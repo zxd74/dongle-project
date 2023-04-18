@@ -1,6 +1,5 @@
 <template>
   <Home msg="Welcome to Dongle System"/>
-  <!-- <router-view ></router-view> -->
 </template>
 
 

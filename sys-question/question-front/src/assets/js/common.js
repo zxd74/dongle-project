@@ -11,3 +11,4 @@ export function sendToAnalytics(path){
     console.log(path)
     window.location.url='/404'
 }
+

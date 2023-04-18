@@ -1,22 +1,14 @@
 <template>
-  <Header :msg="msg"/>
-  <Left />
-  <Content />
-  <Footer />
-  <!-- <div class="common-layout">
+  <el-container>
+    <el-header class="header"><Header :msg="msg"/></el-header>
     <el-container>
-      <el-header class="header"><Header :msg="msg"/></el-header>
+      <el-aside class="left"><Left /></el-aside>
       <el-container>
-        <el-aside class="left"><Left /></el-aside>
-        <el-container>
-          <el-main>
-            <Content></Content>
-          </el-main>
-          <el-footer class="footer"><Footer /></el-footer>
-        </el-container>
+        <el-main class="content"><Content /></el-main>
+        <el-footer class="footer"><Footer /></el-footer>
       </el-container>
     </el-container>
-  </div> -->
+  </el-container>
 </template>
 
 <script>
@@ -41,10 +33,26 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-    margin: 40px 0 0;
+.header {
+    width: 100%;
+    height: 6%;
+    background-color: #409EFF;
+    display: inline-block;
 }
-
-
+.left {
+    height: 95%;width: 10%;
+    position: absolute;
+    background-color: #909399;
+}
+.content{
+    left: 10%;height: 92%;width: 90%;
+    padding: 5px;
+    position: absolute;
+}
+.footer {
+    height: 2%; width: 100%;
+    position: absolute;
+    bottom: 0;
+}
 </style>
   

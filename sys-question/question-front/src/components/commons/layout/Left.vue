@@ -1,6 +1,7 @@
 <template>
-    <div class="left">
-        <el-button @click="gotoPath('/user')">goto User</el-button>
+    <el-button @click="gotoPath('/user')">goto User</el-button>
+    <div id="left">
+
     </div>
 </template>
 
@@ -11,7 +12,6 @@ export default {
     methods:{
         gotoPath(url){
             console.log(url)
-            console.log(this.$router)
             this.$router.push(url)
         }
     }
