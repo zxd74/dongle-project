@@ -95,7 +95,554 @@
 * 试卷详情：题号，试题，分数
 * 作答信息：试卷，题号，解答
 
+## 题库表`tb_questions`
 
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>题标识ID，生成规则：YYYYMMDDHHmmss</td>
+    </tr>
+    <tr>
+        <td>title</td>
+        <td>varchar(200)</td>
+        <td>200</td>
+        <td>问题</td>
+    </tr>
+    <tr>
+        <td>type</td>
+        <td>int(1)</td>
+        <td>1</td>
+        <td>题型分类，见题型表</td>
+    </tr>
+    <tr>
+        <td>desc</td>
+        <td>varchar(200)</td>
+        <td>200</td>
+        <td>问题描述</td>
+    </tr>
+    <tr>
+        <td>cate</td>
+        <td>varchar(100)</td>
+        <td>100</td>
+        <td>问题类别，见题类别表，逗号分割,待优化列</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td>-</td>
+        <td>唯一索引</td>
+        <td>`id`</td>
+        <td>题标识ID，生成规则：YYYYMMDDHHmmss</td>
+    </tr>
+</table>
+
+## 试题详情`tb_question_info`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>qid</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>题标识ID，见题库表</td>
+    </tr>
+    <tr>
+        <td>选项</td>
+        <td>blob</td>
+        <td>-</td>
+        <td>选项或描述，根据题型补充</td>
+    </tr>
+    <tr>
+        <td>答案</td>
+        <td>blob</td>
+        <td>-</td>
+        <td>选项或问答内容</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td>-</td>
+        <td>唯一索引</td>
+        <td>`qid`</td>
+        <td>题标识ID</td>
+    </tr>
+</table>
+
+## 分类表`tb_cate`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>标签ID</td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td>varchar(50)</td>
+        <td>50</td>
+        <td>分类名称</td>
+    </tr>
+    <tr>
+        <td>pid</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>父类分类ID</td>
+    </tr>
+    <tr>
+        <td>order</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>顺序</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td>-</td>
+        <td>唯一索引</td>
+        <td>`id`</td>
+        <td>分类ID</td>
+    </tr>
+</table>
+
+## 标签表`tb_label`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>标签ID</td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td>varchar(50)</td>
+        <td>50</td>
+        <td>标签名</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td>-</td>
+        <td>唯一索引</td>
+        <td>`id`</td>
+        <td>标签ID</td>
+    </tr>
+</table>
+
+## 试卷表`tb_papers`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>试卷标识ID，生成规则：YYYYMMDDHHmmss</td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td>varchar(50)</td>
+        <td>50</td>
+        <td>试卷名称</td>
+    </tr>
+    <tr>
+        <td>total_score</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>试卷总分数，默认100</td>
+    </tr>
+    <tr>
+        <td>type</td>
+        <td>int(1)</td>
+        <td>1</td>
+        <td>试卷类型</td>
+    </tr>
+    <tr>
+        <td>cate</td>
+        <td>int(1)</td>
+        <td>1</td>
+        <td>试卷分类</td>
+    </tr>
+    <tr>
+        <td>status</td>
+        <td>int(1)</td>
+        <td>1</td>
+        <td>试卷状态</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td>-</td>
+        <td>唯一索引</td>
+        <td>`id`</td>
+        <td>试卷标识ID，生成规则：YYYYMMDDHHmmss</td>
+    </tr>
+</table>
+
+## 试卷大题表`tb_paper_struct`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>pid</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>试卷标识ID，见试卷表</td>
+    </tr>
+    <tr>
+        <td>bqn</td>
+        <td>int</td>
+        <td>11</td>
+        <td>试题大题号，见试卷大题表</td>
+    </tr>
+    <tr>
+        <td>info</td>
+        <td>varchar(20)</td>
+        <td>20</td>
+        <td>大题简介</td>
+    </tr>
+    <tr>
+        <td>desc</td>
+        <td>varchar(200)</td>
+        <td>200</td>
+        <td>大题详细描述</td>
+    </tr>
+    <tr>
+        <td>idx</td>
+        <td>int</td>
+        <td>11</td>
+        <td>大题顺序</td>
+    </tr>
+    <tr>
+        <td>total_score</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>试卷大题总分数，默认0</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td></td>
+        <td>唯一索引</td>
+        <td>`pid`,`bqn`</td>
+        <td>试卷大题唯一</td>
+    </tr>
+</table>
+
+## 试卷试题表`tb_paper_questions`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>pid</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>试卷标识ID，见试卷表</td>
+    </tr>
+    <tr>
+        <td>bqn</td>
+        <td>int</td>
+        <td>11</td>
+        <td>试题大题号，见试卷大题表</td>
+    </tr>
+    <tr>
+        <td>qid</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>试题ID，见试题表</td>
+    </tr>
+    <tr>
+        <td>order</td>
+        <td>int</td>
+        <td>11</td>
+        <td>试题顺序</td>
+    </tr>
+    <tr>
+        <td>score</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>试卷试题分数，默认0</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td>`pq`</td>
+        <td>唯一索引</td>
+        <td>`pid`,`qid`</td>
+        <td>试卷小题唯一</td>
+    </tr>
+</table>
+
+## 试卷详情表`tb_paper_info`
+
+暂略。
+
+## 用户表`tb_users`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>用户ID，系统生成</td>
+    </tr>
+    <tr>
+        <td>username</td>
+        <td>varchar(20)</td>
+        <td>20</td>
+        <td>用户名</td>
+    </tr>
+    <tr>
+        <td>password</td>
+        <td>char(64)</td>
+        <td>64</td>
+        <td>用户密码，加密</td>
+    </tr>
+    <tr>
+        <td>sex</td>
+        <td>int(1)</td>
+        <td>1</td>
+        <td>性别</td>
+    </tr>
+    <tr>
+        <td>age</td>
+        <td>int(3)</td>
+        <td>3</td>
+        <td>年龄</td>
+    </tr>
+    <tr>
+        <td>phone</td>
+        <td>varchar(20)</td>
+        <td>20</td>
+        <td>手机号</td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td>varchar(50)</td>
+        <td>50</td>
+        <td>邮箱地址</td>
+    </tr>
+    <tr>
+        <td>logo</td>
+        <td>varchar(100)</td>
+        <td>100</td>
+        <td>用户头像</td>
+    </tr>
+    <tr>
+        <td>source</td>
+        <td>varchar(20)</td>
+        <td>20</td>
+        <td>来源，如微信，注册，其它</td>
+    </tr>
+    <tr>
+        <td>rdt</td>
+        <td>datetime</td>
+        <td>-</td>
+        <td>注册时间</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td></td>
+        <td>唯一索引</td>
+        <td>`id`</td>
+        <td>用户ID</td>
+    </tr>
+</table>
+
+## 用户试卷表`tb_user_paper`
+
+暂略。
+
+## 用户试卷答题表`tb_user_paper_info`
+
+暂略。
+
+## 系统操作记录表`tb_sys_opt`
+
+暂略。
+
+## 用户访问记录表`tb_user_logs`
+
+暂略。
+
+## 字典表`tb_dict`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>字典ID，自增</td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td>varchar(20)</td>
+        <td>20</td>
+        <td>字典名称</td>
+    </tr>
+    <tr>
+        <td>pid</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>父级字典</td>
+    </tr>
+    <tr>
+        <td>order</td>
+        <td>int</td>
+        <td>11</td>
+        <td>字典顺序</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>索引分类</th>
+        <th>索引名称</th>
+        <th>索引类型</th>
+        <th>索引列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td></td>
+        <td>唯一索引</td>
+        <td>`id`</td>
+        <td>字典ID</td>
+    </tr>
+    <tr>
+        <td>索引</td>
+        <td>`idx_p`</td>
+        <td>普通索引</td>
+        <td>`pid`</td>
+        <td>父级字典索引</td>
+    </tr>
+</table>
 
 # 业务设计
 
