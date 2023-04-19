@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongle.question.dao.mapper.PaperQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.dongle.question.dao.entity.PaperQuestion">
+    <id column="pid" jdbcType="CHAR" property="pid" />
+    <result column="qid" jdbcType="CHAR" property="qid" />
+    <result column="bqn" jdbcType="INTEGER" property="bqn" />
+    <result column="bname" jdbcType="VARCHAR" property="bname" />
+    <result column="info" jdbcType="INTEGER" property="info" />
+    <result column="desc" jdbcType="INTEGER" property="desc" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="cdt" jdbcType="TIMESTAMP" property="cdt" />
+    <result column="udt" jdbcType="TIMESTAMP" property="udt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pid, qid, bqn, bname, info, `desc`, `order`, score, cdt, udt
+  </sql>
+  <select id="selectByExample" parameterType="com.dongle.question.dao.example.PaperQuestionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_paper_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_paper_questions
+    where pid = #{pid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_paper_questions
+    where pid = #{pid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dongle.question.dao.example.PaperQuestionExample">
+    delete from tb_paper_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dongle.question.dao.entity.PaperQuestion">
+    insert into tb_paper_questions (pid, qid, bqn, bname, 
+      info, `desc`, `order`, 
+      score, cdt, udt
+      )
+    values (#{pid,jdbcType=CHAR}, #{qid,jdbcType=CHAR}, #{bqn,jdbcType=INTEGER}, #{bname,jdbcType=VARCHAR}, 
+      #{info,jdbcType=INTEGER}, #{desc,jdbcType=INTEGER}, #{order,jdbcType=INTEGER}, 
+      #{score,jdbcType=INTEGER}, #{cdt,jdbcType=TIMESTAMP}, #{udt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dongle.question.dao.entity.PaperQuestion">
+    insert into tb_paper_questions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="qid != null">
+        qid,
+      </if>
+      <if test="bqn != null">
+        bqn,
+      </if>
+      <if test="bname != null">
+        bname,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="desc != null">
+        `desc`,
+      </if>
+      <if test="order != null">
+        `order`,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="cdt != null">
+        cdt,
+      </if>
+      <if test="udt != null">
+        udt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=CHAR},
+      </if>
+      <if test="qid != null">
+        #{qid,jdbcType=CHAR},
+      </if>
+      <if test="bqn != null">
+        #{bqn,jdbcType=INTEGER},
+      </if>
+      <if test="bname != null">
+        #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=INTEGER},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="cdt != null">
+        #{cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udt != null">
+        #{udt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dongle.question.dao.example.PaperQuestionExample" resultType="java.lang.Long">
+    select count(*) from tb_paper_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_paper_questions
+    <set>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=CHAR},
+      </if>
+      <if test="record.qid != null">
+        qid = #{record.qid,jdbcType=CHAR},
+      </if>
+      <if test="record.bqn != null">
+        bqn = #{record.bqn,jdbcType=INTEGER},
+      </if>
+      <if test="record.bname != null">
+        bname = #{record.bname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.info != null">
+        info = #{record.info,jdbcType=INTEGER},
+      </if>
+      <if test="record.desc != null">
+        `desc` = #{record.desc,jdbcType=INTEGER},
+      </if>
+      <if test="record.order != null">
+        `order` = #{record.order,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.cdt != null">
+        cdt = #{record.cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.udt != null">
+        udt = #{record.udt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_paper_questions
+    set pid = #{record.pid,jdbcType=CHAR},
+      qid = #{record.qid,jdbcType=CHAR},
+      bqn = #{record.bqn,jdbcType=INTEGER},
+      bname = #{record.bname,jdbcType=VARCHAR},
+      info = #{record.info,jdbcType=INTEGER},
+      `desc` = #{record.desc,jdbcType=INTEGER},
+      `order` = #{record.order,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=INTEGER},
+      cdt = #{record.cdt,jdbcType=TIMESTAMP},
+      udt = #{record.udt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongle.question.dao.entity.PaperQuestion">
+    update tb_paper_questions
+    <set>
+      <if test="qid != null">
+        qid = #{qid,jdbcType=CHAR},
+      </if>
+      <if test="bqn != null">
+        bqn = #{bqn,jdbcType=INTEGER},
+      </if>
+      <if test="bname != null">
+        bname = #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null">
+        `desc` = #{desc,jdbcType=INTEGER},
+      </if>
+      <if test="order != null">
+        `order` = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="cdt != null">
+        cdt = #{cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udt != null">
+        udt = #{udt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongle.question.dao.entity.PaperQuestion">
+    update tb_paper_questions
+    set qid = #{qid,jdbcType=CHAR},
+      bqn = #{bqn,jdbcType=INTEGER},
+      bname = #{bname,jdbcType=VARCHAR},
+      info = #{info,jdbcType=INTEGER},
+      `desc` = #{desc,jdbcType=INTEGER},
+      `order` = #{order,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      cdt = #{cdt,jdbcType=TIMESTAMP},
+      udt = #{udt,jdbcType=TIMESTAMP}
+    where pid = #{pid,jdbcType=CHAR}
+  </update>
+  <select id="selectOneByExample" parameterType="com.dongle.question.dao.example.PaperQuestionExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_paper_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" parameterType="map">
+    insert into tb_paper_questions
+    (pid, qid, bqn, bname, info, `desc`, `order`, score, cdt, udt)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.pid,jdbcType=CHAR}, #{item.qid,jdbcType=CHAR}, #{item.bqn,jdbcType=INTEGER}, 
+        #{item.bname,jdbcType=VARCHAR}, #{item.info,jdbcType=INTEGER}, #{item.desc,jdbcType=INTEGER}, 
+        #{item.order,jdbcType=INTEGER}, #{item.score,jdbcType=INTEGER}, #{item.cdt,jdbcType=TIMESTAMP}, 
+        #{item.udt,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into tb_paper_questions (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'pid'.toString() == column.value">
+          #{item.pid,jdbcType=CHAR}
+        </if>
+        <if test="'qid'.toString() == column.value">
+          #{item.qid,jdbcType=CHAR}
+        </if>
+        <if test="'bqn'.toString() == column.value">
+          #{item.bqn,jdbcType=INTEGER}
+        </if>
+        <if test="'bname'.toString() == column.value">
+          #{item.bname,jdbcType=VARCHAR}
+        </if>
+        <if test="'info'.toString() == column.value">
+          #{item.info,jdbcType=INTEGER}
+        </if>
+        <if test="'desc'.toString() == column.value">
+          #{item.desc,jdbcType=INTEGER}
+        </if>
+        <if test="'order'.toString() == column.value">
+          #{item.order,jdbcType=INTEGER}
+        </if>
+        <if test="'score'.toString() == column.value">
+          #{item.score,jdbcType=INTEGER}
+        </if>
+        <if test="'cdt'.toString() == column.value">
+          #{item.cdt,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'udt'.toString() == column.value">
+          #{item.udt,jdbcType=TIMESTAMP}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+</mapper>

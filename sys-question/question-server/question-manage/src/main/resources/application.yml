@@ -1,0 +1,4 @@
+mybatis:
+  type-aliases-package: com.dongle.question.dao.entity
+  mapper-locations: classpath*:mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--执行generator插件生成文件的命令： call mvn mybatis-generator:generate -e -->
+    <!-- 引入配置文件 -->
+<!--    <properties resource="mybatis.properties"/>-->
+    <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
+    <!--<classPathEntry location="D:\generator_mybatis\mysql-connector-java-5.1.24-bin.jar" /> -->
+
+    <!-- 一个数据库一个context -->
+    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <context id="MysqlTables" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 关键字列，增加分隔符处理       -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
+        <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin"/>
+        <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
+        <plugin type="com.itfsw.mybatis.generator.plugins.LimitPlugin"/>
+        <plugin type="com.itfsw.mybatis.generator.plugins.ModelBuilderPlugin"/>
+        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin"/>
+        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleTargetPlugin">
+            <!-- 修改Example类生成到目标包下 -->
+            <property name="targetPackage" value="com.dongle.question.dao.example"/>
+        </plugin>
+        <!-- 注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true"/> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!--jdbc-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://db.dongle.com/dongle-question?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false"
+                        userId="root" password="Dongle@123"/>
+        <!--实体类model-->
+        <javaModelGenerator targetPackage="com.dongle.question.dao.entity" targetProject="src/main/java"/>
+
+        <!--生成mapper.xml配置文件-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <!--生成dao接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dongle.question.dao.mapper" targetProject="src/main/java"/>
+
+        <table tableName="tb_questions" domainObjectName="Question" />
+        <table tableName="tb_question_info" domainObjectName="QuestionInfo" />
+        <table tableName="tb_papers" domainObjectName="Paper" />
+        <table tableName="tb_paper_struct" domainObjectName="PaperStruct" />
+        <table tableName="tb_paper_questions" domainObjectName="PaperQuestion" />
+        <table tableName="tb_exams" domainObjectName="Exam" />
+        <table tableName="tb_users" domainObjectName="User" />
+    </context>
+</generatorConfiguration>

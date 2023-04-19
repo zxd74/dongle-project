@@ -106,8 +106,8 @@
     </tr>
     <tr>
         <td>id</td>
-        <td>int(11)</td>
-        <td>11</td>
+        <td>char(14)</td>
+        <td>14</td>
         <td>题标识ID，生成规则：YYYYMMDDHHmmss</td>
     </tr>
     <tr>
@@ -151,7 +151,15 @@
         <td>`id`</td>
         <td>题标识ID，生成规则：YYYYMMDDHHmmss</td>
     </tr>
+    <tr>
+        <td>索引</td>
+        <td>idx_t</td>
+        <td>普通索引</td>
+        <td>`title`</td>
+        <td>问题索引</td>
+    </tr>
 </table>
+
 
 ## 试题详情`tb_question_info`
 
@@ -164,23 +172,24 @@
     </tr>
     <tr>
         <td>qid</td>
-        <td>int(11)</td>
-        <td>11</td>
+        <td>char(14)</td>
+        <td>14</td>
         <td>题标识ID，见题库表</td>
     </tr>
     <tr>
-        <td>选项</td>
+        <td>content</td>
         <td>blob</td>
         <td>-</td>
         <td>选项或描述，根据题型补充</td>
     </tr>
     <tr>
-        <td>答案</td>
+        <td>anwser</td>
         <td>blob</td>
         <td>-</td>
         <td>选项或问答内容</td>
     </tr>
 </table>
+
 
 <table>
 	<tr>
@@ -302,8 +311,8 @@
     </tr>
     <tr>
         <td>id</td>
-        <td>int(11)</td>
-        <td>11</td>
+        <td>char(14)</td>
+        <td>14</td>
         <td>试卷标识ID，生成规则：YYYYMMDDHHmmss</td>
     </tr>
     <tr>
@@ -353,7 +362,15 @@
         <td>`id`</td>
         <td>试卷标识ID，生成规则：YYYYMMDDHHmmss</td>
     </tr>
+    <tr>
+        <td>索引</td>
+        <td>-</td>
+        <td>普通索引</td>
+        <td>`name`</td>
+        <td>试卷名称</td>
+    </tr>
 </table>
+
 
 ## 试卷大题表`tb_paper_struct`
 
@@ -366,7 +383,7 @@
     </tr>
     <tr>
         <td>pid</td>
-        <td>int(11)</td>
+        <td>char(14)</td>
         <td>11</td>
         <td>试卷标识ID，见试卷表</td>
     </tr>
@@ -389,8 +406,8 @@
         <td>大题详细描述</td>
     </tr>
     <tr>
-        <td>idx</td>
-        <td>int</td>
+        <td>order</td>
+        <td>int(11)</td>
         <td>11</td>
         <td>大题顺序</td>
     </tr>
@@ -401,6 +418,7 @@
         <td>试卷大题总分数，默认0</td>
     </tr>
 </table>
+
 
 <table>
 	<tr>
@@ -430,21 +448,21 @@
     </tr>
     <tr>
         <td>pid</td>
-        <td>int(11)</td>
-        <td>11</td>
+        <td>char(14)</td>
+        <td>14</td>
         <td>试卷标识ID，见试卷表</td>
+    </tr>
+    <tr>
+        <td>qid</td>
+        <td>char(14)</td>
+        <td>14</td>
+        <td>试题ID,每个试卷仅出现一次</td>
     </tr>
     <tr>
         <td>bqn</td>
         <td>int</td>
         <td>11</td>
         <td>试题大题号，见试卷大题表</td>
-    </tr>
-    <tr>
-        <td>qid</td>
-        <td>int(11)</td>
-        <td>11</td>
-        <td>试题ID，见试题表</td>
     </tr>
     <tr>
         <td>order</td>
@@ -462,15 +480,15 @@
 
 <table>
 	<tr>
-        <th>索引分类</th>
-        <th>索引名称</th>
-        <th>索引类型</th>
-        <th>索引列</th>
+        <th>分类</th>
+        <th>名称</th>
+        <th>类型</th>
+        <th>列</th>
         <th>说明</th>
     </tr>
     <tr>
         <td>主键</td>
-        <td>`pq`</td>
+        <td></td>
         <td>唯一索引</td>
         <td>`pid`,`qid`</td>
         <td>试卷小题唯一</td>
@@ -480,6 +498,102 @@
 ## 试卷详情表`tb_paper_info`
 
 暂略。
+
+## 考试表`tb_exam`
+
+<table>
+	<tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>长度</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>char(14)</td>
+        <td>14</td>
+        <td>考试计划标识ID，生成规则：YYYYMMDDHHmmss</td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td>varchar(50)</td>
+        <td>50</td>
+        <td>考试名称</td>
+    </tr>
+     <tr>
+        <td>pid</td>
+        <td>int(11)</td>
+        <td>11</td>
+        <td>绑定试卷ID</td>
+    </tr>
+    <tr>
+        <td>type</td>
+        <td>int(1)</td>
+        <td>1</td>
+        <td>考试类型</td>
+    </tr>
+    <tr>
+        <td>status</td>
+        <td>int(1)</td>
+        <td>1</td>
+        <td>考试状态</td>
+    </tr>
+    <tr>
+        <td>cdt</td>
+        <td>datetime</td>
+        <td>-</td>
+        <td>创建时间</td>
+    </tr>
+    <tr>
+        <td>udt</td>
+        <td>datetime</td>
+        <td>-</td>
+        <td>更新时间</td>
+    </tr>
+    <tr>
+        <td>sdt</td>
+        <td>datetime</td>
+        <td>-</td>
+        <td>开始时间</td>
+    </tr>
+    <tr>
+        <td>edt</td>
+        <td>datetime</td>
+        <td></td>
+        <td>结束时间</td>
+    </tr>
+</table>
+
+<table>
+	<tr>
+        <th>分类</th>
+        <th>名称</th>
+        <th>类型</th>
+        <th>列</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>主键</td>
+        <td>-</td>
+        <td>唯一索引</td>
+        <td>`id`</td>
+        <td>考试计划唯一标识</td>
+    </tr>
+    <tr>
+        <td>索引</td>
+        <td>-</td>
+        <td>普通索引</td>
+        <td>`pid`</td>
+        <td>考试计划唯一标识</td>
+    </tr>
+    <tr>
+        <td>索引</td>
+        <td>idx_se</td>
+        <td>聚合索引</td>
+        <td>`sdt`,`edt`</td>
+        <td>考试时间</td>
+    </tr>
+</table>
 
 ## 用户表`tb_users`
 
@@ -492,8 +606,8 @@
     </tr>
     <tr>
         <td>id</td>
-        <td>int(11)</td>
-        <td>11</td>
+        <td>char(14)</td>
+        <td>14</td>
         <td>用户ID，系统生成</td>
     </tr>
     <tr>
@@ -510,15 +624,21 @@
     </tr>
     <tr>
         <td>sex</td>
-        <td>int(1)</td>
-        <td>1</td>
-        <td>性别</td>
+        <td>emun(0,1,2)</td>
+        <td>-</td>
+        <td>性别，0-未知，1-男，2-女</td>
     </tr>
     <tr>
         <td>age</td>
         <td>int(3)</td>
         <td>3</td>
         <td>年龄</td>
+    </tr>
+    <tr>
+        <td>birth_day</td>
+        <td>int()</td>
+        <td></td>
+        <td>出生日期,YYYYMMDD</td>
     </tr>
     <tr>
         <td>phone</td>
@@ -551,6 +671,7 @@
         <td>注册时间</td>
     </tr>
 </table>
+
 
 <table>
 	<tr>
@@ -651,9 +772,88 @@
 * 试卷绑定试题，顺序，分数，描述
 * 试卷作答负责记录用户对试卷的解答
 
+## 管理员
+
+1. 基本信息维护
+   1. 分类管理
+   2. 标签管理
+2. 题库管理
+   1. 题型管理
+      1. 单选题
+      2. 多选题
+      3. 填空题
+      4. 问答题
+      5. 连线题
+      6. 画图题
+      7. 作文/论问题
+   2. 试题管理：批量查看、添加、删除试题，修改试题，
+      1. 状态
+         1. 已创建：创建但未使用关联
+         2. 已关联：已关联试卷关联，则不可修改或删除
+         3. 已删除：删除试题
+3. 试卷管理：
+   1. 查看、删除、复制试卷
+   2. 创建试卷
+      1. 编辑试卷基本信息
+      2. 编辑试卷试题：批量添加、删除、修改试卷试题
+         1. 关联试题：根据查询条件关联试题
+            1. 关联试题后，未修改试题，则直接关联试题
+            2. 关联试题后修改试题，需要创建新试题入库
+         2. 创建新试题：需要同步创建新试题入库
+      3. 提交试卷：同步添加试卷试题道试题库
+   3. 更新试卷：同创建试卷
+      1. 若修改了自有试题信息，则仅同步
+      2. 若修改了非自有试题信息，则创建新试题
+   4. 状态说明
+      1. 已创建：仅创建基本信息，未关联试题
+      2. 已关联：已关联试题，未绑定考试计划
+      3. 已绑定：已绑定考试计划
+      4. 已删除：已删除，已绑定考试计划且考试计划已开启及之后状态都不可删除和修改
+4. 考试管理
+   1. 查看、删除、复制考试计划
+   2. 创建考试计划
+      1. 编辑考试计划基本信息
+      2. 关联试卷信息
+      3. 设置考试计划状态
+   3. 编辑考试计划：同考试计划
+   4. 生成推广链接
+   5. 状态说明：
+      1. 已创建：仅创建考试计划基本信息
+      2. 已绑定：已绑定试卷，未启动试卷
+      3. 已启动：人为启动，不可编辑和删除，
+      4. 已结束：计划结束，在计划期结束后的状态
+      5. 已暂停：未开考前计划人为终止，
+      6. 已开考：计划期间内状态
+      7. 已终止：已开考后人为终止，后续答题无效不会被保存
+      8. 已删除：删除考试计划，已考试或已开答不可删除和编辑
+5. 统计管理
+   1. 用户访问统计
+   2. 用户作答统计
+   3. 试卷答题统计
+   4. 考试统计分析
+   5. 试题统计分析
+
+## 考试管理
+
+1. 答题
+   1. 用户根据指定地址访问考试系统
+   2. 用户信息验证
+   3. 验证通过开始作答
+   4. 根据题型做出响应解答
+   5. 作答完毕后提交试卷/问卷
+   6. 等待结果或退出系统
+2. 判分/统计
+
 
 
 # UI设计
 
+[见文件](./sys-ui.rp)
 
+# 架构设计
+
+* 前端：Nodejs + Vue3
+* 后端：JDK1.8+Spring Boot(2.7.8) + Mysql5.7 + Redis + Dubbo3 + Nacos + Rabbitmq 
+
+![架构](./question-frame.png)
 

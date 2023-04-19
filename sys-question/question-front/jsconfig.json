@@ -10,7 +10,7 @@
         "src/*"
       ]
     },
-    // "types": ["vite/client"],
+    "types": ["vite/client"],
     "lib": [
       "esnext",
       "dom",

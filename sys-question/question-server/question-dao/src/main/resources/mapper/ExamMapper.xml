@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongle.question.dao.mapper.ExamMapper">
+  <resultMap id="BaseResultMap" type="com.dongle.question.dao.entity.Exam">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pid" jdbcType="CHAR" property="pid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="cdt" jdbcType="TIMESTAMP" property="cdt" />
+    <result column="udt" jdbcType="TIMESTAMP" property="udt" />
+    <result column="sdt" jdbcType="TIMESTAMP" property="sdt" />
+    <result column="edt" jdbcType="TIMESTAMP" property="edt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `name`, pid, `type`, `status`, cdt, udt, sdt, edt
+  </sql>
+  <select id="selectByExample" parameterType="com.dongle.question.dao.example.ExamExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_exams
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_exams
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_exams
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dongle.question.dao.example.ExamExample">
+    delete from tb_exams
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dongle.question.dao.entity.Exam">
+    insert into tb_exams (id, `name`, pid, `type`, 
+      `status`, cdt, udt, 
+      sdt, edt)
+    values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{pid,jdbcType=CHAR}, #{type,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{cdt,jdbcType=TIMESTAMP}, #{udt,jdbcType=TIMESTAMP}, 
+      #{sdt,jdbcType=TIMESTAMP}, #{edt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dongle.question.dao.entity.Exam">
+    insert into tb_exams
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="cdt != null">
+        cdt,
+      </if>
+      <if test="udt != null">
+        udt,
+      </if>
+      <if test="sdt != null">
+        sdt,
+      </if>
+      <if test="edt != null">
+        edt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cdt != null">
+        #{cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udt != null">
+        #{udt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdt != null">
+        #{sdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edt != null">
+        #{edt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dongle.question.dao.example.ExamExample" resultType="java.lang.Long">
+    select count(*) from tb_exams
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_exams
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.cdt != null">
+        cdt = #{record.cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.udt != null">
+        udt = #{record.udt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sdt != null">
+        sdt = #{record.sdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edt != null">
+        edt = #{record.edt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_exams
+    set id = #{record.id,jdbcType=CHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=CHAR},
+      `type` = #{record.type,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=INTEGER},
+      cdt = #{record.cdt,jdbcType=TIMESTAMP},
+      udt = #{record.udt,jdbcType=TIMESTAMP},
+      sdt = #{record.sdt,jdbcType=TIMESTAMP},
+      edt = #{record.edt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongle.question.dao.entity.Exam">
+    update tb_exams
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cdt != null">
+        cdt = #{cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udt != null">
+        udt = #{udt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdt != null">
+        sdt = #{sdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edt != null">
+        edt = #{edt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongle.question.dao.entity.Exam">
+    update tb_exams
+    set `name` = #{name,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=CHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      cdt = #{cdt,jdbcType=TIMESTAMP},
+      udt = #{udt,jdbcType=TIMESTAMP},
+      sdt = #{sdt,jdbcType=TIMESTAMP},
+      edt = #{edt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <select id="selectOneByExample" parameterType="com.dongle.question.dao.example.ExamExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_exams
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" parameterType="map">
+    insert into tb_exams
+    (id, `name`, pid, `type`, `status`, cdt, udt, sdt, edt)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=CHAR}, #{item.name,jdbcType=VARCHAR}, #{item.pid,jdbcType=CHAR}, 
+        #{item.type,jdbcType=INTEGER}, #{item.status,jdbcType=INTEGER}, #{item.cdt,jdbcType=TIMESTAMP}, 
+        #{item.udt,jdbcType=TIMESTAMP}, #{item.sdt,jdbcType=TIMESTAMP}, #{item.edt,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into tb_exams (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=CHAR}
+        </if>
+        <if test="'name'.toString() == column.value">
+          #{item.name,jdbcType=VARCHAR}
+        </if>
+        <if test="'pid'.toString() == column.value">
+          #{item.pid,jdbcType=CHAR}
+        </if>
+        <if test="'type'.toString() == column.value">
+          #{item.type,jdbcType=INTEGER}
+        </if>
+        <if test="'status'.toString() == column.value">
+          #{item.status,jdbcType=INTEGER}
+        </if>
+        <if test="'cdt'.toString() == column.value">
+          #{item.cdt,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'udt'.toString() == column.value">
+          #{item.udt,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'sdt'.toString() == column.value">
+          #{item.sdt,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'edt'.toString() == column.value">
+          #{item.edt,jdbcType=TIMESTAMP}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+</mapper>
