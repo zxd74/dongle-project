@@ -1,0 +1,10 @@
+dubbo:
+  application:
+    name: question-manage
+  protocol:
+    name: dubbo
+  registry:
+    address: nacos://nacos.dongle.com:8848
+    username: nacos
+    password: nacos
+    register: false

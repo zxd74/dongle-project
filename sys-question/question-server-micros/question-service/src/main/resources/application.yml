@@ -1,0 +1,15 @@
+dubbo:
+  application:
+    name: question-service
+  protocol:
+    name: dubbo
+  registry:
+    address: nacos://nacos.dongle.com:8848
+    username: nacos
+    password: nacos
+    subscribe: false
+
+mybatis:
+  type-aliases-package: com.dongle.question.dao.entity
+  mapper-locations: classpath*:mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
