@@ -1,7 +1,5 @@
 package com.dongle.question.service.impl;
 
-import com.dongle.question.manage.model.ExamModel;
-import com.dongle.question.manage.service.ExamService;
 import com.dongle.question.model.ExamModel;
 import com.dongle.question.service.ExamService;
 import org.springframework.stereotype.Service;

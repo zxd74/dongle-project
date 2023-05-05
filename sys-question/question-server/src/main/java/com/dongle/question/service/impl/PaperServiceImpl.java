@@ -1,8 +1,5 @@
 package com.dongle.question.service.impl;
 
-import com.dongle.question.manage.service.PaperService;
-import com.dongle.question.manage.model.PaperModel;
-import com.dongle.question.manage.service.PaperService;
 import com.dongle.question.model.PaperModel;
 import com.dongle.question.service.PaperService;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 <template>
-    <el-button @click="gotoPath('/user')">goto User</el-button>
     <div id="left">
-
+        <el-button @click="gotoPath('/users')">goto User Manage</el-button>
+        <el-button @click="gotoPath('/questions')">goto Question Manage</el-button>
     </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
     name:'Left',
     methods:{
         gotoPath(url){
-            console.log(url)
+            console.log('goto ' + url)
             this.$router.push(url)
         }
     }

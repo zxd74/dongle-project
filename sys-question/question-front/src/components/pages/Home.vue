@@ -16,6 +16,8 @@ import Left from '@/components/commons/layout/Left'
 import Header from '@/components/commons/layout/Header'
 import Footer from '@/components/commons/layout/Footer'
 import Content from '@/components/commons/layout/Content'
+import {access} from '@/assets/js/api'
+import { ElMessage } from 'element-plus'
 
 export default {
     name: 'Home',
@@ -26,8 +28,18 @@ export default {
     data(){
       return{
         // msg:"Welcome to Dongle System",
+        isAccess:false
       }
-    }
+    },
+    created(){
+      // access().then(res => {
+      //   console.log(res);
+      //   if(res.data == "OK"){
+      //     this.isAccess = true
+      //     this.$message.success("connect success with server")
+      //   }
+      // });
+    },
 }
 </script>
 

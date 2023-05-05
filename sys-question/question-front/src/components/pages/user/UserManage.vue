@@ -1,60 +1,63 @@
 <template>
     <div class="user-manage">
-        用户中心
-        <el-button @click="addQuestion()">添加试题</el-button>
-        <div id="questions"  >
-            <question-frame v-for="(item, index) in questions" :key='"com_" + index' :id='"question_" + index' :question="item" @del="delQuestion(index)"/>
-        </div>
+        <div class="condition">
 
-        <div class="options">
-            <el-button @click="savenQuestions()">保存</el-button>
+        </div>
+        <div class="contain">
+            <el-table :data="users" border style="width: 100%">
+                <el-table-column type="index"/>
+                <el-table-column prop="name" label="名称" />
+                <el-table-column prop="age" label="年龄" width="60"/>
+                <el-table-column label="性别" width="60">
+                    <template #default="scope">
+                        <label v-if="scope.row.sex==1">男</label>
+                        <label v-else-if="scope.row.sex==2">女</label>
+                        <label v-else>未知</label>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="phone" label="电话" width="150"/>
+                <el-table-column prop="email" label="邮箱"/>
+                <el-table-column label="操作">
+                    <template #default="scope">
+                        <el-button @click="review(scope.row)">预览</el-button>
+                        <el-button @click="modify(scope.row)">编辑</el-button>
+                        <el-button @click="remove(scope.row.id)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
         </div>
     </div>
 </template>
 
 <script>
-import QuestionFrame from '@/components/commons/QuestionFrame.vue';
+import {local} from '@/assets/js/api.js'
 export default {
-    name:'UserManage',
-    components:{QuestionFrame},
+    name:"UserManage",
     data(){
-        return {
-            num:0,
-            index:0,
-            questions:[]
+        return{
+            users:[]
         }
     },
+    created(){
+        local('/static/users.json').then(res=>{
+            this.users = res.data
+        })
+    },
     methods:{
-        addQuestion(){
-            var question = {
-                idx:this.index++,
-                qn:++this.num,
-            }
-            this.questions.push(question)
+        review(question){
+            console.log("review " + question.id)
+            console.log(question)
         },
-        delQuestion(idx){
-            console.log(this.questions[idx])
-            this.num--
-            this.index--
-            this.questions.splice(idx,1)
-            for(var i=idx;i<this.questions.length;i++){
-                this.questions[i].idx--
-                this.questions[i].qn--
-            }
+        modify(question){
+            console.log("modify " + question.id)
+            console.log(question)
         },
-        savenQuestions(){
-            console.log(this.questions)
+        remove(id){
+            console.log("remove " + id)
         },
     }
 }
 </script>
 <style scoped>
-#question{
-    width: 100%;
-}
-.options{
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-}
+
 </style>

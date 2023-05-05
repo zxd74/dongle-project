@@ -1,8 +1,5 @@
 package com.dongle.question.service.impl;
 
-import com.dongle.question.manage.service.QuestionService;
-import com.dongle.question.manage.model.QuestionModel;
-import com.dongle.question.manage.service.QuestionService;
 import com.dongle.question.model.QuestionModel;
 import com.dongle.question.service.QuestionService;
 import org.springframework.stereotype.Service;

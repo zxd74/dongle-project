@@ -1,8 +1,5 @@
 package com.dongle.question.service.impl;
 
-import com.dongle.question.manage.service.UserService;
-import com.dongle.question.manage.model.UserModel;
-import com.dongle.question.manage.service.UserService;
 import com.dongle.question.model.UserModel;
 import com.dongle.question.service.UserService;
 import org.springframework.stereotype.Service;

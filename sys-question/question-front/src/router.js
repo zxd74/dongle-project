@@ -12,16 +12,16 @@ const routes = [
         redirect:'/',
     },
     {
-        path:'/user',
+        path:'/users',
         // ()=> import() 代路由懒加载
         component:() => import('@/components/pages/user/UserManage')
     },
     {
-        path:'/question',
+        path:'/questions',
         component:() => import('@/components/pages/question/QuestionManage')
     },
     {
-        path:'/exam',
+        path:'/exams',
         component:() => import('@/components/pages/exam/ExamManage')
     },
     {
