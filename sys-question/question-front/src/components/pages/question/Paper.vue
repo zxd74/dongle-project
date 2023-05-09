@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="paper">
         <!-- 试卷详情，负责试题增改查 -->
         <el-button @click="addQuestion()">添加试题</el-button>
         <div id="questions"  >

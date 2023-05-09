@@ -1,6 +1,7 @@
 <template>
     <div>
         <!-- 数据中心 -->
+        Data
     </div>
 </template>
 

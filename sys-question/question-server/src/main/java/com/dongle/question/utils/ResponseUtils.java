@@ -32,6 +32,10 @@ public class ResponseUtils {
     public static ResponseData success(String message){
         return response(ResponseCode.SUCCESS,message,null);
     }
+
+    public static ResponseData success(Object data){
+        return response(ResponseCode.SUCCESS,DEFAULT_SUCCESS_MESSAGE,data);
+    }
     public static ResponseData success(String message,Object data){
         return response(ResponseCode.SUCCESS,message,data);
     }
@@ -41,9 +45,6 @@ public class ResponseUtils {
     }
     public static ResponseData error(String message){
         return response(ResponseCode.ERROR,message,null);
-    }
-    public static ResponseData error(String message,Object data){
-        return response(ResponseCode.ERROR,message,data);
     }
 
     public static ResponseData response(ResponseCode code,String message,Object data){

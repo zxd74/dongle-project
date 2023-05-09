@@ -6,27 +6,48 @@ import Page_404 from '@/components/pages/404'
 const routes = [
     {
         path:'/',
-    },
-    {
-        path:'/home',
-        redirect:'/',
-    },
-    {
-        path:'/users',
-        // ()=> import() 代路由懒加载
-        component:() => import('@/components/pages/user/UserManage')
-    },
-    {
-        path:'/questions',
-        component:() => import('@/components/pages/question/QuestionManage')
-    },
-    {
-        path:'/exams',
-        component:() => import('@/components/pages/exam/ExamManage')
-    },
-    {
-        path:'/data',
-        component:() => import('@/components/pages/data/Data')
+        children:[
+            {
+                path:'/home',
+                redirect:'/',
+            },
+            {
+                path:'/users',
+                // ()=> import() 代路由懒加载
+                component:() => import('@/components/pages/user/UserManage'),
+                meta:{
+                    title:"User Manage"
+                },
+            },
+            {
+                path:'/questions',
+                component:() => import('@/components/pages/question/QuestionManage'),
+                meta:{
+                    title:"Question Manage"
+                },
+            },
+            {
+                path:'/questions/types',
+                component:() => import('@/components/pages/question/QuestionType'),
+                meta:{
+                    title:"Question Type"
+                }
+            },
+            {
+                path:'/exams',
+                component:() => import('@/components/pages/exam/ExamManage'),
+                meta:{
+                    title:"Exama Manage"
+                },
+            },
+            {
+                path:'/data',
+                component:() => import('@/components/pages/data/Data'),
+                meta:{
+                    title:"Data"
+                },
+            },
+        ]
     },
     {
         path:'/404',
@@ -44,10 +65,10 @@ const router = createRouter({
 })
 router.beforeEach(async (to,from)=>{
     const canAccess = await canUserAccess()
-    console.log(to)
     var url = to.fullPath
     if(url != '/login' && !canAccess){
         console.log("无权限访问")
+        console.log(to)
         return '/login'
     }else if(url == '/login' && canUserAccess){
         return '/'

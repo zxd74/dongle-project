@@ -1,0 +1,22 @@
+[
+    {
+        "name":"User Manage",
+        "url":"/users"
+    },
+    {
+        "name":"Question Manage",
+        "url":"/questions"
+    },
+    {
+        "name":"Question Type",
+        "url":"/questions/types"
+    },
+    {
+        "name":"Exam Manage",
+        "url":"/exams"
+    },
+    {
+        "name":"Data",
+        "url":"/data"
+    }
+]

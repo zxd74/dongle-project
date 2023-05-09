@@ -1,14 +1,23 @@
 <template>
     <div id="left">
-        <el-button @click="gotoPath('/users')">goto User Manage</el-button>
-        <el-button @click="gotoPath('/questions')">goto Question Manage</el-button>
+        <label class="menu" v-for="(menu, index) in menus" :key="'menu_' + index" @click="gotoPath(menu.url)">{{menu.name}}</label>
     </div>
 </template>
 
 <script>
-
+import {local} from '@/assets/js/api.js'
 export default {
     name:'Left',
+    data(){
+        return{
+            menus:[]
+        }
+    },
+    created(){
+        local('/static/menus.json').then(res=>{
+            this.menus = res.data
+        })
+    },
     methods:{
         gotoPath(url){
             console.log('goto ' + url)
@@ -17,3 +26,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+#left{
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.menu{
+    display: block;
+}
+</style>
