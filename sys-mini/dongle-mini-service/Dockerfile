@@ -38,4 +38,4 @@ COPY --from=build /app/target/*.jar .
 # 此处端口必须与「服务设置」-「流水线」以及「手动上传代码包」部署时填写的端口一致，否则会部署失败。
 EXPOSE 80
 
-CMD ["java", "-jar", "/app/sys-recode-0.0.1.jar"]
+CMD ["java", "-jar", "/app/dongle-mini-service.jar"]

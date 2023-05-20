@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dongle.mini.seivice</groupId>
     <artifactId>dongle-mini-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>dongle-mini-service</name>
     <description>dongle-mini-service</description>
     <properties>
@@ -40,6 +40,7 @@
     </dependencies>
 
     <build>
+        <finalName>dongle-mini-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
