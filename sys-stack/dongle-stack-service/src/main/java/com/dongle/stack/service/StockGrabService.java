@@ -13,9 +13,9 @@ public interface StockGrabService {
 
     /**
      * 抓取当天股票数据
-     * @param date
+     * @param day
      * @return
      */
-    boolean grabByDay(Date date);
+    boolean grabByDay(String day);
 
 }

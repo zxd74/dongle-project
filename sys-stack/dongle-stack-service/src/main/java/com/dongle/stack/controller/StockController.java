@@ -26,8 +26,8 @@ public class StockController {
     }
 
     @RequestMapping("grab-day")
-    public String grabStockData(Date date){
-        return stockGrabService.grabByDay(date) ? "OK":"Error";
+    public String grabStockData(@RequestParam("day") String day){
+        return stockGrabService.grabByDay(day) ? "OK":"Error";
     }
 
     @RequestMapping("query")
