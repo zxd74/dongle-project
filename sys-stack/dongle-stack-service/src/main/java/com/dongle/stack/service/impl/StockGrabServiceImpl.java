@@ -12,6 +12,9 @@ public class StockGrabServiceImpl implements StockGrabService {
 
     @Override
     public boolean grabNewStock(String code, String from) {
+        if (!StringUtils.hasLength(from)){
+            from="";
+        }
         String[] args = new String[]{"python",PythonUtils.STOCK_GRAB_PYTHON,"method=new","code="+code,"day="+from};
         return PythonUtils.execPython(args);
     }

@@ -2,6 +2,8 @@ package com.dongle.stack.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Stock {
 
@@ -11,4 +13,6 @@ public class Stock {
     private double price;
     private double high;
     private double low;
+    private double open;
+    private List<Stock> data;
 }

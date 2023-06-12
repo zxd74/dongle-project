@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db.dongle.com:3306/dongle-data?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: Dongle@123
+  jpa:
+    show-sql: true
+    hibernate:
+#      ddl-auto: update
+      naming:
+        # 取消小驼峰到下划线映射(加上这个)
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

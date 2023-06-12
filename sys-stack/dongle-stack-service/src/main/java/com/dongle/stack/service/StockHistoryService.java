@@ -6,5 +6,13 @@ import java.util.List;
 
 public interface StockHistoryService {
 
-    List<Stock> queryStockHistory(Stock stock);
+    Stock queryStock(String code);
+
+    List<Stock> queryStockHistory(String code);
+
+    List<Stock> queryAllStock();
+
+    List<Stock> queryAllStockData();
+
+    List<Stock> collectAllStockData();
 }

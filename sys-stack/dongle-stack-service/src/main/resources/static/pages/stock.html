@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/js/jquery-3.7.0.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <title>股票信息</title>
+    <script type="application/javascript">
+
+        window.onload=function (){
+            allData();
+        }
+
+        function queryCode(code){
+            $("#content").val(code)
+        }
+        function query(){
+            let content = $('#content').val();
+            if (content == undefined || content == '') return
+            // 清空个股数据
+            $("#stock-info").html('')
+            $("#stock-data").html('')
+            // 查询数据
+            request('/stock/query-stock','code='+content,null,null,function (data){
+                console.log(data)
+                if (data==null){
+                    return
+                }
+
+                let html = "代码:<label>" + data.code +"</label>名称:<lable>" + data.name +  "</lable>";
+                $("#stock-info").html(html)
+
+                html = "<table>\n" +
+                    "                    <tr>\n" +
+                    "                        <th>日期</th>\n" +
+                    "                        <th>开盘价</th>\n" +
+                    "                        <th>最高价</th>\n" +
+                    "                        <th>最低价</th>\n" +
+                    "                        <th>收盘价</th>\n" +
+                    "                        <th>涨率</th>\n" +
+                    "                    </tr>";
+                for (let i = 0; i < data.data.length; i++) {
+                    let sd = data.data[i]
+                    html += "<tr>\n" +
+                        "                        <td>"+ sd.date +  "</td>\n" +
+                        "                        <td>"+ sd.open + "</td>\n" +
+                        "                        <td>"+ sd.high + "</td>\n" +
+                        "                        <td>"+ sd.low + "</td>\n" +
+                        "                        <td>"+ sd.price + "</td>\n" +
+                        "                        <td>" + "</td>\n" +
+                        "                    </tr>"
+                }
+                html += "</table>"
+                $("#stock-data").html(html)
+            })
+        }
+        function gradNew(){
+            var code = $('#content').val();
+            // 抓取新股票
+            request('/stock/add-new','code='+code,null,null,function (data){
+                query()
+                allData()
+            })
+        }
+        function gradAll(){
+            // 抓取全部
+            request('/stock/grab-day',null,null,null,function (data){
+                allData()
+            })
+        }
+
+        function allData(){
+            // 清空全部数据
+            $('#all-list').html('')
+            $('#all-data').html('')
+            // 全部汇总数据
+            request('/stock/all-stock',null,null,null,function (data){
+                let html = "<table>\n" +
+                    "                    <tr>\n" +
+                    "                        <th>代码</th>\n" +
+                    "                        <th>名称</th>\n" +
+                    "                    </tr>";
+                for (let i = 0; i < data.length; i++) {
+                    let sd = data[i]
+                    html += "<tr>\n" +
+                        "                        <td onclick=\"queryCode('"+sd.code+"')\">"+ sd.code +  "</td>\n" +
+                        "                        <td>"+ sd.name + "</td>\n" +
+                        "                    </tr>"
+                }
+                html += "</table>"
+                $("#all-list").html(html)
+
+            })
+
+            request('/stock/all-data',null,null,null,function (data){
+                console.log(data)
+            })
+        }
+
+        function request(url,data,method,header,success){
+            $.ajax({
+                url:url,
+                data:data,
+                header:header,
+                type:method||'GET',
+                success:success,
+                error:function (data){
+                    console.log((data))
+                }
+            })
+        }
+    </script>
+    <style type="text/css">
+        .condition{
+            width: 100%;
+            height: 10%;
+        }
+        .content{
+            width: 100%;
+        }
+        .stock{
+            height: 40%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="condition">
+        <label>股票代码
+            <input id="content" placeholder="请输入股票名称或股票代码查询">
+        </label>
+        <button onclick="query()"> 查询 </button>
+        <button onclick="gradNew()">添加</button>
+        <button onclick="gradAll()">更新</button>
+    </div>
+    <div class="content">
+        <div class="stock">
+            个股数据
+            <div id="stock-info"></div>
+            <div id="stock-data">
+                <div>七日数据</div>
+                <div>每周数据</div>
+                <div>每月数据</div>
+                <div>每年数据</div>
+            </div>
+        </div>
+        <div class="all">
+            整体数据
+            <div id="all-list"></div>
+            <div id="all-data">
+                <div>每日数据</div>
+                <div>每月数据</div>
+                <div>每年数据</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
