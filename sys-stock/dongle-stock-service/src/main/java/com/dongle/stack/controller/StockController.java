@@ -8,16 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("stock")
 public class StockController {
 
-
     @Autowired
     private StockHistoryService stockHistoryService;
+
     @Autowired
     private StockGrabService stockGrabService;
 
@@ -35,7 +34,7 @@ public class StockController {
     @RequestMapping("query-stock")
     public Stock queryStock(@RequestParam("code")String code){
         Stock stock = stockHistoryService.queryStock(code);
-        if (stock == null) return stock;
+        if (stock == null) return null;
         stock.setData(stockHistoryService.queryStockHistory(code));
         return stock;
     }
