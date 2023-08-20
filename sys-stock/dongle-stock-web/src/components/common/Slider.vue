@@ -21,7 +21,7 @@
                     <span slot="title">数据管理</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="3-1" @click="goto('/data-manage')">数据管理</el-menu-item>
+                    <el-menu-item index="3-1" @click="goto('data-manage')">数据管理</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -39,11 +39,12 @@ export default{
     methods:{
         goto(url){
             console.log(url)
-            var curPath = localStorage.getItem("curPath") || "/"
-            if (url === curPath){
-                return
-            }
-            localStorage.setItem("curPath",url)
+            // var curPath = localStorage.getItem("curPath") || "/"
+            // console.log(curPath)
+            // if (url === curPath){
+            //     return
+            // }
+            // localStorage.setItem("curPath",url)
             this.$router.push(url)
         },
         handlerOpen(){

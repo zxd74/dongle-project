@@ -41,6 +41,7 @@ export default{
 #dongle-content{
     width: 90%;
     left: 10%;
+    margin-left: 10px;
 }
 #dongle-content,#slider{
     top:5%;
@@ -53,5 +54,10 @@ export default{
     height: 2%;
     bottom: 1px;
     border-top: 1px solid black;
+}
+.condition{
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 </style>

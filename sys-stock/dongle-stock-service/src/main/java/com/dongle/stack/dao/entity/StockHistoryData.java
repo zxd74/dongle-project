@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
-@Table(name = "stack_history_data")
+@Table(name = "stock_history_data")
 @IdClass(StockHistoryKey.class)
 @Entity
 public class StockHistoryData {

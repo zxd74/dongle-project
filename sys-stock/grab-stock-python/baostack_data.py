@@ -30,7 +30,7 @@ def track_stock_info(code):
     return None
 
 
-def track_stock_data(codes,sday,eday):
+def track_stock_data(codes, sday, eday):
     """
 
     @rtype: object
@@ -45,11 +45,11 @@ def track_stock_data(codes,sday,eday):
         if rs.error_code != '0':
             print('query_history_k_data_plus respond code:%s,msg:%s' % (rs.error_code, rs.error_msg))
             return
-        while (rs.error_code == '0') & rs.next():
+        while rs.next():
             data = rs.get_row_data()
             result.append(model.StockData(data[0], data[1], data[2], data[3], data[4], data[5],
-                                   data[6], data[7], data[8], data[9], data[10], data[11],
-                                   data[12], data[13], data[14], data[15], data[16], data[17]))
+                                          data[6], data[7], data[8], data[9], data[10], data[11],
+                                          data[12], data[13], data[14], data[15], data[16], data[17]))
     if len(result) == 0:
         return None
     return result

@@ -6,14 +6,15 @@ cursor = db.cursor()
 
 
 def dis_conn():
-    db.close()
-    cursor.close()
+    # db.close()
+    # cursor.close()
+    pass
 
 
 # 保存股票交易数据
 def save_history_data(result):
     try:
-        sql = "insert into stack_history_data(`date`,`code`,`open`,`high`,`low`,`close`,`preclose`,`volume`,`amount`,`adjustflag`,`turn`,`tradestatus`,`pctChg`,`peTTM`,`pbMRQ`,`psTTM`,`pcfNcfTTM`,`isST`) values "
+        sql = "insert into stock_history_data(`date`,`code`,`open`,`high`,`low`,`close`,`preclose`,`volume`,`amount`,`adjustflag`,`turn`,`tradestatus`,`pctChg`,`peTTM`,`pbMRQ`,`psTTM`,`pcfNcfTTM`,`isST`) values "
         for row in result:
             sql += "(" + str(row).removeprefix("[").removesuffix("]") + "),"
         sql = sql.removesuffix(",")
@@ -27,6 +28,7 @@ def save_history_data(result):
     # 关闭数据库连接
     dis_conn()
 
+
 # 保存股票信息
 def save_stock_data(result):
     try:
@@ -34,14 +36,13 @@ def save_stock_data(result):
         for row in result:
             sql += "(" + str(row).removeprefix("[").removesuffix("]") + "),"
         sql = sql.removesuffix(",")
-        print(sql)
         cursor.execute(sql)
-
         db.commit()
     except Exception as ex:
         print("save history data is error")
         print(ex)
         db.rollback()
+
     # 关闭数据库连接
     dis_conn()
 
@@ -60,6 +61,7 @@ def query_stock_code_list():
         print(ex)
     dis_conn()
     return codes
+
 
 # 检查股票是否存在
 def exsit_stock_data(code):

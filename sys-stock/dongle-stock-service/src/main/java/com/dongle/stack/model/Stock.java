@@ -14,5 +14,8 @@ public class Stock {
     private double high;
     private double low;
     private double open;
+    /**
+     * Stock历史数据
+     */
     private List<Stock> data;
 }

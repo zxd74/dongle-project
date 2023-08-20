@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // '/api': {       //接口前缀，自定义，如果实际没有，则需要将其重写置空，页面路径不要设置此前缀
+      //   target:'http://localhost:8888/', // 接口服务地址
+      //   changeOrigin:true, //允许跨域  关键
+      //   // pathRewrite:{
+      //   //   '^/api': '' // 若非api前缀需要置空
+      //   // }
+      // }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

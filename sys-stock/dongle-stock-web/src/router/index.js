@@ -1,8 +1,13 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 
-Vue.use(Router)
-const router = new Router({
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(to) {
+    return VueRouterPush.call(this, to).catch(err => err)
+}
+
+Vue.use(VueRouter)
+const router = new VueRouter({
   mode:'hash',
   routes: [
     {
@@ -37,10 +42,10 @@ const router = new Router({
 //   return true
 // })
 
-router.afterEach((to, from, failure) => {
-  if (failure == false) {
-      console.log("访问地址无效" + to.fullPath)
-      router.push('/404')
-  }
-})
+// router.afterEach((to, from, failure) => {
+//   if (failure == false) {
+//       console.log("访问地址无效" + to.fullPath)
+//       router.push('/404')
+//   }
+// })
 export default router;

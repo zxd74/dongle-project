@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 
 public class PythonUtils {
 
-    public static final String STOCK_GRAB_PYTHON = "D:\\Project\\Source\\Dongle\\dongle-python\\stock\\track.py";
+    public static final String STOCK_GRAB_PYTHON = "D:\\Project\\Source\\Github\\dongle\\dongle-project\\sys-stock\\grab-stock-python\\stock.py";
 
     /**
      * 执行python文件
