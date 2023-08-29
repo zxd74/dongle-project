@@ -67,6 +67,13 @@ public class StockHistoryServiceImpl implements StockHistoryService {
         return stocks;
     }
 
+    @Override
+    public List<Stock> queryGroupStockData(String groupId) {
+        List<Stock> stocks = queryAllStock();
+        stocks.forEach(stock -> stock.setData(stockHistoryDataDao.queryByCode(stock.getCode(),30).stream().map(this::convert).collect(Collectors.toList())));
+        return stocks;
+    }
+
     private Stock convert(StockInfo stockInfo) {
         Stock stock = new Stock();
         convert(stock,stockInfo);

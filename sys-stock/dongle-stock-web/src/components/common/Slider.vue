@@ -12,7 +12,7 @@
                     <span slot="title">股票管理</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="2-1" @click="goto('stock-manage')">股票管理</el-menu-item>
+                    <el-menu-item index="2-1" @click="goto('/stock-manage')">股票管理</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
@@ -21,7 +21,8 @@
                     <span slot="title">数据管理</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="3-1" @click="goto('data-manage')">数据管理</el-menu-item>
+                    <el-menu-item index="3-1" @click="goto('/data-manage')">数据管理</el-menu-item>
+                    <el-menu-item index="3-2" @click="goto('/group-data')">分组数据</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -33,25 +34,45 @@ export default{
     data(){
         return{
             isCollapse:false,
-            backColor:"background-color:blue;"
+            backColor:"background-color:blue;",
+            menus:[
+                {
+                    "url":'/home',
+                    "name":'首页',
+                },
+                {
+                    "url":'',
+                    "name":'股票管理',
+                    "menus":[
+                        {
+                            "url":'/stock-manage',
+                            "name":'股票管理',
+                        },
+                    ]
+                },
+                {
+                    "name":'数据管理',
+                    "menus":[
+                        {
+                            "url":'/data/data-manage',
+                            "name":'数据管理',
+                        },
+                        {
+                            "url":'/data/group-data',
+                            "name":'分组数据',
+                        },
+                    ]
+                }
+            ],
         };
     },
     methods:{
         goto(url){
-            console.log(url)
-            // var curPath = localStorage.getItem("curPath") || "/"
-            // console.log(curPath)
-            // if (url === curPath){
-            //     return
-            // }
-            // localStorage.setItem("curPath",url)
             this.$router.push(url)
         },
         handlerOpen(){
             this.isCollapse = !this.isCollapse
             this.backColor = this.isCollapse?"background-color:blue;":"background-color:black"
-            console.log(this.isCollapse)
-            console.log(this.backColor)
         }
     }
 }

@@ -45,6 +45,9 @@ export const allStockNewData = () =>{
 export const stockAllData = (params) =>{
     return axios.get(`${dataApi}/stock`,{params:params})
 }
+export const groupStockAllData = (params)=>{
+    return axios.get(`${dataApi}/group-all`,{params:params})
+}
 
 
 /************股票管理接口******* */

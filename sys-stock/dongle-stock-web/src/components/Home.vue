@@ -37,16 +37,17 @@ export default{
     border-right: 1px solid green;
     /* float: left; */
     text-align: left;
+    position: fixed;
 }
 #dongle-content{
     width: 90%;
     left: 10%;
     margin-left: 10px;
+    position: absolute;
 }
 #dongle-content,#slider{
     top:5%;
     height: 93%;
-    position: fixed;
 }
 #footer{
     position: fixed;

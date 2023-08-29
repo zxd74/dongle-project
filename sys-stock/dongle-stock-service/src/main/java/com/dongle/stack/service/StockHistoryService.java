@@ -21,4 +21,6 @@ public interface StockHistoryService {
      * @return
      */
     List<Stock> queryNewAllStockData();
+
+    List<Stock> queryGroupStockData(String groupId);
 }

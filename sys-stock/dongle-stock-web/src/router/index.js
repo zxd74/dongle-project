@@ -11,10 +11,6 @@ const router = new VueRouter({
   mode:'hash',
   routes: [
     {
-      path: '/',
-      component:()=>import('@/components/pages/HomeData')
-    },
-    {
       path:'/index',
       redirect:'/'
     },
@@ -23,12 +19,22 @@ const router = new VueRouter({
       redirect:'/'
     },
     {
-      path:'/stock-manage',
-      component:()=>import('@/components/pages/stock/StockManage'),
-    },
-    {
-      path:'/data-manage',
-      component:()=>import('@/components/pages/data/DataManage'),
+      path:'/',
+      component:()=>import('@/components/Home'),
+      children:[
+        {
+          path:'stock-manage',
+          component:()=>import('@/components/pages/stock/StockManage'),
+        },
+        {
+          path:'data-manage',
+          component:()=>import('@/components/pages/data/DataManage'),
+        },
+        {
+          path:'group-data',
+          component:()=>import('@/components/pages/data/GroupStockData'),
+        }
+      ]
     },
     {
       path:'/404',

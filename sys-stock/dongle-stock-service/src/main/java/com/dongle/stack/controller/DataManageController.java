@@ -36,4 +36,9 @@ public class DataManageController {
     public List<Stock> queryStockAll(String code,@RequestParam(required = false,defaultValue = "30") int day){
         return historyService.queryStockHistory(code,day);
     }
+
+    @GetMapping("group-all")
+    public List<Stock> queryGroupStockAll(String groupId){
+        return historyService.queryGroupStockData(groupId);
+    }
 }

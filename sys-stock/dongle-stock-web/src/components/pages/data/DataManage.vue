@@ -43,7 +43,7 @@ export default{
             })
         },
         gotoStock(code){
-            this.$router.push({path:'/stock-manage',query:{code:code}})
+            this.$router.push({path:'/stock/stock-manage',query:{code:code}})
         }
     }
 }
