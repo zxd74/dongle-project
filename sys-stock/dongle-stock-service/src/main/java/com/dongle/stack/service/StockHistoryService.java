@@ -1,26 +1,33 @@
 package com.dongle.stack.service;
 
-import com.dongle.stack.model.Stock;
+import com.dongle.stack.model.StockModel;
 
 import java.util.List;
 
 public interface StockHistoryService {
 
-    Stock queryStock(String code);
+    StockModel queryStock(String code);
 
-    List<Stock> queryStockHistory(String code,int day);
+    List<StockModel> queryStockHistory(String code, int day);
 
-    List<Stock> queryAllStock();
+    List<StockModel> queryAllStock();
 
-    List<Stock> queryAllStockData();
+    List<StockModel> queryAllStockData();
 
-    List<Stock> collectAllStockData();
+    List<StockModel> collectAllStockData();
 
     /**
      * 获取最近一天所有数据
      * @return
      */
-    List<Stock> queryNewAllStockData();
+    List<StockModel> queryNewAllStockData();
 
-    List<Stock> queryGroupStockData(String groupId);
+    List<StockModel> queryGroupStockData(String groupId);
+
+    /**
+     * 查询股票集数据
+     * @param codes
+     * @return
+     */
+    void queryStockData(List<StockModel> codes);
 }

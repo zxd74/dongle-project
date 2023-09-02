@@ -1,6 +1,6 @@
 package com.dongle.stack.controller;
 
-import com.dongle.stack.model.Stock;
+import com.dongle.stack.model.StockModel;
 import com.dongle.stack.service.StockHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +23,13 @@ public class StockManageController {
      * @return 股票信息 or null
      */
     @GetMapping("query")
-    public Stock queryStockInfo(String code){
+    public StockModel queryStockInfo(String code){
         return historyService.queryStock(code);
     }
 
 
     @RequestMapping("all-stock")
-    public List<Stock> allStock(){
+    public List<StockModel> allStock(){
         return historyService.queryAllStock();
     }
 }

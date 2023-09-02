@@ -19,7 +19,7 @@
             <el-table-column prop="low" label="最低"/>
             <el-table-column label="操作">
                 <template slot-scope="stock">
-                    <el-link type="primary">查看</el-link>
+                    <el-link type="primary"  @click="gotoStock(stock.row.code)">查看</el-link>
                 </template>
             </el-table-column>
         </el-table>
@@ -43,7 +43,7 @@ export default{
             })
         },
         gotoStock(code){
-            this.$router.push({path:'/stock/stock-manage',query:{code:code}})
+            this.$router.push({path:'/stock-manage',query:{code:code}})
         }
     }
 }

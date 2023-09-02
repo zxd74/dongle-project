@@ -1,5 +1,5 @@
 <template>
-    <div id="header">标题区</div>
+    <div id="header">Dongle Stock System</div>
 </template>
 <script>
 export default{

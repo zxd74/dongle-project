@@ -4,7 +4,7 @@ import com.dongle.stack.dao.StockHistoryDataDao;
 import com.dongle.stack.dao.StockInfoDao;
 import com.dongle.stack.dao.entity.StockHistoryData;
 import com.dongle.stack.dao.entity.StockInfo;
-import com.dongle.stack.model.Stock;
+import com.dongle.stack.model.StockModel;
 import com.dongle.stack.service.StockHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,83 +23,88 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     private StockHistoryDataDao stockHistoryDataDao;
 
     @Override
-    public Stock queryStock(String code) {
+    public StockModel queryStock(String code) {
         return convert(stockInfoDao.findById(code).orElse(null));
     }
 
     @Override
-    public List<Stock> queryStockHistory(String code,int day) {
-        List<Stock> stocks = new ArrayList<>();
+    public List<StockModel> queryStockHistory(String code, int day) {
+        List<StockModel> stockModels = new ArrayList<>();
         Iterable<StockHistoryData> iterable = stockHistoryDataDao.queryByCode(code,day);
-        iterable.forEach(stockInfo -> stocks.add(convert(stockInfo)));
-        return stocks;
+        iterable.forEach(stockInfo -> stockModels.add(convert(stockInfo)));
+        return stockModels;
     }
 
     @Override
-    public List<Stock> queryAllStock() {
-        List<Stock> stocks = new ArrayList<>();
+    public List<StockModel> queryAllStock() {
+        List<StockModel> stockModels = new ArrayList<>();
         Iterable<StockInfo> iterable = stockInfoDao.findAll();
-        iterable.forEach(stockInfo -> stocks.add(convert(stockInfo)));
-        return stocks;
+        iterable.forEach(stockInfo -> stockModels.add(convert(stockInfo)));
+        return stockModels;
     }
 
     @Override
-    public List<Stock> queryAllStockData() {
-        List<Stock> stocks = new ArrayList<>();
-        stockHistoryDataDao.findAll().forEach(stockHistoryData -> stocks.add(convert(stockHistoryData)));
-        return stocks;
+    public List<StockModel> queryAllStockData() {
+        List<StockModel> stockModels = new ArrayList<>();
+        stockHistoryDataDao.findAll().forEach(stockHistoryData -> stockModels.add(convert(stockHistoryData)));
+        return stockModels;
     }
 
     @Override
-    public List<Stock> queryNewAllStockData() {
-        Map<String,List<Stock>> map = stockHistoryDataDao.queryByNew().stream().map(this::convert).collect(Collectors.groupingBy(Stock::getCode));
+    public List<StockModel> queryNewAllStockData() {
+        Map<String,List<StockModel>> map = stockHistoryDataDao.queryByNew().stream().map(this::convert).collect(Collectors.groupingBy(StockModel::getCode));
         Iterable<StockInfo> iterable = stockInfoDao.findAll();
         iterable.forEach(stockInfo -> convert(map.get(stockInfo.getCode()).get(0),stockInfo));
-        List<Stock> stocks = new ArrayList<>(map.size());
-        map.values().forEach(stocks::addAll);
-        return stocks;
+        List<StockModel> stockModels = new ArrayList<>(map.size());
+        map.values().forEach(stockModels::addAll);
+        return stockModels;
     }
 
     @Override
-    public List<Stock> collectAllStockData() {
-        List<Stock> stocks = new ArrayList<>();
+    public List<StockModel> collectAllStockData() {
+        List<StockModel> stockModels = new ArrayList<>();
         // TODO 汇总各股票数据
-        return stocks;
+        return stockModels;
     }
 
     @Override
-    public List<Stock> queryGroupStockData(String groupId) {
-        List<Stock> stocks = queryAllStock();
-        stocks.forEach(stock -> stock.setData(stockHistoryDataDao.queryByCode(stock.getCode(),30).stream().map(this::convert).collect(Collectors.toList())));
-        return stocks;
+    public List<StockModel> queryGroupStockData(String groupId) {
+        List<StockModel> stockModels = queryAllStock();
+        stockModels.forEach(stock -> stock.setData(stockHistoryDataDao.queryByCode(stock.getCode(),30).stream().map(this::convert).collect(Collectors.toList())));
+        return stockModels;
     }
 
-    private Stock convert(StockInfo stockInfo) {
-        Stock stock = new Stock();
-        convert(stock,stockInfo);
-        return stock;
+    @Override
+    public void queryStockData(List<StockModel> stockModels) {
+        stockModels.forEach(stock -> stock.setData(stockHistoryDataDao.queryByCode(stock.getCode(),30).stream().map(this::convert).collect(Collectors.toList())));
     }
 
-    private void convert(Stock stock,StockInfo stockInfo) {
+    private StockModel convert(StockInfo stockInfo) {
+        StockModel stockModel = new StockModel();
+        convert(stockModel,stockInfo);
+        return stockModel;
+    }
+
+    private void convert(StockModel stockModel, StockInfo stockInfo) {
         if (stockInfo == null) return;
-        stock.setCode(stockInfo.getCode());
-        stock.setName(stockInfo.getName());
+        stockModel.setCode(stockInfo.getCode());
+        stockModel.setName(stockInfo.getName());
     }
 
-    private Stock convert(StockHistoryData historyData) {
-        Stock stock = new Stock();
-        convert(stock,historyData);
-        return stock;
+    private StockModel convert(StockHistoryData historyData) {
+        StockModel stockModel = new StockModel();
+        convert(stockModel,historyData);
+        return stockModel;
     }
 
-    private void convert(Stock stock,StockHistoryData historyData) {
+    private void convert(StockModel stockModel, StockHistoryData historyData) {
         if (historyData == null) return;
-        stock.setCode(historyData.getCode());
-        stock.setDate(historyData.getDate());
-        stock.setOpen(historyData.getOpen());
-        stock.setHigh(historyData.getHigh());
-        stock.setLow(historyData.getLow());
-        stock.setPrice(historyData.getClose());
+        stockModel.setCode(historyData.getCode());
+        stockModel.setDate(historyData.getDate());
+        stockModel.setOpen(historyData.getOpen());
+        stockModel.setHigh(historyData.getHigh());
+        stockModel.setLow(historyData.getLow());
+        stockModel.setPrice(historyData.getClose());
     }
 
 }

@@ -8,11 +8,11 @@
         <version>2.7.10</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.dongle.stock</groupId>
-    <artifactId>dongle-stock-service</artifactId>
+    <groupId>com.dongle.stockModel</groupId>
+    <artifactId>dongle-stockModel-service</artifactId>
     <version>0.0.1</version>
-    <name>dongle-stock-service</name>
-    <description>dongle-stock-service</description>
+    <name>dongle-stockModel-service</name>
+    <description>dongle-stockModel-service</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

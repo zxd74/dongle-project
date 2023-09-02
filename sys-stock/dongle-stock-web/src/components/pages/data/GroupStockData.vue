@@ -1,47 +1,53 @@
 <template>
     <div class="main">
         <div class="condition">
-            <!-- <el-select>
-                <el-option v-for="item in groups" :key="item.id" :value="item.value" :label="item.name"></el-option>
-            </el-select> -->
+            <el-select v-model="groupId" placeholder="请选择分组" @change="selectGroup">
+                <el-option v-for="item in groups" :key='"group_"+item.groupId' :value="item.groupId" :label="item.groupName"></el-option>
+            </el-select>
+            <el-button @click="$router.push('/stock-group')" type="primary" round>分组管理</el-button>
         </div>
         <div class="content">
-            <div id="echarts"></div>
+            <div id="echarts">
+                <div v-for="(item,index) in echarts" :id='"echarts_" + index' :key='"echarts_" + index'
+                    style="display: inline-block;"></div>
+
+            </div>
         </div>
     </div>
 </template>
 <script>
 import {createEcharts} from '@/assets/js/stock'
-import {groupStockAllData} from '@/assets/js/Api'
+import {groupStockAllData,allStockGroup} from '@/assets/js/Api'
 export default{
     data(){
         return{
-            groups:[
-                {id:1,name:"测试",value:""}
-            ],
+            groups:[],
             echarts:[],
+            groupId:undefined
         }
     },
     created(){
-        this.selectGroup("1")
+        this.queryAllGroup()
+        this.selectGroup(this.$route.query.groupId)
     },
     methods:{
-        createEchartElement(num){
-            var div = document.createElement('div')
-            div.setAttribute("id",'main_' + num)
-            div.setAttribute("style","display:inline-block;")
-            var main = document.getElementById('echarts').appendChild(div)
-            return main
+        queryAllGroup(){
+            allStockGroup().then(res=>{
+                this.groups = res.data
+            })
         },
         selectGroup(groupId){
             var that = this;
+            if(groupId == undefined) groupId = that.groupId
             groupStockAllData({groupId:groupId}).then(res=>{
                 var data = res.data 
-                data.forEach(item => {
-                    var echart = createEcharts(this.createEchartElement(this.echarts.length),item.data)
-                    that.echarts.push(echart)
-                });
-                
+                if (data != '')
+                    that.echarts = data
+                return new Promise(res => res())
+            }).then(()=>{
+                that.echarts.forEach((item,index)=>{
+                    createEcharts(document.getElementById('echarts_'+index),item.data,item.name + '('+item.code+')')
+                })
             })
         }
     }

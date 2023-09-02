@@ -18,17 +18,17 @@
             let content = $('#content').val();
             if (content == undefined || content == '') return
             // 清空个股数据
-            $("#stock-info").html('')
-            $("#stock-data").html('')
+            $("#stockModel-info").html('')
+            $("#stockModel-data").html('')
             // 查询数据
-            request('/stock/query-stock','code='+content,null,null,function (data){
+            request('/stockModel/query-stockModel','code='+content,null,null,function (data){
                 console.log(data)
                 if (data==null){
                     return
                 }
 
                 let html = "代码:<label>" + data.code +"</label>名称:<lable>" + data.name +  "</lable>";
-                $("#stock-info").html(html)
+                $("#stockModel-info").html(html)
 
                 html = "<table>\n" +
                     "                    <tr>\n" +
@@ -51,20 +51,20 @@
                         "                    </tr>"
                 }
                 html += "</table>"
-                $("#stock-data").html(html)
+                $("#stockModel-data").html(html)
             })
         }
         function gradNew(){
             var code = $('#content').val();
             // 抓取新股票
-            request('/stock/add-new','code='+code,null,null,function (data){
+            request('/stockModel/add-new','code='+code,null,null,function (data){
                 query()
                 allData()
             })
         }
         function gradAll(){
             // 抓取全部
-            request('/stock/grab-day',null,null,null,function (data){
+            request('/stockModel/grab-day',null,null,null,function (data){
                 allData()
             })
         }
@@ -74,7 +74,7 @@
             $('#all-list').html('')
             $('#all-data').html('')
             // 全部汇总数据
-            request('/stock/all-stock',null,null,null,function (data){
+            request('/stockModel/all-stockModel',null,null,null,function (data){
                 let html = "<table>\n" +
                     "                    <tr>\n" +
                     "                        <th>代码</th>\n" +
@@ -92,7 +92,7 @@
 
             })
 
-            request('/stock/all-data',null,null,null,function (data){
+            request('/stockModel/all-data',null,null,null,function (data){
                 console.log(data)
             })
         }
@@ -118,7 +118,7 @@
         .content{
             width: 100%;
         }
-        .stock{
+        .stockModel{
             height: 40%;
         }
 
@@ -134,10 +134,10 @@
         <button onclick="gradAll()">更新</button>
     </div>
     <div class="content">
-        <div class="stock">
+        <div class="stockModel">
             个股数据
-            <div id="stock-info"></div>
-            <div id="stock-data">
+            <div id="stockModel-info"></div>
+            <div id="stockModel-data">
                 <div>七日数据</div>
                 <div>每周数据</div>
                 <div>每月数据</div>

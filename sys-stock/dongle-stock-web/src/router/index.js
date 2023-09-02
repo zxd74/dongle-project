@@ -27,6 +27,10 @@ const router = new VueRouter({
           component:()=>import('@/components/pages/stock/StockManage'),
         },
         {
+          path:'stock-group',
+          component:()=>import('@/components/pages/stock/StockGroup'),
+        },
+        {
           path:'data-manage',
           component:()=>import('@/components/pages/data/DataManage'),
         },

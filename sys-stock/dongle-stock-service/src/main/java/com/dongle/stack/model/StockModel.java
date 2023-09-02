@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Stock {
+public class StockModel {
 
     private String code;
     private String name;
@@ -14,8 +14,12 @@ public class Stock {
     private double high;
     private double low;
     private double open;
+    private int groupId;
+    private String groupName;
     /**
      * Stock历史数据
      */
-    private List<Stock> data;
+    private List<StockModel> data;
+
+
 }
