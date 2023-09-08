@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        Footer
+        @2021 版权所有 @Dongle<img src="@/assets/imgs/logo.png" alt="logo">
     </div>
 </template>
 <script>

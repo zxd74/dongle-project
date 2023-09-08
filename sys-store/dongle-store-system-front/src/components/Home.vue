@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    Home
       <d-header></d-header>
       <d-side-bar></d-side-bar>
       <d-main></d-main>

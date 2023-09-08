@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="condition">
-            <el-input type="text" v-model="condition.name">商品名称</el-input>
+            <el-input autosize  type="text" v-model="condition.name" style="width:200px;">商品名称</el-input>
             <el-button type="primary" @click="search">搜索</el-button>
         </div>
         <div class="content">
@@ -45,7 +45,7 @@ export default {
         }
     },
     created(){
-
+        console.log('product manage created')
     },
     methods:{
         search(){
