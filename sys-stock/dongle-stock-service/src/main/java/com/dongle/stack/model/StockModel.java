@@ -16,6 +16,8 @@ public class StockModel {
     private double open;
     private int groupId;
     private String groupName;
+    private double pctChg; // 涨跌率%
+    private StockModel preData; //前日数据
     /**
      * Stock历史数据
      */

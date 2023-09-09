@@ -2,6 +2,7 @@ package com.dongle.stack.controller;
 
 import com.dongle.stack.model.StockGroupModel;
 import com.dongle.stack.model.StockModel;
+import com.dongle.stack.service.StockDataService;
 import com.dongle.stack.service.StockGroupService;
 import com.dongle.stack.service.StockHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,11 @@ public class DataManageController {
     @Autowired
     private StockGroupService groupService;
 
+    @Autowired
+    private StockDataService dataService;
+
     /**
-     * 查询素有股票交易信息
+     * 查询素有股票交易信息 TODO 不应考虑提供
      * @return
      */
     @GetMapping("all")

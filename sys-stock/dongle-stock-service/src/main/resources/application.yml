@@ -15,3 +15,8 @@ spring:
         # 取消小驼峰到下划线映射(加上这个)
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  redis:
+#    url: redis://:123456@db.dongle.com:6379
+    host: db.dongle.com
+    port: 6379
+    password: 123456
