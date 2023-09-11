@@ -75,7 +75,7 @@ def exsit_stock_data(code):
 
 # 检查交易日数据是否存在
 def exsit_stock_day_data(day):
-    sql = "select count(1) from stack_history_data where date = '" + day + "'"
+    sql = "select count(1) from stock_history_data where date = '" + day + "'"
     cursor.execute(sql)
     result = cursor.fetchone()
     for r in result:

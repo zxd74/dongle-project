@@ -19,7 +19,7 @@ def date(dif):
     return (datetime.datetime.now() - datetime.timedelta(days=dif)).strftime(DATE_FORMAT)
 
 
-params = {'method': 'data', 'day': date(0)}
+params = {'method': 'data', 'day': date(-1)}
 # params = {'method': 'new', 'code': 'sz.002025', 'day': date(30)}
 sys.argv.pop(0)
 for p in sys.argv:
