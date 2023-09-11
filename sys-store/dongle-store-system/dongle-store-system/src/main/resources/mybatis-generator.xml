@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--执行generator插件生成文件的命令： call mvn mybatis-generator:generate -e -->
+    <!-- 引入配置文件 -->
+    <!--<properties resource="mybatis.properties"/>-->
+    <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
+    <!--<classPathEntry location="D:\generator_mybatis\mysql-connector-java-5.1.24-bin.jar" /> -->
+
+    <!-- 一个数据库一个context -->
+    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <context id="MysqlTables" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 关键字列，增加分隔符处理       -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+<!--         代码生成插件-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin"/>-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.LimitPlugin"/>-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.ModelBuilderPlugin"/>-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin"/>-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleTargetPlugin">-->
+<!--            &lt;!&ndash; 修改Example类生成到目标包下 &ndash;&gt;-->
+<!--            <property name="targetPackage" value="com.dongle.store.system.dao.model"/>-->
+<!--        </plugin>-->
+
+        <!-- 注释 -->
+        <commentGenerator type="com.dongle.mybatis.generator.plugins.DongleCommentGenerator">
+            <property name="suppressAllComments" value="false"/><!-- 是否取消所有内容注释 -->
+            <property name="suppressDate" value="true"/> <!-- 是否生成注释代时间戳-->
+            <property name="addRemarkComments" value="true"/> <!--增加表和列注释-->
+        </commentGenerator>
+
+        <!--jdbc-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://db.dongle.com/dongle-data?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false"
+                        userId="root" password="Dongle@123"/>
+
+        <!--实体类model-->
+        <javaModelGenerator targetPackage="com.dongle.store.system.dao.entity" targetProject="src/main/java" />
+        <!--生成mapper.xml配置文件-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
+        <!--生成dao接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dongle.store.system.dao.mapper" targetProject="src/main/java" />
+
+        <!--对应数据库表-->
+        <table tableName="store_merchants" domainObjectName="StoreMerchants"/>
+        <table tableName="store_products" domainObjectName="StoreProduct"/>
+        <table tableName="store_users" domainObjectName="StoreUser"/>
+    </context>
+</generatorConfiguration>
