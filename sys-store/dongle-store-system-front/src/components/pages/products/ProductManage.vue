@@ -2,6 +2,9 @@
     <div class="container">
         <div class="condition">
             <el-input autosize  type="text" v-model="condition.name" style="width:200px;">商品名称</el-input>
+            <el-select v-model="condition.type" placeholder="请选择商品分类">
+                    <el-option v-for="item in types" :key="'type-' + item.value" :label="item.name" :value="item.value" />
+                </el-select>
             <el-button type="primary" @click="search">搜索</el-button>
         </div>
         <div class="content">
@@ -13,6 +16,7 @@
                     <el-table-column prop="image" label="图片" width="180"></el-table-column>
                     <el-table-column prop="images" label="轮播图">
                         <template slot-scope="scope">
+                            <!-- 轮播图 -->
                         </template>
                     </el-table-column>
                     <el-table-column prop="desc" label="描述"></el-table-column>
@@ -42,6 +46,7 @@ export default {
         return {
             produts:[],
             condition:{},
+            types:[],
         }
     },
     created(){

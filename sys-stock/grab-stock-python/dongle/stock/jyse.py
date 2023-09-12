@@ -68,6 +68,7 @@ class SzJysApi(JysApi):
             print("深圳交易所未查询到股票%s %s交易数据" % (code, day))
             return None
         d = data[0]
+        print(d)
         stockData = model.StockData(day, code, d['ks'], d['zg'], d['zd'], d['ss'])
         return stockData
 
@@ -336,3 +337,6 @@ class HkJysApi(JysApi):
             else 7 if (365 * 2) < num <= (365 * 5) \
             else 8 if (365 * 5) < num <= (365 * 10) \
             else -1
+
+jys = SzJysApi()
+print(jys.grab_stock_data_by_day('000988','2023-09-11'))

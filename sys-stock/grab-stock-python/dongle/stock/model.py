@@ -38,13 +38,13 @@ class StockData:
     股票数据类
     """
 
-    def __init__(self, date: str, code, open=0, low=0, high=0, close=0, volume=0, amount=0):
+    def __init__(self, date: str, code, open=0, high=0,low=0, close=0, volume=0, amount=0):
         """
         @param date: 数据日期 str
         @param code: 股票代码 str
         @param open: 开盘价 float
-        @param low: 最低价 float
         @param high: 最高价 float
+        @param low: 最低价 float
         @param close: 最高价 float
         @param volume: 交易量 股数
         @param amount: 交易额 金额 元，float
@@ -52,8 +52,8 @@ class StockData:
         self.code = code
         self.date = date
         self.open = open
-        self.low = low
         self.high = high
+        self.low = low
         self.close = close
         self.volume = volume
         self.amount = amount

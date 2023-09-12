@@ -25,6 +25,28 @@ Vue.use(Router)
           path: 'data-manage',
           component: () => import('@/components/pages/data/DataManage'),
           meta: { title: '数据管理' }
+        },
+        {
+          path: 'user-manage',
+          component: () => import('@/components/pages/user-manage/UserManage'),
+          meta: { title: '用户管理' },
+          children:[
+            {
+              path: 'sys',
+              component: () => import('@/components/pages/user-manage/SystemUserManage'),
+              meta: { title: '系统用户管理' },
+            },
+            {
+              path: 'users',
+              component: () => import('@/components/pages/user-manage/StoreUserManage'),
+              meta: { title: '会员管理' },
+            },
+            {
+              path: 'merchants',
+              component: () => import('@/components/pages/user-manage/StoreMerchantManage'),
+              meta: { title: '商户管理' },
+            }
+          ]
         }
       ]
     },
