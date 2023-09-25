@@ -59,7 +59,7 @@ class SzJysApi(JysApi):
         super().__init__(model.StockJyseType.SHENZHEN)
 
     def grab_stock_data_by_day(self, code, day):
-        # 基本时试试数据，如果需要整天数据，不要在交易时间内查询
+        # 当日实时数据，如果需要整天数据，不要在交易时间内查询
         url = self.__stock_data_request_uri % (code, day, day)
         content = requests.get(url)
         data = content.json()
@@ -107,9 +107,7 @@ class ShJysApi(JysApi):
     # http://query.sse.com.cn/commonQuery.do?jsonCallBack=jsonpCallback%s&sqlId=COMMON_SSE_CP_GPJCTPZ_GPLB_CJGK_MRGK_C&SEC_CODE=%s&TX_DATE=%s&TX_DATE_MON=&TX_DATE_YEAR=&_=%d
     __stock_request_day_uri = "http://query.sse.com.cn/commonQuery.do?"
     __headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
-        "Cookie": "ba17301551dcbaf9_gdp_user_key=; gdp_user_id=gioenc-342gae68%2C078g%2C5d97%2Cacg0%2Cgg9812bb3526; ba17301551dcbaf9_gdp_session_id_b4388a90-37b4-4870-a840-ba2fd116da65=true; ba17301551dcbaf9_gdp_session_id_e752cd56-677c-4c58-8907-e0f12c2f08d8=true; ba17301551dcbaf9_gdp_session_id_a8288453-f138-4dae-9543-37f6a7401ac8=true; VISITED_MENU=%5B%229061%22%2C%229060%22%5D; VISITED_COMPANY_CODE=%5B%22600000%22%2C%22688111%22%2C%22603069%22%5D; VISITED_STOCK_CODE=%5B%22600000%22%2C%22688111%22%2C%22603069%22%5D; JSESSIONID=AB2D0D283994F48072E17109768C6BA3; ba17301551dcbaf9_gdp_session_id=757befbd-70c1-4978-88c7-6952898e7084; ba17301551dcbaf9_gdp_session_id_757befbd-70c1-4978-88c7-6952898e7084=true; ba17301551dcbaf9_gdp_sequence_ids={%22globalKey%22:252%2C%22VISIT%22:5%2C%22PAGE%22:36%2C%22VIEW_CLICK%22:185%2C%22VIEW_CHANGE%22:15%2C%22CUSTOM%22:15}",
-        "Host": "query.sse.com.cn",
+        "User-Agent": UserAgent,
         "Referer": "http://www.sse.com.cn/",  # TODO 此条件必需
     }
 
@@ -160,8 +158,8 @@ class ShJysApi(JysApi):
             "TX_DATE_YEAR": "",
             "_": t
         }
-        content = requests.post(self.__stock_request_day_uri, data=params, headers=self.__headers).content.decode(
-            "utf-8")
+        response = requests.post(self.__stock_request_day_uri, data=params, headers=self.__headers)
+        content = response.content.decode("utf-8")
         content = utils.JsonUtil.convertJsonFromJsonCallBack(content, jsonCallBack)
         data = json.loads(content)
         if 'result' not in data:
@@ -338,5 +336,6 @@ class HkJysApi(JysApi):
             else 8 if (365 * 5) < num <= (365 * 10) \
             else -1
 
-jys = SzJysApi()
-print(jys.grab_stock_data_by_day('000988','2023-09-11'))
+
+# jys = ShJysApi()
+# print(jys.grab_stock_data_by_day('601800','2023-09-25'))

@@ -1,6 +1,6 @@
 import sys
 import datetime
-import baostack_data as bs
+import baostock_data as bs
 import utils as u
 
 PARAM_CODE = 'code'
