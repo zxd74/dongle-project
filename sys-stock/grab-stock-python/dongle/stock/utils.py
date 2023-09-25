@@ -55,6 +55,23 @@ class StockDao:
         sql = sql.removesuffix(",")
         self.__conn.executeSql(sql)
 
+    def saveStockTmp(self,codes,day):
+        sql = "delete from `stock_tmp`"
+        self.__conn.executeSql(sql)
+        sql = "insert into `stock_tmp`(`code`,`day`) values"
+        for code in codes:
+            sql += "('"+code+"','" + day + "'),"
+        sql = sql.removesuffix(",")
+        self.__conn.executeSql(sql)
+
+    def queryStockTmp(self,day):
+        sql = "select s.source,st.code,s.code_name  from `stock_tmp` st left join `stocks` s on s.code = st.code where st.day='" + day +"'"
+        result = self.__conn.querySql(sql)
+        stocks = []
+        for row in result:
+            stocks.append(model.Stock(row[0], row[1], row[2]))
+        return stocks
+
 
 class DateUtil:
     # TODO 考虑归为enum对象
