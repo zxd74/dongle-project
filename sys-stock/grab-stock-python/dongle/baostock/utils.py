@@ -64,7 +64,7 @@ def query_stock_code_list():
 
 
 # 检查股票是否存在
-def exsit_stock_data(code):
+def exist_stock_data(code):
     sql = "select count(1) from stock_info where code = '" + code + "'"
     cursor.execute(sql)
     result = cursor.fetchone()
@@ -74,7 +74,7 @@ def exsit_stock_data(code):
 
 
 # 检查交易日数据是否存在
-def exsit_stock_day_data(day):
+def exist_stock_day_data(day):
     sql = "select count(1) from stock_history_data where date = '" + day + "'"
     cursor.execute(sql)
     result = cursor.fetchone()
@@ -91,3 +91,11 @@ def readExcel(file):
         for row in reader:
             data.append(row)
     return data
+
+
+def params_sys(args, sp="="):
+    params = {}
+    for p in args:
+        ps = p.split(sp)
+        params[ps[0]] = ps[1] if len(ps) > 1 else None
+    return params

@@ -11,7 +11,7 @@ METHOD_DATA = "data"
 DATE_FORMAT = "%Y-%m-%d"
 
 
-def date(dif):
+def date(dif=0):
     if dif == 0:
         return datetime.datetime.now().strftime(DATE_FORMAT)
     if dif < 0:
@@ -19,12 +19,8 @@ def date(dif):
     return (datetime.datetime.now() - datetime.timedelta(days=dif)).strftime(DATE_FORMAT)
 
 
-params = {'method': 'data', 'day': date(-1)}
-# params = {'method': 'new', 'code': 'sz.002025', 'day': date(30)}
-sys.argv.pop(0)
-for p in sys.argv:
-    ps = p.split("=")
-    params[ps[0]] = ps[1]
+params = {'method': 'data', 'day': date(0)}
+params.update(u.params_sys(sys.argv))
 print(params)
 
 
@@ -38,7 +34,7 @@ def grab_new_stock():
     start_day = params[PARAM_DAY] or date(30)
     # end_day = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime(DATE_FORMAT)
     end_day = date(1)
-    if u.exsit_stock_data(code):
+    if u.exist_stock_data(code):
         print("stock is exist!")
         return
     print("success grab new stock info")
@@ -54,17 +50,17 @@ def grab_new_stock():
 def grab_stock_data():
     print("start grab old stock data....")
     day = params[PARAM_DAY]
-    if u.exsit_stock_day_data(day):
-        print("%s stock day already exist!")
+    if u.exist_stock_day_data(day):
+        print("%s stock day already exist!" % day)
         return
     bs.login()
     codes = u.query_stock_code_list()
-    save_stock_data(codes,day,day)
+    save_stock_data(codes, day, day)
     bs.logout()
 
 
 # 保存股票交易数据
-def save_stock_data(codes,sday,eday):
+def save_stock_data(codes, sday, eday):
     result = bs.track_stock_data(codes, sday, eday)
     data = []
     if result is None:
@@ -72,7 +68,7 @@ def save_stock_data(codes,sday,eday):
         return
     for r in result:
         data.append(r.to_list().__str__())
-    if len(data)>0:
+    if len(data) > 0:
         u.save_history_data(data)
         print("success grad stock data %d" % len(data))
 
@@ -82,4 +78,4 @@ if __name__ == "__main__":
         grab_new_stock()
     else:
         grab_stock_data()
-
+    pass

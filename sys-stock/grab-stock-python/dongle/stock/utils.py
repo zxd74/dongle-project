@@ -55,17 +55,17 @@ class StockDao:
         sql = sql.removesuffix(",")
         self.__conn.executeSql(sql)
 
-    def saveStockTmp(self,codes,day):
+    def saveStockTmp(self, codes, day):
         sql = "delete from `stock_tmp`"
         self.__conn.executeSql(sql)
         sql = "insert into `stock_tmp`(`code`,`day`) values"
         for code in codes:
-            sql += "('"+code+"','" + day + "'),"
+            sql += "('" + code + "','" + day + "'),"
         sql = sql.removesuffix(",")
         self.__conn.executeSql(sql)
 
-    def queryStockTmp(self,day):
-        sql = "select s.source,st.code,s.code_name  from `stock_tmp` st left join `stocks` s on s.code = st.code where st.day='" + day +"'"
+    def queryStockTmp(self, day):
+        sql = "select s.source,st.code,s.code_name  from `stock_tmp` st left join `stocks` s on s.code = st.code where st.day='" + day + "'"
         result = self.__conn.querySql(sql)
         stocks = []
         for row in result:
@@ -115,18 +115,18 @@ class DateUtil:
         @return:
         """
         dt = dt.timestamp()
-        p = pow(10,(tp * 3))
+        p = pow(10, (tp * 3))
         return int(dt * p)
 
     @staticmethod
-    def localdate(ts:int,tp:int = 0):
+    def localdate(ts: int, tp: int = 0):
         """
         @param ts: 时间戳
         @param tp:  0 秒级；1，毫秒；2.微秒
         @return:
         """
-        p = pow(10,(tp * 3))
-        return  datetime.datetime.fromtimestamp((ts/p))
+        p = pow(10, (tp * 3))
+        return datetime.datetime.fromtimestamp((ts / p))
 
 
 class JsonUtil:
@@ -160,3 +160,13 @@ class JsonUtil:
     def json_2_obj_from_file(fp, handler=None):
         with open(fp, 'r') as file:
             return json.load(file, object_hook=handler)
+
+
+class EnvUtil:
+    @staticmethod
+    def params_sys(args, sp="="):
+        params = {}
+        for p in args:
+            ps = p.split(sp)
+            params[ps[0]] = ps[1] if len(ps) > 1 else None
+        return params

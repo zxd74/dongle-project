@@ -2,25 +2,27 @@
 功能一：根据指定股票code到指定交易所抓取股票信息
 功能二：根据指定股票code到指定交易所抓取股票交易日数据
 """
+import sys
+
 import jyse
 import model, utils
 
-DBOPTION = utils.StockDao()
-JYSE_MAP: dict = {}
+DB_OPTION = utils.StockDao()
+JYS_MAP: dict = {}
 DATA_DIR = "D:\\"
 
 
 def getStocks(day):
-    stocks = DBOPTION.queryStockTmp(day)
+    stocks = DB_OPTION.queryStockTmp(day)
     if stocks and len(stocks) > 0:
         return stocks
     """从库中读取所需抓取的股票集"""
-    return DBOPTION.queryStocks()
+    return DB_OPTION.queryStocks()
 
 
 def getJyse(src):
-    if src in JYSE_MAP:
-        return JYSE_MAP[src]
+    if src in JYS_MAP:
+        return JYS_MAP[src]
     if src == model.StockJyseType.SHENZHEN:
         jys = jyse.SzJysApi()
     elif src == model.StockJyseType.SHANGHAI:
@@ -31,7 +33,7 @@ def getJyse(src):
         jys = jyse.HkJysApi()
     else:
         jys = None
-    JYSE_MAP[src] = jys
+    JYS_MAP[src] = jys
     return jys
 
 
@@ -49,11 +51,11 @@ def grabStockData(stocks: [model.Stock], day: str):
 
 
 def saveStockInfo(stock: model.Stock):
-    DBOPTION.saveStock(stock)
+    DB_OPTION.saveStock(stock)
 
 
 def saveStockData(stockDatas: [model.StockData]):
-    DBOPTION.saveStockDatas(stockDatas)
+    DB_OPTION.saveStockDatas(stockDatas)
     print("save stock data to db successful![%d]" % len(stockDatas))
 
 
@@ -63,7 +65,7 @@ def saveToFile(data, file):
 
 
 def saveStockTmp(codes,day):
-    DBOPTION.saveStockTmp(codes,day)
+    DB_OPTION.saveStockTmp(codes, day)
 
 
 def grabStockDatas(day):
@@ -97,7 +99,7 @@ def grabStockDatas(day):
         saveToFile(stockDatas, "data_" + day + ".json")
     print(day, "股票数据抓取任务结束！")
     print(stockDatas)
-    DBOPTION.close()
+    DB_OPTION.close()
 
 
 def grabNewStockDatas(stock, days=30):
@@ -113,7 +115,8 @@ def handlerStockData(data):
 
 
 if __name__ == "__main__":
-    day = utils.DateUtil.format_date()
+    params = utils.EnvUtil.params_sys(sys.argv)
+    day = params['day'] if 'day' in params else utils.DateUtil.format_date()
     grabStockDatas(day)
     # TODO 考虑根据交易所做多线程采集处理
     # TODO 为什么上海还能查到周日数据
