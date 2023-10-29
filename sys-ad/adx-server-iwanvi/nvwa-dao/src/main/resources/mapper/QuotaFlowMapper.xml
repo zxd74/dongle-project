@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.QuotaFlowMapper">
+	<resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.QuotaFlow">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="flow_id" jdbcType="VARCHAR" property="flowId" />
+		<result column="cre_day" jdbcType="INTEGER" property="creDay" />
+		<result column="cre_hour" jdbcType="INTEGER" property="creHour" />
+        <result column="bid" jdbcType="INTEGER" property="bid" />
+        <result column="req" jdbcType="BIGINT" property="req" />
+		<result column="exp" jdbcType="INTEGER" property="exp" />
+		<result column="clk" jdbcType="INTEGER" property="clk" />
+        <result column="requv" jdbcType="INTEGER" property="requv" />
+		<result column="expuv" jdbcType="INTEGER" property="expuv" />
+		<result column="clkuv" jdbcType="INTEGER" property="clkuv" />
+		<result column="invest" jdbcType="BIGINT" property="invest" />
+		<result column="active" jdbcType="INTEGER" property="active" />
+		<result column="appid" jdbcType="VARCHAR" property="appid" />
+		<result column="adpid" jdbcType="VARCHAR" property="adpid" />
+		<result column="versions" jdbcType="VARCHAR" property="versions" />
+		<result column="channel1" jdbcType="VARCHAR" property="channel1" />
+		<result column="channel2" jdbcType="VARCHAR" property="channel2" />
+		<result column="item_id" jdbcType="VARCHAR" property="itemId" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, flow_id, cre_day, cre_hour, req, bid, exp, clk, invest,
+		active, requv, expuv, clkuv, appid, adpid, channel1, channel2, versions
+	</sql>
+	<select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowExample" resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from quota_flow
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from quota_flow
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		quota_flow
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowExample">
+		delete from quota_flow
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlow">
+		insert into quota_flow (id, flow_id, cre_day,
+      cre_hour, req, requv,
+      bid, exp, expuv, clk,
+      clkuv, invest, active,
+      appid, adpid, channel1,
+      channel2, versions)
+    values (#{id,jdbcType=INTEGER}, #{flowId,jdbcType=VARCHAR}, #{creDay,jdbcType=INTEGER},
+      #{creHour,jdbcType=INTEGER}, #{req,jdbcType=BIGINT}, #{requv,jdbcType=INTEGER},
+      #{bid,jdbcType=INTEGER}, #{exp,jdbcType=INTEGER}, #{expuv,jdbcType=INTEGER}, #{clk,jdbcType=INTEGER},
+      #{clkuv,jdbcType=INTEGER}, #{invest,jdbcType=BIGINT}, #{active,jdbcType=INTEGER},
+      #{appid,jdbcType=VARCHAR}, #{adpid,jdbcType=VARCHAR}, #{channel1,jdbcType=VARCHAR},
+      #{channel2,jdbcType=VARCHAR}, #{versions,jdbcType=VARCHAR})
+	</insert>
+    <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlow">
+        insert into quota_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="flowId != null">
+                flow_id,
+            </if>
+            <if test="creDay != null">
+                cre_day,
+            </if>
+            <if test="creHour != null">
+                cre_hour,
+            </if>
+            <if test="req != null">
+                req,
+            </if>
+            <if test="requv != null">
+                requv,
+            </if>
+            <if test="bid != null">
+                bid,
+            </if>
+            <if test="exp != null">
+                exp,
+            </if>
+            <if test="expuv != null">
+                expuv,
+            </if>
+            <if test="clk != null">
+                clk,
+            </if>
+            <if test="clkuv != null">
+                clkuv,
+            </if>
+            <if test="invest != null">
+                invest,
+            </if>
+            <if test="active != null">
+                active,
+            </if>
+            <if test="appid != null">
+                appid,
+            </if>
+            <if test="adpid != null">
+                adpid,
+            </if>
+            <if test="channel1 != null">
+                channel1,
+            </if>
+            <if test="channel2 != null">
+                channel2,
+            </if>
+            <if test="versions != null">
+                versions,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="flowId != null">
+                #{flowId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDay != null">
+                #{creDay,jdbcType=INTEGER},
+            </if>
+            <if test="creHour != null">
+                #{creHour,jdbcType=INTEGER},
+            </if>
+            <if test="req != null">
+                #{req,jdbcType=BIGINT},
+            </if>
+            <if test="requv != null">
+                #{requv,jdbcType=INTEGER},
+            </if>
+            <if test="bid != null">
+                #{bid,jdbcType=INTEGER},
+            </if>
+            <if test="exp != null">
+                #{exp,jdbcType=INTEGER},
+            </if>
+            <if test="expuv != null">
+                #{expuv,jdbcType=INTEGER},
+            </if>
+            <if test="clk != null">
+                #{clk,jdbcType=INTEGER},
+            </if>
+            <if test="clkuv != null">
+                #{clkuv,jdbcType=INTEGER},
+            </if>
+            <if test="invest != null">
+                #{invest,jdbcType=BIGINT},
+            </if>
+            <if test="active != null">
+                #{active,jdbcType=INTEGER},
+            </if>
+            <if test="appid != null">
+                #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="adpid != null">
+                #{adpid,jdbcType=VARCHAR},
+            </if>
+            <if test="channel1 != null">
+                #{channel1,jdbcType=VARCHAR},
+            </if>
+            <if test="channel2 != null">
+                #{channel2,jdbcType=VARCHAR},
+            </if>
+            <if test="versions != null">
+                #{versions,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowExample" resultType="java.lang.Long">
+        select count(*) from quota_flow
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update quota_flow
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.flowId != null">
+                flow_id = #{record.flowId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creDay != null">
+                cre_day = #{record.creDay,jdbcType=INTEGER},
+            </if>
+            <if test="record.creHour != null">
+                cre_hour = #{record.creHour,jdbcType=INTEGER},
+            </if>
+            <if test="record.req != null">
+                req = #{record.req,jdbcType=BIGINT},
+            </if>
+            <if test="record.requv != null">
+                requv = #{record.requv,jdbcType=INTEGER},
+            </if>
+            <if test="record.bid != null">
+                bid = #{record.bid,jdbcType=INTEGER},
+            </if>
+            <if test="record.exp != null">
+                exp = #{record.exp,jdbcType=INTEGER},
+            </if>
+            <if test="record.expuv != null">
+                expuv = #{record.expuv,jdbcType=INTEGER},
+            </if>
+            <if test="record.clk != null">
+                clk = #{record.clk,jdbcType=INTEGER},
+            </if>
+            <if test="record.clkuv != null">
+                clkuv = #{record.clkuv,jdbcType=INTEGER},
+            </if>
+            <if test="record.invest != null">
+                invest = #{record.invest,jdbcType=BIGINT},
+            </if>
+            <if test="record.active != null">
+                active = #{record.active,jdbcType=INTEGER},
+            </if>
+            <if test="record.appid != null">
+                appid = #{record.appid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.adpid != null">
+                adpid = #{record.adpid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.channel1 != null">
+                channel1 = #{record.channel1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.channel2 != null">
+                channel2 = #{record.channel2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.versions != null">
+                versions = #{record.versions,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update quota_flow
+        set id = #{record.id,jdbcType=INTEGER},
+        flow_id = #{record.flowId,jdbcType=VARCHAR},
+        cre_day = #{record.creDay,jdbcType=INTEGER},
+        cre_hour = #{record.creHour,jdbcType=INTEGER},
+        req = #{record.req,jdbcType=BIGINT},
+        requv = #{record.requv,jdbcType=INTEGER},
+        bid = #{record.bid,jdbcType=INTEGER},
+        exp = #{record.exp,jdbcType=INTEGER},
+        expuv = #{record.expuv,jdbcType=INTEGER},
+        clk = #{record.clk,jdbcType=INTEGER},
+        clkuv = #{record.clkuv,jdbcType=INTEGER},
+        invest = #{record.invest,jdbcType=BIGINT},
+        active = #{record.active,jdbcType=INTEGER},
+        appid = #{record.appid,jdbcType=VARCHAR},
+        adpid = #{record.adpid,jdbcType=VARCHAR},
+        channel1 = #{record.channel1,jdbcType=VARCHAR},
+        channel2 = #{record.channel2,jdbcType=VARCHAR},
+        versions = #{record.versions,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlow">
+        update quota_flow
+        <set>
+            <if test="flowId != null">
+                flow_id = #{flowId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDay != null">
+                cre_day = #{creDay,jdbcType=INTEGER},
+            </if>
+            <if test="creHour != null">
+                cre_hour = #{creHour,jdbcType=INTEGER},
+            </if>
+            <if test="req != null">
+                req = #{req,jdbcType=BIGINT},
+            </if>
+            <if test="requv != null">
+                requv = #{requv,jdbcType=INTEGER},
+            </if>
+            <if test="bid != null">
+                bid = #{bid,jdbcType=INTEGER},
+            </if>
+            <if test="exp != null">
+                exp = #{exp,jdbcType=INTEGER},
+            </if>
+            <if test="expuv != null">
+                expuv = #{expuv,jdbcType=INTEGER},
+            </if>
+            <if test="clk != null">
+                clk = #{clk,jdbcType=INTEGER},
+            </if>
+            <if test="clkuv != null">
+                clkuv = #{clkuv,jdbcType=INTEGER},
+            </if>
+            <if test="invest != null">
+                invest = #{invest,jdbcType=BIGINT},
+            </if>
+            <if test="active != null">
+                active = #{active,jdbcType=INTEGER},
+            </if>
+            <if test="appid != null">
+                appid = #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="adpid != null">
+                adpid = #{adpid,jdbcType=VARCHAR},
+            </if>
+            <if test="channel1 != null">
+                channel1 = #{channel1,jdbcType=VARCHAR},
+            </if>
+            <if test="channel2 != null">
+                channel2 = #{channel2,jdbcType=VARCHAR},
+            </if>
+            <if test="versions != null">
+                versions = #{versions,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlow">
+    update quota_flow
+    set flow_id = #{flowId,jdbcType=VARCHAR},
+      cre_day = #{creDay,jdbcType=INTEGER},
+      cre_hour = #{creHour,jdbcType=INTEGER},
+      req = #{req,jdbcType=BIGINT},
+      requv = #{requv,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      exp = #{exp,jdbcType=INTEGER},
+      expuv = #{expuv,jdbcType=INTEGER},
+      clk = #{clk,jdbcType=INTEGER},
+      clkuv = #{clkuv,jdbcType=INTEGER},
+      invest = #{invest,jdbcType=BIGINT},
+      active = #{active,jdbcType=INTEGER},
+      appid = #{appid,jdbcType=VARCHAR},
+      adpid = #{adpid,jdbcType=VARCHAR},
+      channel1 = #{channel1,jdbcType=VARCHAR},
+      channel2 = #{channel2,jdbcType=VARCHAR},
+      versions = #{versions,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+	<select id="selectSumDataByCreday" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowExample" resultMap="BaseResultMap">
+		SELECT cre_day AS 'cre_day',
+		SUM(req) AS 'req',
+		SUM(exp) AS 'exp',
+		SUM(clk) AS 'clk',
+		SUM(bid) AS 'bid' ,
+		SUM(active) AS 'putActive' ,
+		SUM(invest) AS
+		'invest'
+		FROM quota_flow
+		<include refid="Example_Where_Clause" />
+		GROUP BY cre_day
+	</select>
+	<select id="selectSumDataByFlow" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowExample" resultMap="BaseResultMap">
+		SELECT `p`.`id` as fsId,`p`.`media_name`as fsName,
+		SUM(`q`.req) AS req
+		,
+		SUM(`q`.bid) AS bid ,
+		SUM(active) AS 'putActive' ,
+		SUM(`q`.invest) AS
+		invest ,
+		SUM(`q`.`exp`)
+		AS EXP ,
+		SUM(`q`.clk) AS clk
+		FROM quota_flow
+		AS q, flow_source AS p
+		<include refid="Example_Where_Clause" />
+		and `q`.`flow_id` = `p`.`media_uuid`
+		GROUP BY `p`.`id`
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<select id="getOneFlowDataByHour" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`flow_source`.`media_name` AS 'fsName',
+		`quota_flow`.`cre_hour`
+		AS
+		'cre_hour',
+		SUM(`quota_flow`.`req`) AS 'req',
+		SUM(`quota_flow`.`bid`)
+		AS
+		'bid',
+		SUM(`quota_flow`.`invest`) AS
+		'invest',
+		SUM(`quota_flow`.`exp`) AS 'exp',
+		SUM(`quota_flow`.`clk`) AS 'clk'
+		FROM
+		quota_flow , flow_source
+		WHERE
+		`quota_flow`.`flow_id`=`flow_source`.`media_uuid`
+		AND
+		`quota_flow`.cre_day
+		between
+		#{start} and #{end}
+		AND `flow_source`.`id`=
+		#{dx_media}
+		<if test="all == null ">
+			GROUP BY
+			`quota_flow`.`cre_hour`
+		</if>
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<select id="getFlowDataByHourAndFlow" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`flow_source`.`media_name` AS 'fsName',
+		`quota_flow`.`cre_hour`
+		AS
+		'cre_hour',
+		`flow_source`.`id` AS fsId,
+		SUM(`quota_flow`.`req`) AS
+		'req',
+		SUM(`quota_flow`.`bid`) AS 'bid',
+		SUM(`quota_flow`.`exp`) AS
+		'exp',
+		SUM(`quota_flow`.`clk`) AS 'clk'
+		FROM quota_flow , flow_source
+		WHERE
+		`flow_source`.`media_uuid`= `quota_flow`.`flow_id`
+		AND
+		`flow_source`.`id`
+		IN
+		<foreach close=")" collection="list" index="index" item="list" open="(" separator=","> #{list}</foreach>
+		AND (`quota_flow`.cre_day BETWEEN #{start} AND #{end})
+		GROUP BY
+		`quota_flow`.`cre_hour`,`flow_source`.`id`
+	</select>
+	<select id="getFlowDataByDay" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`quota_flow`.`cre_day` AS cre_day,
+		`flow_source`.`media_name` AS
+		'fsName',
+		SUM(`quota_flow`.`req`) AS 'req',
+		SUM(`quota_flow`.`bid`) AS
+		'bid',
+		`flow_source`.`id` AS fsId,
+		SUM(`quota_flow`.`exp`) AS 'exp',
+		SUM(`quota_flow`.`clk`) AS
+		'clk',
+		SUM(`quota_flow`.`active`) AS
+		'putActive',
+		SUM(`quota_flow`.`invest`) AS 'invest'
+		FROM
+		quota_flow ,
+		flow_source
+		WHERE
+		`flow_source`.`media_uuid`=
+		`quota_flow`.`flow_id`
+		AND
+		`quota_flow`.cre_day
+		BETWEEN
+		#{startDay}
+		AND #{endDay}
+		AND `flow_source`.`id`=
+		#{dx_media}
+		<if test="isGroup != null">
+			GROUP BY `quota_flow`.cre_day
+		</if>
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<select id="getFlowDataOneDayByFs" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`flow_source`.`media_name` AS 'fsName',
+		`quota_flow`.`cre_day` AS
+		'cre_day',
+		`flow_source`.`id` AS 'fsId',
+		SUM(`quota_flow`.`req`) AS
+		'req',
+		SUM(`quota_flow`.`bid`) AS 'bid',
+		SUM(`quota_flow`.`exp`) AS
+		'exp',
+		SUM(`quota_flow`.`clk`) AS 'clk'
+		FROM quota_flow ,flow_source
+		WHERE
+		`flow_source`.`media_uuid`= `quota_flow`.`flow_id`
+		AND
+		(`quota_flow`.cre_day BETWEEN
+		#{start} AND #{end})
+		AND
+		`flow_source`.`id` IN
+		<foreach close=")" collection="list" index="index" item="list" open="(" separator=","> #{list}</foreach>
+		GROUP
+		BY`flow_source`.`id`
+	</select>
+	<select id="getFsByDay" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`quota_flow`.`cre_day` AS
+		'cre_day',
+		SUM(`quota_flow`.`req`) AS
+		'req',
+		SUM(`quota_flow`.`bid`) AS 'bid',
+		SUM(`quota_flow`.`exp`) AS
+		'exp',
+		SUM(`quota_flow`.`clk`) AS 'clk'
+		FROM quota_flow , flow_source
+		WHERE
+		`flow_source`.`media_uuid`= `quota_flow`.`flow_id`
+		AND
+		(`quota_flow`.cre_day BETWEEN
+		#{start} AND #{end})
+		AND
+		`flow_source`.`id` IN
+		<foreach close=")" collection="list" index="index" item="list" open="(" separator=","> #{list}</foreach>
+		<if test="table == null">
+			GROUP
+			BY`quota_flow`.`cre_day`
+		</if>
+	</select>
+	<select id="getFsByFs" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`flow_source`.`media_name` AS 'fsName',
+		`flow_source`.`id` AS
+		'fsId',
+		`quota_flow`.`cre_day` AS
+		'cre_day',
+		SUM(`quota_flow`.`req`) AS
+		'req',
+		SUM(`quota_flow`.`invest`) AS 'invest',
+		SUM(`quota_flow`.`bid`) AS 'bid',
+		SUM(`quota_flow`.`exp`) AS
+		'exp',
+		SUM(`quota_flow`.`clk`) AS 'clk'
+		FROM quota_flow , flow_source
+		WHERE
+		`flow_source`.`media_uuid`= `quota_flow`.`flow_id`
+		AND
+		(`quota_flow`.cre_day BETWEEN
+		#{startDay} AND #{endDay})
+		AND
+		`flow_source`.`id` IN
+		<foreach close=")" collection="list" index="index" item="list" open="(" separator=","> #{list}</foreach>
+		GROUP
+		BY`flow_source`.`id`
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<select id="getAllFlowDataByUser" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`quota_flow`.`cre_day` AS
+		'cre_day',
+		`flow_source`.`media_name` AS 'fsName',
+		`flow_source`.`id` AS
+		'fsId',
+		SUM(`quota_flow`.`req`) AS
+		'req',
+		SUM(`quota_flow`.`bid`)
+		AS
+		'bid',
+		SUM(`quota_flow`.`invest`) AS
+		'invest',
+		SUM(`quota_flow`.`exp`) AS 'exp',
+		SUM(`quota_flow`.`clk`)
+		AS 'clk'
+		FROM
+		quota_flow , flow_source
+		WHERE
+		`quota_flow`.`flow_id`=`flow_source`.`media_uuid`
+		AND
+		`quota_flow`.cre_day
+		between
+		#{startday} and #{endday}
+		AND
+		`flow_source`.`id` IN
+		<foreach close=")" collection="list" index="index" item="list" open="(" separator=","> #{list}</foreach>
+		<if test="all == all ">
+			GROUP BY
+			`quota_flow`.cre_day
+		</if>
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+
+    <select id="sumWithDate" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select cre_day, sum(exp) exp, sum(req) req, sum(clk) clk, sum(requv) requv, sum(expuv) expuv,
+        sum(clkuv) clkuv, sum(invest) invest, flow_id
+        from quota_flow
+        <where>
+            <trim prefixOverrides="and">
+                <if test="sDate != null and eDate != null">
+                    and cre_day between ${sDate} and ${eDate}
+                </if>
+                <if test="flowId != null">
+                    and flow_id =#{flowId}
+                </if>
+                <if test="pids != null and pids.size > 0">
+                    and adpid in (
+                    <foreach collection="pids" item="pid" separator=",">
+                        #{pid}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels1 != null and channels1.size > 0">
+                    and channel1 in (
+                    <foreach collection="channels1" item="channel" separator=",">
+                        #{channel}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels2 != null and channels2.size > 0">
+                    and channel2 in (
+                    <foreach collection="channels2" item="channel" separator=",">
+                        #{channel}
+                    </foreach>
+                    )
+                </if>
+                <if test="apps != null and apps.size > 0">
+                    and appid in (
+                    <foreach collection="apps" item="app" separator=",">
+                        #{app}
+                    </foreach>
+                    )
+                </if>
+                <if test="versions != null and versions.size > 0">
+                    and versions in (
+                    <foreach collection="versions" item="version" separator=",">
+                        #{version}
+                    </foreach>
+                    )
+                </if>
+            </trim>
+        </where>
+        group by cre_day
+    </select>
+
+    <select id="sumWithGroup" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select sum(exp) exp, sum(req) req, sum(clk) clk, sum(requv) requv, sum(expuv) expuv,
+        sum(clkuv) clkuv, sum(invest) invest, flow_id
+        <if test="groupItem != null">
+            , ${groupItem} item_id
+        </if>
+        from quota_flow
+        <where>
+            <trim prefixOverrides="and">
+                <if test="sDate != null and eDate != null">
+                    and cre_day between ${sDate} and ${eDate}
+                </if>
+                <if test="flowId != null">
+                    and flow_id =#{flowId}
+                </if>
+                <if test="pids != null and pids.size > 0">
+                    and adpid in (
+                    <foreach collection="pids" item="pid" separator=",">
+                        #{pid}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels1 != null and channels1.size > 0">
+                    and channel1 in (
+                    <foreach collection="channels1" item="channel" separator=",">
+                        #{channel}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels2 != null and channels2.size > 0">
+                    and channel2 in (
+                    <foreach collection="channels2" item="channel" separator=",">
+                        #{channel}
+                    </foreach>
+                    )
+                </if>
+                <if test="apps != null and apps.size > 0">
+                    and appid in (
+                    <foreach collection="apps" item="app" separator=",">
+                        #{app}
+                    </foreach>
+                    )
+                </if>
+                <if test="versions != null and versions.size > 0">
+                    and versions in (
+                    <foreach collection="versions" item="version" separator=",">
+                        #{version}
+                    </foreach>
+                    )
+                </if>
+            </trim>
+        </where>
+        <if test="groupItem != null">
+            group by ${groupItem}
+        </if>
+    </select>
+
+    <select id="sumWithDateAndGroup" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select sum(exp) exp, sum(req) req, sum(clk) clk, sum(requv) requv, sum(expuv) expuv,
+        sum(clkuv) clkuv, sum(invest) invest, flow_id, cre_day
+        <if test="groupItem != null">
+            , ${groupItem} item_id
+        </if>
+        from quota_flow
+        <where>
+            <trim prefixOverrides="and">
+                <if test="sDate != null and eDate != null">
+                    and cre_day between ${sDate} and ${eDate}
+                </if>
+                <if test="flowId != null">
+                    and flow_id =#{flowId}
+                </if>
+                <if test="pids != null and pids.size > 0">
+                    and adpid in (
+                    <foreach collection="pids" item="pid" separator=",">
+                        #{pid}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels1 != null and channels1.size > 0">
+                    and channel1 in (
+                    <foreach collection="channels1" item="channel" separator=",">
+                        #{channel}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels2 != null and channels2.size > 0">
+                    and channel2 in (
+                    <foreach collection="channels2" item="channel" separator=",">
+                        #{channel}
+                    </foreach>
+                    )
+                </if>
+                <if test="apps != null and apps.size > 0">
+                    and appid in (
+                    <foreach collection="apps" item="app" separator=",">
+                        #{app}
+                    </foreach>
+                    )
+                </if>
+                <if test="versions != null and versions.size > 0">
+                    and versions in (
+                    <foreach collection="versions" item="version" separator=",">
+                        #{version}
+                    </foreach>
+                    )
+                </if>
+            </trim>
+        </where>
+        group by cre_day
+        <if test="groupItem != null">
+            , ${groupItem}
+        </if>
+    </select>
+    <select id="detailReport" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select cre_day, sum(exp) exp, sum(req) req, sum(clk) clk, sum(requv) requv, sum(expuv) expuv,
+        sum(clkuv) clkuv, sum(invest) invest, flow_id
+        from quota_flow
+        <where>
+            <trim prefixOverrides="and">
+                <if test="sDate != null and eDate != null">
+                    and cre_day between ${sDate} and ${eDate}
+                </if>
+                <if test="flowId != null">
+                    and flow_id =#{flowId}
+                </if>
+                <if test="pids != null and pids.size > 0">
+                    and adpid in (
+                    <foreach collection="pids" item="pid" separator=",">
+                        #{pid}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels1 != null and channels1.size > 0">
+                    and channel1 in (
+                    <foreach collection="channels1" item="channel" separator=",">
+                        #{channel}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels2 != null and channels2.size > 0">
+                    and channel2 in (
+                    <foreach collection="channels2" item="channel" separator=",">
+                        #{channel}
+                    </foreach>
+                    )
+                </if>
+                <if test="apps != null and apps.size > 0">
+                    and appid in (
+                    <foreach collection="apps" item="app" separator=",">
+                        #{app}
+                    </foreach>
+                    )
+                </if>
+                <if test="versions != null and versions.size > 0">
+                    and versions in (
+                    <foreach collection="versions" item="version" separator=",">
+                        #{version}
+                    </foreach>
+                    )
+                </if>
+            </trim>
+        </where>
+        group by cre_day
+    </select>
+	<select id="getAppAdPostionUuidList" resultType="java.util.HashMap">
+		select t1.app_id appId, t2.uuid posId
+		from apps t1, ad_position t2
+		where t2.app_id = t1.id;
+	</select>
+	<select id="getChannelList" resultType="java.util.HashMap">
+		select t1.name channelCode from app_channel t1;
+	</select>
+	<select id="getVersionList" resultType="java.util.HashMap">
+		select t1.name verCode from app_version t1;
+	</select>
+	<select id="getQuotaFlowByCountKey" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select * 
+		from quota_flow
+		where appid = #{appId} and adpid=#{posId} and channel1=#{channel1} 
+		<if test="channel2 != null">
+			and channel2=#{channel2} 
+		</if>
+		<if test="version != null">
+			and versions=#{version} 
+		</if>
+		and cre_day=#{day};
+	</select>
+</mapper>

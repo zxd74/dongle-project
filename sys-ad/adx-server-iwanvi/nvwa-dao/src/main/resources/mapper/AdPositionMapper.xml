@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.AdPositionMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.AdPosition">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="flow_uuid" jdbcType="VARCHAR" property="flowUuid" />
+    <result column="app_id" jdbcType="INTEGER" property="appId" />
+    <result column="create_type" jdbcType="INTEGER" property="createType" />
+    <result column="template_id" jdbcType="VARCHAR" property="templateId" />
+    <result column="out_template_id" jdbcType="INTEGER" property="outTemplateId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="sell_type" jdbcType="INTEGER" property="sellType" />
+    <result column="terminal" jdbcType="INTEGER" property="terminal" />
+    <result column="flow_position_id" jdbcType="VARCHAR" property="flowPositionId" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+    <result column="sub_Channel" jdbcType="INTEGER" property="subChannel" />
+    <result column="car_level" jdbcType="INTEGER" property="carLevel" />
+    <result column="car_series" jdbcType="INTEGER" property="carSeries" />
+    <result column="area_level" jdbcType="INTEGER" property="areaLevel" />
+    <result column="area" jdbcType="INTEGER" property="area" />
+    <result column="price_range" jdbcType="INTEGER" property="priceRange" />
+    <result column="forecast_exposure" jdbcType="BIGINT" property="forecastExposure" />
+    <result column="forecast_click" jdbcType="BIGINT" property="forecastClick" />
+    <result column="min_sell_day" jdbcType="INTEGER" property="minSellDay" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="aika_template_id" jdbcType="INTEGER" property="aikaTemplateId" />
+    <result column="os" jdbcType="INTEGER" property="os" />
+    <result column="is_support_dynamic" jdbcType="INTEGER" property="isSupportDynamic" />
+    <result column="mapping_switch" jdbcType="INTEGER" property="mappingSwitch" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="title" jdbcType="INTEGER" property="title" />
+    <result column="pic_width" jdbcType="INTEGER" property="picWidth" />
+    <result column="pic_height" jdbcType="INTEGER" property="picHeight" />
+    <result column="video_width" jdbcType="INTEGER" property="videoWidth" />
+    <result column="video_height" jdbcType="INTEGER" property="videoHeight" />
+    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="forecast_CTR" jdbcType="DOUBLE" property="forecastCtr" />
+    <result column="screenshot" jdbcType="VARCHAR" property="screenshot" />
+    <result column="location_x" jdbcType="INTEGER" property="locationX" />
+    <result column="location_y" jdbcType="INTEGER" property="locationY" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, flow_uuid, app_id, create_type, template_id, out_template_id, type, sell_type, 
+    terminal, flow_position_id, uuid, status, channel, sub_Channel, car_level, car_series, 
+    area_level, area, price_range, forecast_exposure, forecast_click, min_sell_day, update_user, 
+    update_time, aika_template_id, os, is_support_dynamic, mapping_switch, comment, title, 
+    pic_width, pic_height, video_width, video_height, duration, forecast_CTR, screenshot, 
+    location_x, location_y
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.AdPositionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ad_position
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and limit != null">
+      limit ${start},${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ad_position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ad_position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.AdPositionExample">
+    delete from ad_position
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.AdPosition" keyProperty="id" useGeneratedKeys="true">
+    insert into ad_position (id, name, flow_uuid, 
+      app_id, create_type, template_id, 
+      out_template_id, type, sell_type, 
+      terminal, flow_position_id, uuid, 
+      status, channel, sub_Channel, 
+      car_level, car_series, area_level, 
+      area, price_range, forecast_exposure, 
+      forecast_click, min_sell_day, update_user, 
+      update_time, aika_template_id, os, 
+      is_support_dynamic, mapping_switch, comment, 
+      title, pic_width, pic_height, 
+      video_width, video_height, duration, 
+      forecast_CTR, screenshot, location_x, 
+      location_y)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{flowUuid,jdbcType=VARCHAR}, 
+      #{appId,jdbcType=INTEGER}, #{createType,jdbcType=INTEGER}, #{templateId,jdbcType=VARCHAR}, 
+      #{outTemplateId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{sellType,jdbcType=INTEGER}, 
+      #{terminal,jdbcType=INTEGER}, #{flowPositionId,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{channel,jdbcType=INTEGER}, #{subChannel,jdbcType=INTEGER}, 
+      #{carLevel,jdbcType=INTEGER}, #{carSeries,jdbcType=INTEGER}, #{areaLevel,jdbcType=INTEGER}, 
+      #{area,jdbcType=INTEGER}, #{priceRange,jdbcType=INTEGER}, #{forecastExposure,jdbcType=BIGINT}, 
+      #{forecastClick,jdbcType=BIGINT}, #{minSellDay,jdbcType=INTEGER}, #{updateUser,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{aikaTemplateId,jdbcType=INTEGER}, #{os,jdbcType=INTEGER}, 
+      #{isSupportDynamic,jdbcType=INTEGER}, #{mappingSwitch,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
+      #{title,jdbcType=INTEGER}, #{picWidth,jdbcType=INTEGER}, #{picHeight,jdbcType=INTEGER}, 
+      #{videoWidth,jdbcType=INTEGER}, #{videoHeight,jdbcType=INTEGER}, #{duration,jdbcType=INTEGER}, 
+      #{forecastCtr,jdbcType=DOUBLE}, #{screenshot,jdbcType=VARCHAR}, #{locationX,jdbcType=INTEGER}, 
+      #{locationY,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.AdPosition" keyProperty="id" useGeneratedKeys="true">
+    insert into ad_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="flowUuid != null">
+        flow_uuid,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="createType != null">
+        create_type,
+      </if>
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="outTemplateId != null">
+        out_template_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="sellType != null">
+        sell_type,
+      </if>
+      <if test="terminal != null">
+        terminal,
+      </if>
+      <if test="flowPositionId != null">
+        flow_position_id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="subChannel != null">
+        sub_Channel,
+      </if>
+      <if test="carLevel != null">
+        car_level,
+      </if>
+      <if test="carSeries != null">
+        car_series,
+      </if>
+      <if test="areaLevel != null">
+        area_level,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="priceRange != null">
+        price_range,
+      </if>
+      <if test="forecastExposure != null">
+        forecast_exposure,
+      </if>
+      <if test="forecastClick != null">
+        forecast_click,
+      </if>
+      <if test="minSellDay != null">
+        min_sell_day,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="aikaTemplateId != null">
+        aika_template_id,
+      </if>
+      <if test="os != null">
+        os,
+      </if>
+      <if test="isSupportDynamic != null">
+        is_support_dynamic,
+      </if>
+      <if test="mappingSwitch != null">
+        mapping_switch,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="picWidth != null">
+        pic_width,
+      </if>
+      <if test="picHeight != null">
+        pic_height,
+      </if>
+      <if test="videoWidth != null">
+        video_width,
+      </if>
+      <if test="videoHeight != null">
+        video_height,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="forecastCtr != null">
+        forecast_CTR,
+      </if>
+      <if test="screenshot != null">
+        screenshot,
+      </if>
+      <if test="locationX != null">
+        location_x,
+      </if>
+      <if test="locationY != null">
+        location_y,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flowUuid != null">
+        #{flowUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="createType != null">
+        #{createType,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null">
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="outTemplateId != null">
+        #{outTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="sellType != null">
+        #{sellType,jdbcType=INTEGER},
+      </if>
+      <if test="terminal != null">
+        #{terminal,jdbcType=INTEGER},
+      </if>
+      <if test="flowPositionId != null">
+        #{flowPositionId,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="subChannel != null">
+        #{subChannel,jdbcType=INTEGER},
+      </if>
+      <if test="carLevel != null">
+        #{carLevel,jdbcType=INTEGER},
+      </if>
+      <if test="carSeries != null">
+        #{carSeries,jdbcType=INTEGER},
+      </if>
+      <if test="areaLevel != null">
+        #{areaLevel,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=INTEGER},
+      </if>
+      <if test="priceRange != null">
+        #{priceRange,jdbcType=INTEGER},
+      </if>
+      <if test="forecastExposure != null">
+        #{forecastExposure,jdbcType=BIGINT},
+      </if>
+      <if test="forecastClick != null">
+        #{forecastClick,jdbcType=BIGINT},
+      </if>
+      <if test="minSellDay != null">
+        #{minSellDay,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aikaTemplateId != null">
+        #{aikaTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="os != null">
+        #{os,jdbcType=INTEGER},
+      </if>
+      <if test="isSupportDynamic != null">
+        #{isSupportDynamic,jdbcType=INTEGER},
+      </if>
+      <if test="mappingSwitch != null">
+        #{mappingSwitch,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=INTEGER},
+      </if>
+      <if test="picWidth != null">
+        #{picWidth,jdbcType=INTEGER},
+      </if>
+      <if test="picHeight != null">
+        #{picHeight,jdbcType=INTEGER},
+      </if>
+      <if test="videoWidth != null">
+        #{videoWidth,jdbcType=INTEGER},
+      </if>
+      <if test="videoHeight != null">
+        #{videoHeight,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="forecastCtr != null">
+        #{forecastCtr,jdbcType=DOUBLE},
+      </if>
+      <if test="screenshot != null">
+        #{screenshot,jdbcType=VARCHAR},
+      </if>
+      <if test="locationX != null">
+        #{locationX,jdbcType=INTEGER},
+      </if>
+      <if test="locationY != null">
+        #{locationY,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.AdPositionExample" resultType="java.lang.Integer">
+    select count(*) from ad_position
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ad_position
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowUuid != null">
+        flow_uuid = #{record.flowUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appId != null">
+        app_id = #{record.appId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createType != null">
+        create_type = #{record.createType,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateId != null">
+        template_id = #{record.templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outTemplateId != null">
+        out_template_id = #{record.outTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellType != null">
+        sell_type = #{record.sellType,jdbcType=INTEGER},
+      </if>
+      <if test="record.terminal != null">
+        terminal = #{record.terminal,jdbcType=INTEGER},
+      </if>
+      <if test="record.flowPositionId != null">
+        flow_position_id = #{record.flowPositionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.channel != null">
+        channel = #{record.channel,jdbcType=INTEGER},
+      </if>
+      <if test="record.subChannel != null">
+        sub_Channel = #{record.subChannel,jdbcType=INTEGER},
+      </if>
+      <if test="record.carLevel != null">
+        car_level = #{record.carLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.carSeries != null">
+        car_series = #{record.carSeries,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaLevel != null">
+        area_level = #{record.areaLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=INTEGER},
+      </if>
+      <if test="record.priceRange != null">
+        price_range = #{record.priceRange,jdbcType=INTEGER},
+      </if>
+      <if test="record.forecastExposure != null">
+        forecast_exposure = #{record.forecastExposure,jdbcType=BIGINT},
+      </if>
+      <if test="record.forecastClick != null">
+        forecast_click = #{record.forecastClick,jdbcType=BIGINT},
+      </if>
+      <if test="record.minSellDay != null">
+        min_sell_day = #{record.minSellDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.aikaTemplateId != null">
+        aika_template_id = #{record.aikaTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.os != null">
+        os = #{record.os,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSupportDynamic != null">
+        is_support_dynamic = #{record.isSupportDynamic,jdbcType=INTEGER},
+      </if>
+      <if test="record.mappingSwitch != null">
+        mapping_switch = #{record.mappingSwitch,jdbcType=INTEGER},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=INTEGER},
+      </if>
+      <if test="record.picWidth != null">
+        pic_width = #{record.picWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.picHeight != null">
+        pic_height = #{record.picHeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoWidth != null">
+        video_width = #{record.videoWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoHeight != null">
+        video_height = #{record.videoHeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.duration != null">
+        duration = #{record.duration,jdbcType=INTEGER},
+      </if>
+      <if test="record.forecastCtr != null">
+        forecast_CTR = #{record.forecastCtr,jdbcType=DOUBLE},
+      </if>
+      <if test="record.screenshot != null">
+        screenshot = #{record.screenshot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationX != null">
+        location_x = #{record.locationX,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationY != null">
+        location_y = #{record.locationY,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ad_position
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      flow_uuid = #{record.flowUuid,jdbcType=VARCHAR},
+      app_id = #{record.appId,jdbcType=INTEGER},
+      create_type = #{record.createType,jdbcType=INTEGER},
+      template_id = #{record.templateId,jdbcType=VARCHAR},
+      out_template_id = #{record.outTemplateId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      sell_type = #{record.sellType,jdbcType=INTEGER},
+      terminal = #{record.terminal,jdbcType=INTEGER},
+      flow_position_id = #{record.flowPositionId,jdbcType=VARCHAR},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      channel = #{record.channel,jdbcType=INTEGER},
+      sub_Channel = #{record.subChannel,jdbcType=INTEGER},
+      car_level = #{record.carLevel,jdbcType=INTEGER},
+      car_series = #{record.carSeries,jdbcType=INTEGER},
+      area_level = #{record.areaLevel,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=INTEGER},
+      price_range = #{record.priceRange,jdbcType=INTEGER},
+      forecast_exposure = #{record.forecastExposure,jdbcType=BIGINT},
+      forecast_click = #{record.forecastClick,jdbcType=BIGINT},
+      min_sell_day = #{record.minSellDay,jdbcType=INTEGER},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      aika_template_id = #{record.aikaTemplateId,jdbcType=INTEGER},
+      os = #{record.os,jdbcType=INTEGER},
+      is_support_dynamic = #{record.isSupportDynamic,jdbcType=INTEGER},
+      mapping_switch = #{record.mappingSwitch,jdbcType=INTEGER},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=INTEGER},
+      pic_width = #{record.picWidth,jdbcType=INTEGER},
+      pic_height = #{record.picHeight,jdbcType=INTEGER},
+      video_width = #{record.videoWidth,jdbcType=INTEGER},
+      video_height = #{record.videoHeight,jdbcType=INTEGER},
+      duration = #{record.duration,jdbcType=INTEGER},
+      forecast_CTR = #{record.forecastCtr,jdbcType=DOUBLE},
+      screenshot = #{record.screenshot,jdbcType=VARCHAR},
+      location_x = #{record.locationX,jdbcType=INTEGER},
+      location_y = #{record.locationY,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.AdPosition">
+    update ad_position
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flowUuid != null">
+        flow_uuid = #{flowUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="createType != null">
+        create_type = #{createType,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null">
+        template_id = #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="outTemplateId != null">
+        out_template_id = #{outTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="sellType != null">
+        sell_type = #{sellType,jdbcType=INTEGER},
+      </if>
+      <if test="terminal != null">
+        terminal = #{terminal,jdbcType=INTEGER},
+      </if>
+      <if test="flowPositionId != null">
+        flow_position_id = #{flowPositionId,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="subChannel != null">
+        sub_Channel = #{subChannel,jdbcType=INTEGER},
+      </if>
+      <if test="carLevel != null">
+        car_level = #{carLevel,jdbcType=INTEGER},
+      </if>
+      <if test="carSeries != null">
+        car_series = #{carSeries,jdbcType=INTEGER},
+      </if>
+      <if test="areaLevel != null">
+        area_level = #{areaLevel,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=INTEGER},
+      </if>
+      <if test="priceRange != null">
+        price_range = #{priceRange,jdbcType=INTEGER},
+      </if>
+      <if test="forecastExposure != null">
+        forecast_exposure = #{forecastExposure,jdbcType=BIGINT},
+      </if>
+      <if test="forecastClick != null">
+        forecast_click = #{forecastClick,jdbcType=BIGINT},
+      </if>
+      <if test="minSellDay != null">
+        min_sell_day = #{minSellDay,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aikaTemplateId != null">
+        aika_template_id = #{aikaTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="os != null">
+        os = #{os,jdbcType=INTEGER},
+      </if>
+      <if test="isSupportDynamic != null">
+        is_support_dynamic = #{isSupportDynamic,jdbcType=INTEGER},
+      </if>
+      <if test="mappingSwitch != null">
+        mapping_switch = #{mappingSwitch,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=INTEGER},
+      </if>
+      <if test="picWidth != null">
+        pic_width = #{picWidth,jdbcType=INTEGER},
+      </if>
+      <if test="picHeight != null">
+        pic_height = #{picHeight,jdbcType=INTEGER},
+      </if>
+      <if test="videoWidth != null">
+        video_width = #{videoWidth,jdbcType=INTEGER},
+      </if>
+      <if test="videoHeight != null">
+        video_height = #{videoHeight,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="forecastCtr != null">
+        forecast_CTR = #{forecastCtr,jdbcType=DOUBLE},
+      </if>
+      <if test="screenshot != null">
+        screenshot = #{screenshot,jdbcType=VARCHAR},
+      </if>
+      <if test="locationX != null">
+        location_x = #{locationX,jdbcType=INTEGER},
+      </if>
+      <if test="locationY != null">
+        location_y = #{locationY,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.AdPosition">
+    update ad_position
+    set name = #{name,jdbcType=VARCHAR},
+      flow_uuid = #{flowUuid,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=INTEGER},
+      create_type = #{createType,jdbcType=INTEGER},
+      template_id = #{templateId,jdbcType=VARCHAR},
+      out_template_id = #{outTemplateId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      sell_type = #{sellType,jdbcType=INTEGER},
+      terminal = #{terminal,jdbcType=INTEGER},
+      flow_position_id = #{flowPositionId,jdbcType=VARCHAR},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      channel = #{channel,jdbcType=INTEGER},
+      sub_Channel = #{subChannel,jdbcType=INTEGER},
+      car_level = #{carLevel,jdbcType=INTEGER},
+      car_series = #{carSeries,jdbcType=INTEGER},
+      area_level = #{areaLevel,jdbcType=INTEGER},
+      area = #{area,jdbcType=INTEGER},
+      price_range = #{priceRange,jdbcType=INTEGER},
+      forecast_exposure = #{forecastExposure,jdbcType=BIGINT},
+      forecast_click = #{forecastClick,jdbcType=BIGINT},
+      min_sell_day = #{minSellDay,jdbcType=INTEGER},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      aika_template_id = #{aikaTemplateId,jdbcType=INTEGER},
+      os = #{os,jdbcType=INTEGER},
+      is_support_dynamic = #{isSupportDynamic,jdbcType=INTEGER},
+      mapping_switch = #{mappingSwitch,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=VARCHAR},
+      title = #{title,jdbcType=INTEGER},
+      pic_width = #{picWidth,jdbcType=INTEGER},
+      pic_height = #{picHeight,jdbcType=INTEGER},
+      video_width = #{videoWidth,jdbcType=INTEGER},
+      video_height = #{videoHeight,jdbcType=INTEGER},
+      duration = #{duration,jdbcType=INTEGER},
+      forecast_CTR = #{forecastCtr,jdbcType=DOUBLE},
+      screenshot = #{screenshot,jdbcType=VARCHAR},
+      location_x = #{locationX,jdbcType=INTEGER},
+      location_y = #{locationY,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

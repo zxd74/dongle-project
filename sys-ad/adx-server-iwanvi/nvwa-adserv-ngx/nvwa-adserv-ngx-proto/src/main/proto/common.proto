@@ -1,0 +1,200 @@
+//Copyright 2019 iwanvi.com All right reserved.
+syntax = "proto2";
+
+package com.iwanvi.minerva.proto;
+
+option java_package = "com.iwanvi.nvwa.proto";
+option java_outer_classname = "CommonProto";
+
+// 所有unknown的值对于投放来说都不存在，只有请求才会存在该值，
+// 如果广告主对于某一定向不限定，则不需要填写任何值
+
+// 移动终端标示类型
+enum MuidType{
+    kIMEI = 1;
+    kIFA = 2;
+}
+
+// 链接方式
+enum ConnectType{
+    kConnectTypeUnKnown = 0;
+    kWifi = 1;
+    k2g = 2;
+    k3g = 3;
+    k4g = 4;
+    k5g = 5;
+}
+
+// 运营商
+enum Carrier{
+    kCarrierUnKnown = 0;
+    kMobile = 1;               // 移动
+    kUnicom = 2;               // 联通
+    kTelecom = 3;              // 电信
+}
+
+enum GenderType{
+    kGenderUnKnown = 0;  // 对于广告投放来说该值不存在，对于广告请求来说存在
+    kMale = 1;
+    kFemale = 2;
+}
+
+enum OSType{
+    kOSUnKnown = 0;
+    kIOS = 1;
+    kAndroid = 2;
+    kHtml5 = 6;
+    kPc = 7;
+}
+
+enum CreativeType{
+    kText = 1;       // 文字
+    kPic = 2;        // 图片
+    kScreen = 3;        // 插屏
+    kFirstScreen = 4;   //开屏
+    kVideo = 5;      //贴片
+    kFocusPic = 6;   //焦点图
+    kNative = 7;     //原生广告
+    kDynamic = 8;    //动态广告
+    kRewardVideo = 9;
+    kFullScreenVideo = 10;
+    kDrawVideo = 11;
+}
+
+//推广类型
+enum ExtensionType {
+    kExtWebsite = 1;  //网站
+    kExtIos = 2;    //IOS应用
+    kExtAndroid = 3;    //安卓应用
+    kExtDeeplink = 4; //深度链接
+}
+
+//付费类型
+enum CostType {
+    kCpc = 1;
+    kCpm = 2;
+    kCpa = 3;
+    kCpt = 4; //包段投放
+    kCpfc = 5;//按照固定cpc投放
+    kCpfm = 6; //按照固定cpm投放
+}
+
+//ADX类型
+enum AdxType {
+    kAdxTypeUnKnown = 0;
+}
+
+//ADX素材信息
+message AdxInfo {
+    optional AdxType adx_type = 1;     // adx类型
+    optional string adx_crid = 2;      // adx对应的素材id
+    optional string adx_m_url = 3;     // adx素材地址,只针对贴片有效
+}
+
+enum DeviceType {
+    kDeviceTypeUnKnown = 0;
+    kPhone = 1;
+    kPad = 2;
+    kPC = 3;
+    kTV = 4;
+}
+
+// 流量来源
+enum TrafficType {
+    kTrafficTypeUnKnown = 0;
+    kAdExchange = 1;                   // adx流量
+    kMobileUnion = 2;                  // 移动联盟
+}
+
+// 终端类型
+enum TerminalType {
+    kTerminalTypeUnKnown = 0;
+    kMobileTerminal = 1;           // 移动终端
+    kPcTerminal = 2;               // pc终端
+    kH5Terminal = 3; //h5
+}
+
+// 计费模式
+enum BillingMode {
+    kGspBillingMode = 1;          // GSP 二价计费
+    kGfpBillingMode = 2;          // GFP 一价计费
+}
+
+enum EntityType {
+	kAdvertiser = 1;
+	kAdPlan = 2;
+	kAdUnit = 3;
+	kCreative = 4;
+	kAdTypeConfig = 5;
+	kCommonConfig = 6;
+	kAgent = 7; //代理商
+	kAgentFloorPriceConfig = 8; //代理商框架价格配置
+	kApp = 9; //ssp应用
+	kSspAdPosition = 10; //ssp广告位
+	kDsp = 11; //dsp广告平台
+	kDspCreative = 12; //dsp平台创意
+	kAreaLevel = 13; //地域等级
+	kAdPositionFloorPrice = 14; //广告位底价
+	kCompetingProduct = 15; //竞品信息
+}
+
+//代理商类型枚举
+enum AgentType {
+	kAgentTypeKA = 1; //直客代理商
+	kAgentTypeNM = 2; //普通代理商
+}
+
+enum DspType {
+    kDspTypePrivate = 1; //自有广告平台
+    kDspTypePublic = 2; //第三方广告平台
+}
+
+enum PutType {
+    kPutTypeOrder = 1; //订单投放
+    kPutTypeRtb = 2; //rtb投放
+    kPutTypeDefault = 3; //打底广告投放
+}
+
+enum DeliveryMode {
+    kDefault = 1;
+    kSmoothBudgetDelivery = 2;
+}
+
+enum FrequencyPeriod {
+    kFrequencyPeriodDay   = 1;
+    kFrequencyPeriodWeek  = 2;
+    kFrequencyPeriodMonth = 3;
+}
+
+message MapEntry {
+    optional string key = 1;
+    optional string value = 2;
+}
+
+message FrequencyCapping {
+    optional bool frequency_capping = 1; //是否启用频次控制
+	optional uint32 frequency = 2; //频次
+	optional FrequencyPeriod frequency_period = 3; //频次控制周期
+	optional bool ip_capping = 4; //是否ip频控
+}
+
+//频次控制类型枚举
+enum FrequencyType {
+    kFrequencyTypeIp = 1; //ip频次控制
+    kFrequencyTypeDevice = 2; //按照设备id
+}
+
+message CPACapping {
+    optional bool cpa_capping = 1; //是否启用CPA限制
+    optional uint32 cpa = 2; //CPA限制成本
+}
+
+message Pmp {
+    required string deal_id = 1;
+}
+
+enum AdPositionType {
+    UNKNOWN_AD_POSITION_TYPE = 0;
+    CPC = 1;
+    CPM = 2;
+}

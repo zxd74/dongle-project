@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<redis-profiles>
+	<redis-profile>
+		<id>default</id>
+		<address>${redis.default.host}</address>
+		<maxActive>${redis.default.maxActive}</maxActive>
+		<sharding>false</sharding>
+		<connectTimeout>${redis.default.connectTimeout}</connectTimeout>
+		<soTimeout>${redis.default.soTimeout}</soTimeout>
+		<auth>${redis.default.auth}</auth>
+		<db>${redis.default.db}</db>
+	</redis-profile>
+	
+	<redis-profile>
+		<id>ratelimit</id>
+		<address>${redis.ratelimit.host}</address>
+		<maxActive>${redis.ratelimit.maxActive}</maxActive>
+		<sharding>false</sharding>
+		<connectTimeout>${redis.ratelimit.connectTimeout}</connectTimeout>
+		<soTimeout>${redis.ratelimit.soTimeout}</soTimeout>
+		<auth>${redis.ratelimit.auth}</auth>
+		<db>${redis.ratelimit.db}</db>
+	</redis-profile>
+</redis-profiles>

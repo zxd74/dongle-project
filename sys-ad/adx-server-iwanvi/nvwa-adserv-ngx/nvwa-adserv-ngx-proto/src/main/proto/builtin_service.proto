@@ -1,0 +1,262 @@
+//Copyright 2019 iwanvi.com All right reserved.
+syntax = "proto2";
+
+package com.iwanvi.minerva.proto;
+
+import "ad_model.proto";
+import "common.proto";
+import "bidding_service.proto";
+
+option java_package = "com.iwanvi.nvwa.proto";
+option java_outer_classname="BuiltinServiceProto";
+
+option java_generic_services = true;
+option optimize_for = SPEED;
+
+message GetAdReq {
+    required uint32 unit_id = 1;
+}
+
+message GetAdResp {
+	optional AdUnit ad_unit = 1;
+	optional AdPlan ad_plan = 2;
+	optional Advertiser advertiser = 3;
+	optional Agent agent = 4;
+	repeated AgentFloorPriceConfig agent_floor_price_config = 5;
+}
+
+//InspectAdReq中，只有是常规代理商的情况下才需要OSType和AreaLevel这2个参数，直客代理商只需要单元ID即可
+message InspectAdReq {
+    required uint32 ad_unit_id = 1; //单元id
+    optional OSType os = 2; //操作系统
+    optional uint32 area_level_id = 3; //地域level, 分为kK,kA,kB三级
+}
+
+message InspectAdResp {
+    optional InspectStatus status = 1;
+    optional string message = 2;
+}
+
+enum InspectStatus {
+    AD_NOT_FOUND = 1;
+    INVALID_AD_STATUS = 2;
+    AD_PLAN_NOT_FOUND = 3;
+    INVALID_PLAN_STATUS = 4;
+    ADVERTISER_NOT_FOUND = 5;
+    INVALID_ADVERTISER_STATUS = 6;
+    AGENT_NOT_FOUND = 7;
+    INVALID_AGENT_STATUS = 8;
+    AGENT_FLOOR_NOT_FOUND = 9;
+    OK = 10;
+    MISSING_PARAMETERS = 11;
+}
+
+message StatReq {
+}
+
+message StatResp {
+    optional Stat stat = 1;
+}
+
+message GetBiddingCreativesReq {
+}
+
+message GetBiddingCreativesResp {
+    repeated BiddingCreative bidding_creative = 1;
+    
+    message BiddingCreative {
+        optional uint32 creative_id = 1; //创意id
+        optional string media_uuid = 2; //媒体uuid
+        optional uint32 adx_bid_price = 3; //adx出价
+        optional uint32 bid_price = 4; //原始出价
+        optional OSType os = 5; //操作系统
+        optional uint32 unit_id = 6; //单元id
+        optional bool is_cpa_capping = 7;
+        optional bool is_frequency_capping = 8;
+        optional bool is_smooth_budget_delivery = 9;
+    }
+}
+
+message Stat {
+	optional uint32 expired_impression_queue_size = 1; //用户曝光超时队列大小
+	optional uint32 reverse_index_size = 2;                    //倒排索引数量
+	optional uint32 reverse_index_value_size = 22;         //倒排索引value数量
+	
+	optional uint32 bidding_request_count = 3;              //竞价请求数
+	
+	optional uint32 bidding_timeout_count = 4;             //竞价超时数(>30ms)
+	optional uint32 bidding_cost_le_5ms_count = 5;      //耗时低于5ms的请求数 
+	optional uint32 bidding_cost_5_10ms_count = 6;     //耗时在5-10ms之间的请求数
+	optional uint32 bidding_cost_10_15ms_count = 7;   //耗时在10-15ms之间的请求数
+	optional uint32 bidding_cost_15_20ms_count = 8;   //耗时在15-20ms之间的请求数
+	optional uint32 bidding_cost_20_25ms_count = 9;   //耗时在20-25ms之间的请求数
+	optional uint32 bidding_cost_25_30ms_count = 10; //耗时在25-30ms之间的请求数
+	optional uint32 bidding_cost_gt_30ms_count = 11;  //耗时大于30ms的请求数
+	
+	optional uint32 frequency_capping_filtered_requests = 12; //被频次控制过滤掉的请求数
+	optional uint32 cpa_capping_filtered_requests = 13;          //被CPA/CPI成本过滤掉的请求数
+	
+	optional uint64 frequency_capping_filter_invoke_count = 14; //频次控制过滤器总调用次数
+	optional uint32 avg_frequency_capping_filter_cost_time = 21; //频次控制平均耗时时间
+	optional uint32 avg_bidding_cost_time = 15; //平均竞价响应时间
+	
+	optional uint32 valid_adunit_count = 16; //有效的推广单元数
+	optional uint32 valid_advertiser_count = 17; //有效的广告主数
+	optional uint32 valid_adplan_count = 18; //有效的推广计划数
+	optional uint32 valid_agent_count = 19; //有效的代理商数
+	optional uint32 valid_agent_floor_count = 20; //有效的代理商底价数
+	optional uint32 cpa_capping_ad_count = 23; //有CPA/CPI限制的广告数
+	optional uint32 frequency_capping_ad_count = 24; //频次控制的广告数
+	optional uint32 smooth_budget_delivery_ad_count = 25; //开启匀速花费的广告数
+	optional uint32 invalid_idfa_filtered_requests = 26; //IDFA设备标识非法滤掉的请求数
+	optional uint32 avg_smooth_budget_delivery_cost_time = 27; //匀速投放平均耗时
+	optional uint32 smooth_budget_delivery_invoke_count = 28; //匀速投放执行次数
+}
+
+message GetBiddingRequestCountReq {}
+
+message GetBiddingRequestCountResp {
+    optional uint32 bidding_request_count = 1;
+    optional uint64 timestamp = 2;
+}
+
+message SearchAdRevIndexReq {
+    optional BiddingReq bidding_req = 1;
+}
+
+message SearchAdRevIndexResp {
+    repeated int64 reverse_index = 1;
+    repeated RevIndexAd rev_index_ad = 2;
+    
+    message RevIndexAd {
+        optional int64 reverse_index = 1;
+        repeated uint32 ad_unit_id = 2;
+    }
+}
+
+message InspectBiddingReq {
+    optional BiddingReq bidding_req = 1;
+}
+
+message InspectBiddingResp {
+    optional string inspect_result = 2;
+}
+
+message SetLogLevelReq {
+    optional string logger_name = 1;
+    required Level log_level = 2;
+    enum Level {
+        DEBUG = 1;
+        INFO = 2;
+        WARN = 3;
+        ERROR = 4;
+    }
+}
+
+message SetLogLevelRsp {
+}
+
+message GetLoggersReq {
+}
+
+message GetLoggersRsp {
+    repeated Logger logger = 1;
+    message Logger {
+        optional string name = 1;
+        optional string level = 2;
+    }
+}
+
+message OfflineAdReq {
+    repeated int32 ad_id = 1;
+}
+
+message OfflineAdRsp {
+    optional uint32 resp_code = 2;
+}
+
+message ListAppsReq {
+    optional string app_id = 1;
+}
+
+message ListAppsRsp {
+    repeated string app = 2;
+}
+
+message GetDspCreativeReq {
+    optional string creative_id = 1;
+    optional string dsp_id = 2;
+}
+
+message GetDspCreativeRsp {
+    optional DspCreative dsp_creative = 1;
+}
+
+message GetDspReq {
+    optional string dsp_id = 1;
+}
+
+message GetDspRsp {
+    optional Dsp dsp = 1;
+}
+
+message GetAreaLevelReq {
+    required uint32 area_code = 1;
+}
+
+message GetAreaLevelRsp {
+    optional uint32 area_level = 2;
+}
+
+message GetAdPosFloorPriceReq {
+    required uint32 industry = 1; //行业id
+    required uint32 area_code = 2; //地域码
+    required string tag_id = 3; //广告位id
+}
+
+message GetAdPosFloorPriceRsp {
+   optional AdPositionFloorPrice adpfp = 1;
+}
+
+message GetAllDspReq {
+}
+
+message GetAllDspRsp {
+    repeated Dsp dsp = 1;
+}
+
+message GetAllDspCreativeReq {
+}
+
+message GetAllDspCreativeRsp {
+    repeated DspCreative dspCreative = 1;
+}
+
+message GetSspAdPositionReq {
+    required string adslot_id = 1;
+}
+
+message GetSspAdPositionRsp {
+    optional SspAdPosition adslot = 1;
+}
+
+service BuiltinService {
+    rpc GetAd( GetAdReq ) returns ( GetAdResp );
+    rpc InspectAd( InspectAdReq) returns ( InspectAdResp );
+    rpc Stat( StatReq ) returns ( StatResp );
+    rpc GetBiddingCreatives ( GetBiddingCreativesReq ) returns ( GetBiddingCreativesResp );
+    rpc GetBiddingRequestCount ( GetBiddingRequestCountReq ) returns ( GetBiddingRequestCountResp );
+    rpc SearchAdRevIndex ( SearchAdRevIndexReq ) returns ( SearchAdRevIndexResp );
+    rpc InspectBidding( InspectBiddingReq ) returns ( InspectBiddingResp );
+    rpc SetLogLevel ( SetLogLevelReq ) returns ( SetLogLevelRsp );
+    rpc GetLoggers ( GetLoggersReq ) returns ( GetLoggersRsp );
+    rpc OfflineAd ( OfflineAdReq ) returns ( OfflineAdRsp );
+    rpc listApps ( ListAppsReq ) returns ( ListAppsRsp);
+    rpc GetDspCreative ( GetDspCreativeReq ) returns ( GetDspCreativeRsp );
+    rpc GetDsp ( GetDspReq ) returns ( GetDspRsp );
+    rpc GetAreaLevel ( GetAreaLevelReq ) returns ( GetAreaLevelRsp );
+    rpc GetAdPosFloorPrice ( GetAdPosFloorPriceReq ) returns ( GetAdPosFloorPriceRsp );
+    rpc GetAllDspList ( GetAllDspReq ) returns ( GetAllDspRsp );
+    rpc GetAllDspCreativeList ( GetAllDspCreativeReq ) returns ( GetAllDspCreativeRsp );
+    rpc GetSspAdPosition (GetSspAdPositionReq ) returns (GetSspAdPositionRsp );
+}

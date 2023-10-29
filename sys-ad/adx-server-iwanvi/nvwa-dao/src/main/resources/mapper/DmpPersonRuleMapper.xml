@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.DmpPersonRuleMapper">
+    <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.DmpPersonRule">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pkey" jdbcType="VARCHAR" property="pkey"/>
+        <result column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="score" jdbcType="DOUBLE" property="score"/>
+        <result column="use_tag" jdbcType="INTEGER" property="useTag"/>
+        <result column="did" jdbcType="INTEGER" property="did"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, pkey, tid, score, use_tag, did
+    </sql>
+    <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.DmpPersonRuleExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from dmp_person_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dmp_person_rule
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from dmp_person_rule
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.DmpPersonRuleExample">
+        delete from dmp_person_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.DmpPersonRule">
+        insert into dmp_person_rule (id, pkey, tid,
+          score, use_tag, did)
+        values (#{id,jdbcType=INTEGER}, #{pkey,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER},
+          #{score,jdbcType=DOUBLE}, #{useTag,jdbcType=INTEGER}, #{did,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.DmpPersonRule">
+        insert into dmp_person_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pkey != null">
+                pkey,
+            </if>
+            <if test="tid != null">
+                tid,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="useTag != null">
+                use_tag,
+            </if>
+            <if test="did != null">
+                did,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pkey != null">
+                #{pkey,jdbcType=VARCHAR},
+            </if>
+            <if test="tid != null">
+                #{tid,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="useTag != null">
+                #{useTag,jdbcType=INTEGER},
+            </if>
+            <if test="did != null">
+                #{did,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.DmpPersonRuleExample"
+            resultType="java.lang.Integer">
+        select count(*) from dmp_person_rule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update dmp_person_rule
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.pkey != null">
+                pkey = #{record.pkey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tid != null">
+                tid = #{record.tid,jdbcType=INTEGER},
+            </if>
+            <if test="record.score != null">
+                score = #{record.score,jdbcType=DOUBLE},
+            </if>
+            <if test="record.useTag != null">
+                use_tag = #{record.useTag,jdbcType=INTEGER},
+            </if>
+            <if test="record.did != null">
+                did = #{record.did,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update dmp_person_rule
+        set id = #{record.id,jdbcType=INTEGER},
+        pkey = #{record.pkey,jdbcType=VARCHAR},
+        tid = #{record.tid,jdbcType=INTEGER},
+        score = #{record.score,jdbcType=DOUBLE},
+        use_tag = #{record.useTag,jdbcType=INTEGER},
+        did = #{record.did,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.DmpPersonRule">
+        update dmp_person_rule
+        <set>
+            <if test="pkey != null">
+                pkey = #{pkey,jdbcType=VARCHAR},
+            </if>
+            <if test="tid != null">
+                tid = #{tid,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="useTag != null">
+                use_tag = #{useTag,jdbcType=INTEGER},
+            </if>
+            <if test="did != null">
+                did = #{did,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.DmpPersonRule">
+        update dmp_person_rule
+        set pkey = #{pkey,jdbcType=VARCHAR},
+          tid = #{tid,jdbcType=INTEGER},
+          score = #{score,jdbcType=DOUBLE},
+          use_tag = #{useTag,jdbcType=INTEGER},
+          did = #{did,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="countPersonByDidsAndTidsUnion" resultType="java.lang.Integer">
+        select count(distinct dpr.pkey)
+        from dmp_person_rule dpr
+        <where>
+            <trim prefixOverrides="and">
+                <if test="dataList != null and dataList.size &gt; 0">
+                    and dpr.did in
+                    <foreach close=")" collection="dataList" item="data" open="(" separator=",">
+                        #{data}
+                    </foreach>
+                </if>
+                <if test="dataList != null and dataList.size &gt; 0">
+                    and dpr.tid in
+                    <foreach close=")" collection="tagList" item="tag" open="(" separator=",">
+                        #{tag}
+                    </foreach>
+                </if>
+            </trim>
+        </where>
+    </select>
+    <select id="countPersonByDidsAndTidsJoin" resultType="java.util.Map">
+        select dpr.pkey, count(*) num
+        from dmp_person_rule dpr
+        <where>
+            <trim prefixOverrides="and">
+                <if test="dataList != null and dataList.size &gt; 0">
+                    and dpr.did in
+                    <foreach close=")" collection="dataList" item="data" open="(" separator=",">
+                        #{data}
+                    </foreach>
+                </if>
+                <if test="tagList != null and tagList.size &gt; 0">
+                    and dpr.tid in
+                    <foreach close=")" collection="tagList" item="tag" open="(" separator=",">
+                        #{tag}
+                    </foreach>
+                </if>
+            </trim>
+        </where>
+        group by dpr.pkey
+    </select>
+    <select id="countByDidsAndTids" resultType="java.util.Map">
+        select dpr.tid, count(*) num, dt.name tagName
+        from dmp_person_rule dpr
+        left join dmp_tag dt on dpr.tid = dt.id
+        <where>
+            <trim prefixOverrides="and">
+                <if test="dataList != null and dataList.size &gt; 0">
+                    and dpr.did in
+                    <foreach close=")" collection="dataList" item="data" open="(" separator=",">
+                        #{data}
+                    </foreach>
+                </if>
+                <if test="tagList != null and tagList.size &gt; 0">
+                    and dpr.tid in
+                    <foreach close=")" collection="tagList" item="tag" open="(" separator=",">
+                        #{tag}
+                    </foreach>
+                </if>
+            </trim>
+        </where>
+        group by dpr.tid
+    </select>
+    <select id="selectAllPersons" resultType="java.util.Map">
+        select pkey,group_concat(CONVERT(tid,char)) tids
+        from dmp_person_rule
+        where use_tag = 1
+        group by pkey
+    </select>
+</mapper>

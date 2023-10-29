@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--执行generator插件生成文件的命令： call mvn mybatis-generator:generate -e -->
+    <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
+    <!--<classPathEntry location="D:\generator_mybatis\mysql-connector-java-5.1.24-bin.jar" /> -->
+
+    <!-- 引入配置文件 -->
+<!--    <properties resource="schemeone/properties/mysql/mysql.properties"/>-->
+
+    <!-- 一个数据库一个context -->
+    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <!-- 此处是将 Example 改名为 Criteria -->
+<!--        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">-->
+<!--            <property name="searchString" value="Example"/>-->
+<!--            <property name="replaceString" value="Criteria"/>-->
+<!--        </plugin>-->
+
+        <!--        <plugin type="org.mybatis.generator.plugins.ExampleTargetPlugin">-->
+        <!--            &lt;!&ndash; 修改Example类生成到目标包下 &ndash;&gt;-->
+        <!--            <property name="targetPackage" value="com.dongle.adx.dao.model" />-->
+        <!--        </plugin>-->
+
+        <!-- 序列化 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+            <!-- 是否生成注释代时间戳-->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.24.254:3306/adx_dongle?useUnicode=true&amp;characterEncoding=utf8" userId="root"
+                        password="Dongle@123"/>
+
+        <!--指定生成的类型为java类型，避免数据库中number等类型字段 -->
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--自动生成的实体的存放包路径 -->
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.dongle.adx.dao.model" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--自动生成的*Mapper.xml文件存放路径 -->
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--自动生成的*Mapper.java存放路径 -->
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dongle.adx.dao" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 指定数据库表 保留Example例子 -->
+        <!--        <table schema="" tableName="u01" domainObjectName="u01" />-->
+
+        <!-- 指定数据库表 去除Example例子  -->
+        <!--        <table schema="general" tableName="tb_item" domainObjectName="Item" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false">-->
+        <!--            <property name="useActualColumnNames" value="false" />-->
+        <!--        </table>-->
+
+<!--        <table tableName="user" domainObjectName="User"/>-->
+        <table tableName="%"/>
+    </context>
+</generatorConfiguration>

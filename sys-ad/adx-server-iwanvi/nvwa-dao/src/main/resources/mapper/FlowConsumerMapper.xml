@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.FlowConsumerMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.FlowConsumer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="consumer_name" jdbcType="VARCHAR" property="consumerName" />
+    <result column="consumer_uuid" jdbcType="VARCHAR" property="consumerUuid" />
+    <result column="consumer_type" jdbcType="INTEGER" property="consumerType" />
+    <result column="rtb_url" jdbcType="VARCHAR" property="rtbUrl" />
+    <result column="run_state" jdbcType="INTEGER" property="runState" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_addr" jdbcType="VARCHAR" property="companyAddr" />
+    <result column="company_linkman" jdbcType="VARCHAR" property="companyLinkman" />
+    <result column="linkman_tel" jdbcType="VARCHAR" property="linkmanTel" />
+    <result column="adpos_id" jdbcType="VARCHAR" property="adposId" />
+    <result column="consumer_state" jdbcType="INTEGER" property="consumerState" />
+    <result column="qps" jdbcType="INTEGER" property="qps" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="cookiemappingurl" jdbcType="VARCHAR" property="cookiemappingurl" />
+    <result column="dsp_id" jdbcType="VARCHAR" property="dspId" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="is_private" jdbcType="INTEGER" property="isPrivate" />
+    <result column="is_deal" jdbcType="INTEGER" property="isDeal" />
+    <result column="adposition_price" jdbcType="VARCHAR" property="adpositionPrice" />
+    <result column="is_check" jdbcType="INTEGER" property="isCheck" />
+    <result column="dx_did" jdbcType="VARCHAR" property="dxDid" />
+    <result column="is_test" jdbcType="INTEGER" property="isTest" />
+    <result column="consumer_mark" jdbcType="VARCHAR" property="consumerMark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, consumer_name, consumer_uuid, consumer_type, rtb_url, run_state, create_user, 
+    create_time, update_time, company_name, company_addr, company_linkman, linkman_tel, 
+    adpos_id, consumer_state, qps, remark, cookiemappingurl, dsp_id, token, is_private, 
+    is_deal, adposition_price, is_check, dx_did, is_test, consumer_mark
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.FlowConsumerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from flow_consumer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+    <if test="start != null and limit != null">
+			limit ${start},${limit}
+	</if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from flow_consumer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from flow_consumer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.FlowConsumerExample">
+    delete from flow_consumer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.FlowConsumer">
+    insert into flow_consumer (id, consumer_name, consumer_uuid, 
+      consumer_type, rtb_url, run_state, 
+      create_user, create_time, update_time, 
+      company_name, company_addr, company_linkman, 
+      linkman_tel, adpos_id, consumer_state, 
+      qps, remark, cookiemappingurl, 
+      dsp_id, token, is_private, 
+      is_deal, adposition_price, is_check, 
+      dx_did, is_test, consumer_mark
+      )
+    values (#{id,jdbcType=INTEGER}, #{consumerName,jdbcType=VARCHAR}, #{consumerUuid,jdbcType=VARCHAR}, 
+      #{consumerType,jdbcType=INTEGER}, #{rtbUrl,jdbcType=VARCHAR}, #{runState,jdbcType=INTEGER}, 
+      #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{companyName,jdbcType=VARCHAR}, #{companyAddr,jdbcType=VARCHAR}, #{companyLinkman,jdbcType=VARCHAR}, 
+      #{linkmanTel,jdbcType=VARCHAR}, #{adposId,jdbcType=VARCHAR}, #{consumerState,jdbcType=INTEGER}, 
+      #{qps,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{cookiemappingurl,jdbcType=VARCHAR}, 
+      #{dspId,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{isPrivate,jdbcType=INTEGER}, 
+      #{isDeal,jdbcType=INTEGER}, #{adpositionPrice,jdbcType=VARCHAR}, #{isCheck,jdbcType=INTEGER}, 
+      #{dxDid,jdbcType=VARCHAR}, #{isTest,jdbcType=INTEGER}, #{consumerMark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.FlowConsumer">
+    insert into flow_consumer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="consumerName != null">
+        consumer_name,
+      </if>
+      <if test="consumerUuid != null">
+        consumer_uuid,
+      </if>
+      <if test="consumerType != null">
+        consumer_type,
+      </if>
+      <if test="rtbUrl != null">
+        rtb_url,
+      </if>
+      <if test="runState != null">
+        run_state,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyAddr != null">
+        company_addr,
+      </if>
+      <if test="companyLinkman != null">
+        company_linkman,
+      </if>
+      <if test="linkmanTel != null">
+        linkman_tel,
+      </if>
+      <if test="adposId != null">
+        adpos_id,
+      </if>
+      <if test="consumerState != null">
+        consumer_state,
+      </if>
+      <if test="qps != null">
+        qps,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="cookiemappingurl != null">
+        cookiemappingurl,
+      </if>
+      <if test="dspId != null">
+        dsp_id,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="isPrivate != null">
+        is_private,
+      </if>
+      <if test="isDeal != null">
+        is_deal,
+      </if>
+      <if test="adpositionPrice != null">
+        adposition_price,
+      </if>
+      <if test="isCheck != null">
+        is_check,
+      </if>
+      <if test="dxDid != null">
+        dx_did,
+      </if>
+      <if test="isTest != null">
+        is_test,
+      </if>
+      <if test="consumerMark != null">
+        consumer_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="consumerName != null">
+        #{consumerName,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerUuid != null">
+        #{consumerUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerType != null">
+        #{consumerType,jdbcType=INTEGER},
+      </if>
+      <if test="rtbUrl != null">
+        #{rtbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="runState != null">
+        #{runState,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null">
+        #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkman != null">
+        #{companyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanTel != null">
+        #{linkmanTel,jdbcType=VARCHAR},
+      </if>
+      <if test="adposId != null">
+        #{adposId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerState != null">
+        #{consumerState,jdbcType=INTEGER},
+      </if>
+      <if test="qps != null">
+        #{qps,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cookiemappingurl != null">
+        #{cookiemappingurl,jdbcType=VARCHAR},
+      </if>
+      <if test="dspId != null">
+        #{dspId,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrivate != null">
+        #{isPrivate,jdbcType=INTEGER},
+      </if>
+      <if test="isDeal != null">
+        #{isDeal,jdbcType=INTEGER},
+      </if>
+      <if test="adpositionPrice != null">
+        #{adpositionPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null">
+        #{isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="dxDid != null">
+        #{dxDid,jdbcType=VARCHAR},
+      </if>
+      <if test="isTest != null">
+        #{isTest,jdbcType=INTEGER},
+      </if>
+      <if test="consumerMark != null">
+        #{consumerMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.FlowConsumerExample" resultType="java.lang.Long">
+    select count(*) from flow_consumer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update flow_consumer
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.consumerName != null">
+        consumer_name = #{record.consumerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumerUuid != null">
+        consumer_uuid = #{record.consumerUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumerType != null">
+        consumer_type = #{record.consumerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.rtbUrl != null">
+        rtb_url = #{record.rtbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runState != null">
+        run_state = #{record.runState,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.companyName != null">
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddr != null">
+        company_addr = #{record.companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyLinkman != null">
+        company_linkman = #{record.companyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkmanTel != null">
+        linkman_tel = #{record.linkmanTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adposId != null">
+        adpos_id = #{record.adposId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumerState != null">
+        consumer_state = #{record.consumerState,jdbcType=INTEGER},
+      </if>
+      <if test="record.qps != null">
+        qps = #{record.qps,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cookiemappingurl != null">
+        cookiemappingurl = #{record.cookiemappingurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dspId != null">
+        dsp_id = #{record.dspId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isPrivate != null">
+        is_private = #{record.isPrivate,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDeal != null">
+        is_deal = #{record.isDeal,jdbcType=INTEGER},
+      </if>
+      <if test="record.adpositionPrice != null">
+        adposition_price = #{record.adpositionPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCheck != null">
+        is_check = #{record.isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="record.dxDid != null">
+        dx_did = #{record.dxDid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isTest != null">
+        is_test = #{record.isTest,jdbcType=INTEGER},
+      </if>
+      <if test="record.consumerMark != null">
+        consumer_mark = #{record.consumerMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update flow_consumer
+    set id = #{record.id,jdbcType=INTEGER},
+      consumer_name = #{record.consumerName,jdbcType=VARCHAR},
+      consumer_uuid = #{record.consumerUuid,jdbcType=VARCHAR},
+      consumer_type = #{record.consumerType,jdbcType=INTEGER},
+      rtb_url = #{record.rtbUrl,jdbcType=VARCHAR},
+      run_state = #{record.runState,jdbcType=INTEGER},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      company_addr = #{record.companyAddr,jdbcType=VARCHAR},
+      company_linkman = #{record.companyLinkman,jdbcType=VARCHAR},
+      linkman_tel = #{record.linkmanTel,jdbcType=VARCHAR},
+      adpos_id = #{record.adposId,jdbcType=VARCHAR},
+      consumer_state = #{record.consumerState,jdbcType=INTEGER},
+      qps = #{record.qps,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      cookiemappingurl = #{record.cookiemappingurl,jdbcType=VARCHAR},
+      dsp_id = #{record.dspId,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      is_private = #{record.isPrivate,jdbcType=INTEGER},
+      is_deal = #{record.isDeal,jdbcType=INTEGER},
+      adposition_price = #{record.adpositionPrice,jdbcType=VARCHAR},
+      is_check = #{record.isCheck,jdbcType=INTEGER},
+      dx_did = #{record.dxDid,jdbcType=VARCHAR},
+      is_test = #{record.isTest,jdbcType=INTEGER},
+      consumer_mark = #{record.consumerMark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.FlowConsumer">
+    update flow_consumer
+    <set>
+      <if test="consumerName != null">
+        consumer_name = #{consumerName,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerUuid != null">
+        consumer_uuid = #{consumerUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerType != null">
+        consumer_type = #{consumerType,jdbcType=INTEGER},
+      </if>
+      <if test="rtbUrl != null">
+        rtb_url = #{rtbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="runState != null">
+        run_state = #{runState,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null">
+        company_addr = #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkman != null">
+        company_linkman = #{companyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanTel != null">
+        linkman_tel = #{linkmanTel,jdbcType=VARCHAR},
+      </if>
+      <if test="adposId != null">
+        adpos_id = #{adposId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerState != null">
+        consumer_state = #{consumerState,jdbcType=INTEGER},
+      </if>
+      <if test="qps != null">
+        qps = #{qps,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cookiemappingurl != null">
+        cookiemappingurl = #{cookiemappingurl,jdbcType=VARCHAR},
+      </if>
+      <if test="dspId != null">
+        dsp_id = #{dspId,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrivate != null">
+        is_private = #{isPrivate,jdbcType=INTEGER},
+      </if>
+      <if test="isDeal != null">
+        is_deal = #{isDeal,jdbcType=INTEGER},
+      </if>
+      <if test="adpositionPrice != null">
+        adposition_price = #{adpositionPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null">
+        is_check = #{isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="dxDid != null">
+        dx_did = #{dxDid,jdbcType=VARCHAR},
+      </if>
+      <if test="isTest != null">
+        is_test = #{isTest,jdbcType=INTEGER},
+      </if>
+      <if test="consumerMark != null">
+        consumer_mark = #{consumerMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.FlowConsumer">
+    update flow_consumer
+    set consumer_name = #{consumerName,jdbcType=VARCHAR},
+      consumer_uuid = #{consumerUuid,jdbcType=VARCHAR},
+      consumer_type = #{consumerType,jdbcType=INTEGER},
+      rtb_url = #{rtbUrl,jdbcType=VARCHAR},
+      run_state = #{runState,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_addr = #{companyAddr,jdbcType=VARCHAR},
+      company_linkman = #{companyLinkman,jdbcType=VARCHAR},
+      linkman_tel = #{linkmanTel,jdbcType=VARCHAR},
+      adpos_id = #{adposId,jdbcType=VARCHAR},
+      consumer_state = #{consumerState,jdbcType=INTEGER},
+      qps = #{qps,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      cookiemappingurl = #{cookiemappingurl,jdbcType=VARCHAR},
+      dsp_id = #{dspId,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      is_private = #{isPrivate,jdbcType=INTEGER},
+      is_deal = #{isDeal,jdbcType=INTEGER},
+      adposition_price = #{adpositionPrice,jdbcType=VARCHAR},
+      is_check = #{isCheck,jdbcType=INTEGER},
+      dx_did = #{dxDid,jdbcType=VARCHAR},
+      is_test = #{isTest,jdbcType=INTEGER},
+      consumer_mark = #{consumerMark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="com.iwanvi.nvwa.dao.model.FlowConsumerExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from flow_consumer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into flow_consumer
+    (id, consumer_name, consumer_uuid, consumer_type, rtb_url, run_state, create_user, 
+      create_time, update_time, company_name, company_addr, company_linkman, linkman_tel, 
+      adpos_id, consumer_state, qps, remark, cookiemappingurl, dsp_id, token, is_private, 
+      is_deal, adposition_price, is_check, dx_did, is_test, consumer_mark)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.consumerName,jdbcType=VARCHAR}, #{item.consumerUuid,jdbcType=VARCHAR}, 
+        #{item.consumerType,jdbcType=INTEGER}, #{item.rtbUrl,jdbcType=VARCHAR}, #{item.runState,jdbcType=INTEGER}, 
+        #{item.createUser,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+        #{item.companyName,jdbcType=VARCHAR}, #{item.companyAddr,jdbcType=VARCHAR}, #{item.companyLinkman,jdbcType=VARCHAR}, 
+        #{item.linkmanTel,jdbcType=VARCHAR}, #{item.adposId,jdbcType=VARCHAR}, #{item.consumerState,jdbcType=INTEGER}, 
+        #{item.qps,jdbcType=INTEGER}, #{item.remark,jdbcType=VARCHAR}, #{item.cookiemappingurl,jdbcType=VARCHAR}, 
+        #{item.dspId,jdbcType=VARCHAR}, #{item.token,jdbcType=VARCHAR}, #{item.isPrivate,jdbcType=INTEGER}, 
+        #{item.isDeal,jdbcType=INTEGER}, #{item.adpositionPrice,jdbcType=VARCHAR}, #{item.isCheck,jdbcType=INTEGER}, 
+        #{item.dxDid,jdbcType=VARCHAR}, #{item.isTest,jdbcType=INTEGER}, #{item.consumerMark,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into flow_consumer (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'consumer_name'.toString() == column.value">
+          #{item.consumerName,jdbcType=VARCHAR}
+        </if>
+        <if test="'consumer_uuid'.toString() == column.value">
+          #{item.consumerUuid,jdbcType=VARCHAR}
+        </if>
+        <if test="'consumer_type'.toString() == column.value">
+          #{item.consumerType,jdbcType=INTEGER}
+        </if>
+        <if test="'rtb_url'.toString() == column.value">
+          #{item.rtbUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="'run_state'.toString() == column.value">
+          #{item.runState,jdbcType=INTEGER}
+        </if>
+        <if test="'create_user'.toString() == column.value">
+          #{item.createUser,jdbcType=INTEGER}
+        </if>
+        <if test="'create_time'.toString() == column.value">
+          #{item.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'update_time'.toString() == column.value">
+          #{item.updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'company_name'.toString() == column.value">
+          #{item.companyName,jdbcType=VARCHAR}
+        </if>
+        <if test="'company_addr'.toString() == column.value">
+          #{item.companyAddr,jdbcType=VARCHAR}
+        </if>
+        <if test="'company_linkman'.toString() == column.value">
+          #{item.companyLinkman,jdbcType=VARCHAR}
+        </if>
+        <if test="'linkman_tel'.toString() == column.value">
+          #{item.linkmanTel,jdbcType=VARCHAR}
+        </if>
+        <if test="'adpos_id'.toString() == column.value">
+          #{item.adposId,jdbcType=VARCHAR}
+        </if>
+        <if test="'consumer_state'.toString() == column.value">
+          #{item.consumerState,jdbcType=INTEGER}
+        </if>
+        <if test="'qps'.toString() == column.value">
+          #{item.qps,jdbcType=INTEGER}
+        </if>
+        <if test="'remark'.toString() == column.value">
+          #{item.remark,jdbcType=VARCHAR}
+        </if>
+        <if test="'cookiemappingurl'.toString() == column.value">
+          #{item.cookiemappingurl,jdbcType=VARCHAR}
+        </if>
+        <if test="'dsp_id'.toString() == column.value">
+          #{item.dspId,jdbcType=VARCHAR}
+        </if>
+        <if test="'token'.toString() == column.value">
+          #{item.token,jdbcType=VARCHAR}
+        </if>
+        <if test="'is_private'.toString() == column.value">
+          #{item.isPrivate,jdbcType=INTEGER}
+        </if>
+        <if test="'is_deal'.toString() == column.value">
+          #{item.isDeal,jdbcType=INTEGER}
+        </if>
+        <if test="'adposition_price'.toString() == column.value">
+          #{item.adpositionPrice,jdbcType=VARCHAR}
+        </if>
+        <if test="'is_check'.toString() == column.value">
+          #{item.isCheck,jdbcType=INTEGER}
+        </if>
+        <if test="'dx_did'.toString() == column.value">
+          #{item.dxDid,jdbcType=VARCHAR}
+        </if>
+        <if test="'is_test'.toString() == column.value">
+          #{item.isTest,jdbcType=INTEGER}
+        </if>
+        <if test="'consumer_mark'.toString() == column.value">
+          #{item.consumerMark,jdbcType=VARCHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+  	<select id="getCnt" resultType="java.lang.Integer">
+		SELECT count(T1.id) as total
+		FROM
+		`flow_consumer` T1
+	</select>
+
+	<select id="getIds" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		SELECT
+		T1.id, T1.dsp_id FROM `flow_consumer` T1
+		where T1.consumer_type = #{t}
+		limit #{limit}
+	</select>
+</mapper>

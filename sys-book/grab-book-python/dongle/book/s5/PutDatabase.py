@@ -2,14 +2,14 @@ import base64
 import threading
 
 import pymysql
-from dongle.util import Files as f
+from dongle.utils import Files as f
 
 # db = pymysql.connect(host='db.dongle.com', user='root', passwd='Dongle@123', port=3306, db="dongle-data")
 # cursor = db.cursor()
-CAT = "yqjh"
-DIR = "D:\\Data\\My\\小说\\sex5\\" + CAT + "\\"
+CAT = "jtll"
+DIR = "F:\\Download\\Dongle\\b\\" + CAT + "\\"
 files = f.read_dir_files_name(DIR)
-DATE = "2023-09-03"
+DATE = "2023-10-23"
 THREAD_NUM = 20
 
 

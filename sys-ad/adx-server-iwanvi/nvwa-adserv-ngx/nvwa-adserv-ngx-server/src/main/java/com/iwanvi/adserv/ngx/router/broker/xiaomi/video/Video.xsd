@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="MediaFile">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="delivery" use="optional"/>
+          <xs:attribute type="xs:string" name="assetId" use="optional"/>
+          <xs:attribute type="xs:string" name="width" use="optional"/>
+          <xs:attribute type="xs:string" name="height" use="optional"/>
+          <xs:attribute type="xs:string" name="type" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClickThrough" type="xs:string"/>
+  <xs:element name="ClickTracking" type="xs:string"/>
+  <xs:element name="Tracking">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="event" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Duration" type="xs:string"/>
+  <xs:element name="Thumbnail" type="xs:string"/>
+  <xs:element name="MediaFiles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="MediaFile" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VideoClicks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ClickThrough"/>
+        <xs:element ref="ClickTracking" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TrackingEvents">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Tracking" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Linear">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Duration"/>
+        <xs:element ref="Thumbnail"/>
+        <xs:element ref="MediaFiles"/>
+        <xs:element ref="VideoClicks"/>
+        <xs:element ref="TrackingEvents"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Creative">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Linear"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TargetType" type="xs:string"/>
+  <xs:element name="PackageName" type="xs:string"/>
+  <xs:element name="AppSize" type="xs:string"/>
+  <xs:element name="TotalDownloadNum" type="xs:string"/>
+  <xs:element name="DownloadUrl" type="xs:string"/>
+  <xs:element name="DownloadTrackingUrl" type="xs:string"/>
+  <xs:element name="Extension">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="TargetType"/>
+        <xs:element ref="PackageName"/>
+        <xs:element ref="AppSize"/>
+        <xs:element ref="TotalDownloadNum"/>
+        <xs:element ref="DownloadUrl"/>
+        <xs:element ref="DownloadTrackingUrl"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdSystem">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="version"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdTitle" type="xs:string"/>
+  <xs:element name="Impression" type="xs:string"/>
+  <xs:element name="Creatives">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Creative" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Description" type="xs:string"/>
+  <xs:element name="Extensions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Extension" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InLine">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="AdSystem"/>
+        <xs:element ref="AdTitle"/>
+        <xs:element ref="Impression" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element ref="Creatives"/>
+        <xs:element ref="Description"/>
+        <xs:element ref="Extensions"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ad">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="InLine"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="id"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Error" type="xs:string"/>
+  <xs:element name="VAST">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Ad"/>
+        <xs:element ref="Error"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="version"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

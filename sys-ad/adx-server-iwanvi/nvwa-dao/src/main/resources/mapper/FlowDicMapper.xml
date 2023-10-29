@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iwanvi.nvwa.dao.FlowDicMapper" >
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.FlowDic" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dic_value" property="dicValue" jdbcType="VARCHAR" />
+    <result column="dic_key" property="dicKey" jdbcType="VARCHAR" />
+    <result column="dic_group" property="dicGroup" jdbcType="INTEGER" />
+    <result column="dic_type" property="dicType" jdbcType="INTEGER" />
+    <result column="enum_value" property="enumValue" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, dic_value, dic_key, dic_group, dic_type, enum_value, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iwanvi.nvwa.dao.model.FlowDicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from flow_dic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from flow_dic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from flow_dic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.FlowDicExample" >
+    delete from flow_dic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.FlowDic" >
+    insert into flow_dic (id, dic_value, dic_key, 
+      dic_group, dic_type, enum_value, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{dicValue,jdbcType=VARCHAR}, #{dicKey,jdbcType=VARCHAR}, 
+      #{dicGroup,jdbcType=INTEGER}, #{dicType,jdbcType=INTEGER}, #{enumValue,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.FlowDic" >
+    insert into flow_dic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dicValue != null" >
+        dic_value,
+      </if>
+      <if test="dicKey != null" >
+        dic_key,
+      </if>
+      <if test="dicGroup != null" >
+        dic_group,
+      </if>
+      <if test="dicType != null" >
+        dic_type,
+      </if>
+      <if test="enumValue != null" >
+        enum_value,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dicValue != null" >
+        #{dicValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dicKey != null" >
+        #{dicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="dicGroup != null" >
+        #{dicGroup,jdbcType=INTEGER},
+      </if>
+      <if test="dicType != null" >
+        #{dicType,jdbcType=INTEGER},
+      </if>
+      <if test="enumValue != null" >
+        #{enumValue,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.FlowDicExample" resultType="java.lang.Integer" >
+    select count(*) from flow_dic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update flow_dic
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dicValue != null" >
+        dic_value = #{record.dicValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dicKey != null" >
+        dic_key = #{record.dicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dicGroup != null" >
+        dic_group = #{record.dicGroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.dicType != null" >
+        dic_type = #{record.dicType,jdbcType=INTEGER},
+      </if>
+      <if test="record.enumValue != null" >
+        enum_value = #{record.enumValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update flow_dic
+    set id = #{record.id,jdbcType=INTEGER},
+      dic_value = #{record.dicValue,jdbcType=VARCHAR},
+      dic_key = #{record.dicKey,jdbcType=VARCHAR},
+      dic_group = #{record.dicGroup,jdbcType=INTEGER},
+      dic_type = #{record.dicType,jdbcType=INTEGER},
+      enum_value = #{record.enumValue,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.FlowDic" >
+    update flow_dic
+    <set >
+      <if test="dicValue != null" >
+        dic_value = #{dicValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dicKey != null" >
+        dic_key = #{dicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="dicGroup != null" >
+        dic_group = #{dicGroup,jdbcType=INTEGER},
+      </if>
+      <if test="dicType != null" >
+        dic_type = #{dicType,jdbcType=INTEGER},
+      </if>
+      <if test="enumValue != null" >
+        enum_value = #{enumValue,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.FlowDic" >
+    update flow_dic
+    set dic_value = #{dicValue,jdbcType=VARCHAR},
+      dic_key = #{dicKey,jdbcType=VARCHAR},
+      dic_group = #{dicGroup,jdbcType=INTEGER},
+      dic_type = #{dicType,jdbcType=INTEGER},
+      enum_value = #{enumValue,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

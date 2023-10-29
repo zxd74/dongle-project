@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.WarningSettingMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.WarningSetting">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="app_id" jdbcType="INTEGER" property="appId" />
+    <result column="pv_tb" jdbcType="INTEGER" property="pvTb" />
+    <result column="pv_hb" jdbcType="INTEGER" property="pvHb" />
+    <result column="clk_tb" jdbcType="INTEGER" property="clkTb" />
+    <result column="clk_hb" jdbcType="INTEGER" property="clkHb" />
+    <result column="pv_tj" jdbcType="INTEGER" property="pvTj" />
+    <result column="clk_tj" jdbcType="INTEGER" property="clkTj" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, channel_id, app_id, pv_tb, pv_hb, clk_tb, clk_hb, pv_tj, clk_tj, status, email
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.WarningSettingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from warning_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and limit != null">
+      limit ${start},${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from warning_setting
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warning_setting
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.WarningSettingExample">
+    delete from warning_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.WarningSetting">
+    insert into warning_setting (id, channel_id, app_id, 
+      pv_tb, pv_hb, clk_tb, 
+      clk_hb, pv_tj, clk_tj, 
+      status, email)
+    values (#{id,jdbcType=INTEGER}, #{channelId,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, 
+      #{pvTb,jdbcType=INTEGER}, #{pvHb,jdbcType=INTEGER}, #{clkTb,jdbcType=INTEGER}, 
+      #{clkHb,jdbcType=INTEGER}, #{pvTj,jdbcType=INTEGER}, #{clkTj,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.WarningSetting">
+    insert into warning_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="pvTb != null">
+        pv_tb,
+      </if>
+      <if test="pvHb != null">
+        pv_hb,
+      </if>
+      <if test="clkTb != null">
+        clk_tb,
+      </if>
+      <if test="clkHb != null">
+        clk_hb,
+      </if>
+      <if test="pvTj != null">
+        pv_tj,
+      </if>
+      <if test="clkTj != null">
+        clk_tj,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="pvTb != null">
+        #{pvTb,jdbcType=INTEGER},
+      </if>
+      <if test="pvHb != null">
+        #{pvHb,jdbcType=INTEGER},
+      </if>
+      <if test="clkTb != null">
+        #{clkTb,jdbcType=INTEGER},
+      </if>
+      <if test="clkHb != null">
+        #{clkHb,jdbcType=INTEGER},
+      </if>
+      <if test="pvTj != null">
+        #{pvTj,jdbcType=INTEGER},
+      </if>
+      <if test="clkTj != null">
+        #{clkTj,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.WarningSettingExample" resultType="java.lang.Long">
+    select count(*) from warning_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update warning_setting
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelId != null">
+        channel_id = #{record.channelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appId != null">
+        app_id = #{record.appId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pvTb != null">
+        pv_tb = #{record.pvTb,jdbcType=INTEGER},
+      </if>
+      <if test="record.pvHb != null">
+        pv_hb = #{record.pvHb,jdbcType=INTEGER},
+      </if>
+      <if test="record.clkTb != null">
+        clk_tb = #{record.clkTb,jdbcType=INTEGER},
+      </if>
+      <if test="record.clkHb != null">
+        clk_hb = #{record.clkHb,jdbcType=INTEGER},
+      </if>
+      <if test="record.pvTj != null">
+        pv_tj = #{record.pvTj,jdbcType=INTEGER},
+      </if>
+      <if test="record.clkTj != null">
+        clk_tj = #{record.clkTj,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update warning_setting
+    set id = #{record.id,jdbcType=INTEGER},
+      channel_id = #{record.channelId,jdbcType=INTEGER},
+      app_id = #{record.appId,jdbcType=INTEGER},
+      pv_tb = #{record.pvTb,jdbcType=INTEGER},
+      pv_hb = #{record.pvHb,jdbcType=INTEGER},
+      clk_tb = #{record.clkTb,jdbcType=INTEGER},
+      clk_hb = #{record.clkHb,jdbcType=INTEGER},
+      pv_tj = #{record.pvTj,jdbcType=INTEGER},
+      clk_tj = #{record.clkTj,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.WarningSetting">
+    update warning_setting
+    <set>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="pvTb != null">
+        pv_tb = #{pvTb,jdbcType=INTEGER},
+      </if>
+      <if test="pvHb != null">
+        pv_hb = #{pvHb,jdbcType=INTEGER},
+      </if>
+      <if test="clkTb != null">
+        clk_tb = #{clkTb,jdbcType=INTEGER},
+      </if>
+      <if test="clkHb != null">
+        clk_hb = #{clkHb,jdbcType=INTEGER},
+      </if>
+      <if test="pvTj != null">
+        pv_tj = #{pvTj,jdbcType=INTEGER},
+      </if>
+      <if test="clkTj != null">
+        clk_tj = #{clkTj,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.WarningSetting">
+    update warning_setting
+    set channel_id = #{channelId,jdbcType=INTEGER},
+      app_id = #{appId,jdbcType=INTEGER},
+      pv_tb = #{pvTb,jdbcType=INTEGER},
+      pv_hb = #{pvHb,jdbcType=INTEGER},
+      clk_tb = #{clkTb,jdbcType=INTEGER},
+      clk_hb = #{clkHb,jdbcType=INTEGER},
+      pv_tj = #{pvTj,jdbcType=INTEGER},
+      clk_tj = #{clkTj,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="com.iwanvi.nvwa.dao.model.WarningSettingExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from warning_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into warning_setting
+    (id, channel_id, app_id, pv_tb, pv_hb, clk_tb, clk_hb, pv_tj, clk_tj, status, email
+      )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.channelId,jdbcType=INTEGER}, #{item.appId,jdbcType=INTEGER}, 
+        #{item.pvTb,jdbcType=INTEGER}, #{item.pvHb,jdbcType=INTEGER}, #{item.clkTb,jdbcType=INTEGER}, 
+        #{item.clkHb,jdbcType=INTEGER}, #{item.pvTj,jdbcType=INTEGER}, #{item.clkTj,jdbcType=INTEGER}, 
+        #{item.status,jdbcType=INTEGER}, #{item.email,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into warning_setting (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'channel_id'.toString() == column.value">
+          #{item.channelId,jdbcType=INTEGER}
+        </if>
+        <if test="'app_id'.toString() == column.value">
+          #{item.appId,jdbcType=INTEGER}
+        </if>
+        <if test="'pv_tb'.toString() == column.value">
+          #{item.pvTb,jdbcType=INTEGER}
+        </if>
+        <if test="'pv_hb'.toString() == column.value">
+          #{item.pvHb,jdbcType=INTEGER}
+        </if>
+        <if test="'clk_tb'.toString() == column.value">
+          #{item.clkTb,jdbcType=INTEGER}
+        </if>
+        <if test="'clk_hb'.toString() == column.value">
+          #{item.clkHb,jdbcType=INTEGER}
+        </if>
+        <if test="'pv_tj'.toString() == column.value">
+          #{item.pvTj,jdbcType=INTEGER}
+        </if>
+        <if test="'clk_tj'.toString() == column.value">
+          #{item.clkTj,jdbcType=INTEGER}
+        </if>
+        <if test="'status'.toString() == column.value">
+          #{item.status,jdbcType=INTEGER}
+        </if>
+        <if test="'email'.toString() == column.value">
+          #{item.email,jdbcType=VARCHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+</mapper>

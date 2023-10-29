@@ -1,0 +1,1 @@
+package com.fftime.ffmob.common.status;public enum Carrier {  UNKNOWN(0), CMCC(1), UNICOM(2), TELECOM(3);  private int value;  private Carrier(int value) {    this.value = value;  }  public int getValue() {    return this.value;  }}

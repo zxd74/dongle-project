@@ -1,0 +1,140 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.iwanvi</groupId>
+		<artifactId>nvwa-pixel-connector</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>nvwa-pixel-connector-imp</artifactId>
+	<name>nvwa-pixel-connector-imp</name>
+	<description>the pixel-connector-imp module for nvwa</description>
+	
+	<build>
+		<finalName>nvwa-pixel-connector-imp-${project.version}-${profileName}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptors>
+						<descriptor>assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>utf-8</encoding>
+					<useDefaultDelimiters>true</useDefaultDelimiters>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>spring/</include>
+					<include>properties/*</include>
+					<include>spring/*</include>
+					<include>log4j.properties</include>
+					<include>*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>properties/</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.iwanvi</groupId>
+			<artifactId>nvwa-pixel-connector-common</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<profiles>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profileName>prod</profileName>
+				<db.url>jdbc:mysql://rm-2ze8m9018ujn2k1s3.mysql.rds.aliyuncs.com:3306/iwanvi?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=UTF8</db.url>
+				<db.user>iwanvi_r</db.user>
+				<db.password>2019@iwanvi_rds</db.password>
+
+				<redis.host>r-2zefesrbgjs6jltdxo.redis.rds.aliyuncs.com</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.password>2019@iwanvi_redis</redis.password>
+				<redis.default.db>0</redis.default.db>
+				
+				<redis.cluster>r-2zemcvnzvf8a27hv6p.redis.rds.aliyuncs.com:6379</redis.cluster>
+				
+				<path.file.ip>/data/ip/iac-i-ip.csv</path.file.ip>
+			</properties>
+		</profile>
+		<profile>
+			<id>iwanvi</id>
+			<properties>
+				<profileName>iwanvi</profileName>
+				<db.url>jdbc:mysql://rm-2ze4pqu68949x2f6n.mysql.rds.aliyuncs.com:3306/iwanvi?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=UTF8</db.url>
+				<db.user>iwanvi_r</db.user>
+				<db.password>2019@iwanvi_rds</db.password>
+
+				<redis.host>r-2zemcvnzvf8a27hv6p.redis.rds.aliyuncs.com</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.password>2019@iwanvi_redis</redis.password>
+				<redis.default.db>0</redis.default.db>
+				
+				<redis.cluster>r-2zemcvnzvf8a27hv6p.redis.rds.aliyuncs.com:6379</redis.cluster>
+				
+				<path.file.ip>/data/ip/iac-i-ip.csv</path.file.ip>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profileName>test</profileName>
+
+				<db.url>jdbc:mysql://182.92.173.117:3306/zwww?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=UTF8</db.url>
+				<db.user>test</db.user>
+				<db.password>test@fftime</db.password>
+
+				<redis.host>182.92.173.117</redis.host>
+				<redis.port>2917</redis.port>
+				<redis.password>2917</redis.password>
+				<redis.default.db>7</redis.default.db>
+				
+				<redis.cluster>182.92.173.117:2917</redis.cluster>
+				
+				<path.file.ip>/data/ip/iac-i-ip.csv</path.file.ip>
+			</properties>
+		</profile>
+	</profiles>
+</project>

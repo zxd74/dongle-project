@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.PutPositionTimeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.iwanvi.nvwa.dao.model.PutPositionTime">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="put_all_id" jdbcType="INTEGER"
+			property="putAllId" />
+		<result column="cost_type" jdbcType="INTEGER"
+			property="costType" />
+		<result column="position_id" jdbcType="INTEGER"
+			property="positionId" />
+		<result column="begin_time" jdbcType="TIMESTAMP"
+			property="beginTime" />
+		<result column="end_time" jdbcType="TIMESTAMP"
+			property="endTime" />
+		<result column="time_interval" jdbcType="VARCHAR"
+			property="timeInterval" />
+		<result column="put_limit" jdbcType="INTEGER"
+			property="putLimit" />
+		<result column="time_state" jdbcType="INTEGER"
+			property="timeState" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, put_all_id, cost_type, position_id, begin_time, end_time,
+		time_interval, put_limit,
+		time_state
+	</sql>
+	<select id="selectByExample"
+		parameterType="com.iwanvi.nvwa.dao.model.PutPositionTimeExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from put_position_time
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="rows != null">
+			<if test="offset != null">
+				limit ${offset}, ${rows}
+			</if>
+			<if test="offset == null">
+				limit ${rows}
+			</if>
+		</if>
+	</select>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from put_position_time
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from put_position_time
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.iwanvi.nvwa.dao.model.PutPositionTimeExample">
+		delete from put_position_time
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="com.iwanvi.nvwa.dao.model.PutPositionTime">
+		insert into put_position_time (id, put_all_id, cost_type,
+		position_id, begin_time, end_time,
+		time_interval, put_limit, time_state
+		)
+		values (#{id,jdbcType=INTEGER}, #{putAllId,jdbcType=INTEGER},
+		#{costType,jdbcType=INTEGER},
+		#{positionId,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+		#{timeInterval,jdbcType=VARCHAR}, #{putLimit,jdbcType=INTEGER},
+		#{timeState,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.iwanvi.nvwa.dao.model.PutPositionTime">
+		insert into put_position_time
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="putAllId != null">
+				put_all_id,
+			</if>
+			<if test="costType != null">
+				cost_type,
+			</if>
+			<if test="positionId != null">
+				position_id,
+			</if>
+			<if test="beginTime != null">
+				begin_time,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="timeInterval != null">
+				time_interval,
+			</if>
+			<if test="putLimit != null">
+				put_limit,
+			</if>
+			<if test="timeState != null">
+				time_state,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="putAllId != null">
+				#{putAllId,jdbcType=INTEGER},
+			</if>
+			<if test="costType != null">
+				#{costType,jdbcType=INTEGER},
+			</if>
+			<if test="positionId != null">
+				#{positionId,jdbcType=INTEGER},
+			</if>
+			<if test="beginTime != null">
+				#{beginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="timeInterval != null">
+				#{timeInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="putLimit != null">
+				#{putLimit,jdbcType=INTEGER},
+			</if>
+			<if test="timeState != null">
+				#{timeState,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.iwanvi.nvwa.dao.model.PutPositionTimeExample"
+		resultType="java.lang.Long">
+		select count(*) from put_position_time
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update put_position_time
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.putAllId != null">
+				put_all_id = #{record.putAllId,jdbcType=INTEGER},
+			</if>
+			<if test="record.costType != null">
+				cost_type = #{record.costType,jdbcType=INTEGER},
+			</if>
+			<if test="record.positionId != null">
+				position_id = #{record.positionId,jdbcType=INTEGER},
+			</if>
+			<if test="record.beginTime != null">
+				begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.endTime != null">
+				end_time = #{record.endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.timeInterval != null">
+				time_interval = #{record.timeInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="record.putLimit != null">
+				put_limit = #{record.putLimit,jdbcType=INTEGER},
+			</if>
+			<if test="record.timeState != null">
+				time_state = #{record.timeState,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update put_position_time
+		set id = #{record.id,jdbcType=INTEGER},
+		put_all_id = #{record.putAllId,jdbcType=INTEGER},
+		cost_type = #{record.costType,jdbcType=INTEGER},
+		position_id = #{record.positionId,jdbcType=INTEGER},
+		begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+		end_time = #{record.endTime,jdbcType=TIMESTAMP},
+		time_interval = #{record.timeInterval,jdbcType=VARCHAR},
+		put_limit = #{record.putLimit,jdbcType=INTEGER},
+		time_state = #{record.timeState,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.iwanvi.nvwa.dao.model.PutPositionTime">
+		update put_position_time
+		<set>
+			<if test="putAllId != null">
+				put_all_id = #{putAllId,jdbcType=INTEGER},
+			</if>
+			<if test="costType != null">
+				cost_type = #{costType,jdbcType=INTEGER},
+			</if>
+			<if test="positionId != null">
+				position_id = #{positionId,jdbcType=INTEGER},
+			</if>
+			<if test="beginTime != null">
+				begin_time = #{beginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				end_time = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="timeInterval != null">
+				time_interval = #{timeInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="putLimit != null">
+				put_limit = #{putLimit,jdbcType=INTEGER},
+			</if>
+			<if test="timeState != null">
+				time_state = #{timeState,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.iwanvi.nvwa.dao.model.PutPositionTime">
+		update put_position_time
+		set put_all_id = #{putAllId,jdbcType=INTEGER},
+		cost_type = #{costType,jdbcType=INTEGER},
+		position_id = #{positionId,jdbcType=INTEGER},
+		begin_time = #{beginTime,jdbcType=TIMESTAMP},
+		end_time = #{endTime,jdbcType=TIMESTAMP},
+		time_interval = #{timeInterval,jdbcType=VARCHAR},
+		put_limit = #{putLimit,jdbcType=INTEGER},
+		time_state = #{timeState,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample"
+		parameterType="com.iwanvi.nvwa.dao.model.PutPositionTimeExample"
+		resultMap="BaseResultMap">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. @project https://github.com/itfsw/mybatis-generator-plugin -->
+		select
+		<include refid="Base_Column_List" />
+		from put_position_time
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		limit 1
+	</select>
+	<insert id="batchInsert" parameterType="map">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. @project https://github.com/itfsw/mybatis-generator-plugin -->
+		insert into put_position_time
+		(id, put_all_id, cost_type, position_id, begin_time, end_time,
+		time_interval, put_limit,
+		time_state)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.id,jdbcType=INTEGER}, #{item.putAllId,jdbcType=INTEGER},
+			#{item.costType,jdbcType=INTEGER},
+			#{item.positionId,jdbcType=INTEGER},
+			#{item.beginTime,jdbcType=TIMESTAMP},
+			#{item.endTime,jdbcType=TIMESTAMP},
+			#{item.timeInterval,jdbcType=VARCHAR},
+			#{item.putLimit,jdbcType=INTEGER}, #{item.timeState,jdbcType=INTEGER}
+			)
+		</foreach>
+	</insert>
+	<insert id="batchInsertSelective" parameterType="map">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. @project https://github.com/itfsw/mybatis-generator-plugin -->
+		insert into put_position_time (
+		<foreach collection="selective" item="column" separator=",">
+			${column.escapedColumnName}
+		</foreach>
+		)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(
+			<foreach collection="selective" item="column" separator=",">
+				<if test="'id'.toString() == column.value">
+					#{item.id,jdbcType=INTEGER}
+				</if>
+				<if test="'put_all_id'.toString() == column.value">
+					#{item.putAllId,jdbcType=INTEGER}
+				</if>
+				<if test="'cost_type'.toString() == column.value">
+					#{item.costType,jdbcType=INTEGER}
+				</if>
+				<if test="'position_id'.toString() == column.value">
+					#{item.positionId,jdbcType=INTEGER}
+				</if>
+				<if test="'begin_time'.toString() == column.value">
+					#{item.beginTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="'end_time'.toString() == column.value">
+					#{item.endTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="'time_interval'.toString() == column.value">
+					#{item.timeInterval,jdbcType=VARCHAR}
+				</if>
+				<if test="'put_limit'.toString() == column.value">
+					#{item.putLimit,jdbcType=INTEGER}
+				</if>
+				<if test="'time_state'.toString() == column.value">
+					#{item.timeState,jdbcType=INTEGER}
+				</if>
+			</foreach>
+			)
+		</foreach>
+	</insert>
+</mapper>

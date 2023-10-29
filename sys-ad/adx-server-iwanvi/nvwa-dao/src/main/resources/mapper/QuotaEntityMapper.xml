@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iwanvi.nvwa.dao.QuotaEntityMapper">
+	<resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.QuotaEntity">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="ent_id" property="entId" jdbcType="INTEGER" />
+		<result column="cre_day" property="creDay" jdbcType="INTEGER" />
+		<result column="cre_hour" property="creHour" jdbcType="INTEGER" />
+		<result column="req" property="req" jdbcType="INTEGER" />
+		<result column="exp" property="exp" jdbcType="INTEGER" />
+		<result column="clk" property="clk" jdbcType="INTEGER" />
+		<result column="act" property="act" jdbcType="INTEGER" />
+		<result column="cost" property="cost" jdbcType="BIGINT" />
+		<result column="investment" property="investment" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="bid" property="bid" jdbcType="INTEGER" />
+		<result column="win" property="win" jdbcType="INTEGER" />
+		<result column="agent_cost" property="agentCost" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, ent_id, cre_day, cre_hour, req, exp, clk, act, cost,
+		investment,
+		create_time,
+		bid, win, agent_cost
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.iwanvi.nvwa.dao.model.QuotaEntityExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from quota_entity
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from quota_entity
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		quota_entity
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaEntityExample">
+		delete from quota_entity
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.QuotaEntity">
+		insert into quota_entity (id,
+		ent_id, cre_day,
+		cre_hour, req, exp,
+		clk, act, cost, investment,
+		create_time, bid, win,
+		agent_cost)
+		values (#{id,jdbcType=INTEGER},
+		#{entId,jdbcType=INTEGER},
+		#{creDay,jdbcType=INTEGER},
+		#{creHour,jdbcType=INTEGER}, #{req,jdbcType=INTEGER},
+		#{exp,jdbcType=INTEGER},
+		#{clk,jdbcType=INTEGER},
+		#{act,jdbcType=INTEGER},
+		#{cost,jdbcType=BIGINT},
+		#{investment,jdbcType=BIGINT},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{bid,jdbcType=INTEGER},
+		#{win,jdbcType=INTEGER},
+		#{agentCost,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaEntity">
+		insert into quota_entity
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="entId != null">
+				ent_id,
+			</if>
+			<if test="creDay != null">
+				cre_day,
+			</if>
+			<if test="creHour != null">
+				cre_hour,
+			</if>
+			<if test="req != null">
+				req,
+			</if>
+			<if test="exp != null">
+				exp,
+			</if>
+			<if test="clk != null">
+				clk,
+			</if>
+			<if test="act != null">
+				act,
+			</if>
+			<if test="cost != null">
+				cost,
+			</if>
+			<if test="investment != null">
+				investment,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="bid != null">
+				bid,
+			</if>
+			<if test="win != null">
+				win,
+			</if>
+			<if test="agentCost != null">
+				agent_cost,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="entId != null">
+				#{entId,jdbcType=INTEGER},
+			</if>
+			<if test="creDay != null">
+				#{creDay,jdbcType=INTEGER},
+			</if>
+			<if test="creHour != null">
+				#{creHour,jdbcType=INTEGER},
+			</if>
+			<if test="req != null">
+				#{req,jdbcType=INTEGER},
+			</if>
+			<if test="exp != null">
+				#{exp,jdbcType=INTEGER},
+			</if>
+			<if test="clk != null">
+				#{clk,jdbcType=INTEGER},
+			</if>
+			<if test="act != null">
+				#{act,jdbcType=INTEGER},
+			</if>
+			<if test="cost != null">
+				#{cost,jdbcType=BIGINT},
+			</if>
+			<if test="investment != null">
+				#{investment,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bid != null">
+				#{bid,jdbcType=INTEGER},
+			</if>
+			<if test="win != null">
+				#{win,jdbcType=INTEGER},
+			</if>
+			<if test="agentCost != null">
+				#{agentCost,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaEntityExample"
+		resultType="java.lang.Integer">
+		select count(*) from quota_entity
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update quota_entity
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.entId != null">
+				ent_id = #{record.entId,jdbcType=INTEGER},
+			</if>
+			<if test="record.creDay != null">
+				cre_day = #{record.creDay,jdbcType=INTEGER},
+			</if>
+			<if test="record.creHour != null">
+				cre_hour = #{record.creHour,jdbcType=INTEGER},
+			</if>
+			<if test="record.req != null">
+				req = #{record.req,jdbcType=INTEGER},
+			</if>
+			<if test="record.exp != null">
+				exp = #{record.exp,jdbcType=INTEGER},
+			</if>
+			<if test="record.clk != null">
+				clk = #{record.clk,jdbcType=INTEGER},
+			</if>
+			<if test="record.act != null">
+				act = #{record.act,jdbcType=INTEGER},
+			</if>
+			<if test="record.cost != null">
+				cost = #{record.cost,jdbcType=BIGINT},
+			</if>
+			<if test="record.investment != null">
+				investment = #{record.investment,jdbcType=BIGINT},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.bid != null">
+				bid = #{record.bid,jdbcType=INTEGER},
+			</if>
+			<if test="record.win != null">
+				win = #{record.win,jdbcType=INTEGER},
+			</if>
+			<if test="record.agentCost != null">
+				agent_cost = #{record.agentCost,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update quota_entity
+		set id = #{record.id,jdbcType=INTEGER},
+		ent_id =
+		#{record.entId,jdbcType=INTEGER},
+		cre_day =
+		#{record.creDay,jdbcType=INTEGER},
+		cre_hour =
+		#{record.creHour,jdbcType=INTEGER},
+		req =
+		#{record.req,jdbcType=INTEGER},
+		exp = #{record.exp,jdbcType=INTEGER},
+		clk = #{record.clk,jdbcType=INTEGER},
+		act =
+		#{record.act,jdbcType=INTEGER},
+		cost = #{record.cost,jdbcType=BIGINT},
+		investment = #{record.investment,jdbcType=BIGINT},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		bid =
+		#{record.bid,jdbcType=INTEGER},
+		win = #{record.win,jdbcType=INTEGER},
+		agent_cost = #{record.agentCost,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaEntity">
+		update quota_entity
+		<set>
+			<if test="entId != null">
+				ent_id = #{entId,jdbcType=INTEGER},
+			</if>
+			<if test="creDay != null">
+				cre_day = #{creDay,jdbcType=INTEGER},
+			</if>
+			<if test="creHour != null">
+				cre_hour = #{creHour,jdbcType=INTEGER},
+			</if>
+			<if test="req != null">
+				req = #{req,jdbcType=INTEGER},
+			</if>
+			<if test="exp != null">
+				exp = #{exp,jdbcType=INTEGER},
+			</if>
+			<if test="clk != null">
+				clk = #{clk,jdbcType=INTEGER},
+			</if>
+			<if test="act != null">
+				act = #{act,jdbcType=INTEGER},
+			</if>
+			<if test="cost != null">
+				cost = #{cost,jdbcType=BIGINT},
+			</if>
+			<if test="investment != null">
+				investment = #{investment,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bid != null">
+				bid = #{bid,jdbcType=INTEGER},
+			</if>
+			<if test="win != null">
+				win = #{win,jdbcType=INTEGER},
+			</if>
+			<if test="agentCost != null">
+				agent_cost = #{agentCost,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.QuotaEntity">
+		update
+		quota_entity
+		set ent_id = #{entId,jdbcType=INTEGER},
+		cre_day =
+		#{creDay,jdbcType=INTEGER},
+		cre_hour = #{creHour,jdbcType=INTEGER},
+		req
+		= #{req,jdbcType=INTEGER},
+		exp = #{exp,jdbcType=INTEGER},
+		clk =
+		#{clk,jdbcType=INTEGER},
+		act = #{act,jdbcType=INTEGER},
+		cost =
+		#{cost,jdbcType=BIGINT},
+		investment = #{investment,jdbcType=BIGINT},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		bid =
+		#{bid,jdbcType=INTEGER},
+		win = #{win,jdbcType=INTEGER},
+		agent_cost =
+		#{agentCost,jdbcType=BIGINT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<sql id="Ent_Base_Sql">
+		<if test="pid != null and pid != ''">
+			and e.pid = #{pid}
+		</if>
+		<if test="entityState != null and entityState != ''">
+			and e.entity_state = #{entityState}
+		</if>
+		<choose>
+			<when test="createUser != null and createUser != ''">
+				and e.create_user = #{createUser}
+			</when>
+			<when test="createUsers != null and createUsers.size > 0">
+				and e.create_user in
+				<foreach collection="createUsers" close=")" open="("
+					separator="," item="user">
+					#{user}
+				</foreach>
+			</when>
+		</choose>
+	</sql>
+	<sql id="Qe_Base_Sql">
+		<if test="entId != null and entId != ''">
+			and qe.ent_id = #{entId}
+		</if>
+		<if test="creDay != null and creDay != ''">
+			and qe.cre_Day = #{creDay}
+		</if>
+		<if test="sTime != null and eTime != null">
+			and qe.cre_Day between #{sTime} and #{eTime}
+		</if>
+	</sql>
+	<sql id="Select_Base_Sql">
+		SUM(CASE WHEN qe.cre_day = #{day} and qe.cre_hour = #{hour}
+		THEN 0 else qe.exp END) exp,
+		SUM(CASE WHEN qe.cre_day = #{day} and
+		qe.cre_hour = #{hour}
+		THEN 0 else qe.clk END) clk,
+		SUM(CASE WHEN
+		qe.cre_day = #{day} and qe.cre_hour = #{hour}
+		THEN 0 else qe.act END)
+		act,
+		SUM(CASE WHEN qe.cre_day = #{day} and qe.cre_hour = #{hour}
+		THEN 0
+		else qe.cost END)/1000 cost,
+		SUM(CASE WHEN qe.cre_day = #{day} and
+		qe.cre_hour = #{hour}
+		THEN 0 else qe.investment END)/1000 investment
+	</sql>
+	<select id="listByDay" parameterType="java.util.Map"
+		resultType="com.iwanvi.nvwa.dao.model.QuotaEntity">
+		select e.id entId,e.entity_name entityName,qe.cre_day creDay,
+		<include refid="Select_Base_Sql" />
+		from
+		entity e
+		left join quota_entity qe
+		on e.id = qe.ent_id
+		where 1=1
+		<include refid="Ent_Base_Sql" />
+		<include refid="Qe_Base_Sql" />
+		group by qe.cre_day
+		order by qe.cre_day
+	</select>
+	<select id="listByUidAndTime" parameterType="java.util.Map"
+		resultType="com.iwanvi.nvwa.dao.model.QuotaEntity">
+		select
+		e.id entId,e.entity_name entityName,
+		<include refid="Select_Base_Sql" />
+		from entity e
+		left join quota_entity qe
+		on e.id = qe.ent_id
+		<include refid="Qe_Base_Sql" />
+		where 1=1
+		<include refid="Ent_Base_Sql" />
+		group by e.id
+		order by e.run_state desc, e.id desc
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<select id="getIdInfoByCids" resultType="java.util.HashMap"
+		parameterType="java.util.Map">
+		select t1.id cid, t2.id putId, t2.oid oid, t2.put_type puType
+		from entity t1, order_put t2
+		where t1.id in (${ids}) and t1.pid = t2.id;
+	</select>
+</mapper>

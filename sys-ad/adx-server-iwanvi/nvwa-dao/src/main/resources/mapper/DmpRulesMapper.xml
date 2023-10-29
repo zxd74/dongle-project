@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.DmpRulesMapper">
+    <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.DmpRules">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="rid" jdbcType="INTEGER" property="rid"/>
+        <result column="operation" jdbcType="INTEGER" property="operation"/>
+        <result column="score" jdbcType="DOUBLE" property="score"/>
+        <result column="jid" jdbcType="INTEGER" property="jid"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="sum_op" jdbcType="INTEGER" property="sumOp"/>
+        <result column="sum_sc_l" jdbcType="DOUBLE" property="sumScL"/>
+        <result column="create_user" jdbcType="INTEGER" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="relation" jdbcType="INTEGER" property="relation"/>
+        <result column="sum_sc_b" jdbcType="DOUBLE" property="sumScB"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.iwanvi.nvwa.dao.model.DmpRules">
+        <result column="args" jdbcType="LONGVARCHAR" property="args"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, tid, rid, operation, score, jid, status, sum_op, sum_sc_l, create_user, create_time,
+        relation, sum_sc_b
+    </sql>
+    <sql id="Blob_Column_List">
+        args
+    </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.iwanvi.nvwa.dao.model.DmpRulesExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dmp_rules
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.DmpRulesExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from dmp_rules
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dmp_rules
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from dmp_rules
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.DmpRulesExample">
+        delete from dmp_rules
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.DmpRules">
+        insert into dmp_rules (id, tid, rid,
+          operation, score, jid,
+          status, sum_op, sum_sc_l,
+          create_user, create_time, relation,
+          sum_sc_b, args)
+        values (#{id,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER},
+          #{operation,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, #{jid,jdbcType=INTEGER},
+          #{status,jdbcType=INTEGER}, #{sumOp,jdbcType=INTEGER}, #{sumScL,jdbcType=DOUBLE},
+          #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{relation,jdbcType=INTEGER},
+          #{sumScB,jdbcType=DOUBLE}, #{args,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.DmpRules">
+        insert into dmp_rules
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tid != null">
+                tid,
+            </if>
+            <if test="rid != null">
+                rid,
+            </if>
+            <if test="operation != null">
+                operation,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="jid != null">
+                jid,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="sumOp != null">
+                sum_op,
+            </if>
+            <if test="sumScL != null">
+                sum_sc_l,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="relation != null">
+                relation,
+            </if>
+            <if test="sumScB != null">
+                sum_sc_b,
+            </if>
+            <if test="args != null">
+                args,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="tid != null">
+                #{tid,jdbcType=INTEGER},
+            </if>
+            <if test="rid != null">
+                #{rid,jdbcType=INTEGER},
+            </if>
+            <if test="operation != null">
+                #{operation,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="jid != null">
+                #{jid,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="sumOp != null">
+                #{sumOp,jdbcType=INTEGER},
+            </if>
+            <if test="sumScL != null">
+                #{sumScL,jdbcType=DOUBLE},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="relation != null">
+                #{relation,jdbcType=INTEGER},
+            </if>
+            <if test="sumScB != null">
+                #{sumScB,jdbcType=DOUBLE},
+            </if>
+            <if test="args != null">
+                #{args,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.DmpRulesExample"
+            resultType="java.lang.Integer">
+        select count(*) from dmp_rules
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update dmp_rules
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.tid != null">
+                tid = #{record.tid,jdbcType=INTEGER},
+            </if>
+            <if test="record.rid != null">
+                rid = #{record.rid,jdbcType=INTEGER},
+            </if>
+            <if test="record.operation != null">
+                operation = #{record.operation,jdbcType=INTEGER},
+            </if>
+            <if test="record.score != null">
+                score = #{record.score,jdbcType=DOUBLE},
+            </if>
+            <if test="record.jid != null">
+                jid = #{record.jid,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.sumOp != null">
+                sum_op = #{record.sumOp,jdbcType=INTEGER},
+            </if>
+            <if test="record.sumScL != null">
+                sum_sc_l = #{record.sumScL,jdbcType=DOUBLE},
+            </if>
+            <if test="record.createUser != null">
+                create_user = #{record.createUser,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.relation != null">
+                relation = #{record.relation,jdbcType=INTEGER},
+            </if>
+            <if test="record.sumScB != null">
+                sum_sc_b = #{record.sumScB,jdbcType=DOUBLE},
+            </if>
+            <if test="record.args != null">
+                args = #{record.args,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update dmp_rules
+        set id = #{record.id,jdbcType=INTEGER},
+        tid = #{record.tid,jdbcType=INTEGER},
+        rid = #{record.rid,jdbcType=INTEGER},
+        operation = #{record.operation,jdbcType=INTEGER},
+        score = #{record.score,jdbcType=DOUBLE},
+        jid = #{record.jid,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        sum_op = #{record.sumOp,jdbcType=INTEGER},
+        sum_sc_l = #{record.sumScL,jdbcType=DOUBLE},
+        create_user = #{record.createUser,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        relation = #{record.relation,jdbcType=INTEGER},
+        sum_sc_b = #{record.sumScB,jdbcType=DOUBLE},
+        args = #{record.args,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update dmp_rules
+        set id = #{record.id,jdbcType=INTEGER},
+        tid = #{record.tid,jdbcType=INTEGER},
+        rid = #{record.rid,jdbcType=INTEGER},
+        operation = #{record.operation,jdbcType=INTEGER},
+        score = #{record.score,jdbcType=DOUBLE},
+        jid = #{record.jid,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        sum_op = #{record.sumOp,jdbcType=INTEGER},
+        sum_sc_l = #{record.sumScL,jdbcType=DOUBLE},
+        create_user = #{record.createUser,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        relation = #{record.relation,jdbcType=INTEGER},
+        sum_sc_b = #{record.sumScB,jdbcType=DOUBLE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.DmpRules">
+        update dmp_rules
+        <set>
+            <if test="tid != null">
+                tid = #{tid,jdbcType=INTEGER},
+            </if>
+            <if test="rid != null">
+                rid = #{rid,jdbcType=INTEGER},
+            </if>
+            <if test="operation != null">
+                operation = #{operation,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="jid != null">
+                jid = #{jid,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="sumOp != null">
+                sum_op = #{sumOp,jdbcType=INTEGER},
+            </if>
+            <if test="sumScL != null">
+                sum_sc_l = #{sumScL,jdbcType=DOUBLE},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="relation != null">
+                relation = #{relation,jdbcType=INTEGER},
+            </if>
+            <if test="sumScB != null">
+                sum_sc_b = #{sumScB,jdbcType=DOUBLE},
+            </if>
+            <if test="args != null">
+                args = #{args,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.iwanvi.nvwa.dao.model.DmpRules">
+        update dmp_rules
+        set tid = #{tid,jdbcType=INTEGER},
+          rid = #{rid,jdbcType=INTEGER},
+          operation = #{operation,jdbcType=INTEGER},
+          score = #{score,jdbcType=DOUBLE},
+          jid = #{jid,jdbcType=INTEGER},
+          status = #{status,jdbcType=INTEGER},
+          sum_op = #{sumOp,jdbcType=INTEGER},
+          sum_sc_l = #{sumScL,jdbcType=DOUBLE},
+          create_user = #{createUser,jdbcType=INTEGER},
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+          relation = #{relation,jdbcType=INTEGER},
+          sum_sc_b = #{sumScB,jdbcType=DOUBLE},
+          args = #{args,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.DmpRules">
+        update dmp_rules
+        set tid = #{tid,jdbcType=INTEGER},
+          rid = #{rid,jdbcType=INTEGER},
+          operation = #{operation,jdbcType=INTEGER},
+          score = #{score,jdbcType=DOUBLE},
+          jid = #{jid,jdbcType=INTEGER},
+          status = #{status,jdbcType=INTEGER},
+          sum_op = #{sumOp,jdbcType=INTEGER},
+          sum_sc_l = #{sumScL,jdbcType=DOUBLE},
+          create_user = #{createUser,jdbcType=INTEGER},
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+          relation = #{relation,jdbcType=INTEGER},
+          sum_sc_b = #{sumScB,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

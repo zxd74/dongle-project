@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.AgentPriceMapper">
+    <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.AgentPrice">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="aid" jdbcType="INTEGER" property="aid"/>
+        <result column="mid" jdbcType="INTEGER" property="mid"/>
+        <result column="m_name" property="mName" jdbcType="VARCHAR"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="p_name" property="pName" jdbcType="VARCHAR"/>
+        <result column="industryid" jdbcType="INTEGER" property="industryid"/>
+        <result column="industry" property="industry" jdbcType="VARCHAR"/>
+        <result column="price" jdbcType="INTEGER" property="price"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="sys_flag" jdbcType="INTEGER" property="sysFlag"/>
+        <result column="os" jdbcType="INTEGER" property="os"/>
+        <result column="os_name" property="osName" jdbcType="VARCHAR"/>
+        <result column="area_level" jdbcType="INTEGER" property="areaLevel"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="profit_margin" jdbcType="DOUBLE" property="profitMargin"/>
+        <result column="pay_type" jdbcType="INTEGER" property="payType"/>
+        <result column="pay_type_name" jdbcType="VARCHAR" property="payTypeName"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, aid, mid, pid, industryid, price, status, update_user, update_time, sys_flag,
+        os, area_level, profit_margin, pay_type
+    </sql>
+    <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.AgentPriceExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from agent_price
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from agent_price
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from agent_price
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.AgentPriceExample">
+        delete from agent_price
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.AgentPrice">
+        insert into agent_price (id, aid, mid,
+          pid, industryid, price,
+          status, update_user, update_time,
+          sys_flag, os, area_level,
+          profit_margin, pay_type)
+        values (#{id,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER},
+          #{pid,jdbcType=INTEGER}, #{industryid,jdbcType=INTEGER}, #{price,jdbcType=INTEGER},
+          #{status,jdbcType=INTEGER}, #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
+          #{sysFlag,jdbcType=INTEGER}, #{os,jdbcType=INTEGER}, #{areaLevel,jdbcType=INTEGER},
+          #{profitMargin,jdbcType=DOUBLE}, #{payType,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.AgentPrice">
+        insert into agent_price
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="aid != null">
+                aid,
+            </if>
+            <if test="mid != null">
+                mid,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="industryid != null">
+                industryid,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="sysFlag != null">
+                sys_flag,
+            </if>
+            <if test="os != null">
+                os,
+            </if>
+            <if test="areaLevel != null">
+                area_level,
+            </if>
+            <if test="profitMargin != null">
+                profit_margin,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="aid != null">
+                #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="mid != null">
+                #{mid,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="industryid != null">
+                #{industryid,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysFlag != null">
+                #{sysFlag,jdbcType=INTEGER},
+            </if>
+            <if test="os != null">
+                #{os,jdbcType=INTEGER},
+            </if>
+            <if test="areaLevel != null">
+                #{areaLevel,jdbcType=INTEGER},
+            </if>
+            <if test="profitMargin != null">
+                #{profitMargin,jdbcType=DOUBLE},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.AgentPriceExample"
+            resultType="java.lang.Integer">
+        select count(*) from agent_price
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update agent_price
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.aid != null">
+                aid = #{record.aid,jdbcType=INTEGER},
+            </if>
+            <if test="record.mid != null">
+                mid = #{record.mid,jdbcType=INTEGER},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=INTEGER},
+            </if>
+            <if test="record.industryid != null">
+                industryid = #{record.industryid,jdbcType=INTEGER},
+            </if>
+            <if test="record.price != null">
+                price = #{record.price,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateUser != null">
+                update_user = #{record.updateUser,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.sysFlag != null">
+                sys_flag = #{record.sysFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.os != null">
+                os = #{record.os,jdbcType=INTEGER},
+            </if>
+            <if test="record.areaLevel != null">
+                area_level = #{record.areaLevel,jdbcType=INTEGER},
+            </if>
+            <if test="record.profitMargin != null">
+                profit_margin = #{record.profitMargin,jdbcType=DOUBLE},
+            </if>
+            <if test="record.payType != null">
+                pay_type = #{record.payType,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update agent_price
+        set id = #{record.id,jdbcType=INTEGER},
+        aid = #{record.aid,jdbcType=INTEGER},
+        mid = #{record.mid,jdbcType=INTEGER},
+        pid = #{record.pid,jdbcType=INTEGER},
+        industryid = #{record.industryid,jdbcType=INTEGER},
+        price = #{record.price,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        sys_flag = #{record.sysFlag,jdbcType=INTEGER},
+        os = #{record.os,jdbcType=INTEGER},
+        area_level = #{record.areaLevel,jdbcType=INTEGER},
+        profit_margin = #{record.profitMargin,jdbcType=DOUBLE},
+        pay_type = #{record.payType,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.AgentPrice">
+        update agent_price
+        <set>
+            <if test="aid != null">
+                aid = #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="mid != null">
+                mid = #{mid,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="industryid != null">
+                industryid = #{industryid,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysFlag != null">
+                sys_flag = #{sysFlag,jdbcType=INTEGER},
+            </if>
+            <if test="os != null">
+                os = #{os,jdbcType=INTEGER},
+            </if>
+            <if test="areaLevel != null">
+                area_level = #{areaLevel,jdbcType=INTEGER},
+            </if>
+            <if test="profitMargin != null">
+                profit_margin = #{profitMargin,jdbcType=DOUBLE},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.AgentPrice">
+        update agent_price
+        set aid = #{aid,jdbcType=INTEGER},
+          mid = #{mid,jdbcType=INTEGER},
+          pid = #{pid,jdbcType=INTEGER},
+          industryid = #{industryid,jdbcType=INTEGER},
+          price = #{price,jdbcType=INTEGER},
+          status = #{status,jdbcType=INTEGER},
+          update_user = #{updateUser,jdbcType=INTEGER},
+          update_time = #{updateTime,jdbcType=TIMESTAMP},
+          sys_flag = #{sysFlag,jdbcType=INTEGER},
+          os = #{os,jdbcType=INTEGER},
+          area_level = #{areaLevel,jdbcType=INTEGER},
+          profit_margin = #{profitMargin,jdbcType=DOUBLE},
+          pay_type = #{payType,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectAgentPrice" parameterType="com.iwanvi.nvwa.dao.model.AgentPriceExample" resultMap="BaseResultMap">
+        select ap.*, ind.dic_value industry, os.dic_value os_name, m.media_name m_name, p.name p_name, a.group_name area,
+        pay.dic_value pay_type_name
+        from agent_price ap
+        left join dictionary ind on ind.id = ap.industryid
+        left join flow_source m on m.id = ap.mid
+        left join ad_position p on p.id = ap.pid
+        left join dictionary os on os.id = ap.os
+        left join dictionary pay on pay.id = ap.pay_type
+        left join area_group a on a.id = ap.area_level
+        <include refid="Example_Where_Clause_Join"/>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="start != null and limit != null">
+            limit ${start},${limit}
+        </if>
+    </select>
+    <sql id="Example_Where_Clause_Join">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ap.${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ap.${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ap.${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ap.${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <select id="selectSysPricePids" resultType="java.lang.Integer">
+        select distinct pid
+        from agent_price
+        where sys_flag = 1
+    </select>
+</mapper>

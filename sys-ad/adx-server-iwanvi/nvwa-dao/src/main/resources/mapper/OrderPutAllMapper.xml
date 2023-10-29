@@ -1,0 +1,1983 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.OrderPutAllMapper">
+	<resultMap id="BaseResultMap"
+		type="com.iwanvi.nvwa.dao.model.OrderPutAll">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="put_name" jdbcType="VARCHAR" property="putName" />
+		<result column="oid" jdbcType="INTEGER" property="oid" />
+		<result column="pids" jdbcType="VARCHAR" property="pids" />
+		<result column="begin_time" jdbcType="TIMESTAMP"
+			property="beginTime" />
+		<result column="end_time" jdbcType="TIMESTAMP"
+			property="endTime" />
+		<result column="cost_type" jdbcType="INTEGER"
+			property="costType" />
+		<result column="extension_type" jdbcType="INTEGER"
+			property="extensionType" />
+		<result column="land_url" jdbcType="VARCHAR" property="landUrl" />
+		<result column="app_id" jdbcType="VARCHAR" property="appId" />
+		<result column="pkg_name" jdbcType="VARCHAR" property="pkgName" />
+		<result column="time_interval" jdbcType="VARCHAR"
+			property="timeInterval" />
+		<result column="dq_rule" jdbcType="INTEGER" property="dqRule" />
+		<result column="dx_xl" jdbcType="VARCHAR" property="dxXl" />
+		<result column="dx_nl" jdbcType="VARCHAR" property="dxNl" />
+		<result column="dx_xb" jdbcType="VARCHAR" property="dxXb" />
+		<result column="dx_zd" jdbcType="VARCHAR" property="dxZd" />
+		<result column="dx_xw" jdbcType="VARCHAR" property="dxXw" />
+		<result column="dx_xq" jdbcType="VARCHAR" property="dxXq" />
+		<result column="dx_czxt" jdbcType="VARCHAR" property="dxCzxt" />
+		<result column="dx_yys" jdbcType="VARCHAR" property="dxYys" />
+		<result column="dx_wl" jdbcType="VARCHAR" property="dxWl" />
+		<result column="dx_llly" jdbcType="VARCHAR" property="dxLlly" />
+		<result column="dx_zdlx" jdbcType="VARCHAR" property="dxZdlx" />
+		<result column="dx_sb" jdbcType="VARCHAR" property="dxSb" />
+		<result column="dx_bb" jdbcType="VARCHAR" property="dxBb" />
+		<result column="dx_qd" jdbcType="VARCHAR" property="dxQd" />
+		<result column="dx_jx" jdbcType="VARCHAR" property="dxJx" />
+		<result column="dx_ts" jdbcType="VARCHAR" property="dxTs" />
+		<result column="dx_media" jdbcType="VARCHAR" property="dxMedia" />
+		<result column="dx_app" jdbcType="VARCHAR" property="dxApp" />
+		<result column="run_state" jdbcType="INTEGER"
+			property="runState" />
+		<result column="put_state" jdbcType="INTEGER"
+			property="putState" />
+		<result column="create_user" jdbcType="INTEGER"
+			property="createUser" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="price" jdbcType="INTEGER" property="price" />
+		<result column="ad_position" jdbcType="VARCHAR"
+			property="adPosition" />
+		<result column="imp_monitor_url" jdbcType="VARCHAR"
+			property="impMonitorUrl" />
+		<result column="clk_monitor_url" jdbcType="VARCHAR"
+			property="clkMonitorUrl" />
+		<result column="ext_creative_id" jdbcType="VARCHAR"
+			property="extCreativeId" />
+		<result column="put_limit" jdbcType="INTEGER"
+			property="putLimit" />
+		<result column="op_user" jdbcType="INTEGER" property="opUser" />
+		<result column="op_user_type" jdbcType="INTEGER"
+			property="opUserType" />
+		<result column="delivery_mode" jdbcType="INTEGER"
+			property="deliveryMode" />
+		<result column="is_frequency" jdbcType="INTEGER"
+			property="isFrequency" />
+		<result column="frequenc_period" jdbcType="INTEGER"
+			property="frequencPeriod" />
+		<result column="frequenc_num" jdbcType="INTEGER"
+			property="frequencNum" />
+		<result column="limits" jdbcType="VARCHAR" property="limits" />
+		<result column="is_optimize" jdbcType="INTEGER"
+			property="isOptimize" />
+		<result column="optimize_cpa" jdbcType="INTEGER"
+			property="optimizeCpa" />
+		<result column="dx_app_type" jdbcType="VARCHAR"
+			property="dxAppType" />
+		<result column="isfilter_device_code" jdbcType="INTEGER"
+			property="isfilterDeviceCode" />
+		<result column="is_pdb" jdbcType="INTEGER" property="isPdb" />
+		<result column="deal_id" jdbcType="VARCHAR" property="dealId" />
+		<result column="dx_frame" jdbcType="VARCHAR" property="dxFrame" />
+		<result column="dx_adType" jdbcType="VARCHAR"
+			property="dxAdtype" />
+		<result column="o2_url" jdbcType="VARCHAR" property="o2Url" />
+		<result column="dx_rq" jdbcType="VARCHAR" property="dxRq" />
+		<result column="is_attribution" jdbcType="INTEGER"
+			property="isAttribution" />
+		<result column="attribution_ratio" jdbcType="DOUBLE"
+			property="attributionRatio" />
+		<result column="platform" jdbcType="INTEGER"
+			property="platform" />
+		<result column="is_frequency_ip" jdbcType="INTEGER"
+			property="isFrequencyIp" />
+		<result column="frequency_num_ip" jdbcType="INTEGER"
+			property="frequencyNumIp" />
+		<result column="frequency_period_ip" jdbcType="INTEGER"
+			property="frequencyPeriodIp" />
+		<result column="filter_app" jdbcType="INTEGER"
+			property="filterApp" />
+		<result column="versioncode" jdbcType="INTEGER"
+			property="versioncode" />
+		<result column="versionname" jdbcType="VARCHAR"
+			property="versionname" />
+		<result column="size" jdbcType="INTEGER" property="size" />
+		<result column="sign" jdbcType="VARCHAR" property="sign" />
+		<result column="md5" jdbcType="VARCHAR" property="md5" />
+		<result column="minsdklevel" jdbcType="INTEGER"
+			property="minsdklevel" />
+		<result column="dx_model" jdbcType="VARCHAR" property="dxModel" />
+		<result column="is_redirect" jdbcType="VARCHAR"
+			property="isRedirect" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.iwanvi.nvwa.dao.model.OrderPutAll">
+		<result column="pre_dq" jdbcType="LONGVARCHAR" property="preDq" />
+		<result column="dx_dq" jdbcType="LONGVARCHAR" property="dxDq" />
+		<result column="dx_dmp" jdbcType="LONGVARCHAR" property="dxDmp" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, put_name, oid, pids, begin_time, end_time, cost_type, extension_type,
+		land_url,
+		app_id, pkg_name, time_interval, dq_rule, dx_xl, dx_nl, dx_xb, dx_zd, dx_xw,
+		dx_xq,
+		dx_czxt, dx_yys, dx_wl, dx_llly, dx_zdlx, dx_sb, dx_bb, dx_qd, dx_jx, dx_ts,
+		dx_media,
+		dx_app, run_state, put_state, create_user, create_time, update_time, price,
+		ad_position,
+		imp_monitor_url, clk_monitor_url, ext_creative_id, put_limit, op_user, op_user_type,
+		delivery_mode, is_frequency, frequenc_period, frequenc_num, limits,
+		is_optimize,
+		optimize_cpa, dx_app_type, isfilter_device_code, is_pdb, deal_id, dx_frame,
+		dx_adType,
+		o2_url, dx_rq, is_attribution, attribution_ratio, platform, is_frequency_ip,
+		frequency_num_ip,
+		frequency_period_ip, filter_app, versioncode, versionname, size, sign, md5, minsdklevel,
+		dx_model, is_redirect
+	</sql>
+	<sql id="Blob_Column_List">
+		pre_dq, dx_dq, dx_dmp
+	</sql>
+	<select id="selectByExampleWithBLOBs"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAllExample"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from order_put_all
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="rows != null">
+			<if test="offset != null">
+				limit ${offset}, ${rows}
+			</if>
+			<if test="offset == null">
+				limit ${rows}
+			</if>
+		</if>
+	</select>
+	<select id="selectByExample"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAllExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from order_put_all
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="rows != null">
+			<if test="offset != null">
+				limit ${offset}, ${rows}
+			</if>
+			<if test="offset == null">
+				limit ${rows}
+			</if>
+		</if>
+	</select>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from order_put_all
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from order_put_all
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAllExample">
+		delete from order_put_all
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAll">
+		insert into order_put_all (id, put_name, oid,
+		pids, begin_time, end_time,
+		cost_type, extension_type, land_url,
+		app_id, pkg_name, time_interval,
+		dq_rule, dx_xl, dx_nl,
+		dx_xb, dx_zd, dx_xw, dx_xq,
+		dx_czxt, dx_yys, dx_wl,
+		dx_llly, dx_zdlx, dx_sb,
+		dx_bb, dx_qd, dx_jx, dx_ts,
+		dx_media, dx_app, run_state,
+		put_state, create_user, create_time,
+		update_time, price, ad_position,
+		imp_monitor_url, clk_monitor_url, ext_creative_id,
+		put_limit, op_user, op_user_type,
+		delivery_mode, is_frequency, frequenc_period,
+		frequenc_num, limits, is_optimize,
+		optimize_cpa, dx_app_type, isfilter_device_code,
+		is_pdb, deal_id, dx_frame,
+		dx_adType, o2_url, dx_rq,
+		is_attribution, attribution_ratio, platform,
+		is_frequency_ip, frequency_num_ip, frequency_period_ip,
+		filter_app, versioncode, versionname,
+		size, sign, md5, minsdklevel,
+		dx_model, is_redirect, pre_dq,
+		dx_dq, dx_dmp)
+		values (#{id,jdbcType=INTEGER}, #{putName,jdbcType=VARCHAR},
+		#{oid,jdbcType=INTEGER},
+		#{pids,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+		#{costType,jdbcType=INTEGER}, #{extensionType,jdbcType=INTEGER},
+		#{landUrl,jdbcType=VARCHAR},
+		#{appId,jdbcType=VARCHAR}, #{pkgName,jdbcType=VARCHAR}, #{timeInterval,jdbcType=VARCHAR},
+		#{dqRule,jdbcType=INTEGER}, #{dxXl,jdbcType=VARCHAR},
+		#{dxNl,jdbcType=VARCHAR},
+		#{dxXb,jdbcType=VARCHAR}, #{dxZd,jdbcType=VARCHAR}, #{dxXw,jdbcType=VARCHAR},
+		#{dxXq,jdbcType=VARCHAR},
+		#{dxCzxt,jdbcType=VARCHAR}, #{dxYys,jdbcType=VARCHAR}, #{dxWl,jdbcType=VARCHAR},
+		#{dxLlly,jdbcType=VARCHAR}, #{dxZdlx,jdbcType=VARCHAR},
+		#{dxSb,jdbcType=VARCHAR},
+		#{dxBb,jdbcType=VARCHAR}, #{dxQd,jdbcType=VARCHAR}, #{dxJx,jdbcType=VARCHAR},
+		#{dxTs,jdbcType=VARCHAR},
+		#{dxMedia,jdbcType=VARCHAR}, #{dxApp,jdbcType=VARCHAR}, #{runState,jdbcType=INTEGER},
+		#{putState,jdbcType=INTEGER}, #{createUser,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}, #{price,jdbcType=INTEGER}, #{adPosition,jdbcType=VARCHAR},
+		#{impMonitorUrl,jdbcType=VARCHAR}, #{clkMonitorUrl,jdbcType=VARCHAR},
+		#{extCreativeId,jdbcType=VARCHAR},
+		#{putLimit,jdbcType=INTEGER}, #{opUser,jdbcType=INTEGER}, #{opUserType,jdbcType=INTEGER},
+		#{deliveryMode,jdbcType=INTEGER}, #{isFrequency,jdbcType=INTEGER},
+		#{frequencPeriod,jdbcType=INTEGER},
+		#{frequencNum,jdbcType=INTEGER}, #{limits,jdbcType=VARCHAR}, #{isOptimize,jdbcType=INTEGER},
+		#{optimizeCpa,jdbcType=INTEGER}, #{dxAppType,jdbcType=VARCHAR},
+		#{isfilterDeviceCode,jdbcType=INTEGER},
+		#{isPdb,jdbcType=INTEGER}, #{dealId,jdbcType=VARCHAR}, #{dxFrame,jdbcType=VARCHAR},
+		#{dxAdtype,jdbcType=VARCHAR}, #{o2Url,jdbcType=VARCHAR},
+		#{dxRq,jdbcType=VARCHAR},
+		#{isAttribution,jdbcType=INTEGER}, #{attributionRatio,jdbcType=DOUBLE}, #{platform,jdbcType=INTEGER},
+		#{isFrequencyIp,jdbcType=INTEGER}, #{frequencyNumIp,jdbcType=INTEGER},
+		#{frequencyPeriodIp,jdbcType=INTEGER},
+		#{filterApp,jdbcType=INTEGER}, #{versioncode,jdbcType=INTEGER}, #{versionname,jdbcType=VARCHAR},
+		#{size,jdbcType=INTEGER}, #{sign,jdbcType=VARCHAR},
+		#{md5,jdbcType=VARCHAR}, #{minsdklevel,jdbcType=INTEGER},
+		#{dxModel,jdbcType=VARCHAR}, #{isRedirect,jdbcType=VARCHAR},
+		#{preDq,jdbcType=LONGVARCHAR},
+		#{dxDq,jdbcType=LONGVARCHAR}, #{dxDmp,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAll">
+		insert into order_put_all
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="putName != null">
+				put_name,
+			</if>
+			<if test="oid != null">
+				oid,
+			</if>
+			<if test="pids != null">
+				pids,
+			</if>
+			<if test="beginTime != null">
+				begin_time,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="costType != null">
+				cost_type,
+			</if>
+			<if test="extensionType != null">
+				extension_type,
+			</if>
+			<if test="landUrl != null">
+				land_url,
+			</if>
+			<if test="appId != null">
+				app_id,
+			</if>
+			<if test="pkgName != null">
+				pkg_name,
+			</if>
+			<if test="timeInterval != null">
+				time_interval,
+			</if>
+			<if test="dqRule != null">
+				dq_rule,
+			</if>
+			<if test="dxXl != null">
+				dx_xl,
+			</if>
+			<if test="dxNl != null">
+				dx_nl,
+			</if>
+			<if test="dxXb != null">
+				dx_xb,
+			</if>
+			<if test="dxZd != null">
+				dx_zd,
+			</if>
+			<if test="dxXw != null">
+				dx_xw,
+			</if>
+			<if test="dxXq != null">
+				dx_xq,
+			</if>
+			<if test="dxCzxt != null">
+				dx_czxt,
+			</if>
+			<if test="dxYys != null">
+				dx_yys,
+			</if>
+			<if test="dxWl != null">
+				dx_wl,
+			</if>
+			<if test="dxLlly != null">
+				dx_llly,
+			</if>
+			<if test="dxZdlx != null">
+				dx_zdlx,
+			</if>
+			<if test="dxSb != null">
+				dx_sb,
+			</if>
+			<if test="dxBb != null">
+				dx_bb,
+			</if>
+			<if test="dxQd != null">
+				dx_qd,
+			</if>
+			<if test="dxJx != null">
+				dx_jx,
+			</if>
+			<if test="dxTs != null">
+				dx_ts,
+			</if>
+			<if test="dxMedia != null">
+				dx_media,
+			</if>
+			<if test="dxApp != null">
+				dx_app,
+			</if>
+			<if test="runState != null">
+				run_state,
+			</if>
+			<if test="putState != null">
+				put_state,
+			</if>
+			<if test="createUser != null">
+				create_user,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="adPosition != null">
+				ad_position,
+			</if>
+			<if test="impMonitorUrl != null">
+				imp_monitor_url,
+			</if>
+			<if test="clkMonitorUrl != null">
+				clk_monitor_url,
+			</if>
+			<if test="extCreativeId != null">
+				ext_creative_id,
+			</if>
+			<if test="putLimit != null">
+				put_limit,
+			</if>
+			<if test="opUser != null">
+				op_user,
+			</if>
+			<if test="opUserType != null">
+				op_user_type,
+			</if>
+			<if test="deliveryMode != null">
+				delivery_mode,
+			</if>
+			<if test="isFrequency != null">
+				is_frequency,
+			</if>
+			<if test="frequencPeriod != null">
+				frequenc_period,
+			</if>
+			<if test="frequencNum != null">
+				frequenc_num,
+			</if>
+			<if test="limits != null">
+				limits,
+			</if>
+			<if test="isOptimize != null">
+				is_optimize,
+			</if>
+			<if test="optimizeCpa != null">
+				optimize_cpa,
+			</if>
+			<if test="dxAppType != null">
+				dx_app_type,
+			</if>
+			<if test="isfilterDeviceCode != null">
+				isfilter_device_code,
+			</if>
+			<if test="isPdb != null">
+				is_pdb,
+			</if>
+			<if test="dealId != null">
+				deal_id,
+			</if>
+			<if test="dxFrame != null">
+				dx_frame,
+			</if>
+			<if test="dxAdtype != null">
+				dx_adType,
+			</if>
+			<if test="o2Url != null">
+				o2_url,
+			</if>
+			<if test="dxRq != null">
+				dx_rq,
+			</if>
+			<if test="isAttribution != null">
+				is_attribution,
+			</if>
+			<if test="attributionRatio != null">
+				attribution_ratio,
+			</if>
+			<if test="platform != null">
+				platform,
+			</if>
+			<if test="isFrequencyIp != null">
+				is_frequency_ip,
+			</if>
+			<if test="frequencyNumIp != null">
+				frequency_num_ip,
+			</if>
+			<if test="frequencyPeriodIp != null">
+				frequency_period_ip,
+			</if>
+			<if test="filterApp != null">
+				filter_app,
+			</if>
+			<if test="versioncode != null">
+				versioncode,
+			</if>
+			<if test="versionname != null">
+				versionname,
+			</if>
+			<if test="size != null">
+				size,
+			</if>
+			<if test="sign != null">
+				sign,
+			</if>
+			<if test="md5 != null">
+				md5,
+			</if>
+			<if test="minsdklevel != null">
+				minsdklevel,
+			</if>
+			<if test="dxModel != null">
+				dx_model,
+			</if>
+			<if test="isRedirect != null">
+				is_redirect,
+			</if>
+			<if test="preDq != null">
+				pre_dq,
+			</if>
+			<if test="dxDq != null">
+				dx_dq,
+			</if>
+			<if test="dxDmp != null">
+				dx_dmp,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="putName != null">
+				#{putName,jdbcType=VARCHAR},
+			</if>
+			<if test="oid != null">
+				#{oid,jdbcType=INTEGER},
+			</if>
+			<if test="pids != null">
+				#{pids,jdbcType=VARCHAR},
+			</if>
+			<if test="beginTime != null">
+				#{beginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="costType != null">
+				#{costType,jdbcType=INTEGER},
+			</if>
+			<if test="extensionType != null">
+				#{extensionType,jdbcType=INTEGER},
+			</if>
+			<if test="landUrl != null">
+				#{landUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="appId != null">
+				#{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="pkgName != null">
+				#{pkgName,jdbcType=VARCHAR},
+			</if>
+			<if test="timeInterval != null">
+				#{timeInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="dqRule != null">
+				#{dqRule,jdbcType=INTEGER},
+			</if>
+			<if test="dxXl != null">
+				#{dxXl,jdbcType=VARCHAR},
+			</if>
+			<if test="dxNl != null">
+				#{dxNl,jdbcType=VARCHAR},
+			</if>
+			<if test="dxXb != null">
+				#{dxXb,jdbcType=VARCHAR},
+			</if>
+			<if test="dxZd != null">
+				#{dxZd,jdbcType=VARCHAR},
+			</if>
+			<if test="dxXw != null">
+				#{dxXw,jdbcType=VARCHAR},
+			</if>
+			<if test="dxXq != null">
+				#{dxXq,jdbcType=VARCHAR},
+			</if>
+			<if test="dxCzxt != null">
+				#{dxCzxt,jdbcType=VARCHAR},
+			</if>
+			<if test="dxYys != null">
+				#{dxYys,jdbcType=VARCHAR},
+			</if>
+			<if test="dxWl != null">
+				#{dxWl,jdbcType=VARCHAR},
+			</if>
+			<if test="dxLlly != null">
+				#{dxLlly,jdbcType=VARCHAR},
+			</if>
+			<if test="dxZdlx != null">
+				#{dxZdlx,jdbcType=VARCHAR},
+			</if>
+			<if test="dxSb != null">
+				#{dxSb,jdbcType=VARCHAR},
+			</if>
+			<if test="dxBb != null">
+				#{dxBb,jdbcType=VARCHAR},
+			</if>
+			<if test="dxQd != null">
+				#{dxQd,jdbcType=VARCHAR},
+			</if>
+			<if test="dxJx != null">
+				#{dxJx,jdbcType=VARCHAR},
+			</if>
+			<if test="dxTs != null">
+				#{dxTs,jdbcType=VARCHAR},
+			</if>
+			<if test="dxMedia != null">
+				#{dxMedia,jdbcType=VARCHAR},
+			</if>
+			<if test="dxApp != null">
+				#{dxApp,jdbcType=VARCHAR},
+			</if>
+			<if test="runState != null">
+				#{runState,jdbcType=INTEGER},
+			</if>
+			<if test="putState != null">
+				#{putState,jdbcType=INTEGER},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=INTEGER},
+			</if>
+			<if test="adPosition != null">
+				#{adPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="impMonitorUrl != null">
+				#{impMonitorUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="clkMonitorUrl != null">
+				#{clkMonitorUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="extCreativeId != null">
+				#{extCreativeId,jdbcType=VARCHAR},
+			</if>
+			<if test="putLimit != null">
+				#{putLimit,jdbcType=INTEGER},
+			</if>
+			<if test="opUser != null">
+				#{opUser,jdbcType=INTEGER},
+			</if>
+			<if test="opUserType != null">
+				#{opUserType,jdbcType=INTEGER},
+			</if>
+			<if test="deliveryMode != null">
+				#{deliveryMode,jdbcType=INTEGER},
+			</if>
+			<if test="isFrequency != null">
+				#{isFrequency,jdbcType=INTEGER},
+			</if>
+			<if test="frequencPeriod != null">
+				#{frequencPeriod,jdbcType=INTEGER},
+			</if>
+			<if test="frequencNum != null">
+				#{frequencNum,jdbcType=INTEGER},
+			</if>
+			<if test="limits != null">
+				#{limits,jdbcType=VARCHAR},
+			</if>
+			<if test="isOptimize != null">
+				#{isOptimize,jdbcType=INTEGER},
+			</if>
+			<if test="optimizeCpa != null">
+				#{optimizeCpa,jdbcType=INTEGER},
+			</if>
+			<if test="dxAppType != null">
+				#{dxAppType,jdbcType=VARCHAR},
+			</if>
+			<if test="isfilterDeviceCode != null">
+				#{isfilterDeviceCode,jdbcType=INTEGER},
+			</if>
+			<if test="isPdb != null">
+				#{isPdb,jdbcType=INTEGER},
+			</if>
+			<if test="dealId != null">
+				#{dealId,jdbcType=VARCHAR},
+			</if>
+			<if test="dxFrame != null">
+				#{dxFrame,jdbcType=VARCHAR},
+			</if>
+			<if test="dxAdtype != null">
+				#{dxAdtype,jdbcType=VARCHAR},
+			</if>
+			<if test="o2Url != null">
+				#{o2Url,jdbcType=VARCHAR},
+			</if>
+			<if test="dxRq != null">
+				#{dxRq,jdbcType=VARCHAR},
+			</if>
+			<if test="isAttribution != null">
+				#{isAttribution,jdbcType=INTEGER},
+			</if>
+			<if test="attributionRatio != null">
+				#{attributionRatio,jdbcType=DOUBLE},
+			</if>
+			<if test="platform != null">
+				#{platform,jdbcType=INTEGER},
+			</if>
+			<if test="isFrequencyIp != null">
+				#{isFrequencyIp,jdbcType=INTEGER},
+			</if>
+			<if test="frequencyNumIp != null">
+				#{frequencyNumIp,jdbcType=INTEGER},
+			</if>
+			<if test="frequencyPeriodIp != null">
+				#{frequencyPeriodIp,jdbcType=INTEGER},
+			</if>
+			<if test="filterApp != null">
+				#{filterApp,jdbcType=INTEGER},
+			</if>
+			<if test="versioncode != null">
+				#{versioncode,jdbcType=INTEGER},
+			</if>
+			<if test="versionname != null">
+				#{versionname,jdbcType=VARCHAR},
+			</if>
+			<if test="size != null">
+				#{size,jdbcType=INTEGER},
+			</if>
+			<if test="sign != null">
+				#{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="md5 != null">
+				#{md5,jdbcType=VARCHAR},
+			</if>
+			<if test="minsdklevel != null">
+				#{minsdklevel,jdbcType=INTEGER},
+			</if>
+			<if test="dxModel != null">
+				#{dxModel,jdbcType=VARCHAR},
+			</if>
+			<if test="isRedirect != null">
+				#{isRedirect,jdbcType=VARCHAR},
+			</if>
+			<if test="preDq != null">
+				#{preDq,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="dxDq != null">
+				#{dxDq,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="dxDmp != null">
+				#{dxDmp,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAllExample"
+		resultType="java.lang.Long">
+		select count(*) from order_put_all
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update order_put_all
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.putName != null">
+				put_name = #{record.putName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.oid != null">
+				oid = #{record.oid,jdbcType=INTEGER},
+			</if>
+			<if test="record.pids != null">
+				pids = #{record.pids,jdbcType=VARCHAR},
+			</if>
+			<if test="record.beginTime != null">
+				begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.endTime != null">
+				end_time = #{record.endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.costType != null">
+				cost_type = #{record.costType,jdbcType=INTEGER},
+			</if>
+			<if test="record.extensionType != null">
+				extension_type = #{record.extensionType,jdbcType=INTEGER},
+			</if>
+			<if test="record.landUrl != null">
+				land_url = #{record.landUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.appId != null">
+				app_id = #{record.appId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.pkgName != null">
+				pkg_name = #{record.pkgName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.timeInterval != null">
+				time_interval = #{record.timeInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dqRule != null">
+				dq_rule = #{record.dqRule,jdbcType=INTEGER},
+			</if>
+			<if test="record.dxXl != null">
+				dx_xl = #{record.dxXl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxNl != null">
+				dx_nl = #{record.dxNl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxXb != null">
+				dx_xb = #{record.dxXb,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxZd != null">
+				dx_zd = #{record.dxZd,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxXw != null">
+				dx_xw = #{record.dxXw,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxXq != null">
+				dx_xq = #{record.dxXq,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxCzxt != null">
+				dx_czxt = #{record.dxCzxt,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxYys != null">
+				dx_yys = #{record.dxYys,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxWl != null">
+				dx_wl = #{record.dxWl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxLlly != null">
+				dx_llly = #{record.dxLlly,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxZdlx != null">
+				dx_zdlx = #{record.dxZdlx,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxSb != null">
+				dx_sb = #{record.dxSb,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxBb != null">
+				dx_bb = #{record.dxBb,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxQd != null">
+				dx_qd = #{record.dxQd,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxJx != null">
+				dx_jx = #{record.dxJx,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxTs != null">
+				dx_ts = #{record.dxTs,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxMedia != null">
+				dx_media = #{record.dxMedia,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxApp != null">
+				dx_app = #{record.dxApp,jdbcType=VARCHAR},
+			</if>
+			<if test="record.runState != null">
+				run_state = #{record.runState,jdbcType=INTEGER},
+			</if>
+			<if test="record.putState != null">
+				put_state = #{record.putState,jdbcType=INTEGER},
+			</if>
+			<if test="record.createUser != null">
+				create_user = #{record.createUser,jdbcType=INTEGER},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.price != null">
+				price = #{record.price,jdbcType=INTEGER},
+			</if>
+			<if test="record.adPosition != null">
+				ad_position = #{record.adPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="record.impMonitorUrl != null">
+				imp_monitor_url = #{record.impMonitorUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.clkMonitorUrl != null">
+				clk_monitor_url = #{record.clkMonitorUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.extCreativeId != null">
+				ext_creative_id = #{record.extCreativeId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.putLimit != null">
+				put_limit = #{record.putLimit,jdbcType=INTEGER},
+			</if>
+			<if test="record.opUser != null">
+				op_user = #{record.opUser,jdbcType=INTEGER},
+			</if>
+			<if test="record.opUserType != null">
+				op_user_type = #{record.opUserType,jdbcType=INTEGER},
+			</if>
+			<if test="record.deliveryMode != null">
+				delivery_mode = #{record.deliveryMode,jdbcType=INTEGER},
+			</if>
+			<if test="record.isFrequency != null">
+				is_frequency = #{record.isFrequency,jdbcType=INTEGER},
+			</if>
+			<if test="record.frequencPeriod != null">
+				frequenc_period = #{record.frequencPeriod,jdbcType=INTEGER},
+			</if>
+			<if test="record.frequencNum != null">
+				frequenc_num = #{record.frequencNum,jdbcType=INTEGER},
+			</if>
+			<if test="record.limits != null">
+				limits = #{record.limits,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isOptimize != null">
+				is_optimize = #{record.isOptimize,jdbcType=INTEGER},
+			</if>
+			<if test="record.optimizeCpa != null">
+				optimize_cpa = #{record.optimizeCpa,jdbcType=INTEGER},
+			</if>
+			<if test="record.dxAppType != null">
+				dx_app_type = #{record.dxAppType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isfilterDeviceCode != null">
+				isfilter_device_code = #{record.isfilterDeviceCode,jdbcType=INTEGER},
+			</if>
+			<if test="record.isPdb != null">
+				is_pdb = #{record.isPdb,jdbcType=INTEGER},
+			</if>
+			<if test="record.dealId != null">
+				deal_id = #{record.dealId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxFrame != null">
+				dx_frame = #{record.dxFrame,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxAdtype != null">
+				dx_adType = #{record.dxAdtype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2Url != null">
+				o2_url = #{record.o2Url,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dxRq != null">
+				dx_rq = #{record.dxRq,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isAttribution != null">
+				is_attribution = #{record.isAttribution,jdbcType=INTEGER},
+			</if>
+			<if test="record.attributionRatio != null">
+				attribution_ratio = #{record.attributionRatio,jdbcType=DOUBLE},
+			</if>
+			<if test="record.platform != null">
+				platform = #{record.platform,jdbcType=INTEGER},
+			</if>
+			<if test="record.isFrequencyIp != null">
+				is_frequency_ip = #{record.isFrequencyIp,jdbcType=INTEGER},
+			</if>
+			<if test="record.frequencyNumIp != null">
+				frequency_num_ip = #{record.frequencyNumIp,jdbcType=INTEGER},
+			</if>
+			<if test="record.frequencyPeriodIp != null">
+				frequency_period_ip = #{record.frequencyPeriodIp,jdbcType=INTEGER},
+			</if>
+			<if test="record.filterApp != null">
+				filter_app = #{record.filterApp,jdbcType=INTEGER},
+			</if>
+			<if test="record.versioncode != null">
+				versioncode = #{record.versioncode,jdbcType=INTEGER},
+			</if>
+			<if test="record.versionname != null">
+				versionname = #{record.versionname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.size != null">
+				size = #{record.size,jdbcType=INTEGER},
+			</if>
+			<if test="record.sign != null">
+				sign = #{record.sign,jdbcType=VARCHAR},
+			</if>
+			<if test="record.md5 != null">
+				md5 = #{record.md5,jdbcType=VARCHAR},
+			</if>
+			<if test="record.minsdklevel != null">
+				minsdklevel = #{record.minsdklevel,jdbcType=INTEGER},
+			</if>
+			<if test="record.dxModel != null">
+				dx_model = #{record.dxModel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isRedirect != null">
+				is_redirect = #{record.isRedirect,jdbcType=VARCHAR},
+			</if>
+			<if test="record.preDq != null">
+				pre_dq = #{record.preDq,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="record.dxDq != null">
+				dx_dq = #{record.dxDq,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="record.dxDmp != null">
+				dx_dmp = #{record.dxDmp,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map">
+		update order_put_all
+		set id = #{record.id,jdbcType=INTEGER},
+		put_name = #{record.putName,jdbcType=VARCHAR},
+		oid = #{record.oid,jdbcType=INTEGER},
+		pids = #{record.pids,jdbcType=VARCHAR},
+		begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+		end_time = #{record.endTime,jdbcType=TIMESTAMP},
+		cost_type = #{record.costType,jdbcType=INTEGER},
+		extension_type = #{record.extensionType,jdbcType=INTEGER},
+		land_url = #{record.landUrl,jdbcType=VARCHAR},
+		app_id = #{record.appId,jdbcType=VARCHAR},
+		pkg_name = #{record.pkgName,jdbcType=VARCHAR},
+		time_interval = #{record.timeInterval,jdbcType=VARCHAR},
+		dq_rule = #{record.dqRule,jdbcType=INTEGER},
+		dx_xl = #{record.dxXl,jdbcType=VARCHAR},
+		dx_nl = #{record.dxNl,jdbcType=VARCHAR},
+		dx_xb = #{record.dxXb,jdbcType=VARCHAR},
+		dx_zd = #{record.dxZd,jdbcType=VARCHAR},
+		dx_xw = #{record.dxXw,jdbcType=VARCHAR},
+		dx_xq = #{record.dxXq,jdbcType=VARCHAR},
+		dx_czxt = #{record.dxCzxt,jdbcType=VARCHAR},
+		dx_yys = #{record.dxYys,jdbcType=VARCHAR},
+		dx_wl = #{record.dxWl,jdbcType=VARCHAR},
+		dx_llly = #{record.dxLlly,jdbcType=VARCHAR},
+		dx_zdlx = #{record.dxZdlx,jdbcType=VARCHAR},
+		dx_sb = #{record.dxSb,jdbcType=VARCHAR},
+		dx_bb = #{record.dxBb,jdbcType=VARCHAR},
+		dx_qd = #{record.dxQd,jdbcType=VARCHAR},
+		dx_jx = #{record.dxJx,jdbcType=VARCHAR},
+		dx_ts = #{record.dxTs,jdbcType=VARCHAR},
+		dx_media = #{record.dxMedia,jdbcType=VARCHAR},
+		dx_app = #{record.dxApp,jdbcType=VARCHAR},
+		run_state = #{record.runState,jdbcType=INTEGER},
+		put_state = #{record.putState,jdbcType=INTEGER},
+		create_user = #{record.createUser,jdbcType=INTEGER},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+		price = #{record.price,jdbcType=INTEGER},
+		ad_position = #{record.adPosition,jdbcType=VARCHAR},
+		imp_monitor_url = #{record.impMonitorUrl,jdbcType=VARCHAR},
+		clk_monitor_url = #{record.clkMonitorUrl,jdbcType=VARCHAR},
+		ext_creative_id = #{record.extCreativeId,jdbcType=VARCHAR},
+		put_limit = #{record.putLimit,jdbcType=INTEGER},
+		op_user = #{record.opUser,jdbcType=INTEGER},
+		op_user_type = #{record.opUserType,jdbcType=INTEGER},
+		delivery_mode = #{record.deliveryMode,jdbcType=INTEGER},
+		is_frequency = #{record.isFrequency,jdbcType=INTEGER},
+		frequenc_period = #{record.frequencPeriod,jdbcType=INTEGER},
+		frequenc_num = #{record.frequencNum,jdbcType=INTEGER},
+		limits = #{record.limits,jdbcType=VARCHAR},
+		is_optimize = #{record.isOptimize,jdbcType=INTEGER},
+		optimize_cpa = #{record.optimizeCpa,jdbcType=INTEGER},
+		dx_app_type = #{record.dxAppType,jdbcType=VARCHAR},
+		isfilter_device_code = #{record.isfilterDeviceCode,jdbcType=INTEGER},
+		is_pdb = #{record.isPdb,jdbcType=INTEGER},
+		deal_id = #{record.dealId,jdbcType=VARCHAR},
+		dx_frame = #{record.dxFrame,jdbcType=VARCHAR},
+		dx_adType = #{record.dxAdtype,jdbcType=VARCHAR},
+		o2_url = #{record.o2Url,jdbcType=VARCHAR},
+		dx_rq = #{record.dxRq,jdbcType=VARCHAR},
+		is_attribution = #{record.isAttribution,jdbcType=INTEGER},
+		attribution_ratio = #{record.attributionRatio,jdbcType=DOUBLE},
+		platform = #{record.platform,jdbcType=INTEGER},
+		is_frequency_ip = #{record.isFrequencyIp,jdbcType=INTEGER},
+		frequency_num_ip = #{record.frequencyNumIp,jdbcType=INTEGER},
+		frequency_period_ip = #{record.frequencyPeriodIp,jdbcType=INTEGER},
+		filter_app = #{record.filterApp,jdbcType=INTEGER},
+		versioncode = #{record.versioncode,jdbcType=INTEGER},
+		versionname = #{record.versionname,jdbcType=VARCHAR},
+		size = #{record.size,jdbcType=INTEGER},
+		sign = #{record.sign,jdbcType=VARCHAR},
+		md5 = #{record.md5,jdbcType=VARCHAR},
+		minsdklevel = #{record.minsdklevel,jdbcType=INTEGER},
+		dx_model = #{record.dxModel,jdbcType=VARCHAR},
+		is_redirect = #{record.isRedirect,jdbcType=VARCHAR},
+		pre_dq = #{record.preDq,jdbcType=LONGVARCHAR},
+		dx_dq = #{record.dxDq,jdbcType=LONGVARCHAR},
+		dx_dmp = #{record.dxDmp,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update order_put_all
+		set id = #{record.id,jdbcType=INTEGER},
+		put_name = #{record.putName,jdbcType=VARCHAR},
+		oid = #{record.oid,jdbcType=INTEGER},
+		pids = #{record.pids,jdbcType=VARCHAR},
+		begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+		end_time = #{record.endTime,jdbcType=TIMESTAMP},
+		cost_type = #{record.costType,jdbcType=INTEGER},
+		extension_type = #{record.extensionType,jdbcType=INTEGER},
+		land_url = #{record.landUrl,jdbcType=VARCHAR},
+		app_id = #{record.appId,jdbcType=VARCHAR},
+		pkg_name = #{record.pkgName,jdbcType=VARCHAR},
+		time_interval = #{record.timeInterval,jdbcType=VARCHAR},
+		dq_rule = #{record.dqRule,jdbcType=INTEGER},
+		dx_xl = #{record.dxXl,jdbcType=VARCHAR},
+		dx_nl = #{record.dxNl,jdbcType=VARCHAR},
+		dx_xb = #{record.dxXb,jdbcType=VARCHAR},
+		dx_zd = #{record.dxZd,jdbcType=VARCHAR},
+		dx_xw = #{record.dxXw,jdbcType=VARCHAR},
+		dx_xq = #{record.dxXq,jdbcType=VARCHAR},
+		dx_czxt = #{record.dxCzxt,jdbcType=VARCHAR},
+		dx_yys = #{record.dxYys,jdbcType=VARCHAR},
+		dx_wl = #{record.dxWl,jdbcType=VARCHAR},
+		dx_llly = #{record.dxLlly,jdbcType=VARCHAR},
+		dx_zdlx = #{record.dxZdlx,jdbcType=VARCHAR},
+		dx_sb = #{record.dxSb,jdbcType=VARCHAR},
+		dx_bb = #{record.dxBb,jdbcType=VARCHAR},
+		dx_qd = #{record.dxQd,jdbcType=VARCHAR},
+		dx_jx = #{record.dxJx,jdbcType=VARCHAR},
+		dx_ts = #{record.dxTs,jdbcType=VARCHAR},
+		dx_media = #{record.dxMedia,jdbcType=VARCHAR},
+		dx_app = #{record.dxApp,jdbcType=VARCHAR},
+		run_state = #{record.runState,jdbcType=INTEGER},
+		put_state = #{record.putState,jdbcType=INTEGER},
+		create_user = #{record.createUser,jdbcType=INTEGER},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+		price = #{record.price,jdbcType=INTEGER},
+		ad_position = #{record.adPosition,jdbcType=VARCHAR},
+		imp_monitor_url = #{record.impMonitorUrl,jdbcType=VARCHAR},
+		clk_monitor_url = #{record.clkMonitorUrl,jdbcType=VARCHAR},
+		ext_creative_id = #{record.extCreativeId,jdbcType=VARCHAR},
+		put_limit = #{record.putLimit,jdbcType=INTEGER},
+		op_user = #{record.opUser,jdbcType=INTEGER},
+		op_user_type = #{record.opUserType,jdbcType=INTEGER},
+		delivery_mode = #{record.deliveryMode,jdbcType=INTEGER},
+		is_frequency = #{record.isFrequency,jdbcType=INTEGER},
+		frequenc_period = #{record.frequencPeriod,jdbcType=INTEGER},
+		frequenc_num = #{record.frequencNum,jdbcType=INTEGER},
+		limits = #{record.limits,jdbcType=VARCHAR},
+		is_optimize = #{record.isOptimize,jdbcType=INTEGER},
+		optimize_cpa = #{record.optimizeCpa,jdbcType=INTEGER},
+		dx_app_type = #{record.dxAppType,jdbcType=VARCHAR},
+		isfilter_device_code = #{record.isfilterDeviceCode,jdbcType=INTEGER},
+		is_pdb = #{record.isPdb,jdbcType=INTEGER},
+		deal_id = #{record.dealId,jdbcType=VARCHAR},
+		dx_frame = #{record.dxFrame,jdbcType=VARCHAR},
+		dx_adType = #{record.dxAdtype,jdbcType=VARCHAR},
+		o2_url = #{record.o2Url,jdbcType=VARCHAR},
+		dx_rq = #{record.dxRq,jdbcType=VARCHAR},
+		is_attribution = #{record.isAttribution,jdbcType=INTEGER},
+		attribution_ratio = #{record.attributionRatio,jdbcType=DOUBLE},
+		platform = #{record.platform,jdbcType=INTEGER},
+		is_frequency_ip = #{record.isFrequencyIp,jdbcType=INTEGER},
+		frequency_num_ip = #{record.frequencyNumIp,jdbcType=INTEGER},
+		frequency_period_ip = #{record.frequencyPeriodIp,jdbcType=INTEGER},
+		filter_app = #{record.filterApp,jdbcType=INTEGER},
+		versioncode = #{record.versioncode,jdbcType=INTEGER},
+		versionname = #{record.versionname,jdbcType=VARCHAR},
+		size = #{record.size,jdbcType=INTEGER},
+		sign = #{record.sign,jdbcType=VARCHAR},
+		md5 = #{record.md5,jdbcType=VARCHAR},
+		minsdklevel = #{record.minsdklevel,jdbcType=INTEGER},
+		dx_model = #{record.dxModel,jdbcType=VARCHAR},
+		is_redirect = #{record.isRedirect,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAll">
+		update order_put_all
+		<set>
+			<if test="putName != null">
+				put_name = #{putName,jdbcType=VARCHAR},
+			</if>
+			<if test="oid != null">
+				oid = #{oid,jdbcType=INTEGER},
+			</if>
+			<if test="pids != null">
+				pids = #{pids,jdbcType=VARCHAR},
+			</if>
+			<if test="beginTime != null">
+				begin_time = #{beginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				end_time = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="costType != null">
+				cost_type = #{costType,jdbcType=INTEGER},
+			</if>
+			<if test="extensionType != null">
+				extension_type = #{extensionType,jdbcType=INTEGER},
+			</if>
+			<if test="landUrl != null">
+				land_url = #{landUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="appId != null">
+				app_id = #{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="pkgName != null">
+				pkg_name = #{pkgName,jdbcType=VARCHAR},
+			</if>
+			<if test="timeInterval != null">
+				time_interval = #{timeInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="dqRule != null">
+				dq_rule = #{dqRule,jdbcType=INTEGER},
+			</if>
+			<if test="dxXl != null">
+				dx_xl = #{dxXl,jdbcType=VARCHAR},
+			</if>
+			<if test="dxNl != null">
+				dx_nl = #{dxNl,jdbcType=VARCHAR},
+			</if>
+			<if test="dxXb != null">
+				dx_xb = #{dxXb,jdbcType=VARCHAR},
+			</if>
+			<if test="dxZd != null">
+				dx_zd = #{dxZd,jdbcType=VARCHAR},
+			</if>
+			<if test="dxXw != null">
+				dx_xw = #{dxXw,jdbcType=VARCHAR},
+			</if>
+			<if test="dxXq != null">
+				dx_xq = #{dxXq,jdbcType=VARCHAR},
+			</if>
+			<if test="dxCzxt != null">
+				dx_czxt = #{dxCzxt,jdbcType=VARCHAR},
+			</if>
+			<if test="dxYys != null">
+				dx_yys = #{dxYys,jdbcType=VARCHAR},
+			</if>
+			<if test="dxWl != null">
+				dx_wl = #{dxWl,jdbcType=VARCHAR},
+			</if>
+			<if test="dxLlly != null">
+				dx_llly = #{dxLlly,jdbcType=VARCHAR},
+			</if>
+			<if test="dxZdlx != null">
+				dx_zdlx = #{dxZdlx,jdbcType=VARCHAR},
+			</if>
+			<if test="dxSb != null">
+				dx_sb = #{dxSb,jdbcType=VARCHAR},
+			</if>
+			<if test="dxBb != null">
+				dx_bb = #{dxBb,jdbcType=VARCHAR},
+			</if>
+			<if test="dxQd != null">
+				dx_qd = #{dxQd,jdbcType=VARCHAR},
+			</if>
+			<if test="dxJx != null">
+				dx_jx = #{dxJx,jdbcType=VARCHAR},
+			</if>
+			<if test="dxTs != null">
+				dx_ts = #{dxTs,jdbcType=VARCHAR},
+			</if>
+			<if test="dxMedia != null">
+				dx_media = #{dxMedia,jdbcType=VARCHAR},
+			</if>
+			<if test="dxApp != null">
+				dx_app = #{dxApp,jdbcType=VARCHAR},
+			</if>
+			<if test="runState != null">
+				run_state = #{runState,jdbcType=INTEGER},
+			</if>
+			<if test="putState != null">
+				put_state = #{putState,jdbcType=INTEGER},
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=INTEGER},
+			</if>
+			<if test="adPosition != null">
+				ad_position = #{adPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="impMonitorUrl != null">
+				imp_monitor_url = #{impMonitorUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="clkMonitorUrl != null">
+				clk_monitor_url = #{clkMonitorUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="extCreativeId != null">
+				ext_creative_id = #{extCreativeId,jdbcType=VARCHAR},
+			</if>
+			<if test="putLimit != null">
+				put_limit = #{putLimit,jdbcType=INTEGER},
+			</if>
+			<if test="opUser != null">
+				op_user = #{opUser,jdbcType=INTEGER},
+			</if>
+			<if test="opUserType != null">
+				op_user_type = #{opUserType,jdbcType=INTEGER},
+			</if>
+			<if test="deliveryMode != null">
+				delivery_mode = #{deliveryMode,jdbcType=INTEGER},
+			</if>
+			<if test="isFrequency != null">
+				is_frequency = #{isFrequency,jdbcType=INTEGER},
+			</if>
+			<if test="frequencPeriod != null">
+				frequenc_period = #{frequencPeriod,jdbcType=INTEGER},
+			</if>
+			<if test="frequencNum != null">
+				frequenc_num = #{frequencNum,jdbcType=INTEGER},
+			</if>
+			<if test="limits != null">
+				limits = #{limits,jdbcType=VARCHAR},
+			</if>
+			<if test="isOptimize != null">
+				is_optimize = #{isOptimize,jdbcType=INTEGER},
+			</if>
+			<if test="optimizeCpa != null">
+				optimize_cpa = #{optimizeCpa,jdbcType=INTEGER},
+			</if>
+			<if test="dxAppType != null">
+				dx_app_type = #{dxAppType,jdbcType=VARCHAR},
+			</if>
+			<if test="isfilterDeviceCode != null">
+				isfilter_device_code = #{isfilterDeviceCode,jdbcType=INTEGER},
+			</if>
+			<if test="isPdb != null">
+				is_pdb = #{isPdb,jdbcType=INTEGER},
+			</if>
+			<if test="dealId != null">
+				deal_id = #{dealId,jdbcType=VARCHAR},
+			</if>
+			<if test="dxFrame != null">
+				dx_frame = #{dxFrame,jdbcType=VARCHAR},
+			</if>
+			<if test="dxAdtype != null">
+				dx_adType = #{dxAdtype,jdbcType=VARCHAR},
+			</if>
+			<if test="o2Url != null">
+				o2_url = #{o2Url,jdbcType=VARCHAR},
+			</if>
+			<if test="dxRq != null">
+				dx_rq = #{dxRq,jdbcType=VARCHAR},
+			</if>
+			<if test="isAttribution != null">
+				is_attribution = #{isAttribution,jdbcType=INTEGER},
+			</if>
+			<if test="attributionRatio != null">
+				attribution_ratio = #{attributionRatio,jdbcType=DOUBLE},
+			</if>
+			<if test="platform != null">
+				platform = #{platform,jdbcType=INTEGER},
+			</if>
+			<if test="isFrequencyIp != null">
+				is_frequency_ip = #{isFrequencyIp,jdbcType=INTEGER},
+			</if>
+			<if test="frequencyNumIp != null">
+				frequency_num_ip = #{frequencyNumIp,jdbcType=INTEGER},
+			</if>
+			<if test="frequencyPeriodIp != null">
+				frequency_period_ip = #{frequencyPeriodIp,jdbcType=INTEGER},
+			</if>
+			<if test="filterApp != null">
+				filter_app = #{filterApp,jdbcType=INTEGER},
+			</if>
+			<if test="versioncode != null">
+				versioncode = #{versioncode,jdbcType=INTEGER},
+			</if>
+			<if test="versionname != null">
+				versionname = #{versionname,jdbcType=VARCHAR},
+			</if>
+			<if test="size != null">
+				size = #{size,jdbcType=INTEGER},
+			</if>
+			<if test="sign != null">
+				sign = #{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="md5 != null">
+				md5 = #{md5,jdbcType=VARCHAR},
+			</if>
+			<if test="minsdklevel != null">
+				minsdklevel = #{minsdklevel,jdbcType=INTEGER},
+			</if>
+			<if test="dxModel != null">
+				dx_model = #{dxModel,jdbcType=VARCHAR},
+			</if>
+			<if test="isRedirect != null">
+				is_redirect = #{isRedirect,jdbcType=VARCHAR},
+			</if>
+			<if test="preDq != null">
+				pre_dq = #{preDq,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="dxDq != null">
+				dx_dq = #{dxDq,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="dxDmp != null">
+				dx_dmp = #{dxDmp,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAll">
+		update order_put_all
+		set put_name = #{putName,jdbcType=VARCHAR},
+		oid = #{oid,jdbcType=INTEGER},
+		pids = #{pids,jdbcType=VARCHAR},
+		begin_time = #{beginTime,jdbcType=TIMESTAMP},
+		end_time = #{endTime,jdbcType=TIMESTAMP},
+		cost_type = #{costType,jdbcType=INTEGER},
+		extension_type = #{extensionType,jdbcType=INTEGER},
+		land_url = #{landUrl,jdbcType=VARCHAR},
+		app_id = #{appId,jdbcType=VARCHAR},
+		pkg_name = #{pkgName,jdbcType=VARCHAR},
+		time_interval = #{timeInterval,jdbcType=VARCHAR},
+		dq_rule = #{dqRule,jdbcType=INTEGER},
+		dx_xl = #{dxXl,jdbcType=VARCHAR},
+		dx_nl = #{dxNl,jdbcType=VARCHAR},
+		dx_xb = #{dxXb,jdbcType=VARCHAR},
+		dx_zd = #{dxZd,jdbcType=VARCHAR},
+		dx_xw = #{dxXw,jdbcType=VARCHAR},
+		dx_xq = #{dxXq,jdbcType=VARCHAR},
+		dx_czxt = #{dxCzxt,jdbcType=VARCHAR},
+		dx_yys = #{dxYys,jdbcType=VARCHAR},
+		dx_wl = #{dxWl,jdbcType=VARCHAR},
+		dx_llly = #{dxLlly,jdbcType=VARCHAR},
+		dx_zdlx = #{dxZdlx,jdbcType=VARCHAR},
+		dx_sb = #{dxSb,jdbcType=VARCHAR},
+		dx_bb = #{dxBb,jdbcType=VARCHAR},
+		dx_qd = #{dxQd,jdbcType=VARCHAR},
+		dx_jx = #{dxJx,jdbcType=VARCHAR},
+		dx_ts = #{dxTs,jdbcType=VARCHAR},
+		dx_media = #{dxMedia,jdbcType=VARCHAR},
+		dx_app = #{dxApp,jdbcType=VARCHAR},
+		run_state = #{runState,jdbcType=INTEGER},
+		put_state = #{putState,jdbcType=INTEGER},
+		create_user = #{createUser,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		price = #{price,jdbcType=INTEGER},
+		ad_position = #{adPosition,jdbcType=VARCHAR},
+		imp_monitor_url = #{impMonitorUrl,jdbcType=VARCHAR},
+		clk_monitor_url = #{clkMonitorUrl,jdbcType=VARCHAR},
+		ext_creative_id = #{extCreativeId,jdbcType=VARCHAR},
+		put_limit = #{putLimit,jdbcType=INTEGER},
+		op_user = #{opUser,jdbcType=INTEGER},
+		op_user_type = #{opUserType,jdbcType=INTEGER},
+		delivery_mode = #{deliveryMode,jdbcType=INTEGER},
+		is_frequency = #{isFrequency,jdbcType=INTEGER},
+		frequenc_period = #{frequencPeriod,jdbcType=INTEGER},
+		frequenc_num = #{frequencNum,jdbcType=INTEGER},
+		limits = #{limits,jdbcType=VARCHAR},
+		is_optimize = #{isOptimize,jdbcType=INTEGER},
+		optimize_cpa = #{optimizeCpa,jdbcType=INTEGER},
+		dx_app_type = #{dxAppType,jdbcType=VARCHAR},
+		isfilter_device_code = #{isfilterDeviceCode,jdbcType=INTEGER},
+		is_pdb = #{isPdb,jdbcType=INTEGER},
+		deal_id = #{dealId,jdbcType=VARCHAR},
+		dx_frame = #{dxFrame,jdbcType=VARCHAR},
+		dx_adType = #{dxAdtype,jdbcType=VARCHAR},
+		o2_url = #{o2Url,jdbcType=VARCHAR},
+		dx_rq = #{dxRq,jdbcType=VARCHAR},
+		is_attribution = #{isAttribution,jdbcType=INTEGER},
+		attribution_ratio = #{attributionRatio,jdbcType=DOUBLE},
+		platform = #{platform,jdbcType=INTEGER},
+		is_frequency_ip = #{isFrequencyIp,jdbcType=INTEGER},
+		frequency_num_ip = #{frequencyNumIp,jdbcType=INTEGER},
+		frequency_period_ip = #{frequencyPeriodIp,jdbcType=INTEGER},
+		filter_app = #{filterApp,jdbcType=INTEGER},
+		versioncode = #{versioncode,jdbcType=INTEGER},
+		versionname = #{versionname,jdbcType=VARCHAR},
+		size = #{size,jdbcType=INTEGER},
+		sign = #{sign,jdbcType=VARCHAR},
+		md5 = #{md5,jdbcType=VARCHAR},
+		minsdklevel = #{minsdklevel,jdbcType=INTEGER},
+		dx_model = #{dxModel,jdbcType=VARCHAR},
+		is_redirect = #{isRedirect,jdbcType=VARCHAR},
+		pre_dq = #{preDq,jdbcType=LONGVARCHAR},
+		dx_dq = #{dxDq,jdbcType=LONGVARCHAR},
+		dx_dmp = #{dxDmp,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAll">
+		update order_put_all
+		set put_name = #{putName,jdbcType=VARCHAR},
+		oid = #{oid,jdbcType=INTEGER},
+		pids = #{pids,jdbcType=VARCHAR},
+		begin_time = #{beginTime,jdbcType=TIMESTAMP},
+		end_time = #{endTime,jdbcType=TIMESTAMP},
+		cost_type = #{costType,jdbcType=INTEGER},
+		extension_type = #{extensionType,jdbcType=INTEGER},
+		land_url = #{landUrl,jdbcType=VARCHAR},
+		app_id = #{appId,jdbcType=VARCHAR},
+		pkg_name = #{pkgName,jdbcType=VARCHAR},
+		time_interval = #{timeInterval,jdbcType=VARCHAR},
+		dq_rule = #{dqRule,jdbcType=INTEGER},
+		dx_xl = #{dxXl,jdbcType=VARCHAR},
+		dx_nl = #{dxNl,jdbcType=VARCHAR},
+		dx_xb = #{dxXb,jdbcType=VARCHAR},
+		dx_zd = #{dxZd,jdbcType=VARCHAR},
+		dx_xw = #{dxXw,jdbcType=VARCHAR},
+		dx_xq = #{dxXq,jdbcType=VARCHAR},
+		dx_czxt = #{dxCzxt,jdbcType=VARCHAR},
+		dx_yys = #{dxYys,jdbcType=VARCHAR},
+		dx_wl = #{dxWl,jdbcType=VARCHAR},
+		dx_llly = #{dxLlly,jdbcType=VARCHAR},
+		dx_zdlx = #{dxZdlx,jdbcType=VARCHAR},
+		dx_sb = #{dxSb,jdbcType=VARCHAR},
+		dx_bb = #{dxBb,jdbcType=VARCHAR},
+		dx_qd = #{dxQd,jdbcType=VARCHAR},
+		dx_jx = #{dxJx,jdbcType=VARCHAR},
+		dx_ts = #{dxTs,jdbcType=VARCHAR},
+		dx_media = #{dxMedia,jdbcType=VARCHAR},
+		dx_app = #{dxApp,jdbcType=VARCHAR},
+		run_state = #{runState,jdbcType=INTEGER},
+		put_state = #{putState,jdbcType=INTEGER},
+		create_user = #{createUser,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		price = #{price,jdbcType=INTEGER},
+		ad_position = #{adPosition,jdbcType=VARCHAR},
+		imp_monitor_url = #{impMonitorUrl,jdbcType=VARCHAR},
+		clk_monitor_url = #{clkMonitorUrl,jdbcType=VARCHAR},
+		ext_creative_id = #{extCreativeId,jdbcType=VARCHAR},
+		put_limit = #{putLimit,jdbcType=INTEGER},
+		op_user = #{opUser,jdbcType=INTEGER},
+		op_user_type = #{opUserType,jdbcType=INTEGER},
+		delivery_mode = #{deliveryMode,jdbcType=INTEGER},
+		is_frequency = #{isFrequency,jdbcType=INTEGER},
+		frequenc_period = #{frequencPeriod,jdbcType=INTEGER},
+		frequenc_num = #{frequencNum,jdbcType=INTEGER},
+		limits = #{limits,jdbcType=VARCHAR},
+		is_optimize = #{isOptimize,jdbcType=INTEGER},
+		optimize_cpa = #{optimizeCpa,jdbcType=INTEGER},
+		dx_app_type = #{dxAppType,jdbcType=VARCHAR},
+		isfilter_device_code = #{isfilterDeviceCode,jdbcType=INTEGER},
+		is_pdb = #{isPdb,jdbcType=INTEGER},
+		deal_id = #{dealId,jdbcType=VARCHAR},
+		dx_frame = #{dxFrame,jdbcType=VARCHAR},
+		dx_adType = #{dxAdtype,jdbcType=VARCHAR},
+		o2_url = #{o2Url,jdbcType=VARCHAR},
+		dx_rq = #{dxRq,jdbcType=VARCHAR},
+		is_attribution = #{isAttribution,jdbcType=INTEGER},
+		attribution_ratio = #{attributionRatio,jdbcType=DOUBLE},
+		platform = #{platform,jdbcType=INTEGER},
+		is_frequency_ip = #{isFrequencyIp,jdbcType=INTEGER},
+		frequency_num_ip = #{frequencyNumIp,jdbcType=INTEGER},
+		frequency_period_ip = #{frequencyPeriodIp,jdbcType=INTEGER},
+		filter_app = #{filterApp,jdbcType=INTEGER},
+		versioncode = #{versioncode,jdbcType=INTEGER},
+		versionname = #{versionname,jdbcType=VARCHAR},
+		size = #{size,jdbcType=INTEGER},
+		sign = #{sign,jdbcType=VARCHAR},
+		md5 = #{md5,jdbcType=VARCHAR},
+		minsdklevel = #{minsdklevel,jdbcType=INTEGER},
+		dx_model = #{dxModel,jdbcType=VARCHAR},
+		is_redirect = #{isRedirect,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAllExample"
+		resultMap="BaseResultMap">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. @project https://github.com/itfsw/mybatis-generator-plugin -->
+		select
+		<include refid="Base_Column_List" />
+		from order_put_all
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		limit 1
+	</select>
+	<select id="selectOneByExampleWithBLOBs"
+		parameterType="com.iwanvi.nvwa.dao.model.OrderPutAllExample"
+		resultMap="ResultMapWithBLOBs">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. @project https://github.com/itfsw/mybatis-generator-plugin -->
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from order_put_all
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		limit 1
+	</select>
+	<insert id="batchInsert" parameterType="map">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. @project https://github.com/itfsw/mybatis-generator-plugin -->
+		insert into order_put_all
+		(id, put_name, oid, pids, begin_time, end_time, cost_type, extension_type,
+		land_url,
+		app_id, pkg_name, time_interval, dq_rule, dx_xl, dx_nl, dx_xb, dx_zd, dx_xw,
+		dx_xq,
+		dx_czxt, dx_yys, dx_wl, dx_llly, dx_zdlx, dx_sb, dx_bb, dx_qd, dx_jx, dx_ts,
+		dx_media,
+		dx_app, run_state, put_state, create_user, create_time, update_time, price,
+		ad_position,
+		imp_monitor_url, clk_monitor_url, ext_creative_id, put_limit, op_user, op_user_type,
+		delivery_mode, is_frequency, frequenc_period, frequenc_num, limits,
+		is_optimize,
+		optimize_cpa, dx_app_type, isfilter_device_code, is_pdb, deal_id, dx_frame,
+		dx_adType,
+		o2_url, dx_rq, is_attribution, attribution_ratio, platform, is_frequency_ip,
+		frequency_num_ip,
+		frequency_period_ip, filter_app, versioncode, versionname, size, sign, md5, minsdklevel,
+		dx_model, is_redirect, pre_dq, dx_dq, dx_dmp)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.id,jdbcType=INTEGER}, #{item.putName,jdbcType=VARCHAR},
+			#{item.oid,jdbcType=INTEGER},
+			#{item.pids,jdbcType=VARCHAR}, #{item.beginTime,jdbcType=TIMESTAMP},
+			#{item.endTime,jdbcType=TIMESTAMP},
+			#{item.costType,jdbcType=INTEGER},
+			#{item.extensionType,jdbcType=INTEGER},
+			#{item.landUrl,jdbcType=VARCHAR},
+			#{item.appId,jdbcType=VARCHAR}, #{item.pkgName,jdbcType=VARCHAR},
+			#{item.timeInterval,jdbcType=VARCHAR},
+			#{item.dqRule,jdbcType=INTEGER}, #{item.dxXl,jdbcType=VARCHAR},
+			#{item.dxNl,jdbcType=VARCHAR},
+			#{item.dxXb,jdbcType=VARCHAR}, #{item.dxZd,jdbcType=VARCHAR}, #{item.dxXw,jdbcType=VARCHAR},
+			#{item.dxXq,jdbcType=VARCHAR}, #{item.dxCzxt,jdbcType=VARCHAR},
+			#{item.dxYys,jdbcType=VARCHAR},
+			#{item.dxWl,jdbcType=VARCHAR}, #{item.dxLlly,jdbcType=VARCHAR}, #{item.dxZdlx,jdbcType=VARCHAR},
+			#{item.dxSb,jdbcType=VARCHAR}, #{item.dxBb,jdbcType=VARCHAR},
+			#{item.dxQd,jdbcType=VARCHAR},
+			#{item.dxJx,jdbcType=VARCHAR}, #{item.dxTs,jdbcType=VARCHAR}, #{item.dxMedia,jdbcType=VARCHAR},
+			#{item.dxApp,jdbcType=VARCHAR}, #{item.runState,jdbcType=INTEGER},
+			#{item.putState,jdbcType=INTEGER},
+			#{item.createUser,jdbcType=INTEGER},
+			#{item.createTime,jdbcType=TIMESTAMP},
+			#{item.updateTime,jdbcType=TIMESTAMP},
+			#{item.price,jdbcType=INTEGER}, #{item.adPosition,jdbcType=VARCHAR},
+			#{item.impMonitorUrl,jdbcType=VARCHAR},
+			#{item.clkMonitorUrl,jdbcType=VARCHAR},
+			#{item.extCreativeId,jdbcType=VARCHAR},
+			#{item.putLimit,jdbcType=INTEGER}, #{item.opUser,jdbcType=INTEGER},
+			#{item.opUserType,jdbcType=INTEGER},
+			#{item.deliveryMode,jdbcType=INTEGER},
+			#{item.isFrequency,jdbcType=INTEGER},
+			#{item.frequencPeriod,jdbcType=INTEGER},
+			#{item.frequencNum,jdbcType=INTEGER},
+			#{item.limits,jdbcType=VARCHAR}, #{item.isOptimize,jdbcType=INTEGER},
+			#{item.optimizeCpa,jdbcType=INTEGER},
+			#{item.dxAppType,jdbcType=VARCHAR},
+			#{item.isfilterDeviceCode,jdbcType=INTEGER},
+			#{item.isPdb,jdbcType=INTEGER}, #{item.dealId,jdbcType=VARCHAR},
+			#{item.dxFrame,jdbcType=VARCHAR},
+			#{item.dxAdtype,jdbcType=VARCHAR}, #{item.o2Url,jdbcType=VARCHAR}, #{item.dxRq,jdbcType=VARCHAR},
+			#{item.isAttribution,jdbcType=INTEGER},
+			#{item.attributionRatio,jdbcType=DOUBLE},
+			#{item.platform,jdbcType=INTEGER},
+			#{item.isFrequencyIp,jdbcType=INTEGER},
+			#{item.frequencyNumIp,jdbcType=INTEGER},
+			#{item.frequencyPeriodIp,jdbcType=INTEGER},
+			#{item.filterApp,jdbcType=INTEGER},
+			#{item.versioncode,jdbcType=INTEGER},
+			#{item.versionname,jdbcType=VARCHAR}, #{item.size,jdbcType=INTEGER},
+			#{item.sign,jdbcType=VARCHAR}, #{item.md5,jdbcType=VARCHAR},
+			#{item.minsdklevel,jdbcType=INTEGER},
+			#{item.dxModel,jdbcType=VARCHAR},
+			#{item.isRedirect,jdbcType=VARCHAR},
+			#{item.preDq,jdbcType=LONGVARCHAR},
+			#{item.dxDq,jdbcType=LONGVARCHAR},
+			#{item.dxDmp,jdbcType=LONGVARCHAR})
+		</foreach>
+	</insert>
+	<insert id="batchInsertSelective" parameterType="map">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. @project https://github.com/itfsw/mybatis-generator-plugin -->
+		insert into order_put_all (
+		<foreach collection="selective" item="column" separator=",">
+			${column.escapedColumnName}
+		</foreach>
+		)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(
+			<foreach collection="selective" item="column" separator=",">
+				<if test="'id'.toString() == column.value">
+					#{item.id,jdbcType=INTEGER}
+				</if>
+				<if test="'put_name'.toString() == column.value">
+					#{item.putName,jdbcType=VARCHAR}
+				</if>
+				<if test="'oid'.toString() == column.value">
+					#{item.oid,jdbcType=INTEGER}
+				</if>
+				<if test="'pids'.toString() == column.value">
+					#{item.pids,jdbcType=VARCHAR}
+				</if>
+				<if test="'begin_time'.toString() == column.value">
+					#{item.beginTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="'end_time'.toString() == column.value">
+					#{item.endTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="'cost_type'.toString() == column.value">
+					#{item.costType,jdbcType=INTEGER}
+				</if>
+				<if test="'extension_type'.toString() == column.value">
+					#{item.extensionType,jdbcType=INTEGER}
+				</if>
+				<if test="'land_url'.toString() == column.value">
+					#{item.landUrl,jdbcType=VARCHAR}
+				</if>
+				<if test="'app_id'.toString() == column.value">
+					#{item.appId,jdbcType=VARCHAR}
+				</if>
+				<if test="'pkg_name'.toString() == column.value">
+					#{item.pkgName,jdbcType=VARCHAR}
+				</if>
+				<if test="'time_interval'.toString() == column.value">
+					#{item.timeInterval,jdbcType=VARCHAR}
+				</if>
+				<if test="'dq_rule'.toString() == column.value">
+					#{item.dqRule,jdbcType=INTEGER}
+				</if>
+				<if test="'dx_xl'.toString() == column.value">
+					#{item.dxXl,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_nl'.toString() == column.value">
+					#{item.dxNl,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_xb'.toString() == column.value">
+					#{item.dxXb,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_zd'.toString() == column.value">
+					#{item.dxZd,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_xw'.toString() == column.value">
+					#{item.dxXw,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_xq'.toString() == column.value">
+					#{item.dxXq,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_czxt'.toString() == column.value">
+					#{item.dxCzxt,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_yys'.toString() == column.value">
+					#{item.dxYys,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_wl'.toString() == column.value">
+					#{item.dxWl,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_llly'.toString() == column.value">
+					#{item.dxLlly,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_zdlx'.toString() == column.value">
+					#{item.dxZdlx,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_sb'.toString() == column.value">
+					#{item.dxSb,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_bb'.toString() == column.value">
+					#{item.dxBb,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_qd'.toString() == column.value">
+					#{item.dxQd,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_jx'.toString() == column.value">
+					#{item.dxJx,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_ts'.toString() == column.value">
+					#{item.dxTs,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_media'.toString() == column.value">
+					#{item.dxMedia,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_app'.toString() == column.value">
+					#{item.dxApp,jdbcType=VARCHAR}
+				</if>
+				<if test="'run_state'.toString() == column.value">
+					#{item.runState,jdbcType=INTEGER}
+				</if>
+				<if test="'put_state'.toString() == column.value">
+					#{item.putState,jdbcType=INTEGER}
+				</if>
+				<if test="'create_user'.toString() == column.value">
+					#{item.createUser,jdbcType=INTEGER}
+				</if>
+				<if test="'create_time'.toString() == column.value">
+					#{item.createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="'update_time'.toString() == column.value">
+					#{item.updateTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="'price'.toString() == column.value">
+					#{item.price,jdbcType=INTEGER}
+				</if>
+				<if test="'ad_position'.toString() == column.value">
+					#{item.adPosition,jdbcType=VARCHAR}
+				</if>
+				<if test="'imp_monitor_url'.toString() == column.value">
+					#{item.impMonitorUrl,jdbcType=VARCHAR}
+				</if>
+				<if test="'clk_monitor_url'.toString() == column.value">
+					#{item.clkMonitorUrl,jdbcType=VARCHAR}
+				</if>
+				<if test="'ext_creative_id'.toString() == column.value">
+					#{item.extCreativeId,jdbcType=VARCHAR}
+				</if>
+				<if test="'put_limit'.toString() == column.value">
+					#{item.putLimit,jdbcType=INTEGER}
+				</if>
+				<if test="'op_user'.toString() == column.value">
+					#{item.opUser,jdbcType=INTEGER}
+				</if>
+				<if test="'op_user_type'.toString() == column.value">
+					#{item.opUserType,jdbcType=INTEGER}
+				</if>
+				<if test="'delivery_mode'.toString() == column.value">
+					#{item.deliveryMode,jdbcType=INTEGER}
+				</if>
+				<if test="'is_frequency'.toString() == column.value">
+					#{item.isFrequency,jdbcType=INTEGER}
+				</if>
+				<if test="'frequenc_period'.toString() == column.value">
+					#{item.frequencPeriod,jdbcType=INTEGER}
+				</if>
+				<if test="'frequenc_num'.toString() == column.value">
+					#{item.frequencNum,jdbcType=INTEGER}
+				</if>
+				<if test="'limits'.toString() == column.value">
+					#{item.limits,jdbcType=VARCHAR}
+				</if>
+				<if test="'is_optimize'.toString() == column.value">
+					#{item.isOptimize,jdbcType=INTEGER}
+				</if>
+				<if test="'optimize_cpa'.toString() == column.value">
+					#{item.optimizeCpa,jdbcType=INTEGER}
+				</if>
+				<if test="'dx_app_type'.toString() == column.value">
+					#{item.dxAppType,jdbcType=VARCHAR}
+				</if>
+				<if test="'isfilter_device_code'.toString() == column.value">
+					#{item.isfilterDeviceCode,jdbcType=INTEGER}
+				</if>
+				<if test="'is_pdb'.toString() == column.value">
+					#{item.isPdb,jdbcType=INTEGER}
+				</if>
+				<if test="'deal_id'.toString() == column.value">
+					#{item.dealId,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_frame'.toString() == column.value">
+					#{item.dxFrame,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_adType'.toString() == column.value">
+					#{item.dxAdtype,jdbcType=VARCHAR}
+				</if>
+				<if test="'o2_url'.toString() == column.value">
+					#{item.o2Url,jdbcType=VARCHAR}
+				</if>
+				<if test="'dx_rq'.toString() == column.value">
+					#{item.dxRq,jdbcType=VARCHAR}
+				</if>
+				<if test="'is_attribution'.toString() == column.value">
+					#{item.isAttribution,jdbcType=INTEGER}
+				</if>
+				<if test="'attribution_ratio'.toString() == column.value">
+					#{item.attributionRatio,jdbcType=DOUBLE}
+				</if>
+				<if test="'platform'.toString() == column.value">
+					#{item.platform,jdbcType=INTEGER}
+				</if>
+				<if test="'is_frequency_ip'.toString() == column.value">
+					#{item.isFrequencyIp,jdbcType=INTEGER}
+				</if>
+				<if test="'frequency_num_ip'.toString() == column.value">
+					#{item.frequencyNumIp,jdbcType=INTEGER}
+				</if>
+				<if test="'frequency_period_ip'.toString() == column.value">
+					#{item.frequencyPeriodIp,jdbcType=INTEGER}
+				</if>
+				<if test="'filter_app'.toString() == column.value">
+					#{item.filterApp,jdbcType=INTEGER}
+				</if>
+				<if test="'versioncode'.toString() == column.value">
+					#{item.versioncode,jdbcType=INTEGER}
+				</if>
+				<if test="'versionname'.toString() == column.value">
+					#{item.versionname,jdbcType=VARCHAR}
+				</if>
+				<if test="'size'.toString() == column.value">
+					#{item.size,jdbcType=INTEGER}
+				</if>
+				<if test="'sign'.toString() == column.value">
+					#{item.sign,jdbcType=VARCHAR}
+				</if>
+				<if test="'md5'.toString() == column.value">
+					#{item.md5,jdbcType=VARCHAR}
+				</if>
+				<if test="'minsdklevel'.toString() == column.value">
+					#{item.minsdklevel,jdbcType=INTEGER}
+				</if>
+				<if test="'dx_model'.toString() == column.value">
+					#{item.dxModel,jdbcType=VARCHAR}
+				</if>
+				<if test="'is_redirect'.toString() == column.value">
+					#{item.isRedirect,jdbcType=VARCHAR}
+				</if>
+				<if test="'pre_dq'.toString() == column.value">
+					#{item.preDq,jdbcType=LONGVARCHAR}
+				</if>
+				<if test="'dx_dq'.toString() == column.value">
+					#{item.dxDq,jdbcType=LONGVARCHAR}
+				</if>
+				<if test="'dx_dmp'.toString() == column.value">
+					#{item.dxDmp,jdbcType=LONGVARCHAR}
+				</if>
+			</foreach>
+			)
+		</foreach>
+	</insert>
+</mapper>

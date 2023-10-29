@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iwanvi.nvwa.dao.QuotaDspMapper" >
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.QuotaDsp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cre_day" property="creDay" jdbcType="INTEGER" />
+    <result column="cre_hour" property="creHour" jdbcType="INTEGER" />
+    <result column="ader_id" property="aderId" jdbcType="INTEGER" />
+    <result column="ent_id" property="entId" jdbcType="INTEGER" />
+    <result column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="win" property="win" jdbcType="INTEGER" />
+    <result column="exp" property="exp" jdbcType="INTEGER" />
+    <result column="clk" property="clk" jdbcType="INTEGER" />
+    <result column="timeout" property="timeout" jdbcType="INTEGER" />
+    <result column="error" property="error" jdbcType="INTEGER" />
+    <result column="nobid" property="nobid" jdbcType="INTEGER" />
+    <result column="lower" property="lower" jdbcType="INTEGER" />
+    <result column="overqps" property="overqps" jdbcType="INTEGER" />
+    <result column="investment" property="investment" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cre_day, cre_hour, ader_id, ent_id, bid, win, exp, clk, investment, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iwanvi.nvwa.dao.model.QuotaDspExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from quota_dsp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from quota_dsp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from quota_dsp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaDspExample" >
+    delete from quota_dsp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.QuotaDsp" >
+    insert into quota_dsp (id, cre_day, cre_hour, 
+      ader_id, ent_id, bid, 
+      win, exp, clk, investment, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{creDay,jdbcType=INTEGER}, #{creHour,jdbcType=INTEGER}, 
+      #{aderId,jdbcType=INTEGER}, #{entId,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, 
+      #{win,jdbcType=INTEGER}, #{exp,jdbcType=INTEGER}, #{clk,jdbcType=INTEGER}, #{investment,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaDsp" >
+    insert into quota_dsp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="creDay != null" >
+        cre_day,
+      </if>
+      <if test="creHour != null" >
+        cre_hour,
+      </if>
+      <if test="aderId != null" >
+        ader_id,
+      </if>
+      <if test="entId != null" >
+        ent_id,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="win != null" >
+        win,
+      </if>
+      <if test="exp != null" >
+        exp,
+      </if>
+      <if test="clk != null" >
+        clk,
+      </if>
+      
+      <if test="timeout != null" >
+        timeout,
+      </if>
+      <if test="error != null" >
+        error,
+      </if>
+      <if test="nobid != null" >
+        nobid,
+      </if>
+      <if test="lower != null" >
+        lower,
+      </if>
+      <if test="overqps != null" >
+        overqps,
+      </if>
+      
+      <if test="investment != null" >
+        investment,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="creDay != null" >
+        #{creDay,jdbcType=INTEGER},
+      </if>
+      <if test="creHour != null" >
+        #{creHour,jdbcType=INTEGER},
+      </if>
+      <if test="aderId != null" >
+        #{aderId,jdbcType=INTEGER},
+      </if>
+      <if test="entId != null" >
+        #{entId,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="win != null" >
+        #{win,jdbcType=INTEGER},
+      </if>
+      <if test="exp != null" >
+        #{exp,jdbcType=INTEGER},
+      </if>
+      <if test="clk != null" >
+        #{clk,jdbcType=INTEGER},
+      </if>
+    
+      <if test="timeout != null" >
+        #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="error != null" >
+        #{error,jdbcType=INTEGER},
+      </if>
+      <if test="nobid != null" >
+        #{nobid,jdbcType=INTEGER},
+      </if>
+      <if test="lower != null" >
+        #{lower,jdbcType=INTEGER},
+      </if>
+      <if test="overqps != null" >
+        #{overqps,jdbcType=INTEGER},
+      </if>
+      
+      <if test="investment != null" >
+        #{investment,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaDspExample" resultType="java.lang.Integer" >
+    select count(*) from quota_dsp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update quota_dsp
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.creDay != null" >
+        cre_day = #{record.creDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.creHour != null" >
+        cre_hour = #{record.creHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.aderId != null" >
+        ader_id = #{record.aderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.entId != null" >
+        ent_id = #{record.entId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.win != null" >
+        win = #{record.win,jdbcType=INTEGER},
+      </if>
+      <if test="record.exp != null" >
+        exp = #{record.exp,jdbcType=INTEGER},
+      </if>
+      <if test="record.clk != null" >
+        clk = #{record.clk,jdbcType=INTEGER},
+      </if>
+      <if test="record.investment != null" >
+        investment = #{record.investment,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update quota_dsp
+    set id = #{record.id,jdbcType=INTEGER},
+      cre_day = #{record.creDay,jdbcType=INTEGER},
+      cre_hour = #{record.creHour,jdbcType=INTEGER},
+      ader_id = #{record.aderId,jdbcType=INTEGER},
+      ent_id = #{record.entId,jdbcType=INTEGER},
+      bid = #{record.bid,jdbcType=INTEGER},
+      win = #{record.win,jdbcType=INTEGER},
+      exp = #{record.exp,jdbcType=INTEGER},
+      clk = #{record.clk,jdbcType=INTEGER},
+      investment = #{record.investment,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaDsp" >
+    update quota_dsp
+    <set >
+      <if test="creDay != null" >
+        cre_day = #{creDay,jdbcType=INTEGER},
+      </if>
+      <if test="creHour != null" >
+        cre_hour = #{creHour,jdbcType=INTEGER},
+      </if>
+      <if test="aderId != null" >
+        ader_id = #{aderId,jdbcType=INTEGER},
+      </if>
+      <if test="entId != null" >
+        ent_id = #{entId,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="win != null" >
+        win = #{win,jdbcType=INTEGER},
+      </if>
+      <if test="exp != null" >
+        exp = #{exp,jdbcType=INTEGER},
+      </if>
+      <if test="clk != null" >
+        clk = #{clk,jdbcType=INTEGER},
+      </if>
+      <if test="investment != null" >
+        investment = #{investment,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.QuotaDsp" >
+    update quota_dsp
+    set cre_day = #{creDay,jdbcType=INTEGER},
+      cre_hour = #{creHour,jdbcType=INTEGER},
+      ader_id = #{aderId,jdbcType=INTEGER},
+      ent_id = #{entId,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      win = #{win,jdbcType=INTEGER},
+      exp = #{exp,jdbcType=INTEGER},
+      clk = #{clk,jdbcType=INTEGER},
+      investment = #{investment,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

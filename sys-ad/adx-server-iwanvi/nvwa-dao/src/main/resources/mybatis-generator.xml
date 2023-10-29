@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--执行generator插件生成文件的命令： call mvn mybatis-generator:generate -e -->
+    <!-- 引入配置文件 -->
+    <!--<properties resource="mybatis.properties"/>-->
+    <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
+    <!--<classPathEntry location="D:\generator_mybatis\mysql-connector-java-5.1.24-bin.jar" /> -->
+
+    <!-- 一个数据库一个context -->
+    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <context id="MysqlTables" targetRuntime="MyBatis3" defaultModelType="flat">
+    <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin" />
+		<plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin" />
+		<plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin" />
+		<plugin type="com.itfsw.mybatis.generator.plugins.LimitPlugin" />
+		<plugin type="com.itfsw.mybatis.generator.plugins.ModelBuilderPlugin" />
+		<plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin" />
+		<plugin type="com.itfsw.mybatis.generator.plugins.ExampleTargetPlugin">
+		<!-- 修改Example类生成到目标包下 -->
+			<property name="targetPackage" value="com.iwanvi.nvwa.dao.model" />
+		</plugin>
+    <!-- 注释 -->
+    <commentGenerator >
+        <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+        <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+    </commentGenerator>
+
+    <!--jdbc-->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                    connectionURL="jdbc:mysql://127.0.0.1:3306/adx?useUnicode=true&amp;characterEncoding=utf8"
+                    userId="root" password="Dongle@123"/>
+    <!--实体类model-->
+    <javaModelGenerator targetPackage="com.iwanvi.nvwa.dao.model" targetProject="src/main/java"></javaModelGenerator>
+
+    <!--生成mapper.xml配置文件-->
+    <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources"></sqlMapGenerator>
+
+    <!--生成dao接口-->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.iwanvi.nvwa.dao" targetProject="src/main/java"></javaClientGenerator>
+        <!--对应数据库表-->
+        <!--<table tableName="xxxxxx" schema="nvwa"></table>-->
+        <!--<table tableName="user" schema="nvwa"></table>-->
+        <!--<table tableName="ad_position" schema="nvwa"></table>-->
+        <!--<table tableName="template" schema="nvwa"></table>-->
+        <!--<table tableName="module" schema="nvwa"></table>-->
+        <!--<table tableName="template_module_relation" schema="nvwa"></table>-->
+    	<!--<table tableName="flow_source" schema="nvw a"></table>-->
+    	<!--<table tableName="flow_dic" schema="nvwa"></table>-->
+    	<!--<table tableName="user" schema="nvwa"></table>-->
+    	<!--<table tableName="flow_source" schema="nvwa"></table>-->
+    	<!--<table tableName="dictionary" schema="nvwa"></table>-->
+    	<!--<table tableName="user" schema="nvwa"></table>-->
+    	<!--<table tableName="flow_source" schema="nvwa"></table>-->
+    	<!--<table tableName="dictionary" schema="nvwa"></table>-->
+        <!--<table tableName="company" schema="nvwa"></table>-->
+        <!--<table tableName="auth_group" schema="nvwa"></table>-->
+        <!--<table tableName="auths" schema="nvwa"></table>-->
+        <!--<table tableName="group_auths" schema="nvwa"></table>-->
+        <!--<table tableName="user_auths" schema="nvwa"></table>-->
+        <!--<table tableName="ad_position_price" schema="nawa"></table>-->
+        <!--<table tableName="area_group" schema="nvwa"></table>-->
+        <!--<table tableName="area" schema="nvwa"></table>-->
+       <!--  <table tableName="industry" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="application_package" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table> -->
+       <!--  <table tableName="region" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+         <table tableName="region_group" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+         <table tableName="region_group_region" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table> -->
+       <!--  <table tableName="industry_blanklist" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="competing_products" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="application_blackList" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="model_manage" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="books_manage" schema="zwww">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table> -->
+        
+        
+       <!--  <table tableName="settle_report" schema="zwww"></table> -->
+        <!--<table tableName="ad_position_time" domainObjectName="AdPositionTime" >-->
+        <!--</table>-->
+        <!--<table tableName="orders" domainObjectName="Orders" >-->
+        <!--</table>-->
+        <table tableName="entity_dsp" domainObjectName="DspCreative">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="entity_dsp" domainObjectName="EntityDsp">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+    </context>
+</generatorConfiguration>

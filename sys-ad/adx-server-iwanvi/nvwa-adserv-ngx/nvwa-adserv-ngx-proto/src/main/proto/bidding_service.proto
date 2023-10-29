@@ -1,0 +1,158 @@
+//Copyright 2019 iwanvi.com All right reserved.
+syntax = "proto2";
+
+package com.iwanvi.minerva.proto;
+
+import "ad_model.proto";
+import "common.proto";
+
+option java_package = "com.iwanvi.nvwa.proto";
+option java_outer_classname="BiddingProto";
+
+option java_generic_services = true;
+option optimize_for = SPEED;
+
+message CreativeStat{
+	required uint32 creative_id = 1;
+	optional double ctr = 2;
+}
+
+// 请求广告位信息
+message PosInfo{
+    optional string id = 16;
+    optional bytes app_id = 1;          // 应用id
+    optional bytes pos_id = 2;          // 广告位id
+    optional uint32 ad_num = 3;          // 请求的广告个数
+    optional uint32 height = 4;
+    optional uint32 width = 5;
+    repeated CreativeType creative_type = 6; //创意类型
+    repeated CostType cost_type = 7; // 收费类型cpc/cpm
+    optional uint32 duration = 8;       // 贴片广告时长
+    optional uint32 bidfloor = 9;       // adx竞价底价
+    optional string ad_type_id = 10;    // 广告类型id
+    repeated MapEntry ext = 11; //广告位扩展属性
+    optional uint32 min_duration = 12; //最小时长
+    optional uint32 max_duration = 13; //最大时长
+    repeated string dealid = 14;
+    optional string app_version = 15;
+    optional string app_name = 20;
+    optional string bundle = 19; //安卓应用包或者ios的appid
+    //--------新增字段-----------
+    optional CreativeType ad_type = 17; //广告形式，如开屏、插屏等
+    //素材类型：单图=1；组图=2；视频=3
+    optional uint32 toutiaoCreativeType = 18; //头条创意类型
+    repeated string tmid = 21; //广告位支持的模版id列表
+}
+
+// 请求的用户信息
+message UserInfo{
+    optional uint32 client_ip = 1;          // 用户ip
+    optional MuidType muid_type = 2;        // 移动终端类型
+    optional bytes muid = 3;                // 移动终端标示
+    optional bytes device_brand = 4;        // 手机品牌
+    optional bytes device_model = 5;        // 手机型号
+    optional OSType os = 6;                  // 操作系统
+    optional ConnectType connect_type = 7;  // 链接方式
+    optional Carrier carrier = 8;           // 运营商
+    optional uint32 area_code = 9;          // 地域码，共6位，每2位一级，分别是省级、市级、县级
+    optional AdxType adx_type = 10 [default = kAdxTypeUnKnown]; // 本次请求的adx类型，默认为UnKnown
+    optional TrafficType traffic_type = 11 [default = kTrafficTypeUnKnown];  // 流量来源
+    optional TerminalType terminal_type = 12 [default = kTerminalTypeUnKnown]; // 终端类型，如果为pc，则上述的各种移动字段无意义
+    optional string media_uuid = 13;       // 媒体唯一标示
+    optional uint32 behavior = 14; //频道or行为
+	//repeated Taste taste = 15; //兴趣爱好
+	optional GenderType gender_type = 16; //性别
+	repeated MapEntry ext = 17; //用户扩展属性
+	repeated uint32 behaviors = 18; //频道定向
+	optional string osv = 19; //操作系统版本号
+	optional string mac = 20; //mac地址
+	optional string ip = 21;  //用户ip地址
+	optional string ua = 22; //用户user-agent
+	optional uint32 screen_width = 23; 
+	optional uint32 screen_height = 24;
+	optional DeviceType deviceType = 25;
+	optional string adid = 26; //安卓id
+	optional double density = 27; //手机屏幕密度
+	optional double lat = 28; //纬度
+	optional double lon = 29; //经度
+	
+}
+
+message AdMsg{ 
+	optional string id = 46;
+    optional string impid = 45;
+    optional uint32 advertiser_id = 1;
+    optional string advertiser_uuid = 2;
+    optional uint32 plan_id = 3;
+    optional uint32 unit_id = 4;
+    optional uint32 creative_id = 5;
+    optional ExtensionType extension_type = 6; //推广类型
+    optional CreativeType creative_type = 7; //创意类型
+    optional uint32 paid_cpc = 8; //废弃字段
+    optional bytes title = 9;         	// 展示文字
+    optional string pic_url = 10;      	// 图片url
+    optional string land_url = 11;       //跳转url
+    optional string pkg_name = 12;
+    optional string description = 13;
+    optional bytes debug_info = 14;
+    optional CostType cost_type = 15; 			   //扣费类型
+    optional uint32 adx_bid_price = 16;            // adx竞价价格
+    optional AdxInfo adx_info = 17;   				// 素材在adx中的信息
+    optional uint32 next_unit_id = 18;             // 下一名的单元id
+    optional uint32 next_creative_id = 19;         // 下一名的素材id
+    optional string snk_creative_id = 20;          // snk creative's id
+    optional string snk_appkey = 21;               // snk appkey
+    optional uint32 snk_channel_id = 22;           // snk channel_id
+    optional NativeAd native_ad = 23; //原生广告数据
+    optional double adx_pay_discount = 24;   //adx扣费系数
+    optional uint32 bid_price = 25;          //dsp平台原始出价(未乘广告主系数之前)
+	optional string agent_uuid = 26;			 //代理商id
+	optional uint32 industry_id = 27; //行业id
+	optional AgentType agent_type = 28; //代理商类型
+	optional uint32 agent_cost = 29; //代理商扣费价格
+	optional double agent_pay_discount = 30; //代理商扣费系数
+	optional FrequencyCapping frequency_capping = 31; //频次控制
+	optional uint32 ad_duration = 32; //贴片广告时长
+	optional CPACapping cpa_capping = 33; //cpa限制
+	optional Pmp pmp = 34; //pmp
+	optional double sharing = 35; //分成系数
+	//optional NativeAdResp nativeAdResp = 36; //符合OpenRTB NativeAd规范的响应
+	repeated string clk_monitor_url = 37;
+	repeated string imp_monitor_url = 38;
+	
+	repeated string dl_monitor_url = 52; //下载监测
+	repeated string dps_monitor_url = 53; //deeplink成功监测
+	repeated string dpf_monitor_url = 54; //deeplink失败监测
+	
+	//added for iwanvi advertising platform
+	optional string pos_id = 39;
+	optional string dsp_id = 40; //第三方广告平台id
+	optional DspType dsp_type = 41; //第三方广告平台类型
+	optional string order_id = 42; //订单id
+	optional PutType put_type = 43; //投放类型
+	optional FrequencyType frequency_type = 44; //频次控制类型
+	optional string crid = 47; //第三方广告平台创意id
+	optional string source = 48; // 广告来源，自有系统或其他sdk
+	//应用名称，对于推广类型为安卓应用的话，对应应用名称
+	optional string app_name = 49; 
+	optional string fallback = 50; //fallback url, 如果deeplink无法打开，然后使用浏览器打开fallback地址
+	repeated MapEntry ext = 51; //扩展字段
+}
+
+message BiddingReq {
+    optional string id = 1;
+    repeated PosInfo pos_info = 3;           // 广告位信息
+    optional UserInfo user_info = 4;         // 用户信息
+    optional bool is_test = 5;               //是否是测试请求，测试请求会关闭匀速和频次控制相关影响出价的逻辑，保证在符合指定定向条件的情况下出广告
+    optional bool is_debug = 6;              //是否debug请求
+}
+
+message BiddingRsp {
+     required string id = 1;
+     repeated AdMsg ad_imps = 2; //最终展示的广告内容
+}
+
+service BiddingService {
+    rpc Search( BiddingReq ) returns ( BiddingRsp );
+    rpc Bid( BiddingReq ) returns ( BiddingRsp );
+}

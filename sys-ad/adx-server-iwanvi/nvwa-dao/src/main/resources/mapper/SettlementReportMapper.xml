@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.SettlementReportMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.SettlementReport">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="date" jdbcType="INTEGER" property="date" />
+    <result column="position_name" jdbcType="VARCHAR" property="positionName" />
+    <result column="position_id" jdbcType="VARCHAR" property="positionId" />
+    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+    <result column="exp" jdbcType="BIGINT" property="exp" />
+    <result column="clk" jdbcType="BIGINT" property="clk" />
+    <result column="fr" jdbcType="DOUBLE" property="fr" />
+    <result column="ctr" jdbcType="DOUBLE" property="ctr" />
+    <result column="cpm" jdbcType="DOUBLE" property="cpm" />
+    <result column="cpc" jdbcType="DOUBLE" property="cpc" />
+    <result column="exp_income" jdbcType="DOUBLE" property="expIncome" />
+    <result column="clk_income" jdbcType="DOUBLE" property="clkIncome" />
+    <result column="income" jdbcType="DOUBLE" property="income" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="flow_con" jdbcType="INTEGER" property="flowCon" />
+    <result column="app" jdbcType="INTEGER" property="app" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, date, position_name, position_id, exp, clk, fr, ctr, cpm, cpc, exp_income, clk_income, 
+    income, pid, flow_con, app, channel
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.SettlementReportExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from settlement_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from settlement_report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from settlement_report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.SettlementReportExample">
+    delete from settlement_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.SettlementReport">
+    insert into settlement_report (id, date, position_name, 
+      position_id, exp, clk, 
+      fr, ctr, cpm, cpc, 
+      exp_income, clk_income, income, 
+      pid, flow_con, app,
+      channel)
+    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=INTEGER}, #{positionName,jdbcType=VARCHAR}, 
+      #{positionId,jdbcType=VARCHAR}, #{exp,jdbcType=BIGINT}, #{clk,jdbcType=BIGINT}, 
+      #{fr,jdbcType=DOUBLE}, #{ctr,jdbcType=DOUBLE}, #{cpm,jdbcType=DOUBLE}, #{cpc,jdbcType=DOUBLE}, 
+      #{expIncome,jdbcType=DOUBLE}, #{clkIncome,jdbcType=DOUBLE}, #{income,jdbcType=DOUBLE}, 
+      #{pid,jdbcType=INTEGER}, #{flowCon,jdbcType=INTEGER}, #{app,jdbcType=INTEGER},
+      #{channel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.SettlementReport">
+    insert into settlement_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="positionName != null">
+        position_name,
+      </if>
+      <if test="positionId != null">
+        position_id,
+      </if>
+      <if test="exp != null">
+        exp,
+      </if>
+      <if test="clk != null">
+        clk,
+      </if>
+      <if test="fr != null">
+        fr,
+      </if>
+      <if test="ctr != null">
+        ctr,
+      </if>
+      <if test="cpm != null">
+        cpm,
+      </if>
+      <if test="cpc != null">
+        cpc,
+      </if>
+      <if test="expIncome != null">
+        exp_income,
+      </if>
+      <if test="clkIncome != null">
+        clk_income,
+      </if>
+      <if test="income != null">
+        income,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="flowCon != null">
+        flow_con,
+      </if>
+      <if test="app != null">
+        app,
+      </if>
+      <if test="channel != null">
+          channel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=INTEGER},
+      </if>
+      <if test="positionName != null">
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null">
+        #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="exp != null">
+        #{exp,jdbcType=BIGINT},
+      </if>
+      <if test="clk != null">
+        #{clk,jdbcType=BIGINT},
+      </if>
+      <if test="fr != null">
+        #{fr,jdbcType=DOUBLE},
+      </if>
+      <if test="ctr != null">
+        #{ctr,jdbcType=DOUBLE},
+      </if>
+      <if test="cpm != null">
+        #{cpm,jdbcType=DOUBLE},
+      </if>
+      <if test="cpc != null">
+        #{cpc,jdbcType=DOUBLE},
+      </if>
+      <if test="expIncome != null">
+        #{expIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="clkIncome != null">
+        #{clkIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="income != null">
+        #{income,jdbcType=DOUBLE},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="flowCon != null">
+        #{flowCon,jdbcType=INTEGER},
+      </if>
+      <if test="app != null">
+        #{app,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.SettlementReportExample" resultType="java.lang.Long">
+    select count(*) from settlement_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update settlement_report
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionName != null">
+        position_name = #{record.positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionId != null">
+        position_id = #{record.positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exp != null">
+        exp = #{record.exp,jdbcType=BIGINT},
+      </if>
+      <if test="record.clk != null">
+        clk = #{record.clk,jdbcType=BIGINT},
+      </if>
+      <if test="record.fr != null">
+        fr = #{record.fr,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ctr != null">
+        ctr = #{record.ctr,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cpm != null">
+        cpm = #{record.cpm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cpc != null">
+        cpc = #{record.cpc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.expIncome != null">
+        exp_income = #{record.expIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="record.clkIncome != null">
+        clk_income = #{record.clkIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="record.income != null">
+        income = #{record.income,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.flowCon != null">
+        flow_con = #{record.flowCon,jdbcType=INTEGER},
+      </if>
+      <if test="record.app != null">
+        app = #{record.app,jdbcType=INTEGER},
+      </if>
+      <if test="record.channel != null">
+          channel = #{record.channel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update settlement_report
+    set id = #{record.id,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=INTEGER},
+      position_name = #{record.positionName,jdbcType=VARCHAR},
+      position_id = #{record.positionId,jdbcType=VARCHAR},
+      exp = #{record.exp,jdbcType=BIGINT},
+      clk = #{record.clk,jdbcType=BIGINT},
+      fr = #{record.fr,jdbcType=DOUBLE},
+      ctr = #{record.ctr,jdbcType=DOUBLE},
+      cpm = #{record.cpm,jdbcType=DOUBLE},
+      cpc = #{record.cpc,jdbcType=DOUBLE},
+      exp_income = #{record.expIncome,jdbcType=DOUBLE},
+      clk_income = #{record.clkIncome,jdbcType=DOUBLE},
+      income = #{record.income,jdbcType=DOUBLE},
+      pid = #{record.pid,jdbcType=INTEGER},
+      flow_con = #{record.flowCon,jdbcType=INTEGER},
+      app = #{record.app,jdbcType=INTEGER},
+      channel = #{record.channel,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.SettlementReport">
+    update settlement_report
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=INTEGER},
+      </if>
+      <if test="positionName != null">
+        position_name = #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null">
+        position_id = #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="exp != null">
+        exp = #{exp,jdbcType=BIGINT},
+      </if>
+      <if test="clk != null">
+        clk = #{clk,jdbcType=BIGINT},
+      </if>
+      <if test="fr != null">
+        fr = #{fr,jdbcType=DOUBLE},
+      </if>
+      <if test="ctr != null">
+        ctr = #{ctr,jdbcType=DOUBLE},
+      </if>
+      <if test="cpm != null">
+        cpm = #{cpm,jdbcType=DOUBLE},
+      </if>
+      <if test="cpc != null">
+        cpc = #{cpc,jdbcType=DOUBLE},
+      </if>
+      <if test="expIncome != null">
+        exp_income = #{expIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="clkIncome != null">
+        clk_income = #{clkIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="income != null">
+        income = #{income,jdbcType=DOUBLE},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="flowCon != null">
+        flow_con = #{flowCon,jdbcType=INTEGER},
+      </if>
+      <if test="app != null">
+        app = #{app,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null">
+          channel = #{channel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.SettlementReport">
+    update settlement_report
+    set date = #{date,jdbcType=INTEGER},
+      position_name = #{positionName,jdbcType=VARCHAR},
+      position_id = #{positionId,jdbcType=VARCHAR},
+      exp = #{exp,jdbcType=BIGINT},
+      clk = #{clk,jdbcType=BIGINT},
+      fr = #{fr,jdbcType=DOUBLE},
+      ctr = #{ctr,jdbcType=DOUBLE},
+      cpm = #{cpm,jdbcType=DOUBLE},
+      cpc = #{cpc,jdbcType=DOUBLE},
+      exp_income = #{expIncome,jdbcType=DOUBLE},
+      clk_income = #{clkIncome,jdbcType=DOUBLE},
+      income = #{income,jdbcType=DOUBLE},
+      pid = #{pid,jdbcType=INTEGER},
+      flow_con = #{flowCon,jdbcType=INTEGER},
+      app = #{app,jdbcType=INTEGER},
+      channel = #{channel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="com.iwanvi.nvwa.dao.model.SettlementReportExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from settlement_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into settlement_report
+    (id, date, position_name, position_id, exp, clk, fr, ctr, cpm, cpc, exp_income, clk_income, 
+      income, pid, flow_con, app, channel)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.date,jdbcType=INTEGER}, #{item.positionName,jdbcType=VARCHAR}, 
+        #{item.positionId,jdbcType=VARCHAR}, #{item.exp,jdbcType=BIGINT}, #{item.clk,jdbcType=BIGINT}, 
+        #{item.fr,jdbcType=DOUBLE}, #{item.ctr,jdbcType=DOUBLE}, #{item.cpm,jdbcType=DOUBLE}, 
+        #{item.cpc,jdbcType=DOUBLE}, #{item.expIncome,jdbcType=DOUBLE}, #{item.clkIncome,jdbcType=DOUBLE}, 
+        #{item.income,jdbcType=DOUBLE}, #{item.pid,jdbcType=INTEGER}, #{item.flowCon,jdbcType=INTEGER}, 
+        #{item.app,jdbcType=INTEGER},#{item.channel,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into settlement_report (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'date'.toString() == column.value">
+          #{item.date,jdbcType=INTEGER}
+        </if>
+        <if test="'position_name'.toString() == column.value">
+          #{item.positionName,jdbcType=VARCHAR}
+        </if>
+        <if test="'position_id'.toString() == column.value">
+          #{item.positionId,jdbcType=VARCHAR}
+        </if>
+        <if test="'exp'.toString() == column.value">
+          #{item.exp,jdbcType=BIGINT}
+        </if>
+        <if test="'clk'.toString() == column.value">
+          #{item.clk,jdbcType=BIGINT}
+        </if>
+        <if test="'fr'.toString() == column.value">
+          #{item.fr,jdbcType=DOUBLE}
+        </if>
+        <if test="'ctr'.toString() == column.value">
+          #{item.ctr,jdbcType=DOUBLE}
+        </if>
+        <if test="'cpm'.toString() == column.value">
+          #{item.cpm,jdbcType=DOUBLE}
+        </if>
+        <if test="'cpc'.toString() == column.value">
+          #{item.cpc,jdbcType=DOUBLE}
+        </if>
+        <if test="'exp_income'.toString() == column.value">
+          #{item.expIncome,jdbcType=DOUBLE}
+        </if>
+        <if test="'clk_income'.toString() == column.value">
+          #{item.clkIncome,jdbcType=DOUBLE}
+        </if>
+        <if test="'income'.toString() == column.value">
+          #{item.income,jdbcType=DOUBLE}
+        </if>
+        <if test="'pid'.toString() == column.value">
+          #{item.pid,jdbcType=INTEGER}
+        </if>
+        <if test="'flow_con'.toString() == column.value">
+          #{item.flowCon,jdbcType=INTEGER}
+        </if>
+        <if test="'app'.toString() == column.value">
+          #{item.app,jdbcType=INTEGER}
+        </if>
+        <if test="'channel'.toString() == column.value">
+          #{item.channel,jdbcType=INTEGER}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+    <select id="sumReportWithDate" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select date, sum(exp) exp, sum(clk) clk, sum(income) income, sum(exp_income) exp_income,
+        sum(clk_income) clk_income, sum(income)*1000/sum(exp) cpm, sum(income)/sum(clk) cpc, sum(clk)/sum(exp) ctr
+        from settlement_report
+        <where>
+            <trim prefixOverrides="and">
+                <if test="sDate != null and eDate != null">
+                    and date between ${sDate} and ${eDate}
+                </if>
+                <if test="pids != null and pids.size > 0">
+                    and pid in (
+                    <foreach collection="pids" item="pid" separator=",">
+                        #{pid}
+                    </foreach>
+                    )
+                </if>
+                <if test="types != null and types.size > 0">
+                    and flow_con in (
+                    <foreach collection="types" item="type" separator=",">
+                        #{type}
+                    </foreach>
+                    )
+                </if>
+                <if test="apps != null and apps.size > 0">
+                    and app in (
+                    <foreach collection="apps" item="app" separator=",">
+                        #{app}
+                    </foreach>
+                    )
+                </if>
+                <if test="posIds != null and posIds.size > 0">
+                    and position_id in (
+                    <foreach collection="posIds" item="posId" separator=",">
+                        #{posId}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels != null and channels.size > 0">
+                    and channel in (
+                    <foreach collection="channels" item="it" separator=",">
+                        #{it}
+                    </foreach>
+                    )
+                </if>
+            </trim>
+        </where>
+        group by date
+    </select>
+    <select id="sumReportWithGroup" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select sum(exp) exp, sum(clk) clk, sum(income) income, sum(exp_income) exp_income,
+        sum(clk_income) clk_income, sum(income)*1000/sum(exp) cpm, sum(income)/sum(clk) cpc, sum(clk)/sum(exp) ctr,
+        case when count(distinct flow_con) > 1  then null
+        when count(distinct flow_con) = 1 then max(flow_con) end as flow_con
+            ,${groupItem} item_id
+        from settlement_report
+        <where>
+            <trim prefixOverrides="and">
+                <if test="sDate != null and eDate != null">
+                    and date between ${sDate} and ${eDate}
+                </if>
+                <if test="pids != null and pids.size > 0">
+                    and pid in (
+                    <foreach collection="pids" item="pid" separator=",">
+                        #{pid}
+                    </foreach>
+                    )
+                </if>
+                <if test="types != null and types.size > 0">
+                    and flow_con in (
+                    <foreach collection="types" item="type" separator=",">
+                        #{type}
+                    </foreach>
+                    )
+                </if>
+                <if test="apps != null and apps.size > 0">
+                    and app in (
+                    <foreach collection="apps" item="app" separator=",">
+                        #{app}
+                    </foreach>
+                    )
+                </if>
+                <if test="posIds != null and posIds.size > 0">
+                    and position_id in (
+                    <foreach collection="posIds" item="posId" separator=",">
+                        #{posId}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels != null and channels.size > 0">
+                    and channel in (
+                    <foreach collection="channels" item="it" separator=",">
+                        #{it}
+                    </foreach>
+                    )
+                </if>
+            </trim>
+        </where>
+        <if test="groupItem != null">
+            group by ${groupItem}
+        </if>
+    </select>
+    <select id="detailReport" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select date, sum(exp) exp, sum(clk) clk, sum(income) income, sum(exp_income) exp_income,
+        sum(clk_income) clk_income, sum(income)*1000/sum(exp) cpm, sum(income)/sum(clk) cpc, sum(clk)/sum(exp) ctr
+        from settlement_report
+        <where>
+            <trim prefixOverrides="and">
+                <if test="sDate != null and eDate != null">
+                    and date between ${sDate} and ${eDate}
+                </if>
+                <if test="pids != null and pids.size > 0">
+                    and pid in (
+                    <foreach collection="pids" item="pid" separator=",">
+                        #{pid}
+                    </foreach>
+                    )
+                </if>
+                <if test="types != null and types.size > 0">
+                    and flow_con in (
+                    <foreach collection="types" item="type" separator=",">
+                        #{type}
+                    </foreach>
+                    )
+                </if>
+                <if test="apps != null and apps.size > 0">
+                    and app in (
+                    <foreach collection="apps" item="app" separator=",">
+                        #{app}
+                    </foreach>
+                    )
+                </if>
+                <if test="posIds != null and posIds.size > 0">
+                    and position_id in (
+                    <foreach collection="posIds" item="posId" separator=",">
+                        #{posId}
+                    </foreach>
+                    )
+                </if>
+                <if test="channels != null and channels.size > 0">
+                    and channel in (
+                    <foreach collection="channels" item="it" separator=",">
+                        #{it}
+                    </foreach>
+                    )
+                </if>
+            </trim>
+        </where>
+        group by date
+    </select>
+</mapper>

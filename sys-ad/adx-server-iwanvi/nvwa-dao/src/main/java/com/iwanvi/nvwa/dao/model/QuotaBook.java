@@ -1,0 +1,652 @@
+package com.iwanvi.nvwa.dao.model;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class QuotaBook {
+    private Integer id;
+
+    private Integer creDay;
+
+    private Integer level1;
+
+    private Integer level2;
+
+    private Integer level3;
+
+    private Integer req = 0;
+
+    private Integer requv = 0;
+
+    private Integer exp = 0;
+
+    private Integer expuv = 0;
+
+    private Integer clk = 0;
+
+    private Integer clkuv = 0;
+
+    private double exp_rate;
+
+    private double clk_rate;
+
+    private Long invest = 0l;
+
+    private String level1Name;
+
+    private String level2Name;
+
+    private String level3Name;
+
+    private Double expPer;
+
+    private float cpm = 0f;
+
+    private float cpc = 0f;
+
+    private float investment = 0f;
+
+    private String itemId;
+
+    private String itemName;
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public float getInvestment() {
+        return (float) Math.round(invest / 1000) / 100;
+    }
+
+    public void setInvestment(float investment) {
+        this.investment = investment;
+    }
+
+    public float getCpm() {
+        if (exp != null && exp != 0) {
+            cpm = (float) getInvestment() / exp * 1000;
+            cpm = (float) Math.round(cpm * 100) / 100;
+        }
+        return cpm;
+    }
+
+    public void setCpm(float cpm) {
+        this.cpm = cpm;
+    }
+
+    public float getCpc() {
+        if (clk != null && clk != 0) {
+            cpc = (float) getInvestment() / clk;
+            cpc = (float) Math.round(cpc * 100) / 100;
+        }
+        return cpc;
+    }
+
+    public void setCpc(float cpc) {
+        this.cpc = cpc;
+    }
+
+    public double getExp_rate() {
+        if (getReq() == null || getExp() == null) {
+            exp_rate = 0 ;
+        } else {
+            exp_rate = Double.parseDouble(String.format("%.2f", (((float)getExp() / (float)getReq()) * 100.0)));
+        }
+        return exp_rate;
+    }
+
+    public double getClk_rate() {
+        if (getClk() == null || getExp() == null) {
+            clk_rate = 0;
+        } else {
+            clk_rate = Double.parseDouble(String.format("%.2f", ((float)getClk() / (float)getExp()) * 100.0));
+        }
+        return clk_rate;
+    }
+
+    public Double getExpPer() {
+        if (getExpuv() == null || getExp() == null) {
+            expPer = 0d;
+        } else {
+            expPer = Double.parseDouble(String.format("%.2f", (((float)getExp() / (float)getExpuv()))));
+        }
+        return expPer;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getCreDay() {
+        return creDay;
+    }
+
+    public void setCreDay(Integer creDay) {
+        this.creDay = creDay;
+    }
+
+    public Integer getLevel1() {
+        return level1;
+    }
+
+    public void setLevel1(Integer level1) {
+        this.level1 = level1;
+    }
+
+    public Integer getLevel2() {
+        return level2;
+    }
+
+    public void setLevel2(Integer level2) {
+        this.level2 = level2;
+    }
+
+    public Integer getLevel3() {
+        return level3;
+    }
+
+    public void setLevel3(Integer level3) {
+        this.level3 = level3;
+    }
+
+    public Integer getReq() {
+        return req;
+    }
+
+    public void setReq(Integer req) {
+        this.req = req;
+    }
+
+    public Integer getRequv() {
+        return requv;
+    }
+
+    public void setRequv(Integer requv) {
+        this.requv = requv;
+    }
+
+    public Integer getExp() {
+        return exp;
+    }
+
+    public void setExp(Integer exp) {
+        this.exp = exp;
+    }
+
+    public Integer getExpuv() {
+        return expuv;
+    }
+
+    public void setExpuv(Integer expuv) {
+        this.expuv = expuv;
+    }
+
+    public Integer getClk() {
+        return clk;
+    }
+
+    public void setClk(Integer clk) {
+        this.clk = clk;
+    }
+
+    public Integer getClkuv() {
+        return clkuv;
+    }
+
+    public void setClkuv(Integer clkuv) {
+        this.clkuv = clkuv;
+    }
+
+    public Long getInvest() {
+        return invest;
+    }
+
+    public void setInvest(Long invest) {
+        this.invest = invest;
+    }
+
+    public String getLevel1Name() {
+        return level1Name;
+    }
+
+    public void setLevel1Name(String level1Name) {
+        this.level1Name = level1Name;
+    }
+
+    public String getLevel2Name() {
+        return level2Name;
+    }
+
+    public void setLevel2Name(String level2Name) {
+        this.level2Name = level2Name;
+    }
+
+    public String getLevel3Name() {
+        return level3Name;
+    }
+
+    public void setLevel3Name(String level3Name) {
+        this.level3Name = level3Name;
+    }
+
+    /**
+     * This method was generated by MyBatis Generator.
+     * This method corresponds to the database table quota_book
+     *
+     * @mbg.generated
+     * @project https://github.com/itfsw/mybatis-generator-plugin
+     */
+    public static QuotaBook.Builder builder() {
+        return new QuotaBook.Builder();
+    }
+
+    /**
+     * This class was generated by MyBatis Generator.
+     * This class corresponds to the database table quota_book
+     *
+     * @mbg.generated
+     * @project https://github.com/itfsw/mybatis-generator-plugin
+     */
+    public static class Builder {
+        /**
+         * This field was generated by MyBatis Generator.
+         * This field corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        private QuotaBook obj;
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder() {
+            this.obj = new QuotaBook();
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.id
+         *
+         * @param id the value for quota_book.id
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder id(Integer id) {
+            obj.setId(id);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.cre_day
+         *
+         * @param creDay the value for quota_book.cre_day
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder creDay(Integer creDay) {
+            obj.setCreDay(creDay);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.level1
+         *
+         * @param level1 the value for quota_book.level1
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder level1(Integer level1) {
+            obj.setLevel1(level1);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.level2
+         *
+         * @param level2 the value for quota_book.level2
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder level2(Integer level2) {
+            obj.setLevel2(level2);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.level3
+         *
+         * @param level3 the value for quota_book.level3
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder level3(Integer level3) {
+            obj.setLevel3(level3);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.req
+         *
+         * @param req the value for quota_book.req
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder req(Integer req) {
+            obj.setReq(req);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.requv
+         *
+         * @param requv the value for quota_book.requv
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder requv(Integer requv) {
+            obj.setRequv(requv);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.exp
+         *
+         * @param exp the value for quota_book.exp
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder exp(Integer exp) {
+            obj.setExp(exp);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.expuv
+         *
+         * @param expuv the value for quota_book.expuv
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder expuv(Integer expuv) {
+            obj.setExpuv(expuv);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.clk
+         *
+         * @param clk the value for quota_book.clk
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder clk(Integer clk) {
+            obj.setClk(clk);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.clkuv
+         *
+         * @param clkuv the value for quota_book.clkuv
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder clkuv(Integer clkuv) {
+            obj.setClkuv(clkuv);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method sets the value of the database column quota_book.invest
+         *
+         * @param invest the value for quota_book.invest
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public Builder invest(Long invest) {
+            obj.setInvest(invest);
+            return this;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public QuotaBook build() {
+            return this.obj;
+        }
+    }
+
+    /**
+     * This enum was generated by MyBatis Generator.
+     * This enum corresponds to the database table quota_book
+     *
+     * @mbg.generated
+     * @project https://github.com/itfsw/mybatis-generator-plugin
+     */
+    public enum Column {
+        id("id", "id", "INTEGER", false),
+        creDay("cre_day", "creDay", "INTEGER", false),
+        level1("level1", "level1", "INTEGER", false),
+        level2("level2", "level2", "INTEGER", false),
+        level3("level3", "level3", "INTEGER", false),
+        req("req", "req", "INTEGER", false),
+        requv("requv", "requv", "INTEGER", false),
+        exp("exp", "exp", "INTEGER", false),
+        expuv("expuv", "expuv", "INTEGER", false),
+        clk("clk", "clk", "INTEGER", false),
+        clkuv("clkuv", "clkuv", "INTEGER", false),
+        invest("invest", "invest", "BIGINT", false);
+
+        /**
+         * This field was generated by MyBatis Generator.
+         * This field corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        private static final String BEGINNING_DELIMITER = "\"";
+
+        /**
+         * This field was generated by MyBatis Generator.
+         * This field corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        private static final String ENDING_DELIMITER = "\"";
+
+        /**
+         * This field was generated by MyBatis Generator.
+         * This field corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        private final String column;
+
+        /**
+         * This field was generated by MyBatis Generator.
+         * This field corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        private final boolean isColumnNameDelimited;
+
+        /**
+         * This field was generated by MyBatis Generator.
+         * This field corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        private final String javaProperty;
+
+        /**
+         * This field was generated by MyBatis Generator.
+         * This field corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        private final String jdbcType;
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public String value() {
+            return this.column;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public String getValue() {
+            return this.column;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public String getJavaProperty() {
+            return this.javaProperty;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public String getJdbcType() {
+            return this.jdbcType;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        Column(String column, String javaProperty, String jdbcType, boolean isColumnNameDelimited) {
+            this.column = column;
+            this.javaProperty = javaProperty;
+            this.jdbcType = jdbcType;
+            this.isColumnNameDelimited = isColumnNameDelimited;
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public String desc() {
+            return this.getEscapedColumnName() + " DESC";
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public String asc() {
+            return this.getEscapedColumnName() + " ASC";
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public static Column[] excludes(Column ... excludes) {
+            ArrayList<Column> columns = new ArrayList<>(Arrays.asList(Column.values()));
+            if (excludes != null && excludes.length > 0) {
+                columns.removeAll(new ArrayList<>(Arrays.asList(excludes)));
+            }
+            return columns.toArray(new Column[]{});
+        }
+
+        /**
+         * This method was generated by MyBatis Generator.
+         * This method corresponds to the database table quota_book
+         *
+         * @mbg.generated
+         * @project https://github.com/itfsw/mybatis-generator-plugin
+         */
+        public String getEscapedColumnName() {
+            if (this.isColumnNameDelimited) {
+                return new StringBuilder().append(BEGINNING_DELIMITER).append(this.column).append(ENDING_DELIMITER).toString();
+            } else {
+                return this.column;
+            }
+        }
+    }
+}

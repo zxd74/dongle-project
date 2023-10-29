@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+http://www.springframework.org/schema/task 
+http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<task:scheduled-tasks>
+		<!-- 每小时10分钟触发 -->
+		<task:scheduled ref="taskService" method="quotaTask" cron="0 10 * * * ?" />
+		<!-- 每天3点触发 -->
+		<task:scheduled ref="taskService" method="quotaTaskForDay" cron="0 0 3 * * ?" />
+		
+		<!-- 每小时0分钟10秒触发 -->
+		<task:scheduled ref="dspPlatformTaskService" method="quotaTask" cron="10 0 * * * ?" />
+		<!-- 每小时0分钟30秒触发 -->
+		<task:scheduled ref="flowTaskService" method="quotaTask" cron="30 0 * * * ?" />
+	</task:scheduled-tasks>
+	
+</beans>

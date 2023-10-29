@@ -1,0 +1,20 @@
+//package test;
+//
+//import com.iwanvi.nvwa.common.utils.JsonUtils;
+//import com.iwanvi.nvwa.dao.model.User;
+//import com.iwanvi.nvwa.web.service.UserService;
+//import org.junit.Test;
+//import org.springframework.beans.factory.annotation.Autowired;
+//
+//public class UserTest extends BaseTest {
+//    @Autowired
+//    private UserService userService;
+//
+////    @Test
+//    public void updateTest() {
+//        String userJson = "{\"id\":4,\"type\":9,\"company\":null,\"status\":1,\"password\":\"\",\"realName\":\"\",\"phone\":\"\",\"remark\":\"\",\"auths\":[{\"icon\":\"el-icon-view\",\"name\":\"数据概览\",\"aid\":1,\"childs\":[{\"icon\":\"\",\"name\":\"流量数据\",\"aid\":2,\"childs\":[]},{\"icon\":\"\",\"name\":\"客户数据\",\"aid\":3,\"childs\":[]},{\"icon\":\"\",\"name\":\"平台数据\",\"aid\":5,\"childs\":[]}]},{\"icon\":\"el-icon-sort\",\"name\":\"流量管理\",\"aid\":6,\"childs\":[{\"icon\":\"\",\"name\":\"流量源APP管理\",\"aid\":8,\"childs\":[],\"status\":0},{\"icon\":\"\",\"name\":\"广告模板管理\",\"aid\":9,\"childs\":[],\"status\":0},{\"icon\":\"\",\"name\":\"广告位管理\",\"aid\":10,\"childs\":[],\"status\":1},{\"icon\":\"\",\"name\":\"广告位底价\",\"aid\":11,\"childs\":[]},{\"icon\":\"\",\"name\":\"流量控制\",\"aid\":61,\"childs\":[]},{\"icon\":\"\",\"name\":\"SDK广告轮播策略\",\"aid\":62,\"childs\":[]},{\"icon\":\"\",\"name\":\"广告位映射\",\"aid\":63,\"childs\":[]},{\"icon\":\"\",\"name\":\"版本渠道管理\",\"aid\":64,\"childs\":[]},{\"icon\":\"\",\"name\":\"预警设置\",\"aid\":76,\"childs\":[]}]},{\"icon\":\"el-icon-news\",\"name\":\"广告平台管理\",\"aid\":12,\"childs\":[{\"icon\":\"\",\"name\":\"广告平台管理\",\"aid\":51,\"childs\":[]},{\"icon\":\"\",\"name\":\"广告平台广告主\",\"aid\":52,\"childs\":[]},{\"icon\":\"\",\"name\":\"广告平台创意\",\"aid\":53,\"childs\":[]}]},{\"icon\":\"el-icon-service\",\"name\":\"用户管理\",\"aid\":13,\"childs\":[{\"icon\":\"\",\"name\":\"用户管理\",\"aid\":14,\"childs\":[]},{\"icon\":\"\",\"name\":\"用户组管理\",\"aid\":54,\"childs\":[]}]},{\"icon\":\"el-icon-service\",\"name\":\"客户管理\",\"aid\":15,\"childs\":[{\"icon\":\"\",\"name\":\"客户管理\",\"aid\":16,\"childs\":[]}]},{\"icon\":\"el-icon-sold-out\",\"name\":\"订单投放\",\"aid\":21,\"childs\":[{\"icon\":\"\",\"name\":\"订单列表\",\"aid\":22,\"childs\":[]},{\"icon\":\"\",\"name\":\"投放列表\",\"aid\":23,\"childs\":[]},{\"icon\":\"\",\"name\":\"创意列表\",\"aid\":24,\"childs\":[]},{\"icon\":\"\",\"name\":\"创意状态查询\",\"aid\":79,\"childs\":[]}]},{\"icon\":\"el-icon-sold-out\",\"name\":\"抄底投放\",\"aid\":57,\"childs\":[{\"icon\":\"\",\"name\":\"抄底投放\",\"aid\":60,\"childs\":[]}]},{\"icon\":\"el-icon-sold-out\",\"name\":\"SDK投放\",\"aid\":65,\"childs\":[{\"icon\":\"\",\"name\":\"SDK包段\",\"aid\":66,\"childs\":[]},{\"icon\":\"\",\"name\":\"SDK包量\",\"aid\":67,\"childs\":[]}]},{\"icon\":\"el-icon-edit-outline\",\"name\":\"审核管理\",\"aid\":27,\"childs\":[{\"icon\":\"\",\"name\":\"客户审核\",\"aid\":28,\"childs\":[]},{\"icon\":\"\",\"name\":\"广告审核\",\"aid\":29,\"childs\":[]}]},{\"icon\":\"el-icon-setting\",\"name\":\"参数管理\",\"aid\":68,\"childs\":[{\"icon\":\"\",\"name\":\"关键词管理\",\"aid\":69,\"childs\":[]},{\"icon\":\"\",\"name\":\"地域管理\",\"aid\":70,\"childs\":[]},{\"icon\":\"\",\"name\":\"黑名单管理\",\"aid\":71,\"childs\":[]},{\"icon\":\"\",\"name\":\"机型管理\",\"aid\":72,\"childs\":[]},{\"icon\":\"\",\"name\":\"图书分级管理\",\"aid\":73,\"childs\":[]}]},{\"icon\":\"el-icon-date\",\"name\":\"数据报告\",\"aid\":33,\"childs\":[{\"icon\":\"\",\"name\":\"实时监控-流量源\",\"aid\":34,\"childs\":[]},{\"icon\":\"\",\"name\":\"实时监控-DSP平台\",\"aid\":35,\"childs\":[]},{\"icon\":\"\",\"name\":\"流量源报告\",\"aid\":36,\"childs\":[]},{\"icon\":\"\",\"name\":\"流量源报告-地区\",\"aid\":81,\"childs\":[]},{\"icon\":\"\",\"name\":\"DSP平台报告\",\"aid\":80,\"childs\":[]},{\"icon\":\"\",\"name\":\"SDK报告\",\"aid\":38,\"childs\":[]},{\"icon\":\"\",\"name\":\"订单报告\",\"aid\":39,\"childs\":[]},{\"icon\":\"\",\"name\":\"客户报告\",\"aid\":43,\"childs\":[]},{\"icon\":\"\",\"name\":\"图书分类报告\",\"aid\":74,\"childs\":[]},{\"icon\":\"\",\"name\":\"结算报告\",\"aid\":75,\"childs\":[]}]}]}";
+//        User user = JsonUtils.TO_OBJ(userJson, User.class);
+//
+//        userService.update(user);
+//    }
+//}

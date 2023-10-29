@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iwanvi.nvwa.dao.AuthsMapper">
+    <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.Auths">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="platform" property="platform" jdbcType="INTEGER"/>
+        <result column="is_menu" property="isMenu" jdbcType="INTEGER"/>
+        <result column="orders" property="orders" jdbcType="INTEGER"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="readonly" property="readonly" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, name, path, pid, status, platform, is_menu, orders, icon
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iwanvi.nvwa.dao.model.AuthsExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from auths
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from auths
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from auths
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.AuthsExample">
+        delete from auths
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.Auths" keyProperty="id" useGeneratedKeys="true">
+        insert into auths (id, name, path,
+          pid, status, platform,
+          is_menu, orders, icon)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+          #{pid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{platform,jdbcType=INTEGER},
+          #{isMenu,jdbcType=INTEGER}, #{orders,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.Auths" keyProperty="id" useGeneratedKeys="true">
+        insert into auths
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="path != null">
+                path,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="platform != null">
+                platform,
+            </if>
+            <if test="isMenu != null">
+                is_menu,
+            </if>
+            <if test="orders != null">
+                orders,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="platform != null">
+                #{platform,jdbcType=INTEGER},
+            </if>
+            <if test="isMenu != null">
+                #{isMenu,jdbcType=INTEGER},
+            </if>
+            <if test="orders != null">
+                #{orders,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.AuthsExample" resultType="java.lang.Integer">
+        select count(*) from auths
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update auths
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.path != null">
+                path = #{record.path,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.platform != null">
+                platform = #{record.platform,jdbcType=INTEGER},
+            </if>
+            <if test="record.isMenu != null">
+                is_menu = #{record.isMenu,jdbcType=INTEGER},
+            </if>
+            <if test="record.orders != null">
+                orders = #{record.orders,jdbcType=INTEGER},
+            </if>
+            <if test="record.icon != null">
+                icon = #{record.icon,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update auths
+        set id = #{record.id,jdbcType=INTEGER},
+        name = #{record.name,jdbcType=VARCHAR},
+        path = #{record.path,jdbcType=VARCHAR},
+        pid = #{record.pid,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        platform = #{record.platform,jdbcType=INTEGER},
+        is_menu = #{record.isMenu,jdbcType=INTEGER},
+        orders = #{record.orders,jdbcType=INTEGER},
+        icon = #{record.icon,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.Auths">
+        update auths
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="platform != null">
+                platform = #{platform,jdbcType=INTEGER},
+            </if>
+            <if test="isMenu != null">
+                is_menu = #{isMenu,jdbcType=INTEGER},
+            </if>
+            <if test="orders != null">
+                orders = #{orders,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                icon = #{orders,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.Auths">
+        update auths
+        set name = #{name,jdbcType=VARCHAR},
+          path = #{path,jdbcType=VARCHAR},
+          pid = #{pid,jdbcType=INTEGER},
+          status = #{status,jdbcType=INTEGER},
+          platform = #{platform,jdbcType=INTEGER},
+          is_menu = #{isMenu,jdbcType=INTEGER},
+          orders = #{orders,jdbcType=INTEGER},
+          icon = #{icon,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectByUserIdAndPlatform" resultMap="BaseResultMap">
+        select a.*, ua.readonly readonly
+        from user_auths ua
+        left join user u on ua.uid = u.id
+        left join auths a on ua.aid = a.id
+        where ua.status = 1
+        and a.status = 1
+        <if test="uid != null">
+            and u.id = ${uid}
+        </if>
+        <if test="platform != null">
+            and a.platform = ${platform}
+        </if>
+    </select>
+    <select id="selectByGroupIdAndPlatform" resultMap="BaseResultMap">
+        select a.*
+        from group_auths ga
+        left join auths a on ga.aid = a.id
+        where ga.status = 1
+        and a.status = 1
+        <if test="gid != null">
+            and ga.gid = ${gid}
+        </if>
+        <if test="platform != null">
+            and a.platform = ${platform}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.AdvertiserDspMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.AdvertiserDsp">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="flow_consumer_id" jdbcType="INTEGER" property="flowConsumerId" />
+    <result column="dsp_advertiser_id" jdbcType="VARCHAR" property="dspAdvertiserId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="examines_status" jdbcType="INTEGER" property="examinesStatus" />
+    <result column="examines_user" jdbcType="INTEGER" property="examinesUser" />
+    <result column="examines_time" jdbcType="TIMESTAMP" property="examinesTime" />
+    <result column="examines_remarks" jdbcType="VARCHAR" property="examinesRemarks" />
+    <result column="businesslicense" jdbcType="VARCHAR" property="businesslicense" />
+    <result column="qualifications" jdbcType="VARCHAR" property="qualifications" />
+    <result column="industry_type" jdbcType="INTEGER" property="industryType" />
+    <result column="linkman" jdbcType="VARCHAR" property="linkman" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, flow_consumer_id, dsp_advertiser_id, status, examines_status, examines_user, 
+    examines_time, examines_remarks, businesslicense, qualifications, industry_type, 
+    linkman, tel, address, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.AdvertiserDspExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from advertiser_dsp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and limit != null">
+      limit ${start},${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from advertiser_dsp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from advertiser_dsp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.AdvertiserDspExample">
+    delete from advertiser_dsp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.AdvertiserDsp">
+    insert into advertiser_dsp (id, name, flow_consumer_id, 
+      dsp_advertiser_id, status, examines_status, 
+      examines_user, examines_time, examines_remarks, 
+      businesslicense, qualifications, industry_type, 
+      linkman, tel, address, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{flowConsumerId,jdbcType=INTEGER}, 
+      #{dspAdvertiserId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{examinesStatus,jdbcType=INTEGER}, 
+      #{examinesUser,jdbcType=INTEGER}, #{examinesTime,jdbcType=TIMESTAMP}, #{examinesRemarks,jdbcType=VARCHAR}, 
+      #{businesslicense,jdbcType=VARCHAR}, #{qualifications,jdbcType=VARCHAR}, #{industryType,jdbcType=INTEGER}, 
+      #{linkman,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.AdvertiserDsp">
+    insert into advertiser_dsp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="flowConsumerId != null">
+        flow_consumer_id,
+      </if>
+      <if test="dspAdvertiserId != null">
+        dsp_advertiser_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="examinesStatus != null">
+        examines_status,
+      </if>
+      <if test="examinesUser != null">
+        examines_user,
+      </if>
+      <if test="examinesTime != null">
+        examines_time,
+      </if>
+      <if test="examinesRemarks != null">
+        examines_remarks,
+      </if>
+      <if test="businesslicense != null">
+        businesslicense,
+      </if>
+      <if test="qualifications != null">
+        qualifications,
+      </if>
+      <if test="industryType != null">
+        industry_type,
+      </if>
+      <if test="linkman != null">
+        linkman,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flowConsumerId != null">
+        #{flowConsumerId,jdbcType=INTEGER},
+      </if>
+      <if test="dspAdvertiserId != null">
+        #{dspAdvertiserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="examinesStatus != null">
+        #{examinesStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examinesUser != null">
+        #{examinesUser,jdbcType=INTEGER},
+      </if>
+      <if test="examinesTime != null">
+        #{examinesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinesRemarks != null">
+        #{examinesRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicense != null">
+        #{businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="qualifications != null">
+        #{qualifications,jdbcType=VARCHAR},
+      </if>
+      <if test="industryType != null">
+        #{industryType,jdbcType=INTEGER},
+      </if>
+      <if test="linkman != null">
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.AdvertiserDspExample" resultType="java.lang.Integer">
+    select count(*) from advertiser_dsp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update advertiser_dsp
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowConsumerId != null">
+        flow_consumer_id = #{record.flowConsumerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dspAdvertiserId != null">
+        dsp_advertiser_id = #{record.dspAdvertiserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinesStatus != null">
+        examines_status = #{record.examinesStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinesUser != null">
+        examines_user = #{record.examinesUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinesTime != null">
+        examines_time = #{record.examinesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examinesRemarks != null">
+        examines_remarks = #{record.examinesRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businesslicense != null">
+        businesslicense = #{record.businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qualifications != null">
+        qualifications = #{record.qualifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryType != null">
+        industry_type = #{record.industryType,jdbcType=INTEGER},
+      </if>
+      <if test="record.linkman != null">
+        linkman = #{record.linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update advertiser_dsp
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      flow_consumer_id = #{record.flowConsumerId,jdbcType=INTEGER},
+      dsp_advertiser_id = #{record.dspAdvertiserId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      examines_status = #{record.examinesStatus,jdbcType=INTEGER},
+      examines_user = #{record.examinesUser,jdbcType=INTEGER},
+      examines_time = #{record.examinesTime,jdbcType=TIMESTAMP},
+      examines_remarks = #{record.examinesRemarks,jdbcType=VARCHAR},
+      businesslicense = #{record.businesslicense,jdbcType=VARCHAR},
+      qualifications = #{record.qualifications,jdbcType=VARCHAR},
+      industry_type = #{record.industryType,jdbcType=INTEGER},
+      linkman = #{record.linkman,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.AdvertiserDsp">
+    update advertiser_dsp
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flowConsumerId != null">
+        flow_consumer_id = #{flowConsumerId,jdbcType=INTEGER},
+      </if>
+      <if test="dspAdvertiserId != null">
+        dsp_advertiser_id = #{dspAdvertiserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="examinesStatus != null">
+        examines_status = #{examinesStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examinesUser != null">
+        examines_user = #{examinesUser,jdbcType=INTEGER},
+      </if>
+      <if test="examinesTime != null">
+        examines_time = #{examinesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinesRemarks != null">
+        examines_remarks = #{examinesRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicense != null">
+        businesslicense = #{businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="qualifications != null">
+        qualifications = #{qualifications,jdbcType=VARCHAR},
+      </if>
+      <if test="industryType != null">
+        industry_type = #{industryType,jdbcType=INTEGER},
+      </if>
+      <if test="linkman != null">
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.AdvertiserDsp">
+    update advertiser_dsp
+    set name = #{name,jdbcType=VARCHAR},
+      flow_consumer_id = #{flowConsumerId,jdbcType=INTEGER},
+      dsp_advertiser_id = #{dspAdvertiserId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      examines_status = #{examinesStatus,jdbcType=INTEGER},
+      examines_user = #{examinesUser,jdbcType=INTEGER},
+      examines_time = #{examinesTime,jdbcType=TIMESTAMP},
+      examines_remarks = #{examinesRemarks,jdbcType=VARCHAR},
+      businesslicense = #{businesslicense,jdbcType=VARCHAR},
+      qualifications = #{qualifications,jdbcType=VARCHAR},
+      industry_type = #{industryType,jdbcType=INTEGER},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

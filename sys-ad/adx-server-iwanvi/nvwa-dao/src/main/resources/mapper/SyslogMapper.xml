@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.SyslogMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.Syslog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="op_time" jdbcType="TIMESTAMP" property="opTime" />
+    <result column="object_id" jdbcType="INTEGER" property="objectId" />
+    <result column="class_type" jdbcType="VARCHAR" property="classType" />
+    <result column="op_type" jdbcType="VARCHAR" property="opType" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.iwanvi.nvwa.dao.model.Syslog">
+    <result column="object_data" jdbcType="LONGVARCHAR" property="objectData" />
+    <result column="old_data" jdbcType="LONGVARCHAR" property="oldData" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, op_time, object_id, class_type, op_type, user_type
+  </sql>
+  <sql id="Blob_Column_List">
+    object_data, old_data
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.iwanvi.nvwa.dao.model.SyslogExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from syslog
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.SyslogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from syslog
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from syslog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from syslog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.SyslogExample">
+    delete from syslog
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.Syslog">
+    insert into syslog (id, user_id, op_time, 
+      object_id, class_type, op_type, 
+      user_type, object_data, old_data
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{opTime,jdbcType=TIMESTAMP}, 
+      #{objectId,jdbcType=INTEGER}, #{classType,jdbcType=VARCHAR}, #{opType,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=INTEGER}, #{objectData,jdbcType=LONGVARCHAR}, #{oldData,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.Syslog">
+    insert into syslog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="opTime != null">
+        op_time,
+      </if>
+      <if test="objectId != null">
+        object_id,
+      </if>
+      <if test="classType != null">
+        class_type,
+      </if>
+      <if test="opType != null">
+        op_type,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="objectData != null">
+        object_data,
+      </if>
+      <if test="oldData != null">
+        old_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="opTime != null">
+        #{opTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="objectId != null">
+        #{objectId,jdbcType=INTEGER},
+      </if>
+      <if test="classType != null">
+        #{classType,jdbcType=VARCHAR},
+      </if>
+      <if test="opType != null">
+        #{opType,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="objectData != null">
+        #{objectData,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="oldData != null">
+        #{oldData,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.SyslogExample" resultType="java.lang.Integer">
+    select count(*) from syslog
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update syslog
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.opTime != null">
+        op_time = #{record.opTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.objectId != null">
+        object_id = #{record.objectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.classType != null">
+        class_type = #{record.classType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opType != null">
+        op_type = #{record.opType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null">
+        user_type = #{record.userType,jdbcType=INTEGER},
+      </if>
+      <if test="record.objectData != null">
+        object_data = #{record.objectData,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.oldData != null">
+        old_data = #{record.oldData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update syslog
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      op_time = #{record.opTime,jdbcType=TIMESTAMP},
+      object_id = #{record.objectId,jdbcType=INTEGER},
+      class_type = #{record.classType,jdbcType=VARCHAR},
+      op_type = #{record.opType,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=INTEGER},
+      object_data = #{record.objectData,jdbcType=LONGVARCHAR},
+      old_data = #{record.oldData,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update syslog
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      op_time = #{record.opTime,jdbcType=TIMESTAMP},
+      object_id = #{record.objectId,jdbcType=INTEGER},
+      class_type = #{record.classType,jdbcType=VARCHAR},
+      op_type = #{record.opType,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.Syslog">
+    update syslog
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="opTime != null">
+        op_time = #{opTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="objectId != null">
+        object_id = #{objectId,jdbcType=INTEGER},
+      </if>
+      <if test="classType != null">
+        class_type = #{classType,jdbcType=VARCHAR},
+      </if>
+      <if test="opType != null">
+        op_type = #{opType,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="objectData != null">
+        object_data = #{objectData,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="oldData != null">
+        old_data = #{oldData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.iwanvi.nvwa.dao.model.Syslog">
+    update syslog
+    set user_id = #{userId,jdbcType=INTEGER},
+      op_time = #{opTime,jdbcType=TIMESTAMP},
+      object_id = #{objectId,jdbcType=INTEGER},
+      class_type = #{classType,jdbcType=VARCHAR},
+      op_type = #{opType,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER},
+      object_data = #{objectData,jdbcType=LONGVARCHAR},
+      old_data = #{oldData,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.Syslog">
+    update syslog
+    set user_id = #{userId,jdbcType=INTEGER},
+      op_time = #{opTime,jdbcType=TIMESTAMP},
+      object_id = #{objectId,jdbcType=INTEGER},
+      class_type = #{classType,jdbcType=VARCHAR},
+      op_type = #{opType,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

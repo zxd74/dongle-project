@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iwanvi.nvwa.dao.QuotaPutMapper">
+	<resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.QuotaPut">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="put_type" property="putType" jdbcType="INTEGER" />
+		<result column="put_id" property="putId" jdbcType="INTEGER" />
+		<result column="cre_day" property="creDay" jdbcType="INTEGER" />
+		<result column="cre_hour" property="creHour" jdbcType="INTEGER" />
+		<result column="req" property="req" jdbcType="INTEGER" />
+		<result column="exp" property="exp" jdbcType="INTEGER" />
+		<result column="clk" property="clk" jdbcType="INTEGER" />
+		<result column="cost" property="cost" jdbcType="BIGINT" />
+		<result column="investment" property="investment" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="bid" property="bid" jdbcType="INTEGER" />
+		<result column="win" property="win" jdbcType="INTEGER" />
+		<result column="agent_cost" property="agentCost" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, put_type, put_id, cre_day, cre_hour, req, exp, clk,
+		cost,
+		investment,
+		create_time, bid,
+		win, agent_cost
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.iwanvi.nvwa.dao.model.QuotaPutExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from quota_put
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from quota_put
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		quota_put
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaPutExample">
+		delete from quota_put
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.QuotaPut">
+		insert into quota_put
+		(id,put_type,
+		put_id, cre_day,
+		cre_hour, req, exp,
+		clk, cost, investment,
+		create_time,
+		bid, win,
+		agent_cost)
+		values (#{id,jdbcType=INTEGER},
+		#{putType,jdbcType=INTEGER},
+		#{putId,jdbcType=INTEGER},
+		#{creDay,jdbcType=INTEGER},
+		#{creHour,jdbcType=INTEGER},
+		#{req,jdbcType=INTEGER},
+		#{exp,jdbcType=INTEGER},
+		#{clk,jdbcType=INTEGER},
+		#{cost,jdbcType=BIGINT},
+		#{investment,jdbcType=BIGINT},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{bid,jdbcType=INTEGER},
+		#{win,jdbcType=INTEGER},
+		#{agentCost,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaPut">
+		insert into quota_put
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="putType != null">
+				put_type,
+			</if>
+			<if test="putId != null">
+				put_id,
+			</if>
+			<if test="creDay != null">
+				cre_day,
+			</if>
+			<if test="creHour != null">
+				cre_hour,
+			</if>
+			<if test="req != null">
+				req,
+			</if>
+			<if test="exp != null">
+				exp,
+			</if>
+			<if test="clk != null">
+				clk,
+			</if>
+			<if test="cost != null">
+				cost,
+			</if>
+			<if test="investment != null">
+				investment,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="bid != null">
+				bid,
+			</if>
+			<if test="win != null">
+				win,
+			</if>
+			<if test="agentCost != null">
+				agent_cost,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="putType != null">
+				#{putType,jdbcType=INTEGER},
+			</if>
+			<if test="putId != null">
+				#{putId,jdbcType=INTEGER},
+			</if>
+			<if test="creDay != null">
+				#{creDay,jdbcType=INTEGER},
+			</if>
+			<if test="creHour != null">
+				#{creHour,jdbcType=INTEGER},
+			</if>
+			<if test="req != null">
+				#{req,jdbcType=INTEGER},
+			</if>
+			<if test="exp != null">
+				#{exp,jdbcType=INTEGER},
+			</if>
+			<if test="clk != null">
+				#{clk,jdbcType=INTEGER},
+			</if>
+			<if test="cost != null">
+				#{cost,jdbcType=BIGINT},
+			</if>
+			<if test="investment != null">
+				#{investment,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bid != null">
+				#{bid,jdbcType=INTEGER},
+			</if>
+			<if test="win != null">
+				#{win,jdbcType=INTEGER},
+			</if>
+			<if test="agentCost != null">
+				#{agentCost,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaPutExample"
+		resultType="java.lang.Integer">
+		select count(*) from quota_put
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update quota_put
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.putType != null">
+				put_type = #{record.putType,jdbcType=INTEGER},
+			</if>
+			<if test="record.creDay != null">
+				cre_day = #{record.creDay,jdbcType=INTEGER},
+			</if>
+			<if test="record.creHour != null">
+				cre_hour = #{record.creHour,jdbcType=INTEGER},
+			</if>
+			<if test="record.req != null">
+				req = #{record.req,jdbcType=INTEGER},
+			</if>
+			<if test="record.exp != null">
+				exp = #{record.exp,jdbcType=INTEGER},
+			</if>
+			<if test="record.clk != null">
+				clk = #{record.clk,jdbcType=INTEGER},
+			</if>
+			<if test="record.cost != null">
+				cost = #{record.cost,jdbcType=BIGINT},
+			</if>
+			<if test="record.investment != null">
+				investment = #{record.investment,jdbcType=BIGINT},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.bid != null">
+				bid = #{record.bid,jdbcType=INTEGER},
+			</if>
+			<if test="record.win != null">
+				win = #{record.win,jdbcType=INTEGER},
+			</if>
+			<if test="record.agentCost != null">
+				agent_cost = #{record.agentCost,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update quota_put
+		set id = #{record.id,jdbcType=INTEGER},
+		put_type =
+		#{record.putType,jdbcType=INTEGER},
+		put_id =
+		#{record.putId,jdbcType=INTEGER},
+		cre_day =
+		#{record.creDay,jdbcType=INTEGER},
+		cre_hour =
+		#{record.creHour,jdbcType=INTEGER},
+		req =
+		#{record.req,jdbcType=INTEGER},
+		exp = #{record.exp,jdbcType=INTEGER},
+		clk = #{record.clk,jdbcType=INTEGER},
+		cost =
+		#{record.cost,jdbcType=BIGINT},
+		investment =
+		#{record.investment,jdbcType=BIGINT},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		bid =
+		#{record.bid,jdbcType=INTEGER},
+		win = #{record.win,jdbcType=INTEGER},
+		agent_cost = #{record.agentCost,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaPut">
+		update quota_put
+		<set>
+			<if test="putType != null">
+				put_type = #{putType,jdbcType=INTEGER},
+			</if>
+			<if test="putId != null">
+				put_id = #{putId,jdbcType=INTEGER},
+			</if>
+			<if test="creDay != null">
+				cre_day = #{creDay,jdbcType=INTEGER},
+			</if>
+			<if test="creHour != null">
+				cre_hour = #{creHour,jdbcType=INTEGER},
+			</if>
+			<if test="req != null">
+				req = #{req,jdbcType=INTEGER},
+			</if>
+			<if test="exp != null">
+				exp = #{exp,jdbcType=INTEGER},
+			</if>
+			<if test="clk != null">
+				clk = #{clk,jdbcType=INTEGER},
+			</if>
+			<if test="cost != null">
+				cost = #{cost,jdbcType=BIGINT},
+			</if>
+			<if test="investment != null">
+				investment = #{investment,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bid != null">
+				bid = #{bid,jdbcType=INTEGER},
+			</if>
+			<if test="win != null">
+				win = #{win,jdbcType=INTEGER},
+			</if>
+			<if test="agentCost != null">
+				agent_cost = #{agentCost,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.QuotaPut">
+		update quota_put
+		set put_type = #{putType,jdbcType=INTEGER},
+		put_id =
+		#{putId,jdbcType=INTEGER},
+		cre_day =
+		#{creDay,jdbcType=INTEGER},
+		cre_hour = #{creHour,jdbcType=INTEGER},
+		req
+		= #{req,jdbcType=INTEGER},
+		exp = #{exp,jdbcType=INTEGER},
+		clk =
+		#{clk,jdbcType=INTEGER},
+		cost =
+		#{cost,jdbcType=BIGINT},
+		investment =
+		#{investment,jdbcType=BIGINT},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		bid =
+		#{bid,jdbcType=INTEGER},
+		win =
+		#{win,jdbcType=INTEGER},
+		agent_cost =
+		#{agentCost,jdbcType=BIGINT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<sql id="Example_Where_Clause_Join">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and p.${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and p.${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and p.${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and p.${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<select id="selectSumDataByCreday" parameterType="com.iwanvi.nvwa.dao.model.QuotaPutExample"
+		resultMap="BaseResultMap">
+		SELECT p.cre_day AS 'cre_day',
+		SUM(p.req) AS 'req',
+		SUM(`p`.exp) +
+		SUM(`c`.exp) AS 'exp',
+		SUM(`p`.clk) + SUM(`c`.clk) AS 'clk',
+		SUM(`p`.bid) + SUM(`c`.bid) AS 'bid' ,
+		(SUM(`p`.investment) +
+		SUM(`c`.investment))/100000 AS 'investment'
+		FROM quota_put AS p ,
+		quota_consumer AS c
+		<include refid="Example_Where_Clause_Join" />
+		GROUP BY p.cre_day
+	</select>
+	<select id="selectSumDataByFlow" parameterType="com.iwanvi.nvwa.dao.model.QuotaPutExample"
+		resultMap="BaseResultMap">
+		SELECT `p`.`id` as fsId,`p`.`put_name`as fsName,
+		SUM(`q`.req) AS req ,
+		SUM(`q`.bid) AS bid ,SUM(`q`.bid) AS bid ,
+		SUM(`q`.cost) AS cost
+		,SUM(`q`.investment)/100000 AS investment ,
+		SUM(`q`.`exp`) AS EXP ,
+		SUM(`q`.clk) AS clk
+		FROM quota_put AS q, put AS p
+		<include refid="Example_Where_Clause" />
+		and `q`.`put_id` = `p`.`id`
+		GROUP BY `p`.`id`
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<select id="getOneFlowDataByHour" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT
+		`flow_source`.`media_name` AS 'fsName',
+		`quota_put`.`cre_hour` AS
+		'cre_hour',
+		SUM(`quota_put`.`req`) AS 'req',
+		SUM(`quota_put`.`bid`) AS
+		'bid',
+		SUM(`quota_put`.`investment`) AS
+		'investment',
+		SUM(`quota_put`.`exp`) AS 'exp',
+		SUM(`quota_put`.`clk`) AS 'clk'
+		FROM
+		quota_put , put, flow_source
+		WHERE
+		`flow_source`.`id`=
+		`put`.`dx_media`
+		AND
+		`quota_put`.`put_id`=`put`.`id`
+		AND
+		`quota_put`.cre_day between
+		#{start} and #{end}
+		AND `put`.`dx_media`=
+		#{dx_media}
+		<if test="all == null ">
+			GROUP BY
+			`quota_put`.`cre_hour`
+		</if>
+	</select>
+	<select id="getFlowDataByDay" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT
+		`quota_put`.`cre_day` AS cre_day,
+		`flow_source`.`media_name` AS
+		'fsName',
+		SUM(`quota_put`.`req`) AS 'req',
+		SUM(`quota_put`.`bid`) AS
+		'bid',
+		SUM(`quota_put`.`exp`) AS 'exp',
+		SUM(`quota_put`.`clk`) AS 'clk',
+		SUM(`quota_put`.`investment`)/100000 AS 'investment'
+		FROM quota_put ,
+		put, flow_source
+		WHERE
+		`flow_source`.`id`= `put`.`dx_media`
+		AND
+		`quota_put`.`put_id`=`put`.`id`
+		AND `quota_put`.cre_day
+		BETWEEN
+		#{start}
+		AND #{end}
+		AND `put`.`dx_media`= #{dx_media}
+		<if test="isGroup != null">
+			GROUP BY `quota_put`.cre_day
+		</if>
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<select id="getFlowDataByHourAndFlow" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT
+		`flow_source`.`media_name` AS 'fsName',
+		`quota_put`.`cre_hour` AS
+		'cre_hour',
+		`put`.`dx_media` AS fsId,
+		SUM(`quota_put`.`req`) AS 'req',
+		SUM(`quota_put`.`bid`) AS 'bid',
+		SUM(`quota_put`.`exp`) AS 'exp',
+		SUM(`quota_put`.`clk`) AS 'clk'
+		FROM quota_put , put, flow_source
+		WHERE
+		`flow_source`.`id`= `put`.`dx_media`
+		AND
+		`quota_put`.`put_id`=`put`.`id`
+		AND `put`.`dx_media` IN
+		<foreach item="list" index="index" collection="list" open="("
+			separator="," close=")"> #{list}</foreach>
+		AND (`quota_put`.cre_day BETWEEN #{start} AND #{end})
+		GROUP BY
+		`quota_put`.`cre_hour`,`put`.`dx_media`
+	</select>
+	<select id="getFlowDataOneDayByFs" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT
+		`flow_source`.`media_name` AS 'fsName',
+		`quota_put`.`cre_day` AS
+		'cre_day',
+		`put`.`dx_media` AS 'fsId',
+		SUM(`quota_put`.`req`) AS 'req',
+		SUM(`quota_put`.`bid`) AS 'bid',
+		SUM(`quota_put`.`exp`) AS 'exp',
+		SUM(`quota_put`.`clk`) AS 'clk'
+		FROM quota_put , put, flow_source
+		WHERE
+		`flow_source`.`id`= `put`.`dx_media`
+		AND
+		`quota_put`.`put_id`=`put`.`id`
+		AND (`quota_put`.cre_day BETWEEN
+		#{start} AND #{end})
+		AND `put`.`dx_media` IN
+		<foreach item="list" index="index" collection="list" open="("
+			separator="," close=")"> #{list}</foreach>
+		GROUP
+		BY`put`.`dx_media`
+	</select>
+	<select id="getFsByDay" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`quota_put`.`cre_day` AS
+		'cre_day',
+		SUM(`quota_put`.`req`) AS
+		'req',
+		SUM(`quota_put`.`bid`) AS 'bid',
+		SUM(`quota_put`.`exp`) AS 'exp',
+		SUM(`quota_put`.`clk`) AS 'clk'
+		FROM quota_put , put, flow_source
+		WHERE
+		`flow_source`.`id`= `put`.`dx_media`
+		AND
+		`quota_put`.`put_id`=`put`.`id`
+		AND (`quota_put`.cre_day BETWEEN
+		#{start} AND #{end})
+		AND `put`.`dx_media` IN
+		<foreach item="list" index="index" collection="list" open="("
+			separator="," close=")"> #{list}</foreach>
+		<if test="table == null">
+			GROUP
+			BY`quota_put`.`cre_day`
+		</if>
+	</select>
+	<select id="getFsByFs" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		`flow_source`.`media_name` AS 'fsName',
+		`put`.`dx_media` AS
+		'fsId',
+		`quota_put`.`cre_day` AS
+		'cre_day',
+		SUM(`quota_put`.`req`) AS
+		'req',
+		SUM(`quota_put`.`bid`) AS 'bid',
+		SUM(`quota_put`.`exp`) AS 'exp',
+		SUM(`quota_put`.`clk`) AS 'clk'
+		FROM quota_put , put, flow_source
+		WHERE
+		`flow_source`.`id`= `put`.`dx_media`
+		AND
+		`quota_put`.`put_id`=`put`.`id`
+		AND (`quota_put`.cre_day BETWEEN
+		#{start} AND #{end})
+		AND `put`.`dx_media` IN
+		<foreach item="list" index="index" collection="list" open="("
+			separator="," close=")"> #{list}</foreach>
+		GROUP
+		BY`put`.`dx_media`
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<sql id="Put_Where_Clause">
+		<choose>
+			<when test="putType != null and putType != ''">
+				<choose>
+					<!-- 投放类型为精确投放时 -->
+					<when test="putType == 19">
+						<if test="id != null and id != ''">
+							and p.id = #{id}
+						</if>
+						<if test="putType != null and putType != ''">
+							and p.put_type = #{putType}
+						</if>
+						<if test="oid != null and oid != ''">
+							and p.oid = #{oid}
+						</if>
+						<if test="pid != null and pid != ''">
+							and p.pid = #{pid}
+						</if>
+						<choose>
+							<when test="createUser != null and createUser != ''">
+								and p.create_user = #{createUser}
+							</when>
+							<otherwise>
+								<if test="createUsers != null and createUsers.size > 0">
+									and p.create_user in
+									<foreach collection="createUsers" separator="," open="("
+										close=")" item="user">
+										#{user}
+									</foreach>
+								</if>
+							</otherwise>
+						</choose>
+						<if test="putState != null and putState != ''">
+							and p.put_state = #{putState}
+						</if>
+					</when>
+					<!-- 投放类型为订单投放时 -->
+					<otherwise>
+						<if test="id != null and id != ''">
+							and p.id = #{id}
+						</if>
+						<if test="oid != null and oid != ''">
+							and p.oid = #{oid}
+						</if>
+						<choose>
+							<when test="createUser != null and createUser != ''">
+								and p.create_user = #{createUser}
+							</when>
+							<otherwise>
+								<if test="createUsers != null and createUsers.size > 0">
+									and p.create_user in
+									<foreach collection="createUsers" separator="," open="("
+										close=")" item="user">
+										#{user}
+									</foreach>
+								</if>
+							</otherwise>
+						</choose>
+						<if test="putState != null and putState != ''">
+							and p.put_state = #{putState}
+						</if>
+					</otherwise>
+				</choose>
+			</when>
+			<!-- 投放类型默认为精确投放时 -->
+			<otherwise>
+				<if test="id != null and id != ''">
+					and p.id = #{id}
+				</if>
+				<if test="putType != null and putType != ''">
+					and p.put_type = #{putType}
+				</if>
+				<if test="oid != null and oid != ''">
+					and p.oid = #{oid}
+				</if>
+				<if test="pid != null and pid != ''">
+					and p.pid = #{pid}
+				</if>
+				<choose>
+					<when test="createUser != null and createUser != ''">
+						and p.create_user = #{createUser}
+					</when>
+					<otherwise>
+						<if test="createUsers != null and createUsers.size > 0">
+							and p.create_user in
+							<foreach collection="createUsers" separator="," open="("
+								close=")" item="user">
+								#{user}
+							</foreach>
+						</if>
+					</otherwise>
+				</choose>
+				<if test="putState != null and putState != ''">
+					and p.put_state = #{putState}
+				</if>
+			</otherwise>
+		</choose>
+	</sql>
+
+	<sql id="Qp_Where_Clause">
+		<if test="putType != null and putType != ''">
+			and qp.put_type = #{putType}
+		</if>
+		<if test="putId != null and putId != ''">
+			and qp.put_id = #{putId}
+		</if>
+		<if test="sTime != null and eTime != null">
+			and qp.cre_day between #{sTime} and #{eTime}
+		</if>
+		<if test="sTime != null and eTime != null">
+			and qp.cre_day between #{sTime} and #{eTime}
+		</if>
+	</sql>
+
+	<sql id="Base_Select_Clause">
+		SUM(CASE WHEN qp.cre_day = #{day} and qp.cre_hour = #{hour}
+		THEN 0 else qp.exp END) exp,
+		SUM(CASE WHEN qp.cre_day = #{day} and
+		qp.cre_hour = #{hour}
+		THEN 0 else qp.clk END) clk,
+		SUM(CASE WHEN
+		qp.cre_day = #{day} and qp.cre_hour = #{hour}
+		THEN 0 else qp.cost
+		END)/1000 cost,
+		SUM(CASE WHEN qp.cre_day = #{day} and qp.cre_hour =
+		#{hour}
+		THEN 0 else qp.investment END)/1000 investment
+	</sql>
+
+	<select id="listByDay" parameterType="java.util.Map"
+		resultType="com.iwanvi.nvwa.dao.model.QuotaPut">
+		select p.id putId,p.put_name putName,qp.cre_day creDay,
+		<include refid="Base_Select_Clause" />
+		<choose>
+			<when test="putType != null and putType != ''">
+				<choose>
+					<!-- 投放类型为精确投放时 -->
+					<when test="putType == 19">
+						from
+						put p
+					</when>
+					<otherwise>
+						from
+						order_put p
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				from
+				put p
+			</otherwise>
+		</choose>
+		left join quota_put qp
+		on p.id =
+		qp.put_id
+		where 1=1
+		<include refid="Put_Where_Clause" />
+		<include refid="Qp_Where_Clause" />
+		group by qp.cre_day
+		order by qp.cre_day
+	</select>
+
+	<select id="listByOidOrPid" parameterType="java.util.Map"
+		resultType="com.iwanvi.nvwa.dao.model.QuotaPut">
+		select p.id putId,p.put_name putName,
+		<include refid="Base_Select_Clause" />
+		<choose>
+			<when test="putType != null and putType != ''">
+				<choose>
+					<!-- 投放类型为精确投放时 -->
+					<when test="putType == 19">
+						from
+						put p
+					</when>
+					<otherwise>
+						from
+						order_put p
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				from
+				put p
+			</otherwise>
+		</choose>
+		left join quota_put qp
+		on p.id = qp.put_id
+		<include refid="Qp_Where_Clause" />
+		where 1=1
+		<include refid="Put_Where_Clause" />
+		group by p.id
+		order by p.run_state desc, p.id desc
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+
+	<select id="getQuotaPutByDayHour" resultType="java.util.HashMap"
+		parameterType="java.util.Map">
+		select t1.id id, t1.put_id unitId, t1.req req, t1.bid
+		bid,
+		t1.win win, t1.exp exp, t1.clk clk, t1.cost cost, t1.agent_cost
+		agentCost
+		from quota_put t1
+		where t1.put_id = ${unitId} and t1.put_type
+		=
+		${puType} and t1.cre_day = #{day} and t1.cre_hour = #{hour} limit 1
+	</select>
+</mapper>

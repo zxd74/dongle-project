@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.QuotaFlowAreaMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.QuotaFlowArea">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="cre_day" jdbcType="INTEGER" property="creDay" />
+    <result column="req" jdbcType="BIGINT" property="req" />
+    <result column="requv" jdbcType="INTEGER" property="requv" />
+    <result column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="exp" jdbcType="INTEGER" property="exp" />
+    <result column="expuv" jdbcType="INTEGER" property="expuv" />
+    <result column="clk" jdbcType="INTEGER" property="clk" />
+    <result column="clkuv" jdbcType="INTEGER" property="clkuv" />
+    <result column="invest" jdbcType="BIGINT" property="invest" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, area, cre_day, req, requv, bid, exp, expuv, clk, clkuv, invest
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowAreaExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from quota_flow_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from quota_flow_area
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from quota_flow_area
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowAreaExample">
+    delete from quota_flow_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowArea">
+    insert into quota_flow_area (id, area, cre_day,
+      req, requv, bid, exp,
+      expuv, clk, clkuv,
+      invest)
+    values (#{id,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, #{creDay,jdbcType=INTEGER},
+      #{req,jdbcType=BIGINT}, #{requv,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, #{exp,jdbcType=INTEGER},
+      #{expuv,jdbcType=INTEGER}, #{clk,jdbcType=INTEGER}, #{clkuv,jdbcType=INTEGER},
+      #{invest,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowArea">
+    insert into quota_flow_area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="creDay != null">
+        cre_day,
+      </if>
+      <if test="req != null">
+        req,
+      </if>
+      <if test="requv != null">
+        requv,
+      </if>
+      <if test="bid != null">
+        bid,
+      </if>
+      <if test="exp != null">
+        exp,
+      </if>
+      <if test="expuv != null">
+        expuv,
+      </if>
+      <if test="clk != null">
+        clk,
+      </if>
+      <if test="clkuv != null">
+        clkuv,
+      </if>
+      <if test="invest != null">
+        invest,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="creDay != null">
+        #{creDay,jdbcType=INTEGER},
+      </if>
+      <if test="req != null">
+        #{req,jdbcType=BIGINT},
+      </if>
+      <if test="requv != null">
+        #{requv,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null">
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="exp != null">
+        #{exp,jdbcType=INTEGER},
+      </if>
+      <if test="expuv != null">
+        #{expuv,jdbcType=INTEGER},
+      </if>
+      <if test="clk != null">
+        #{clk,jdbcType=INTEGER},
+      </if>
+      <if test="clkuv != null">
+        #{clkuv,jdbcType=INTEGER},
+      </if>
+      <if test="invest != null">
+        #{invest,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowAreaExample" resultType="java.lang.Long">
+    select count(*) from quota_flow_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update quota_flow_area
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creDay != null">
+        cre_day = #{record.creDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.req != null">
+        req = #{record.req,jdbcType=BIGINT},
+      </if>
+      <if test="record.requv != null">
+        requv = #{record.requv,jdbcType=INTEGER},
+      </if>
+      <if test="record.bid != null">
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.exp != null">
+        exp = #{record.exp,jdbcType=INTEGER},
+      </if>
+      <if test="record.expuv != null">
+        expuv = #{record.expuv,jdbcType=INTEGER},
+      </if>
+      <if test="record.clk != null">
+        clk = #{record.clk,jdbcType=INTEGER},
+      </if>
+      <if test="record.clkuv != null">
+        clkuv = #{record.clkuv,jdbcType=INTEGER},
+      </if>
+      <if test="record.invest != null">
+        invest = #{record.invest,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update quota_flow_area
+    set id = #{record.id,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=VARCHAR},
+      cre_day = #{record.creDay,jdbcType=INTEGER},
+      req = #{record.req,jdbcType=BIGINT},
+      requv = #{record.requv,jdbcType=INTEGER},
+      bid = #{record.bid,jdbcType=INTEGER},
+      exp = #{record.exp,jdbcType=INTEGER},
+      expuv = #{record.expuv,jdbcType=INTEGER},
+      clk = #{record.clk,jdbcType=INTEGER},
+      clkuv = #{record.clkuv,jdbcType=INTEGER},
+      invest = #{record.invest,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowArea">
+    update quota_flow_area
+    <set>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="creDay != null">
+        cre_day = #{creDay,jdbcType=INTEGER},
+      </if>
+      <if test="req != null">
+        req = #{req,jdbcType=BIGINT},
+      </if>
+      <if test="requv != null">
+        requv = #{requv,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null">
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="exp != null">
+        exp = #{exp,jdbcType=INTEGER},
+      </if>
+      <if test="expuv != null">
+        expuv = #{expuv,jdbcType=INTEGER},
+      </if>
+      <if test="clk != null">
+        clk = #{clk,jdbcType=INTEGER},
+      </if>
+      <if test="clkuv != null">
+        clkuv = #{clkuv,jdbcType=INTEGER},
+      </if>
+      <if test="invest != null">
+        invest = #{invest,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowArea">
+    update quota_flow_area
+    set area = #{area,jdbcType=VARCHAR},
+      cre_day = #{creDay,jdbcType=INTEGER},
+      req = #{req,jdbcType=BIGINT},
+      requv = #{requv,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      exp = #{exp,jdbcType=INTEGER},
+      expuv = #{expuv,jdbcType=INTEGER},
+      clk = #{clk,jdbcType=INTEGER},
+      clkuv = #{clkuv,jdbcType=INTEGER},
+      invest = #{invest,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="com.iwanvi.nvwa.dao.model.QuotaFlowAreaExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from quota_flow_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into quota_flow_area
+    (id, area, cre_day, req, requv, bid, exp, expuv, clk, clkuv, invest)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.area,jdbcType=VARCHAR}, #{item.creDay,jdbcType=INTEGER},
+        #{item.req,jdbcType=BIGINT}, #{item.requv,jdbcType=INTEGER}, #{item.bid,jdbcType=INTEGER},
+        #{item.exp,jdbcType=INTEGER}, #{item.expuv,jdbcType=INTEGER}, #{item.clk,jdbcType=INTEGER},
+        #{item.clkuv,jdbcType=INTEGER}, #{item.invest,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into quota_flow_area (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'area'.toString() == column.value">
+          #{item.area,jdbcType=VARCHAR}
+        </if>
+        <if test="'cre_day'.toString() == column.value">
+          #{item.creDay,jdbcType=INTEGER}
+        </if>
+        <if test="'req'.toString() == column.value">
+          #{item.req,jdbcType=BIGINT}
+        </if>
+        <if test="'requv'.toString() == column.value">
+          #{item.requv,jdbcType=INTEGER}
+        </if>
+        <if test="'bid'.toString() == column.value">
+          #{item.bid,jdbcType=INTEGER}
+        </if>
+        <if test="'exp'.toString() == column.value">
+          #{item.exp,jdbcType=INTEGER}
+        </if>
+        <if test="'expuv'.toString() == column.value">
+          #{item.expuv,jdbcType=INTEGER}
+        </if>
+        <if test="'clk'.toString() == column.value">
+          #{item.clk,jdbcType=INTEGER}
+        </if>
+        <if test="'clkuv'.toString() == column.value">
+          #{item.clkuv,jdbcType=INTEGER}
+        </if>
+        <if test="'invest'.toString() == column.value">
+          #{item.invest,jdbcType=BIGINT}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+
+    <select id="sumByDay" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select sum(req) req, sum(requv) requv, sum(exp) exp, sum(expuv) expuv, sum(clk) clk, sum(clkuv) clkuv,
+        sum(invest) invest, area
+        from quota_flow_area
+        where cre_day between #{sDate} and #{eDate}
+        <if test="areas != null and areas.size > 0">
+            and area in (
+            <foreach collection="areas" item="it" separator=",">
+                #{it}
+            </foreach>
+            )
+        </if>
+        group by area
+    </select>
+
+    <select id="detail" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select sum(req) req, sum(requv) requv, sum(exp) exp, sum(expuv) expuv, sum(clk) clk, sum(clkuv) clkuv,
+        sum(invest) invest, cre_day, area
+        from quota_flow_area
+        where cre_day between #{sDate} and #{eDate}
+        <if test="areas != null and areas.size > 0">
+            and area in (
+            <foreach collection="areas" item="it" separator=",">
+                #{it}
+            </foreach>
+            )
+        </if>
+        group by cre_day
+    </select>
+    <select id="getQuotaFlowAreaByDay" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select *
+		from quota_flow_area
+		where cre_day = #{day} limit 1
+	</select>
+</mapper>

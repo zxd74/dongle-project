@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iwanvi.nvwa.dao.PackagePositionMapper" >
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.PackagePosition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="flow_id" property="flowId" jdbcType="INTEGER" />
+    <result column="forecast_ exposure" property="forecastExposure" jdbcType="INTEGER" />
+    <result column="forecast_click" property="forecastClick" jdbcType="INTEGER" />
+    <result column="price_rtb" property="priceRtb" jdbcType="INTEGER" />
+    <result column="price_other" property="priceOther" jdbcType="INTEGER" />
+    <result column="position_ids" property="positionIds" jdbcType="INTEGER" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, flow_id, "forecast_ exposure", forecast_click, price_rtb, price_other, 
+    position_ids, update_user, update_date, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iwanvi.nvwa.dao.model.PackagePositionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from package_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from package_position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from package_position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.PackagePositionExample" >
+    delete from package_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.PackagePosition" >
+    insert into package_position (id, name, flow_id, 
+      "forecast_ exposure", forecast_click, price_rtb, 
+      price_other, position_ids, update_user, 
+      update_date, status)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{flowId,jdbcType=INTEGER}, 
+      #{forecastExposure,jdbcType=INTEGER}, #{forecastClick,jdbcType=INTEGER}, #{priceRtb,jdbcType=INTEGER}, 
+      #{priceOther,jdbcType=INTEGER}, #{positionIds,jdbcType=INTEGER}, #{updateUser,jdbcType=INTEGER}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.PackagePosition" >
+    insert into package_position
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="flowId != null" >
+        flow_id,
+      </if>
+      <if test="forecastExposure != null" >
+        "forecast_ exposure",
+      </if>
+      <if test="forecastClick != null" >
+        forecast_click,
+      </if>
+      <if test="priceRtb != null" >
+        price_rtb,
+      </if>
+      <if test="priceOther != null" >
+        price_other,
+      </if>
+      <if test="positionIds != null" >
+        position_ids,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flowId != null" >
+        #{flowId,jdbcType=INTEGER},
+      </if>
+      <if test="forecastExposure != null" >
+        #{forecastExposure,jdbcType=INTEGER},
+      </if>
+      <if test="forecastClick != null" >
+        #{forecastClick,jdbcType=INTEGER},
+      </if>
+      <if test="priceRtb != null" >
+        #{priceRtb,jdbcType=INTEGER},
+      </if>
+      <if test="priceOther != null" >
+        #{priceOther,jdbcType=INTEGER},
+      </if>
+      <if test="positionIds != null" >
+        #{positionIds,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.PackagePositionExample" resultType="java.lang.Integer" >
+    select count(*) from package_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update package_position
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowId != null" >
+        flow_id = #{record.flowId,jdbcType=INTEGER},
+      </if>
+      <if test="record.forecastExposure != null" >
+        "forecast_ exposure" = #{record.forecastExposure,jdbcType=INTEGER},
+      </if>
+      <if test="record.forecastClick != null" >
+        forecast_click = #{record.forecastClick,jdbcType=INTEGER},
+      </if>
+      <if test="record.priceRtb != null" >
+        price_rtb = #{record.priceRtb,jdbcType=INTEGER},
+      </if>
+      <if test="record.priceOther != null" >
+        price_other = #{record.priceOther,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionIds != null" >
+        position_ids = #{record.positionIds,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update package_position
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      flow_id = #{record.flowId,jdbcType=INTEGER},
+      "forecast_ exposure" = #{record.forecastExposure,jdbcType=INTEGER},
+      forecast_click = #{record.forecastClick,jdbcType=INTEGER},
+      price_rtb = #{record.priceRtb,jdbcType=INTEGER},
+      price_other = #{record.priceOther,jdbcType=INTEGER},
+      position_ids = #{record.positionIds,jdbcType=INTEGER},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.PackagePosition" >
+    update package_position
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flowId != null" >
+        flow_id = #{flowId,jdbcType=INTEGER},
+      </if>
+      <if test="forecastExposure != null" >
+        "forecast_ exposure" = #{forecastExposure,jdbcType=INTEGER},
+      </if>
+      <if test="forecastClick != null" >
+        forecast_click = #{forecastClick,jdbcType=INTEGER},
+      </if>
+      <if test="priceRtb != null" >
+        price_rtb = #{priceRtb,jdbcType=INTEGER},
+      </if>
+      <if test="priceOther != null" >
+        price_other = #{priceOther,jdbcType=INTEGER},
+      </if>
+      <if test="positionIds != null" >
+        position_ids = #{positionIds,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.PackagePosition" >
+    update package_position
+    set name = #{name,jdbcType=VARCHAR},
+      flow_id = #{flowId,jdbcType=INTEGER},
+      "forecast_ exposure" = #{forecastExposure,jdbcType=INTEGER},
+      forecast_click = #{forecastClick,jdbcType=INTEGER},
+      price_rtb = #{priceRtb,jdbcType=INTEGER},
+      price_other = #{priceOther,jdbcType=INTEGER},
+      position_ids = #{positionIds,jdbcType=INTEGER},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

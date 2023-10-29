@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.SdkAllotScheduleMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.SdkAllotSchedule">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="allotment_id" jdbcType="INTEGER" property="allotmentId" />
+    <result column="ad_pos_id" jdbcType="INTEGER" property="adPosId" />
+    <result column="start_day" jdbcType="INTEGER" property="startDay" />
+    <result column="end_day" jdbcType="INTEGER" property="endDay" />
+    <result column="is_section" jdbcType="INTEGER" property="isSection" />
+    <result column="schedule_fixed" jdbcType="VARCHAR" property="scheduleFixed" />
+    <result column="exposure_limit" jdbcType="INTEGER" property="exposureLimit" />
+    <result column="is_smooth" jdbcType="INTEGER" property="isSmooth" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="month_period" jdbcType="INTEGER" property="monthPeriod" />
+    <result column="schedule_period" jdbcType="INTEGER" property="schedulePeriod" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="stra_time" jdbcType="INTEGER" property="straTime" />
+    <result column="stra_chapter" jdbcType="INTEGER" property="straChapter" />
+    <result column="stra_page" jdbcType="INTEGER" property="straPage" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, allotment_id, ad_pos_id, start_day, end_day, is_section, schedule_fixed, exposure_limit, 
+    is_smooth, priority, month_period, schedule_period, status, stra_time, stra_chapter, 
+    stra_page
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.SdkAllotScheduleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sdk_allot_schedule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sdk_allot_schedule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sdk_allot_schedule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.SdkAllotScheduleExample">
+    delete from sdk_allot_schedule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.SdkAllotSchedule">
+    insert into sdk_allot_schedule (id, allotment_id, ad_pos_id, 
+      start_day, end_day, is_section, 
+      schedule_fixed, exposure_limit, is_smooth, 
+      priority, month_period, schedule_period, 
+      status, stra_time, stra_chapter, 
+      stra_page)
+    values (#{id,jdbcType=INTEGER}, #{allotmentId,jdbcType=INTEGER}, #{adPosId,jdbcType=INTEGER}, 
+      #{startDay,jdbcType=INTEGER}, #{endDay,jdbcType=INTEGER}, #{isSection,jdbcType=INTEGER}, 
+      #{scheduleFixed,jdbcType=VARCHAR}, #{exposureLimit,jdbcType=INTEGER}, #{isSmooth,jdbcType=INTEGER}, 
+      #{priority,jdbcType=INTEGER}, #{monthPeriod,jdbcType=INTEGER}, #{schedulePeriod,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{straTime,jdbcType=INTEGER}, #{straChapter,jdbcType=INTEGER}, 
+      #{straPage,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.SdkAllotSchedule">
+    insert into sdk_allot_schedule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="allotmentId != null">
+        allotment_id,
+      </if>
+      <if test="adPosId != null">
+        ad_pos_id,
+      </if>
+      <if test="startDay != null">
+        start_day,
+      </if>
+      <if test="endDay != null">
+        end_day,
+      </if>
+      <if test="isSection != null">
+        is_section,
+      </if>
+      <if test="scheduleFixed != null">
+        schedule_fixed,
+      </if>
+      <if test="exposureLimit != null">
+        exposure_limit,
+      </if>
+      <if test="isSmooth != null">
+        is_smooth,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="monthPeriod != null">
+        month_period,
+      </if>
+      <if test="schedulePeriod != null">
+        schedule_period,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="straTime != null">
+        stra_time,
+      </if>
+      <if test="straChapter != null">
+        stra_chapter,
+      </if>
+      <if test="straPage != null">
+        stra_page,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="allotmentId != null">
+        #{allotmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adPosId != null">
+        #{adPosId,jdbcType=INTEGER},
+      </if>
+      <if test="startDay != null">
+        #{startDay,jdbcType=INTEGER},
+      </if>
+      <if test="endDay != null">
+        #{endDay,jdbcType=INTEGER},
+      </if>
+      <if test="isSection != null">
+        #{isSection,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleFixed != null">
+        #{scheduleFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="exposureLimit != null">
+        #{exposureLimit,jdbcType=INTEGER},
+      </if>
+      <if test="isSmooth != null">
+        #{isSmooth,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="monthPeriod != null">
+        #{monthPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="schedulePeriod != null">
+        #{schedulePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="straTime != null">
+        #{straTime,jdbcType=INTEGER},
+      </if>
+      <if test="straChapter != null">
+        #{straChapter,jdbcType=INTEGER},
+      </if>
+      <if test="straPage != null">
+        #{straPage,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.SdkAllotScheduleExample" resultType="java.lang.Long">
+    select count(*) from sdk_allot_schedule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sdk_allot_schedule
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.allotmentId != null">
+        allotment_id = #{record.allotmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adPosId != null">
+        ad_pos_id = #{record.adPosId,jdbcType=INTEGER},
+      </if>
+      <if test="record.startDay != null">
+        start_day = #{record.startDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.endDay != null">
+        end_day = #{record.endDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSection != null">
+        is_section = #{record.isSection,jdbcType=INTEGER},
+      </if>
+      <if test="record.scheduleFixed != null">
+        schedule_fixed = #{record.scheduleFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exposureLimit != null">
+        exposure_limit = #{record.exposureLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSmooth != null">
+        is_smooth = #{record.isSmooth,jdbcType=INTEGER},
+      </if>
+      <if test="record.priority != null">
+        priority = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.monthPeriod != null">
+        month_period = #{record.monthPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.schedulePeriod != null">
+        schedule_period = #{record.schedulePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.straTime != null">
+        stra_time = #{record.straTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.straChapter != null">
+        stra_chapter = #{record.straChapter,jdbcType=INTEGER},
+      </if>
+      <if test="record.straPage != null">
+        stra_page = #{record.straPage,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sdk_allot_schedule
+    set id = #{record.id,jdbcType=INTEGER},
+      allotment_id = #{record.allotmentId,jdbcType=INTEGER},
+      ad_pos_id = #{record.adPosId,jdbcType=INTEGER},
+      start_day = #{record.startDay,jdbcType=INTEGER},
+      end_day = #{record.endDay,jdbcType=INTEGER},
+      is_section = #{record.isSection,jdbcType=INTEGER},
+      schedule_fixed = #{record.scheduleFixed,jdbcType=VARCHAR},
+      exposure_limit = #{record.exposureLimit,jdbcType=INTEGER},
+      is_smooth = #{record.isSmooth,jdbcType=INTEGER},
+      priority = #{record.priority,jdbcType=INTEGER},
+      month_period = #{record.monthPeriod,jdbcType=INTEGER},
+      schedule_period = #{record.schedulePeriod,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      stra_time = #{record.straTime,jdbcType=INTEGER},
+      stra_chapter = #{record.straChapter,jdbcType=INTEGER},
+      stra_page = #{record.straPage,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.SdkAllotSchedule">
+    update sdk_allot_schedule
+    <set>
+      <if test="allotmentId != null">
+        allotment_id = #{allotmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adPosId != null">
+        ad_pos_id = #{adPosId,jdbcType=INTEGER},
+      </if>
+      <if test="startDay != null">
+        start_day = #{startDay,jdbcType=INTEGER},
+      </if>
+      <if test="endDay != null">
+        end_day = #{endDay,jdbcType=INTEGER},
+      </if>
+      <if test="isSection != null">
+        is_section = #{isSection,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleFixed != null">
+        schedule_fixed = #{scheduleFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="exposureLimit != null">
+        exposure_limit = #{exposureLimit,jdbcType=INTEGER},
+      </if>
+      <if test="isSmooth != null">
+        is_smooth = #{isSmooth,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="monthPeriod != null">
+        month_period = #{monthPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="schedulePeriod != null">
+        schedule_period = #{schedulePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="straTime != null">
+        stra_time = #{straTime,jdbcType=INTEGER},
+      </if>
+      <if test="straChapter != null">
+        stra_chapter = #{straChapter,jdbcType=INTEGER},
+      </if>
+      <if test="straPage != null">
+        stra_page = #{straPage,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.SdkAllotSchedule">
+    update sdk_allot_schedule
+    set allotment_id = #{allotmentId,jdbcType=INTEGER},
+      ad_pos_id = #{adPosId,jdbcType=INTEGER},
+      start_day = #{startDay,jdbcType=INTEGER},
+      end_day = #{endDay,jdbcType=INTEGER},
+      is_section = #{isSection,jdbcType=INTEGER},
+      schedule_fixed = #{scheduleFixed,jdbcType=VARCHAR},
+      exposure_limit = #{exposureLimit,jdbcType=INTEGER},
+      is_smooth = #{isSmooth,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      month_period = #{monthPeriod,jdbcType=INTEGER},
+      schedule_period = #{schedulePeriod,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      stra_time = #{straTime,jdbcType=INTEGER},
+      stra_chapter = #{straChapter,jdbcType=INTEGER},
+      stra_page = #{straPage,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <insert id="batchInsert" parameterType="map">
+    insert into sdk_allot_schedule
+    (allotment_id, ad_pos_id, start_day, end_day, is_section, schedule_fixed, exposure_limit, 
+      is_smooth, priority, month_period, schedule_period, status, stra_time, stra_chapter, 
+      stra_page)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.allotmentId,jdbcType=INTEGER}, #{item.adPosId,jdbcType=INTEGER}, 
+        #{item.startDay,jdbcType=INTEGER}, #{item.endDay,jdbcType=INTEGER}, #{item.isSection,jdbcType=INTEGER}, 
+        #{item.scheduleFixed,jdbcType=VARCHAR}, #{item.exposureLimit,jdbcType=INTEGER}, 
+        #{item.isSmooth,jdbcType=INTEGER}, #{item.priority,jdbcType=INTEGER}, #{item.monthPeriod,jdbcType=INTEGER}, 
+        #{item.schedulePeriod,jdbcType=INTEGER},#{item.status,jdbcType=INTEGER},#{item.straTime,jdbcType=INTEGER},
+        #{item.straChapter,jdbcType=INTEGER},#{item.straPage,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <select id="getScheduleListByAllotmentId" resultType="java.util.HashMap" parameterType="int">
+    select t2.id posId, t2.name posName, t1.`status` status, ifnull(t1.priority, 0) as priority, 
+    	t1.`month_period` monthPeriod, t1.`schedule_period` schedulePeriod
+    from `sdk_allot_schedule` t1, ad_position t2
+    where t1.`allotment_id` = #{allotId} and t2.id = t1.ad_pos_id;
+  </select>
+  
+  <select id="getScheduleList" resultType="java.util.HashMap" parameterType="map">
+    select t1.id, t1.`ad_pos_id` posId, t1.month_period monthPeriod, t1. allotment_id allotId, t2.create_user uid,
+    	t1.schedule_period schedulePeriod, t1.`start_day` startDay, t1.`end_day` endDay,
+    	t1.stra_time straTime, t1.stra_chapter straChapter, t1.stra_page straPage
+    from `sdk_allot_schedule` t1, `sdk_allotment` t2
+    where t1.`allotment_id` = t2.id and t2.`type` = #{type} and t1.`ad_pos_id` in (${posIds})
+    <if test="month != null">
+        and t1.`month_period` = #{month}
+    </if>
+  </select>
+  
+   <select id="getScheduleCount" resultType="java.lang.Long">
+    select count(*) total 
+	from sdk_allotment t1, sdk_allot_schedule t2 
+	where t2.allotment_id = t1.id;
+  </select>
+  
+  <select id="getScheduleAll" resultType="java.util.HashMap" parameterType="map">
+	select t1.type alloType, t2.id schId, t2.start_day startDay, t2.end_day endDay, 
+    	t2.schedule_fixed timeSlice, t2.schedule_period schedulePeriod, t2.month_period monthPeriod, 
+    	t2.status, t3.uuid posId, t1.platform_id platformId, t2.priority priority, t2.is_smooth isSmooth, 
+    	t2.exposure_limit expLimit, t1.frequency frequency, t1.charge_type chargeType, t3.type posType, t1.status allotStatus,
+    	t2.stra_time straTime, t2.stra_chapter straChapter, t2.stra_page straPage, t4.dsp_id dspId
+	from sdk_allotment t1, sdk_allot_schedule t2, ad_position t3, flow_consumer t4
+	where t2.allotment_id = t1.id and t3.id = t2.ad_pos_id and t1.platform_id = t4.id
+    order by t2.id
+	<if test="start != null and limit != null">
+      limit ${start}, ${limit}
+    </if>
+  </select>
+</mapper>

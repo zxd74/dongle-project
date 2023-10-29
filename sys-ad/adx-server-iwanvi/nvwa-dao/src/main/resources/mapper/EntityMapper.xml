@@ -1,0 +1,1651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.EntityMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.Entity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="entity_name" jdbcType="VARCHAR" property="entityName" />
+    <result column="put_all_id" jdbcType="INTEGER" property="putAllId" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="ad_position" jdbcType="INTEGER" property="adPosition" />
+    <result column="template_id" jdbcType="INTEGER" property="templateId" />
+    <result column="entity_title" jdbcType="VARCHAR" property="entityTitle" />
+    <result column="ad_id" jdbcType="INTEGER" property="adId" />
+    <result column="entity_desc" jdbcType="VARCHAR" property="entityDesc" />
+    <result column="entity_url" jdbcType="VARCHAR" property="entityUrl" />
+    <result column="run_state" jdbcType="INTEGER" property="runState" />
+    <result column="entity_state" jdbcType="INTEGER" property="entityState" />
+    <result column="audit_user" jdbcType="INTEGER" property="auditUser" />
+    <result column="industry" jdbcType="VARCHAR" property="industry" />
+    <result column="audit_comments" jdbcType="VARCHAR" property="auditComments" />
+    <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="thread_title" jdbcType="VARCHAR" property="threadTitle" />
+    <result column="thread_pic1" jdbcType="VARCHAR" property="threadPic1" />
+    <result column="thread_pic2" jdbcType="VARCHAR" property="threadPic2" />
+    <result column="thread_pic3" jdbcType="VARCHAR" property="threadPic3" />
+    <result column="dynamic_code" jdbcType="VARCHAR" property="dynamicCode" />
+    <result column="thread_content" jdbcType="VARCHAR" property="threadContent" />
+    <result column="thread_url_text" jdbcType="VARCHAR" property="threadUrlText" />
+    <result column="recommend_name" jdbcType="VARCHAR" property="recommendName" />
+    <result column="recommend_link" jdbcType="VARCHAR" property="recommendLink" />
+    <result column="custom_css" jdbcType="VARCHAR" property="customCss" />
+    <result column="user_portrait" jdbcType="VARCHAR" property="userPortrait" />
+    <result column="pop_window_text" jdbcType="VARCHAR" property="popWindowText" />
+    <result column="button_text" jdbcType="VARCHAR" property="buttonText" />
+    <result column="label_title" jdbcType="VARCHAR" property="labelTitle" />
+    <result column="label_visible" jdbcType="VARCHAR" property="labelVisible" />
+    <result column="goods_style" jdbcType="VARCHAR" property="goodsStyle" />
+    <result column="ext_id" jdbcType="VARCHAR" property="extId" />
+    <result column="ext_ids" jdbcType="VARCHAR" property="extIds" />
+    <result column="entity_type" jdbcType="INTEGER" property="entityType" />
+    <result column="dataRate" jdbcType="INTEGER" property="datarate" />
+    <result column="thread_pic4" jdbcType="VARCHAR" property="threadPic4" />
+    <result column="thread_pic5" jdbcType="VARCHAR" property="threadPic5" />
+    <result column="thread_pic6" jdbcType="VARCHAR" property="threadPic6" />
+    <result column="thread_pic7" jdbcType="VARCHAR" property="threadPic7" />
+    <result column="thread_pic8" jdbcType="VARCHAR" property="threadPic8" />
+    <result column="thread_pic9" jdbcType="VARCHAR" property="threadPic9" />
+    <result column="land1" jdbcType="VARCHAR" property="land1" />
+    <result column="land2" jdbcType="VARCHAR" property="land2" />
+    <result column="land3" jdbcType="VARCHAR" property="land3" />
+    <result column="land4" jdbcType="VARCHAR" property="land4" />
+    <result column="land5" jdbcType="VARCHAR" property="land5" />
+    <result column="land6" jdbcType="VARCHAR" property="land6" />
+    <result column="land7" jdbcType="VARCHAR" property="land7" />
+    <result column="land8" jdbcType="VARCHAR" property="land8" />
+    <result column="land9" jdbcType="VARCHAR" property="land9" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, entity_name, put_all_id, pid, ad_position, template_id, entity_title, ad_id, 
+    entity_desc, entity_url, run_state, entity_state, audit_user, industry, audit_comments, 
+    audit_time, create_user, create_time, update_time, user_name, thread_title, thread_pic1, 
+    thread_pic2, thread_pic3, dynamic_code, thread_content, thread_url_text, recommend_name, 
+    recommend_link, custom_css, user_portrait, pop_window_text, button_text, label_title, 
+    label_visible, goods_style, ext_id, ext_ids, entity_type, dataRate, thread_pic4, 
+    thread_pic5, thread_pic6, thread_pic7, thread_pic8, thread_pic9, land1, land2, land3, 
+    land4, land5, land6, land7, land8, land9, task_id
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.EntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from entity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from entity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from entity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.EntityExample">
+    delete from entity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.iwanvi.nvwa.dao.model.Entity" useGeneratedKeys="true">
+    insert into entity (entity_name, put_all_id, pid, 
+      ad_position, template_id, entity_title, 
+      ad_id, entity_desc, entity_url, 
+      run_state, entity_state, audit_user, 
+      industry, audit_comments, audit_time, 
+      create_user, create_time, update_time, 
+      user_name, thread_title, thread_pic1, 
+      thread_pic2, thread_pic3, dynamic_code, 
+      thread_content, thread_url_text, recommend_name, 
+      recommend_link, custom_css, user_portrait, 
+      pop_window_text, button_text, label_title, 
+      label_visible, goods_style, ext_id, 
+      ext_ids, entity_type, dataRate, 
+      thread_pic4, thread_pic5, thread_pic6, 
+      thread_pic7, thread_pic8, thread_pic9, 
+      land1, land2, land3, 
+      land4, land5, land6, 
+      land7, land8, land9, 
+      task_id)
+    values (#{entityName,jdbcType=VARCHAR}, #{putAllId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{adPosition,jdbcType=INTEGER}, #{templateId,jdbcType=INTEGER}, #{entityTitle,jdbcType=VARCHAR}, 
+      #{adId,jdbcType=INTEGER}, #{entityDesc,jdbcType=VARCHAR}, #{entityUrl,jdbcType=VARCHAR}, 
+      #{runState,jdbcType=INTEGER}, #{entityState,jdbcType=INTEGER}, #{auditUser,jdbcType=INTEGER}, 
+      #{industry,jdbcType=VARCHAR}, #{auditComments,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{userName,jdbcType=VARCHAR}, #{threadTitle,jdbcType=VARCHAR}, #{threadPic1,jdbcType=VARCHAR}, 
+      #{threadPic2,jdbcType=VARCHAR}, #{threadPic3,jdbcType=VARCHAR}, #{dynamicCode,jdbcType=VARCHAR}, 
+      #{threadContent,jdbcType=VARCHAR}, #{threadUrlText,jdbcType=VARCHAR}, #{recommendName,jdbcType=VARCHAR}, 
+      #{recommendLink,jdbcType=VARCHAR}, #{customCss,jdbcType=VARCHAR}, #{userPortrait,jdbcType=VARCHAR}, 
+      #{popWindowText,jdbcType=VARCHAR}, #{buttonText,jdbcType=VARCHAR}, #{labelTitle,jdbcType=VARCHAR}, 
+      #{labelVisible,jdbcType=VARCHAR}, #{goodsStyle,jdbcType=VARCHAR}, #{extId,jdbcType=VARCHAR}, 
+      #{extIds,jdbcType=VARCHAR}, #{entityType,jdbcType=INTEGER}, #{datarate,jdbcType=INTEGER}, 
+      #{threadPic4,jdbcType=VARCHAR}, #{threadPic5,jdbcType=VARCHAR}, #{threadPic6,jdbcType=VARCHAR}, 
+      #{threadPic7,jdbcType=VARCHAR}, #{threadPic8,jdbcType=VARCHAR}, #{threadPic9,jdbcType=VARCHAR}, 
+      #{land1,jdbcType=VARCHAR}, #{land2,jdbcType=VARCHAR}, #{land3,jdbcType=VARCHAR}, 
+      #{land4,jdbcType=VARCHAR}, #{land5,jdbcType=VARCHAR}, #{land6,jdbcType=VARCHAR}, 
+      #{land7,jdbcType=VARCHAR}, #{land8,jdbcType=VARCHAR}, #{land9,jdbcType=VARCHAR}, 
+      #{taskId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.iwanvi.nvwa.dao.model.Entity" useGeneratedKeys="true">
+    insert into entity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="entityName != null">
+        entity_name,
+      </if>
+      <if test="putAllId != null">
+        put_all_id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="adPosition != null">
+        ad_position,
+      </if>
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="entityTitle != null">
+        entity_title,
+      </if>
+      <if test="adId != null">
+        ad_id,
+      </if>
+      <if test="entityDesc != null">
+        entity_desc,
+      </if>
+      <if test="entityUrl != null">
+        entity_url,
+      </if>
+      <if test="runState != null">
+        run_state,
+      </if>
+      <if test="entityState != null">
+        entity_state,
+      </if>
+      <if test="auditUser != null">
+        audit_user,
+      </if>
+      <if test="industry != null">
+        industry,
+      </if>
+      <if test="auditComments != null">
+        audit_comments,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="threadTitle != null">
+        thread_title,
+      </if>
+      <if test="threadPic1 != null">
+        thread_pic1,
+      </if>
+      <if test="threadPic2 != null">
+        thread_pic2,
+      </if>
+      <if test="threadPic3 != null">
+        thread_pic3,
+      </if>
+      <if test="dynamicCode != null">
+        dynamic_code,
+      </if>
+      <if test="threadContent != null">
+        thread_content,
+      </if>
+      <if test="threadUrlText != null">
+        thread_url_text,
+      </if>
+      <if test="recommendName != null">
+        recommend_name,
+      </if>
+      <if test="recommendLink != null">
+        recommend_link,
+      </if>
+      <if test="customCss != null">
+        custom_css,
+      </if>
+      <if test="userPortrait != null">
+        user_portrait,
+      </if>
+      <if test="popWindowText != null">
+        pop_window_text,
+      </if>
+      <if test="buttonText != null">
+        button_text,
+      </if>
+      <if test="labelTitle != null">
+        label_title,
+      </if>
+      <if test="labelVisible != null">
+        label_visible,
+      </if>
+      <if test="goodsStyle != null">
+        goods_style,
+      </if>
+      <if test="extId != null">
+        ext_id,
+      </if>
+      <if test="extIds != null">
+        ext_ids,
+      </if>
+      <if test="entityType != null">
+        entity_type,
+      </if>
+      <if test="datarate != null">
+        dataRate,
+      </if>
+      <if test="threadPic4 != null">
+        thread_pic4,
+      </if>
+      <if test="threadPic5 != null">
+        thread_pic5,
+      </if>
+      <if test="threadPic6 != null">
+        thread_pic6,
+      </if>
+      <if test="threadPic7 != null">
+        thread_pic7,
+      </if>
+      <if test="threadPic8 != null">
+        thread_pic8,
+      </if>
+      <if test="threadPic9 != null">
+        thread_pic9,
+      </if>
+      <if test="land1 != null">
+        land1,
+      </if>
+      <if test="land2 != null">
+        land2,
+      </if>
+      <if test="land3 != null">
+        land3,
+      </if>
+      <if test="land4 != null">
+        land4,
+      </if>
+      <if test="land5 != null">
+        land5,
+      </if>
+      <if test="land6 != null">
+        land6,
+      </if>
+      <if test="land7 != null">
+        land7,
+      </if>
+      <if test="land8 != null">
+        land8,
+      </if>
+      <if test="land9 != null">
+        land9,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="entityName != null">
+        #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="putAllId != null">
+        #{putAllId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="adPosition != null">
+        #{adPosition,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null">
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="entityTitle != null">
+        #{entityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="adId != null">
+        #{adId,jdbcType=INTEGER},
+      </if>
+      <if test="entityDesc != null">
+        #{entityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="entityUrl != null">
+        #{entityUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="runState != null">
+        #{runState,jdbcType=INTEGER},
+      </if>
+      <if test="entityState != null">
+        #{entityState,jdbcType=INTEGER},
+      </if>
+      <if test="auditUser != null">
+        #{auditUser,jdbcType=INTEGER},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="auditComments != null">
+        #{auditComments,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="threadTitle != null">
+        #{threadTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic1 != null">
+        #{threadPic1,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic2 != null">
+        #{threadPic2,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic3 != null">
+        #{threadPic3,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicCode != null">
+        #{dynamicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="threadContent != null">
+        #{threadContent,jdbcType=VARCHAR},
+      </if>
+      <if test="threadUrlText != null">
+        #{threadUrlText,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendName != null">
+        #{recommendName,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendLink != null">
+        #{recommendLink,jdbcType=VARCHAR},
+      </if>
+      <if test="customCss != null">
+        #{customCss,jdbcType=VARCHAR},
+      </if>
+      <if test="userPortrait != null">
+        #{userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="popWindowText != null">
+        #{popWindowText,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonText != null">
+        #{buttonText,jdbcType=VARCHAR},
+      </if>
+      <if test="labelTitle != null">
+        #{labelTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="labelVisible != null">
+        #{labelVisible,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsStyle != null">
+        #{goodsStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="extId != null">
+        #{extId,jdbcType=VARCHAR},
+      </if>
+      <if test="extIds != null">
+        #{extIds,jdbcType=VARCHAR},
+      </if>
+      <if test="entityType != null">
+        #{entityType,jdbcType=INTEGER},
+      </if>
+      <if test="datarate != null">
+        #{datarate,jdbcType=INTEGER},
+      </if>
+      <if test="threadPic4 != null">
+        #{threadPic4,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic5 != null">
+        #{threadPic5,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic6 != null">
+        #{threadPic6,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic7 != null">
+        #{threadPic7,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic8 != null">
+        #{threadPic8,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic9 != null">
+        #{threadPic9,jdbcType=VARCHAR},
+      </if>
+      <if test="land1 != null">
+        #{land1,jdbcType=VARCHAR},
+      </if>
+      <if test="land2 != null">
+        #{land2,jdbcType=VARCHAR},
+      </if>
+      <if test="land3 != null">
+        #{land3,jdbcType=VARCHAR},
+      </if>
+      <if test="land4 != null">
+        #{land4,jdbcType=VARCHAR},
+      </if>
+      <if test="land5 != null">
+        #{land5,jdbcType=VARCHAR},
+      </if>
+      <if test="land6 != null">
+        #{land6,jdbcType=VARCHAR},
+      </if>
+      <if test="land7 != null">
+        #{land7,jdbcType=VARCHAR},
+      </if>
+      <if test="land8 != null">
+        #{land8,jdbcType=VARCHAR},
+      </if>
+      <if test="land9 != null">
+        #{land9,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.EntityExample" resultType="java.lang.Long">
+    select count(*) from entity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update entity
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityName != null">
+        entity_name = #{record.entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.putAllId != null">
+        put_all_id = #{record.putAllId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adPosition != null">
+        ad_position = #{record.adPosition,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateId != null">
+        template_id = #{record.templateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityTitle != null">
+        entity_title = #{record.entityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adId != null">
+        ad_id = #{record.adId,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityDesc != null">
+        entity_desc = #{record.entityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityUrl != null">
+        entity_url = #{record.entityUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runState != null">
+        run_state = #{record.runState,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityState != null">
+        entity_state = #{record.entityState,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditUser != null">
+        audit_user = #{record.auditUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.industry != null">
+        industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditComments != null">
+        audit_comments = #{record.auditComments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditTime != null">
+        audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadTitle != null">
+        thread_title = #{record.threadTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadPic1 != null">
+        thread_pic1 = #{record.threadPic1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadPic2 != null">
+        thread_pic2 = #{record.threadPic2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadPic3 != null">
+        thread_pic3 = #{record.threadPic3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dynamicCode != null">
+        dynamic_code = #{record.dynamicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadContent != null">
+        thread_content = #{record.threadContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadUrlText != null">
+        thread_url_text = #{record.threadUrlText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommendName != null">
+        recommend_name = #{record.recommendName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommendLink != null">
+        recommend_link = #{record.recommendLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customCss != null">
+        custom_css = #{record.customCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPortrait != null">
+        user_portrait = #{record.userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popWindowText != null">
+        pop_window_text = #{record.popWindowText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonText != null">
+        button_text = #{record.buttonText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labelTitle != null">
+        label_title = #{record.labelTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labelVisible != null">
+        label_visible = #{record.labelVisible,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsStyle != null">
+        goods_style = #{record.goodsStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extId != null">
+        ext_id = #{record.extId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extIds != null">
+        ext_ids = #{record.extIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityType != null">
+        entity_type = #{record.entityType,jdbcType=INTEGER},
+      </if>
+      <if test="record.datarate != null">
+        dataRate = #{record.datarate,jdbcType=INTEGER},
+      </if>
+      <if test="record.threadPic4 != null">
+        thread_pic4 = #{record.threadPic4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadPic5 != null">
+        thread_pic5 = #{record.threadPic5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadPic6 != null">
+        thread_pic6 = #{record.threadPic6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadPic7 != null">
+        thread_pic7 = #{record.threadPic7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadPic8 != null">
+        thread_pic8 = #{record.threadPic8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threadPic9 != null">
+        thread_pic9 = #{record.threadPic9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land1 != null">
+        land1 = #{record.land1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land2 != null">
+        land2 = #{record.land2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land3 != null">
+        land3 = #{record.land3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land4 != null">
+        land4 = #{record.land4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land5 != null">
+        land5 = #{record.land5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land6 != null">
+        land6 = #{record.land6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land7 != null">
+        land7 = #{record.land7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land8 != null">
+        land8 = #{record.land8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.land9 != null">
+        land9 = #{record.land9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update entity
+    set id = #{record.id,jdbcType=INTEGER},
+      entity_name = #{record.entityName,jdbcType=VARCHAR},
+      put_all_id = #{record.putAllId,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=INTEGER},
+      ad_position = #{record.adPosition,jdbcType=INTEGER},
+      template_id = #{record.templateId,jdbcType=INTEGER},
+      entity_title = #{record.entityTitle,jdbcType=VARCHAR},
+      ad_id = #{record.adId,jdbcType=INTEGER},
+      entity_desc = #{record.entityDesc,jdbcType=VARCHAR},
+      entity_url = #{record.entityUrl,jdbcType=VARCHAR},
+      run_state = #{record.runState,jdbcType=INTEGER},
+      entity_state = #{record.entityState,jdbcType=INTEGER},
+      audit_user = #{record.auditUser,jdbcType=INTEGER},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      audit_comments = #{record.auditComments,jdbcType=VARCHAR},
+      audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      thread_title = #{record.threadTitle,jdbcType=VARCHAR},
+      thread_pic1 = #{record.threadPic1,jdbcType=VARCHAR},
+      thread_pic2 = #{record.threadPic2,jdbcType=VARCHAR},
+      thread_pic3 = #{record.threadPic3,jdbcType=VARCHAR},
+      dynamic_code = #{record.dynamicCode,jdbcType=VARCHAR},
+      thread_content = #{record.threadContent,jdbcType=VARCHAR},
+      thread_url_text = #{record.threadUrlText,jdbcType=VARCHAR},
+      recommend_name = #{record.recommendName,jdbcType=VARCHAR},
+      recommend_link = #{record.recommendLink,jdbcType=VARCHAR},
+      custom_css = #{record.customCss,jdbcType=VARCHAR},
+      user_portrait = #{record.userPortrait,jdbcType=VARCHAR},
+      pop_window_text = #{record.popWindowText,jdbcType=VARCHAR},
+      button_text = #{record.buttonText,jdbcType=VARCHAR},
+      label_title = #{record.labelTitle,jdbcType=VARCHAR},
+      label_visible = #{record.labelVisible,jdbcType=VARCHAR},
+      goods_style = #{record.goodsStyle,jdbcType=VARCHAR},
+      ext_id = #{record.extId,jdbcType=VARCHAR},
+      ext_ids = #{record.extIds,jdbcType=VARCHAR},
+      entity_type = #{record.entityType,jdbcType=INTEGER},
+      dataRate = #{record.datarate,jdbcType=INTEGER},
+      thread_pic4 = #{record.threadPic4,jdbcType=VARCHAR},
+      thread_pic5 = #{record.threadPic5,jdbcType=VARCHAR},
+      thread_pic6 = #{record.threadPic6,jdbcType=VARCHAR},
+      thread_pic7 = #{record.threadPic7,jdbcType=VARCHAR},
+      thread_pic8 = #{record.threadPic8,jdbcType=VARCHAR},
+      thread_pic9 = #{record.threadPic9,jdbcType=VARCHAR},
+      land1 = #{record.land1,jdbcType=VARCHAR},
+      land2 = #{record.land2,jdbcType=VARCHAR},
+      land3 = #{record.land3,jdbcType=VARCHAR},
+      land4 = #{record.land4,jdbcType=VARCHAR},
+      land5 = #{record.land5,jdbcType=VARCHAR},
+      land6 = #{record.land6,jdbcType=VARCHAR},
+      land7 = #{record.land7,jdbcType=VARCHAR},
+      land8 = #{record.land8,jdbcType=VARCHAR},
+      land9 = #{record.land9,jdbcType=VARCHAR},
+      task_id = #{record.taskId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.Entity">
+    update entity
+    <set>
+      <if test="entityName != null">
+        entity_name = #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="putAllId != null">
+        put_all_id = #{putAllId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="adPosition != null">
+        ad_position = #{adPosition,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null">
+        template_id = #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="entityTitle != null">
+        entity_title = #{entityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="adId != null">
+        ad_id = #{adId,jdbcType=INTEGER},
+      </if>
+      <if test="entityDesc != null">
+        entity_desc = #{entityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="entityUrl != null">
+        entity_url = #{entityUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="runState != null">
+        run_state = #{runState,jdbcType=INTEGER},
+      </if>
+      <if test="entityState != null">
+        entity_state = #{entityState,jdbcType=INTEGER},
+      </if>
+      <if test="auditUser != null">
+        audit_user = #{auditUser,jdbcType=INTEGER},
+      </if>
+      <if test="industry != null">
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="auditComments != null">
+        audit_comments = #{auditComments,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="threadTitle != null">
+        thread_title = #{threadTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic1 != null">
+        thread_pic1 = #{threadPic1,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic2 != null">
+        thread_pic2 = #{threadPic2,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic3 != null">
+        thread_pic3 = #{threadPic3,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicCode != null">
+        dynamic_code = #{dynamicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="threadContent != null">
+        thread_content = #{threadContent,jdbcType=VARCHAR},
+      </if>
+      <if test="threadUrlText != null">
+        thread_url_text = #{threadUrlText,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendName != null">
+        recommend_name = #{recommendName,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendLink != null">
+        recommend_link = #{recommendLink,jdbcType=VARCHAR},
+      </if>
+      <if test="customCss != null">
+        custom_css = #{customCss,jdbcType=VARCHAR},
+      </if>
+      <if test="userPortrait != null">
+        user_portrait = #{userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="popWindowText != null">
+        pop_window_text = #{popWindowText,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonText != null">
+        button_text = #{buttonText,jdbcType=VARCHAR},
+      </if>
+      <if test="labelTitle != null">
+        label_title = #{labelTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="labelVisible != null">
+        label_visible = #{labelVisible,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsStyle != null">
+        goods_style = #{goodsStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="extId != null">
+        ext_id = #{extId,jdbcType=VARCHAR},
+      </if>
+      <if test="extIds != null">
+        ext_ids = #{extIds,jdbcType=VARCHAR},
+      </if>
+      <if test="entityType != null">
+        entity_type = #{entityType,jdbcType=INTEGER},
+      </if>
+      <if test="datarate != null">
+        dataRate = #{datarate,jdbcType=INTEGER},
+      </if>
+      <if test="threadPic4 != null">
+        thread_pic4 = #{threadPic4,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic5 != null">
+        thread_pic5 = #{threadPic5,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic6 != null">
+        thread_pic6 = #{threadPic6,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic7 != null">
+        thread_pic7 = #{threadPic7,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic8 != null">
+        thread_pic8 = #{threadPic8,jdbcType=VARCHAR},
+      </if>
+      <if test="threadPic9 != null">
+        thread_pic9 = #{threadPic9,jdbcType=VARCHAR},
+      </if>
+      <if test="land1 != null">
+        land1 = #{land1,jdbcType=VARCHAR},
+      </if>
+      <if test="land2 != null">
+        land2 = #{land2,jdbcType=VARCHAR},
+      </if>
+      <if test="land3 != null">
+        land3 = #{land3,jdbcType=VARCHAR},
+      </if>
+      <if test="land4 != null">
+        land4 = #{land4,jdbcType=VARCHAR},
+      </if>
+      <if test="land5 != null">
+        land5 = #{land5,jdbcType=VARCHAR},
+      </if>
+      <if test="land6 != null">
+        land6 = #{land6,jdbcType=VARCHAR},
+      </if>
+      <if test="land7 != null">
+        land7 = #{land7,jdbcType=VARCHAR},
+      </if>
+      <if test="land8 != null">
+        land8 = #{land8,jdbcType=VARCHAR},
+      </if>
+      <if test="land9 != null">
+        land9 = #{land9,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.Entity">
+    update entity
+    set entity_name = #{entityName,jdbcType=VARCHAR},
+      put_all_id = #{putAllId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      ad_position = #{adPosition,jdbcType=INTEGER},
+      template_id = #{templateId,jdbcType=INTEGER},
+      entity_title = #{entityTitle,jdbcType=VARCHAR},
+      ad_id = #{adId,jdbcType=INTEGER},
+      entity_desc = #{entityDesc,jdbcType=VARCHAR},
+      entity_url = #{entityUrl,jdbcType=VARCHAR},
+      run_state = #{runState,jdbcType=INTEGER},
+      entity_state = #{entityState,jdbcType=INTEGER},
+      audit_user = #{auditUser,jdbcType=INTEGER},
+      industry = #{industry,jdbcType=VARCHAR},
+      audit_comments = #{auditComments,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      user_name = #{userName,jdbcType=VARCHAR},
+      thread_title = #{threadTitle,jdbcType=VARCHAR},
+      thread_pic1 = #{threadPic1,jdbcType=VARCHAR},
+      thread_pic2 = #{threadPic2,jdbcType=VARCHAR},
+      thread_pic3 = #{threadPic3,jdbcType=VARCHAR},
+      dynamic_code = #{dynamicCode,jdbcType=VARCHAR},
+      thread_content = #{threadContent,jdbcType=VARCHAR},
+      thread_url_text = #{threadUrlText,jdbcType=VARCHAR},
+      recommend_name = #{recommendName,jdbcType=VARCHAR},
+      recommend_link = #{recommendLink,jdbcType=VARCHAR},
+      custom_css = #{customCss,jdbcType=VARCHAR},
+      user_portrait = #{userPortrait,jdbcType=VARCHAR},
+      pop_window_text = #{popWindowText,jdbcType=VARCHAR},
+      button_text = #{buttonText,jdbcType=VARCHAR},
+      label_title = #{labelTitle,jdbcType=VARCHAR},
+      label_visible = #{labelVisible,jdbcType=VARCHAR},
+      goods_style = #{goodsStyle,jdbcType=VARCHAR},
+      ext_id = #{extId,jdbcType=VARCHAR},
+      ext_ids = #{extIds,jdbcType=VARCHAR},
+      entity_type = #{entityType,jdbcType=INTEGER},
+      dataRate = #{datarate,jdbcType=INTEGER},
+      thread_pic4 = #{threadPic4,jdbcType=VARCHAR},
+      thread_pic5 = #{threadPic5,jdbcType=VARCHAR},
+      thread_pic6 = #{threadPic6,jdbcType=VARCHAR},
+      thread_pic7 = #{threadPic7,jdbcType=VARCHAR},
+      thread_pic8 = #{threadPic8,jdbcType=VARCHAR},
+      thread_pic9 = #{threadPic9,jdbcType=VARCHAR},
+      land1 = #{land1,jdbcType=VARCHAR},
+      land2 = #{land2,jdbcType=VARCHAR},
+      land3 = #{land3,jdbcType=VARCHAR},
+      land4 = #{land4,jdbcType=VARCHAR},
+      land5 = #{land5,jdbcType=VARCHAR},
+      land6 = #{land6,jdbcType=VARCHAR},
+      land7 = #{land7,jdbcType=VARCHAR},
+      land8 = #{land8,jdbcType=VARCHAR},
+      land9 = #{land9,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="com.iwanvi.nvwa.dao.model.EntityExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from entity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into entity
+    (entity_name, put_all_id, pid, ad_position, template_id, entity_title, ad_id, entity_desc, 
+      entity_url, run_state, entity_state, audit_user, industry, audit_comments, audit_time, 
+      create_user, create_time, update_time, user_name, thread_title, thread_pic1, thread_pic2, 
+      thread_pic3, dynamic_code, thread_content, thread_url_text, recommend_name, recommend_link, 
+      custom_css, user_portrait, pop_window_text, button_text, label_title, label_visible, 
+      goods_style, ext_id, ext_ids, entity_type, dataRate, thread_pic4, thread_pic5, 
+      thread_pic6, thread_pic7, thread_pic8, thread_pic9, land1, land2, land3, land4, 
+      land5, land6, land7, land8, land9, task_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.entityName,jdbcType=VARCHAR}, #{item.putAllId,jdbcType=INTEGER}, #{item.pid,jdbcType=INTEGER}, 
+        #{item.adPosition,jdbcType=INTEGER}, #{item.templateId,jdbcType=INTEGER}, #{item.entityTitle,jdbcType=VARCHAR}, 
+        #{item.adId,jdbcType=INTEGER}, #{item.entityDesc,jdbcType=VARCHAR}, #{item.entityUrl,jdbcType=VARCHAR}, 
+        #{item.runState,jdbcType=INTEGER}, #{item.entityState,jdbcType=INTEGER}, #{item.auditUser,jdbcType=INTEGER}, 
+        #{item.industry,jdbcType=VARCHAR}, #{item.auditComments,jdbcType=VARCHAR}, #{item.auditTime,jdbcType=TIMESTAMP}, 
+        #{item.createUser,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+        #{item.userName,jdbcType=VARCHAR}, #{item.threadTitle,jdbcType=VARCHAR}, #{item.threadPic1,jdbcType=VARCHAR}, 
+        #{item.threadPic2,jdbcType=VARCHAR}, #{item.threadPic3,jdbcType=VARCHAR}, #{item.dynamicCode,jdbcType=VARCHAR}, 
+        #{item.threadContent,jdbcType=VARCHAR}, #{item.threadUrlText,jdbcType=VARCHAR}, 
+        #{item.recommendName,jdbcType=VARCHAR}, #{item.recommendLink,jdbcType=VARCHAR}, 
+        #{item.customCss,jdbcType=VARCHAR}, #{item.userPortrait,jdbcType=VARCHAR}, #{item.popWindowText,jdbcType=VARCHAR}, 
+        #{item.buttonText,jdbcType=VARCHAR}, #{item.labelTitle,jdbcType=VARCHAR}, #{item.labelVisible,jdbcType=VARCHAR}, 
+        #{item.goodsStyle,jdbcType=VARCHAR}, #{item.extId,jdbcType=VARCHAR}, #{item.extIds,jdbcType=VARCHAR}, 
+        #{item.entityType,jdbcType=INTEGER}, #{item.datarate,jdbcType=INTEGER}, #{item.threadPic4,jdbcType=VARCHAR}, 
+        #{item.threadPic5,jdbcType=VARCHAR}, #{item.threadPic6,jdbcType=VARCHAR}, #{item.threadPic7,jdbcType=VARCHAR}, 
+        #{item.threadPic8,jdbcType=VARCHAR}, #{item.threadPic9,jdbcType=VARCHAR}, #{item.land1,jdbcType=VARCHAR}, 
+        #{item.land2,jdbcType=VARCHAR}, #{item.land3,jdbcType=VARCHAR}, #{item.land4,jdbcType=VARCHAR}, 
+        #{item.land5,jdbcType=VARCHAR}, #{item.land6,jdbcType=VARCHAR}, #{item.land7,jdbcType=VARCHAR}, 
+        #{item.land8,jdbcType=VARCHAR}, #{item.land9,jdbcType=VARCHAR}, #{item.taskId,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into entity (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'entity_name'.toString() == column.value">
+          #{item.entityName,jdbcType=VARCHAR}
+        </if>
+        <if test="'put_all_id'.toString() == column.value">
+          #{item.putAllId,jdbcType=INTEGER}
+        </if>
+        <if test="'pid'.toString() == column.value">
+          #{item.pid,jdbcType=INTEGER}
+        </if>
+        <if test="'ad_position'.toString() == column.value">
+          #{item.adPosition,jdbcType=INTEGER}
+        </if>
+        <if test="'template_id'.toString() == column.value">
+          #{item.templateId,jdbcType=INTEGER}
+        </if>
+        <if test="'entity_title'.toString() == column.value">
+          #{item.entityTitle,jdbcType=VARCHAR}
+        </if>
+        <if test="'ad_id'.toString() == column.value">
+          #{item.adId,jdbcType=INTEGER}
+        </if>
+        <if test="'entity_desc'.toString() == column.value">
+          #{item.entityDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="'entity_url'.toString() == column.value">
+          #{item.entityUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="'run_state'.toString() == column.value">
+          #{item.runState,jdbcType=INTEGER}
+        </if>
+        <if test="'entity_state'.toString() == column.value">
+          #{item.entityState,jdbcType=INTEGER}
+        </if>
+        <if test="'audit_user'.toString() == column.value">
+          #{item.auditUser,jdbcType=INTEGER}
+        </if>
+        <if test="'industry'.toString() == column.value">
+          #{item.industry,jdbcType=VARCHAR}
+        </if>
+        <if test="'audit_comments'.toString() == column.value">
+          #{item.auditComments,jdbcType=VARCHAR}
+        </if>
+        <if test="'audit_time'.toString() == column.value">
+          #{item.auditTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'create_user'.toString() == column.value">
+          #{item.createUser,jdbcType=INTEGER}
+        </if>
+        <if test="'create_time'.toString() == column.value">
+          #{item.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'update_time'.toString() == column.value">
+          #{item.updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'user_name'.toString() == column.value">
+          #{item.userName,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_title'.toString() == column.value">
+          #{item.threadTitle,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_pic1'.toString() == column.value">
+          #{item.threadPic1,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_pic2'.toString() == column.value">
+          #{item.threadPic2,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_pic3'.toString() == column.value">
+          #{item.threadPic3,jdbcType=VARCHAR}
+        </if>
+        <if test="'dynamic_code'.toString() == column.value">
+          #{item.dynamicCode,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_content'.toString() == column.value">
+          #{item.threadContent,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_url_text'.toString() == column.value">
+          #{item.threadUrlText,jdbcType=VARCHAR}
+        </if>
+        <if test="'recommend_name'.toString() == column.value">
+          #{item.recommendName,jdbcType=VARCHAR}
+        </if>
+        <if test="'recommend_link'.toString() == column.value">
+          #{item.recommendLink,jdbcType=VARCHAR}
+        </if>
+        <if test="'custom_css'.toString() == column.value">
+          #{item.customCss,jdbcType=VARCHAR}
+        </if>
+        <if test="'user_portrait'.toString() == column.value">
+          #{item.userPortrait,jdbcType=VARCHAR}
+        </if>
+        <if test="'pop_window_text'.toString() == column.value">
+          #{item.popWindowText,jdbcType=VARCHAR}
+        </if>
+        <if test="'button_text'.toString() == column.value">
+          #{item.buttonText,jdbcType=VARCHAR}
+        </if>
+        <if test="'label_title'.toString() == column.value">
+          #{item.labelTitle,jdbcType=VARCHAR}
+        </if>
+        <if test="'label_visible'.toString() == column.value">
+          #{item.labelVisible,jdbcType=VARCHAR}
+        </if>
+        <if test="'goods_style'.toString() == column.value">
+          #{item.goodsStyle,jdbcType=VARCHAR}
+        </if>
+        <if test="'ext_id'.toString() == column.value">
+          #{item.extId,jdbcType=VARCHAR}
+        </if>
+        <if test="'ext_ids'.toString() == column.value">
+          #{item.extIds,jdbcType=VARCHAR}
+        </if>
+        <if test="'entity_type'.toString() == column.value">
+          #{item.entityType,jdbcType=INTEGER}
+        </if>
+        <if test="'dataRate'.toString() == column.value">
+          #{item.datarate,jdbcType=INTEGER}
+        </if>
+        <if test="'thread_pic4'.toString() == column.value">
+          #{item.threadPic4,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_pic5'.toString() == column.value">
+          #{item.threadPic5,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_pic6'.toString() == column.value">
+          #{item.threadPic6,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_pic7'.toString() == column.value">
+          #{item.threadPic7,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_pic8'.toString() == column.value">
+          #{item.threadPic8,jdbcType=VARCHAR}
+        </if>
+        <if test="'thread_pic9'.toString() == column.value">
+          #{item.threadPic9,jdbcType=VARCHAR}
+        </if>
+        <if test="'land1'.toString() == column.value">
+          #{item.land1,jdbcType=VARCHAR}
+        </if>
+        <if test="'land2'.toString() == column.value">
+          #{item.land2,jdbcType=VARCHAR}
+        </if>
+        <if test="'land3'.toString() == column.value">
+          #{item.land3,jdbcType=VARCHAR}
+        </if>
+        <if test="'land4'.toString() == column.value">
+          #{item.land4,jdbcType=VARCHAR}
+        </if>
+        <if test="'land5'.toString() == column.value">
+          #{item.land5,jdbcType=VARCHAR}
+        </if>
+        <if test="'land6'.toString() == column.value">
+          #{item.land6,jdbcType=VARCHAR}
+        </if>
+        <if test="'land7'.toString() == column.value">
+          #{item.land7,jdbcType=VARCHAR}
+        </if>
+        <if test="'land8'.toString() == column.value">
+          #{item.land8,jdbcType=VARCHAR}
+        </if>
+        <if test="'land9'.toString() == column.value">
+          #{item.land9,jdbcType=VARCHAR}
+        </if>
+        <if test="'task_id'.toString() == column.value">
+          #{item.taskId,jdbcType=VARCHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+
+	<sql id="basePageExample">
+		<if test="entity.pid != null">
+			and e.pid = #{entity.pid}
+		</if>
+		<if test="entity.entityName != '' and entity.entityName != null">
+			and e.entity_name like
+			concat('%',#{entity.entityName},'%')
+		</if>
+		<if test="entity.putType != null">
+			<if test="entity.putName != '' and entity.putName != null">
+				<choose>
+					<when test="entity.putType == 17">
+						and op.ad_name like
+						concat('%',{entity.putName},'%')
+					</when>
+					<otherwise>
+						and p.put_name like concat('%',{entity.putName},'%')
+					</otherwise>
+				</choose>
+			</if>
+			<if test="entity.putType == 18">
+				<if test="entity.orderName != null and entity.orderName != ''">
+					and ord.name like concat('%',{entity.orderName},'%')
+				</if>
+				<if test="entity.planName != null and entity.planName != ''">
+					and pl.plan_name like concat('%',{entity.planName},'%')
+				</if>
+			</if>
+		</if>
+		<if test="entity.entityState != null">
+			and e.entity_state = #{entity.entityState}
+		</if>
+		<if test="entity.runState != null">
+			and e.run_state = #{entity.runState}
+		</if>
+		<if test="entity.createUser != null">
+			and e.create_user = #{entity.createUser}
+		</if>
+	</sql>
+
+	<sql id="Base_Map_Where_Sql">
+		<if test="pid != null and pid != ''">
+			and e.pid = #{pid}
+		</if>
+		<if test="plid != null and plid != ''">
+			and p.pid = #{plid}
+		</if>
+		<if test="oid != null and oid != ''">
+			and op.oid = #{oid}
+		</if>
+		<choose>
+			<when test="createUser != null and createUser != ''">
+				and e.create_user = #{createUser}
+			</when>
+			<otherwise>
+				<if test="createUsers != null and createUsers.size &gt; 0">
+					and e.create_user in
+					<foreach close=")" collection="createUsers" item="user" open="(" separator=",">
+						#{user}
+					</foreach>
+				</if>
+			</otherwise>
+		</choose>
+		<if test="entityState != null and entityState != ''">
+			and e.entity_state = #{entityState}
+		</if>
+	</sql>
+
+	<select id="countListByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(e.id) from entity e
+		where 1=1
+		<include refid="Base_Map_Where_Sql" />
+	</select>
+
+	<select id="listByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select e.* from entity e
+		<choose>
+			<when test="plid != null and plid != ''">
+				left join put p
+				on e.pid = p.id
+			</when>
+			<when test="oid != null and oid != ''">
+				left join order_put op
+				on e.pid = op.id
+			</when>
+		</choose>
+		where 1=1
+		<include refid="Base_Map_Where_Sql" />
+	</select>
+
+	<select id="selectCountForPage" resultType="java.lang.Integer">
+		select count(e.id) from entity e
+		<choose>
+			<when test="entity.putType !=null">
+				<choose>
+					<when test="entity.putType == 17">
+						left join order_put op
+						on e.pid = op.id
+						left
+						join
+						orders
+						ord
+						on op.oid =
+						ord.id
+					</when>
+					<when test="entity.putType == 19">
+						left join put p
+						on e.pid = p.id
+						left
+						join plan
+						pl
+						on
+						p.pid = pl.id
+					</when>
+					<when test="entity.putType == 18">
+						left join put p
+						on e.pid = p.id
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				<if test="putTypes != null and putTypes.size &gt; 0">
+					left join put p
+					on e.pid = p.id
+					left
+					join plan
+					pl
+					on p.pid =
+					pl.id
+				</if>
+			</otherwise>
+		</choose>
+		where 1=1
+		<include refid="basePageExample" />
+		<if test="entity.putType == null">
+			<if test="putTypes != null and putTypes.size &gt; 0">
+				and p.put_type in
+				<foreach close=")" collection="putTypes" item="putType" open="(" separator=",">
+					#{putType}
+				</foreach>
+			</if>
+		</if>
+		<choose>
+			<when test="custId != null">
+				<choose>
+					<when test="entity.putType !=null">
+						<choose>
+							<when test="entity.putType == 17">
+								and ord.cust_id = #{custId}
+							</when>
+							<when test="entity.putType == 19">
+								and pl.adver_id = #{custId}
+							</when>
+						</choose>
+					</when>
+					<otherwise>
+						<if test="putTypes != null and putTypes.size &gt; 0">
+							and pl.adver_id = #{custId}
+						</if>
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				<if test="advers != null and advers.size &gt; 0">
+					<choose>
+						<when test="entity.putType !=null">
+							<choose>
+								<when test="entity.putType == 17">
+									and ord.cust_id in
+									<foreach close=")" collection="advers" item="adver" open="(" separator=",">
+										#{adver}
+									</foreach>
+								</when>
+								<when test="entity.putType == 19">
+									and pl.adver_id in
+									<foreach close=")" collection="advers" item="adver" open="(" separator=",">
+										#{adver}
+									</foreach>
+								</when>
+							</choose>
+						</when>
+						<otherwise>
+							<if test="putTypes != null and putTypes.size &gt; 0">
+								and pl.adver_id
+								<foreach close=")" collection="advers" item="adver" open="(" separator=",">
+									#{adver}
+								</foreach>
+							</if>
+						</otherwise>
+					</choose>
+				</if>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="selectForPage" resultType="com.iwanvi.nvwa.dao.model.Entity">
+		select e.id id, e.entity_name entityName, e.entity_state entityState,
+		e.run_state runState
+		<choose>
+			<when test="entity.putType !=null">
+
+				<choose>
+					<when test="entity.putType == 17">
+						,op.put_name putName,ord.name
+						orderName,cust.full_name adverName
+					</when>
+					<when test="entity.putType == 19">
+						,p.put_name putName,pl.plan_name
+						planName,cust.full_name adverName
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				<if test="putTypes != null and putTypes.size &gt; 0">
+					left join put p
+					on e.pid = p.id
+					left
+					join plan
+					pl
+					on p.pid =
+					pl.id
+				</if>
+			</otherwise>
+		</choose>
+		from entity e
+		<choose>
+			<when test="entity.putType !=null">
+				<choose>
+					<when test="entity.putType == 17">
+						left join order_put op
+						on e.pid = op.id
+						left
+						join
+						orders
+						ord
+						on op.oid =
+						ord.id
+						left join company cust
+						on ord.cust_id =
+						cust.id
+					</when>
+					<when test="entity.putType == 19">
+						left join put p
+						on e.pid = p.id
+						left
+						join plan
+						pl
+						on
+						p.pid = pl.id
+						left join company cust
+						on pl.adver_id = cust.id
+					</when>
+					<when test="entity.putType == 18">
+						left join put p
+						on e.pid = p.id
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				<if test="putTypes != null and putTypes.size &gt; 0">
+					left join put p
+					on e.pid = p.id
+					left
+					join plan
+					pl
+					on p.pid =
+					pl.id
+				</if>
+			</otherwise>
+		</choose>
+		where 1=1
+		<include refid="basePageExample" />
+		<if test="entity.putType == null">
+			<if test="putTypes != null and putTypes.size &gt; 0">
+				and p.put_type in
+				<foreach close=")" collection="putTypes" item="putType" open="(" separator=",">
+					#{putType}
+				</foreach>
+			</if>
+		</if>
+		<choose>
+			<when test="custId != null">
+				<choose>
+					<when test="entity.putType !=null">
+						<choose>
+							<when test="entity.putType == 17">
+								and ord.cust_id = #{custId}
+							</when>
+							<when test="entity.putType == 19">
+								and pl.adver_id = #{custId}
+							</when>
+						</choose>
+					</when>
+					<otherwise>
+						<if test="putTypes != null and putTypes.size &gt; 0">
+							and pl.adver_id = #{custId}
+						</if>
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				<if test="advers != null and advers.size &gt; 0">
+					<choose>
+						<when test="entity.putType !=null">
+							<choose>
+								<when test="entity.putType == 17">
+									and ord.cust_id in
+									<foreach close=")" collection="advers" item="adver" open="(" separator=",">
+										#{adver}
+									</foreach>
+								</when>
+								<when test="entity.putType == 19">
+									and pl.adver_id in
+									<foreach close=")" collection="advers" item="adver" open="(" separator=",">
+										#{adver}
+									</foreach>
+								</when>
+							</choose>
+						</when>
+						<otherwise>
+							<if test="putTypes != null and putTypes.size &gt; 0">
+								and pl.adver_id
+								<foreach close=")" collection="advers" item="adver" open="(" separator=",">
+									#{adver}
+								</foreach>
+							</if>
+						</otherwise>
+					</choose>
+				</if>
+			</otherwise>
+		</choose>
+		<!-- &amp;amp;amp;amp;amp;lt;if test="entity.createUser == null and uids != 
+			null and uids.size &amp;amp;amp;amp;amp;amp;gt; 0"&amp;amp;amp;amp;amp;gt; and e.create_user 
+			in &amp;amp;amp;amp;amp;lt;foreach close=")" collection="uids" item="uid" open="(" 
+			separator=","&amp;amp;amp;amp;amp;gt; #{uid} &amp;amp;amp;amp;amp;lt;/foreach&amp;amp;amp;amp;amp;gt; 
+			&amp;amp;amp;amp;amp;lt;/if&amp;amp;amp;amp;amp;gt; -->
+		<choose>
+			<when test="entity.entityState == null and entityStates != null and entityStates.size &gt; 0">
+				and e.entity_state in
+				<foreach close=")" collection="entityStates" item="entityState" open="(" separator=",">
+					#{entityState}
+				</foreach>
+			</when>
+			<otherwise>
+				and e.entity_state != 0
+			</otherwise>
+		</choose>
+		order by e.run_state desc,e.id desc
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+	<select id="selectInfoWithOther" resultType="java.util.Map">
+		select p.put_name putName,pl.`plan_name`
+		planName,ap.`name`
+		posName,med.`media_name` medName, med.id medId,
+		adver.full_name
+		adverName,
+		agent.full_name agentName from entity e
+		left join put p
+		on
+		e.pid = p.id
+		left join plan pl
+		on p.pid = pl.id
+		left join ad_position ap
+		on
+		p.ad_position = ap.id
+		left join company adver
+		on pl.adver_id =
+		adver.id
+		left join flow_source med
+		on p.dx_media = med.media_uuid
+		left
+		join company agent
+		on adver.aid = agent.id
+		<if test="id != null">
+			where e.id = #{id}
+		</if>
+	</select>
+
+	<select id="getAdsCnt" resultType="java.lang.Integer">
+		SELECT count(T1.id) as total
+		FROM `entity` T1
+	</select>
+
+	<select id="getAdIds" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT T1.id id, T1.pid putId FROM `entity` T1
+		<if test="offset != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+</mapper>

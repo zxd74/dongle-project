@@ -1,0 +1,1 @@
+package com.fftime.ffmob.common;public enum AdType {  BANNER(1), INTERSTITIAL(2), APP_WALL(3), SPLASH(4), FEEDS(5);  private int value;  private AdType(int value) {    this.value = value;  }  public int getValue() {    return value;  }  public static AdType fromString(String str) {    AdType adType = AdType.valueOf(str.toUpperCase());    return adType;  }}

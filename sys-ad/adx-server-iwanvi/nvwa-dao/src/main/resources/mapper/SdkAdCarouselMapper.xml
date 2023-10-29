@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.SdkAdCarouselMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.SdkAdCarousel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ad_position" jdbcType="INTEGER" property="adPosition" />
+    <result column="ad_type" jdbcType="INTEGER" property="adType" />
+    <result column="change_type" jdbcType="INTEGER" property="changeType" />
+    <result column="page_value" jdbcType="INTEGER" property="pageValue" />
+    <result column="duration_value" jdbcType="INTEGER" property="durationValue" />
+    <result column="is_default" jdbcType="INTEGER" property="isDefault" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="chapter_num" jdbcType="INTEGER" property="chapterNum" />
+    <result column="page_num" jdbcType="INTEGER" property="pageNum" />
+    <result column="exp_time" jdbcType="INTEGER" property="expTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, ad_position, ad_type, change_type, page_value, duration_value, is_default, is_del, 
+    chapter_num, page_num, exp_time
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.SdkAdCarouselExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sdk_ad_carousel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and limit != null">
+       limit ${start},${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sdk_ad_carousel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sdk_ad_carousel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.SdkAdCarouselExample">
+    delete from sdk_ad_carousel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.SdkAdCarousel">
+    insert into sdk_ad_carousel (id, ad_position, ad_type, 
+      change_type, page_value, duration_value, 
+      is_default, is_del, chapter_num, 
+      page_num, exp_time)
+    values (#{id,jdbcType=INTEGER}, #{adPosition,jdbcType=INTEGER}, #{adType,jdbcType=INTEGER}, 
+      #{changeType,jdbcType=INTEGER}, #{pageValue,jdbcType=INTEGER}, #{durationValue,jdbcType=INTEGER}, 
+      #{isDefault,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, #{chapterNum,jdbcType=INTEGER}, 
+      #{pageNum,jdbcType=INTEGER}, #{expTime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.SdkAdCarousel">
+    insert into sdk_ad_carousel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="adPosition != null">
+        ad_position,
+      </if>
+      <if test="adType != null">
+        ad_type,
+      </if>
+      <if test="changeType != null">
+        change_type,
+      </if>
+      <if test="pageValue != null">
+        page_value,
+      </if>
+      <if test="durationValue != null">
+        duration_value,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="chapterNum != null">
+        chapter_num,
+      </if>
+      <if test="pageNum != null">
+        page_num,
+      </if>
+      <if test="expTime != null">
+        exp_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="adPosition != null">
+        #{adPosition,jdbcType=INTEGER},
+      </if>
+      <if test="adType != null">
+        #{adType,jdbcType=INTEGER},
+      </if>
+      <if test="changeType != null">
+        #{changeType,jdbcType=INTEGER},
+      </if>
+      <if test="pageValue != null">
+        #{pageValue,jdbcType=INTEGER},
+      </if>
+      <if test="durationValue != null">
+        #{durationValue,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="chapterNum != null">
+        #{chapterNum,jdbcType=INTEGER},
+      </if>
+      <if test="pageNum != null">
+        #{pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="expTime != null">
+        #{expTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.SdkAdCarouselExample" resultType="java.lang.Long">
+    select count(*) from sdk_ad_carousel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sdk_ad_carousel
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.adPosition != null">
+        ad_position = #{record.adPosition,jdbcType=INTEGER},
+      </if>
+      <if test="record.adType != null">
+        ad_type = #{record.adType,jdbcType=INTEGER},
+      </if>
+      <if test="record.changeType != null">
+        change_type = #{record.changeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.pageValue != null">
+        page_value = #{record.pageValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.durationValue != null">
+        duration_value = #{record.durationValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDefault != null">
+        is_default = #{record.isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.chapterNum != null">
+        chapter_num = #{record.chapterNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.pageNum != null">
+        page_num = #{record.pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.expTime != null">
+        exp_time = #{record.expTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sdk_ad_carousel
+    set id = #{record.id,jdbcType=INTEGER},
+      ad_position = #{record.adPosition,jdbcType=INTEGER},
+      ad_type = #{record.adType,jdbcType=INTEGER},
+      change_type = #{record.changeType,jdbcType=INTEGER},
+      page_value = #{record.pageValue,jdbcType=INTEGER},
+      duration_value = #{record.durationValue,jdbcType=INTEGER},
+      is_default = #{record.isDefault,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      chapter_num = #{record.chapterNum,jdbcType=INTEGER},
+      page_num = #{record.pageNum,jdbcType=INTEGER},
+      exp_time = #{record.expTime,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.SdkAdCarousel">
+    update sdk_ad_carousel
+    <set>
+      <if test="adPosition != null">
+        ad_position = #{adPosition,jdbcType=INTEGER},
+      </if>
+      <if test="adType != null">
+        ad_type = #{adType,jdbcType=INTEGER},
+      </if>
+      <if test="changeType != null">
+        change_type = #{changeType,jdbcType=INTEGER},
+      </if>
+      <if test="pageValue != null">
+        page_value = #{pageValue,jdbcType=INTEGER},
+      </if>
+      <if test="durationValue != null">
+        duration_value = #{durationValue,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="chapterNum != null">
+        chapter_num = #{chapterNum,jdbcType=INTEGER},
+      </if>
+      <if test="pageNum != null">
+        page_num = #{pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="expTime != null">
+        exp_time = #{expTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.SdkAdCarousel">
+    update sdk_ad_carousel
+    set ad_position = #{adPosition,jdbcType=INTEGER},
+      ad_type = #{adType,jdbcType=INTEGER},
+      change_type = #{changeType,jdbcType=INTEGER},
+      page_value = #{pageValue,jdbcType=INTEGER},
+      duration_value = #{durationValue,jdbcType=INTEGER},
+      is_default = #{isDefault,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      chapter_num = #{chapterNum,jdbcType=INTEGER},
+      page_num = #{pageNum,jdbcType=INTEGER},
+      exp_time = #{expTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="com.iwanvi.nvwa.dao.model.SdkAdCarouselExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from sdk_ad_carousel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into sdk_ad_carousel
+    (id, ad_position, ad_type, change_type, page_value, duration_value, is_default, is_del, 
+      chapter_num, page_num, exp_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.adPosition,jdbcType=INTEGER}, #{item.adType,jdbcType=INTEGER}, 
+        #{item.changeType,jdbcType=INTEGER}, #{item.pageValue,jdbcType=INTEGER}, #{item.durationValue,jdbcType=INTEGER}, 
+        #{item.isDefault,jdbcType=INTEGER}, #{item.isDel,jdbcType=INTEGER}, #{item.chapterNum,jdbcType=INTEGER}, 
+        #{item.pageNum,jdbcType=INTEGER}, #{item.expTime,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into sdk_ad_carousel (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'ad_position'.toString() == column.value">
+          #{item.adPosition,jdbcType=INTEGER}
+        </if>
+        <if test="'ad_type'.toString() == column.value">
+          #{item.adType,jdbcType=INTEGER}
+        </if>
+        <if test="'change_type'.toString() == column.value">
+          #{item.changeType,jdbcType=INTEGER}
+        </if>
+        <if test="'page_value'.toString() == column.value">
+          #{item.pageValue,jdbcType=INTEGER}
+        </if>
+        <if test="'duration_value'.toString() == column.value">
+          #{item.durationValue,jdbcType=INTEGER}
+        </if>
+        <if test="'is_default'.toString() == column.value">
+          #{item.isDefault,jdbcType=INTEGER}
+        </if>
+        <if test="'is_del'.toString() == column.value">
+          #{item.isDel,jdbcType=INTEGER}
+        </if>
+        <if test="'chapter_num'.toString() == column.value">
+          #{item.chapterNum,jdbcType=INTEGER}
+        </if>
+        <if test="'page_num'.toString() == column.value">
+          #{item.pageNum,jdbcType=INTEGER}
+        </if>
+        <if test="'exp_time'.toString() == column.value">
+          #{item.expTime,jdbcType=INTEGER}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+   <select id="getAll" resultType="java.util.Map">
+	select t1.`uuid`, t3.`app_id` as appuuid ,t2.* from ad_position t1, `sdk_ad_carousel` t2, apps t3
+	where  
+    <if test="uuid != null">
+    t3.`app_id` = #{uuid} and 
+    </if>
+	t1.`app_id` = t3.id and t2.`ad_position` = t1.id ;
+   </select>
+
+  <select id="getByAppid" resultType="java.util.Map">
+    select t1.`uuid`, t3.`app_id`,t2.* from ad_position t1, `sdk_ad_carousel` t2, apps t3
+	where  t1.`app_id` = t3.id and t2.`ad_position` = t1.id and t3.app_id = #{appid,jdbcType=VARCHAR} ;
+
+  </select>
+</mapper>

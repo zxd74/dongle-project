@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iwanvi.nvwa.dao.AdxRelationMapper">
+	<resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.AdxRelation">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="obj_id" property="objId" jdbcType="INTEGER" />
+		<result column="obj_type" property="objType" jdbcType="INTEGER" />
+		<result column="adx_type" property="adxType" jdbcType="INTEGER" />
+		<result column="adx_upid" property="adxUpid" jdbcType="VARCHAR" />
+		<result column="adx_crid" property="adxCrid" jdbcType="VARCHAR" />
+		<result column="adx_url" property="adxUrl" jdbcType="VARCHAR" />
+		<result column="audit_state" property="auditState" jdbcType="INTEGER" />
+		<result column="audit_comments" property="auditComments"
+			jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="industry" property="industry" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, obj_id, obj_type, adx_type, adx_upid, adx_crid,
+		adx_url, audit_state,
+		audit_comments,
+		status, create_time, update_time,
+		industry
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.iwanvi.nvwa.dao.model.AdxRelationExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from adx_relation
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from adx_relation
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		adx_relation
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.AdxRelationExample">
+		delete from adx_relation
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.iwanvi.nvwa.dao.model.AdxRelation">
+		insert into adx_relation (id,
+		obj_id, obj_type,
+		adx_type, adx_upid, adx_crid,
+		adx_url, audit_state,
+		audit_comments,
+		status, create_time, update_time,
+		industry)
+		values
+		(#{id,jdbcType=INTEGER}, #{objId,jdbcType=INTEGER},
+		#{objType,jdbcType=INTEGER},
+		#{adxType,jdbcType=INTEGER},
+		#{adxUpid,jdbcType=VARCHAR}, #{adxCrid,jdbcType=VARCHAR},
+		#{adxUrl,jdbcType=VARCHAR}, #{auditState,jdbcType=INTEGER},
+		#{auditComments,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{industry,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.iwanvi.nvwa.dao.model.AdxRelation">
+		insert into adx_relation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="objId != null">
+				obj_id,
+			</if>
+			<if test="objType != null">
+				obj_type,
+			</if>
+			<if test="adxType != null">
+				adx_type,
+			</if>
+			<if test="adxUpid != null">
+				adx_upid,
+			</if>
+			<if test="adxCrid != null">
+				adx_crid,
+			</if>
+			<if test="adxUrl != null">
+				adx_url,
+			</if>
+			<if test="auditState != null">
+				audit_state,
+			</if>
+			<if test="auditComments != null">
+				audit_comments,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="industry != null">
+				industry,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="objId != null">
+				#{objId,jdbcType=INTEGER},
+			</if>
+			<if test="objType != null">
+				#{objType,jdbcType=INTEGER},
+			</if>
+			<if test="adxType != null">
+				#{adxType,jdbcType=INTEGER},
+			</if>
+			<if test="adxUpid != null">
+				#{adxUpid,jdbcType=VARCHAR},
+			</if>
+			<if test="adxCrid != null">
+				#{adxCrid,jdbcType=VARCHAR},
+			</if>
+			<if test="adxUrl != null">
+				#{adxUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="auditState != null">
+				#{auditState,jdbcType=INTEGER},
+			</if>
+			<if test="auditComments != null">
+				#{auditComments,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="industry != null">
+				#{industry,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.AdxRelationExample"
+		resultType="java.lang.Integer">
+		select count(*) from adx_relation
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update adx_relation
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.objId != null">
+				obj_id = #{record.objId,jdbcType=INTEGER},
+			</if>
+			<if test="record.objType != null">
+				obj_type = #{record.objType,jdbcType=INTEGER},
+			</if>
+			<if test="record.adxType != null">
+				adx_type = #{record.adxType,jdbcType=INTEGER},
+			</if>
+			<if test="record.adxUpid != null">
+				adx_upid = #{record.adxUpid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.adxCrid != null">
+				adx_crid = #{record.adxCrid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.adxUrl != null">
+				adx_url = #{record.adxUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.auditState != null">
+				audit_state = #{record.auditState,jdbcType=INTEGER},
+			</if>
+			<if test="record.auditComments != null">
+				audit_comments =
+				#{record.auditComments,jdbcType=VARCHAR},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=INTEGER},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.industry != null">
+				industry = #{record.industry,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update adx_relation
+		set id = #{record.id,jdbcType=INTEGER},
+		obj_id =
+		#{record.objId,jdbcType=INTEGER},
+		obj_type =
+		#{record.objType,jdbcType=INTEGER},
+		adx_type =
+		#{record.adxType,jdbcType=INTEGER},
+		adx_upid =
+		#{record.adxUpid,jdbcType=VARCHAR},
+		adx_crid =
+		#{record.adxCrid,jdbcType=VARCHAR},
+		adx_url =
+		#{record.adxUrl,jdbcType=VARCHAR},
+		audit_state =
+		#{record.auditState,jdbcType=INTEGER},
+		audit_comments =
+		#{record.auditComments,jdbcType=VARCHAR},
+		status =
+		#{record.status,jdbcType=INTEGER},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP},
+		industry =
+		#{record.industry,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.AdxRelation">
+		update adx_relation
+		<set>
+			<if test="objId != null">
+				obj_id = #{objId,jdbcType=INTEGER},
+			</if>
+			<if test="objType != null">
+				obj_type = #{objType,jdbcType=INTEGER},
+			</if>
+			<if test="adxType != null">
+				adx_type = #{adxType,jdbcType=INTEGER},
+			</if>
+			<if test="adxUpid != null">
+				adx_upid = #{adxUpid,jdbcType=VARCHAR},
+			</if>
+			<if test="adxCrid != null">
+				adx_crid = #{adxCrid,jdbcType=VARCHAR},
+			</if>
+			<if test="adxUrl != null">
+				adx_url = #{adxUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="auditState != null">
+				audit_state = #{auditState,jdbcType=INTEGER},
+			</if>
+			<if test="auditComments != null">
+				audit_comments = #{auditComments,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="industry != null">
+				industry = #{industry,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.AdxRelation">
+		update
+		adx_relation
+		set obj_id = #{objId,jdbcType=INTEGER},
+		obj_type =
+		#{objType,jdbcType=INTEGER},
+		adx_type = #{adxType,jdbcType=INTEGER},
+		adx_upid = #{adxUpid,jdbcType=VARCHAR},
+		adx_crid =
+		#{adxCrid,jdbcType=VARCHAR},
+		adx_url = #{adxUrl,jdbcType=VARCHAR},
+		audit_state = #{auditState,jdbcType=INTEGER},
+		audit_comments =
+		#{auditComments,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		industry =
+		#{industry,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectCountAuditEntityByOid" resultType="java.lang.Integer">
+		select count(e.id) from adx_relation ar
+		left join entity e
+		on ar.obj_id
+		= e.id
+		<if test="adverId != null">
+			left join put p
+			on e.pid = p.id
+			left join orders ord
+			on p.oid
+			= ord.id
+		</if>
+		where ar.`status` = 1
+		<if test="objType != null">
+			and ar.obj_type =#{objType}
+		</if>
+		<if test="adxType != null">
+			and ar.adx_type = #{adxType}
+		</if>
+		<choose>
+			<when test="entityStates != null and entityStates.size > 0">
+				and e.entity_state in
+				<foreach collection="entityStates" item="entityState" open="("
+					close=")" separator=",">
+					#{entityStates}
+				</foreach>
+			</when>
+			<when test="entity.entityState != null">
+				and e.entity_state = #{entity.entityState}
+			</when>
+			<otherwise>
+				and e.entity_state != 0
+			</otherwise>
+		</choose>
+		<if test="adverId != null">
+			and ord.cust_id = #{adverId}
+		</if>
+		<if test="entity.id != null">
+			and e.id = #{entity.id}
+		</if>
+		<if test="entity.entityName != null and entity.entityName != ''">
+			and e.entity_name like
+			concat('%',#{entity.entityName},'%')
+		</if>
+	</select>
+	<select id="selectAuditEntityByOid" resultType="com.iwanvi.nvwa.dao.model.Entity">
+		select e.id id, e.entity_name entityName,e.entity_state entityState,
+		p.put_name putName,ord.name
+		orderName,flow.media_name mediaName,
+		adver.full_name adverName,agent.full_name agentName from
+		adx_relation
+		ar
+		left join
+		entity e
+		on ar.obj_id = e.id
+		left join put p
+		on
+		e.pid = p.id
+		left join orders ord
+		on p.oid = ord.id
+		left join company
+		adver
+		on
+		ord.cust_id = adver.id
+		left join company agent
+		on adver.aid =
+		agent.id
+		left join flow_source flow
+		on p.ad_position = flow.id
+		where ar.`status`
+		= 1
+		<if test="objType != null">
+			and ar.obj_type =#{objType}
+		</if>
+		<if test="adxType != null">
+			and ar.adx_type = #{adxType}
+		</if>
+		<choose>
+			<when test="entityStates != null and entityStates.size > 0">
+				and e.entity_state in
+				<foreach collection="entityStates" item="entityState" open="("
+					close=")" separator=",">
+					#{entityStates}
+				</foreach>
+			</when>
+			<when test="entity.entityState != null">
+				and e.entity_state = #{entity.entityState}
+			</when>
+			<otherwise>
+				and e.entity_state != 0
+			</otherwise>
+		</choose>
+		<if test="adverId != null">
+			and ord.cust_id = #{adverId}
+		</if>
+		<if test="entity.id != null">
+			and e.id = #{entity.id}
+		</if>
+		<if test="entity.entityName != null and entity.entityName != ''">
+			and e.entity_name like
+			concat('%',#{entity.entityName},'%')
+		</if>
+		order by e.id desc
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+
+	<select id="selectCountAuditEntityByPid" resultType="java.lang.Integer">
+		select count(e.id) from adx_relation ar
+		left join entity e
+		on ar.obj_id
+		= e.id
+		<if test="adverId != null">
+			left join put p
+			on e.pid = p.id
+			left join plan pl
+			on p.pid
+			=
+			pl.id
+		</if>
+		where ar.`status` = 1 and ar.audit_state != 0 and e.put_type = 19 
+		<if test="objType != null">
+			and ar.obj_type =#{objType}
+		</if>
+		<if test="adxType != null">
+			and ar.adx_type = #{adxType}
+		</if>
+		<choose>
+			<when test="entityStates != null and entityStates.size > 0">
+				and e.entity_state in
+				<foreach collection="entityStates" item="entityState" open="("
+					close=")" separator=",">
+					#{entityStates}
+				</foreach>
+			</when>
+			<when test="entity.entityState != null">
+				and e.entity_state = #{entity.entityState}
+			</when>
+			<otherwise>
+				and e.entity_state != 0
+			</otherwise>
+		</choose>
+		<if test="adverId != null">
+			and pl.adver_id = #{adverId}
+		</if>
+		<if test="entity.id != null">
+			and e.id = #{entity.id}
+		</if>
+		<if test="entity.entityName != null and entity.entityName != ''">
+			and e.entity_name like
+			concat('%',#{entity.entityName},'%')
+		</if>
+	</select>
+	<select id="selectAuditEntityByPid" resultType="com.iwanvi.nvwa.dao.model.Entity">
+		select e.id id, e.entity_name entityName,e.entity_state entityState,
+		p.put_name putName,pl.plan_name
+		planName,position.name posName,
+		adver.full_name adverName,agent.full_name agentName from
+		adx_relation
+		ar
+		left join
+		entity e
+		on ar.obj_id = e.id
+		left join put p
+		on
+		e.pid = p.id
+		left join plan pl
+		on p.pid = pl.id
+		left join company
+		adver
+		on pl.adver_id
+		= adver.id
+		left join company agent
+		on adver.aid =
+		agent.id
+		left join
+		ad_position position
+		on p.ad_position = position.id
+		where ar.`status` = 1 and ar.audit_state != 0 and 
+		e.put_type = 19
+		<if test="objType != null">
+			and ar.obj_type =#{objType}
+		</if>
+		<if test="adxType != null">
+			and ar.adx_type = #{adxType}
+		</if>
+		<choose>
+			<when test="entityStates != null and entityStates.size > 0">
+				and e.entity_state in
+				<foreach collection="entityStates" item="entityState" open="("
+					close=")" separator=",">
+					#{entityStates}
+				</foreach>
+			</when>
+			<when test="entity.entityState != null">
+				and e.entity_state = #{entity.entityState}
+			</when>
+			<otherwise>
+				and e.entity_state != 0
+			</otherwise>
+		</choose>
+		<if test="adverId != null">
+			and pl.adver_id = #{adverId}
+		</if>
+		<if test="entity.id != null">
+			and e.id = #{entity.id}
+		</if>
+		<if test="entity.entityName != null and entity.entityName != ''">
+			and e.entity_name like
+			concat('%',#{entity.entityName},'%')
+		</if>
+		order by e.id desc
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+
+	<select id="selectCountAuditAdver" resultType="java.lang.Integer">
+		select
+		count(ar.id)
+		from adx_relation ar
+		left join company adver
+		on
+		ar.obj_id = adver.id
+		where ar.`status` = 1 and ar.audit_state != 0
+		<if test="objType != null">
+			and ar.obj_type =#{objType}
+		</if>
+		<if test="adxType != null">
+			and ar.adx_type = #{adxType}
+		</if>
+		<if test="company.id != null">
+			and ar.obj_id=#{company.id}
+		</if>
+		<if test="company.auditStatus != null">
+			and ar.audit_state = #{company.auditStatus}
+		</if>
+		<if test="company.fullName != null and company.fullName != ''">
+			and adver.full_name like concat('%',#{company.fullName},'%')
+		</if>
+		<if test="company.aid != null">
+			and adver.aid = #{company.aid}
+		</if>
+	</select>
+
+	<select id="selectAuditAdverPage" resultType="com.iwanvi.nvwa.dao.model.Company">
+		select ar.obj_id id, ar.audit_state auditStatus, u.user_name userName,adver.full_name fullName,
+		agent.full_name agName,industry.dic_value industry
+		from adx_relation ar
+		left join company adver
+		on ar.obj_id = adver.id
+		left join company agent
+		on adver.aid = agent.id
+		left join dictionary industry
+		on adver.industry_type = industry.id
+		left join `user` u
+		on adver.id = u.company
+		where ar.`status` = 1 and ar.audit_state != 0
+		<if test="objType != null">
+			and ar.obj_type =#{objType}
+		</if>
+		<if test="adxType != null">
+			and ar.adx_type = #{adxType}
+		</if>
+		<if test="company.auditStatus != null">
+			and ar.audit_state = #{company.auditStatus}
+		</if>
+		<if test="company.id != null">
+			and ar.obj_id=#{company.id}
+		</if>
+		<if test="company.fullName != null and company.fullName != ''">
+			and adver.full_name like concat('%',#{company.fullName},'%')
+		</if>
+		<if test="company.aid != null">
+			and adver.aid = #{company.aid}
+		</if>
+		order by adver.id desc
+		<if test="start != null and limit != null">
+			limit ${start},${limit}
+		</if>
+	</select>
+
+</mapper>

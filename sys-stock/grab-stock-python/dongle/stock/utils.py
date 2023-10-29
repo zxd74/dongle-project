@@ -1,8 +1,38 @@
-import pymysql, os, datetime, json
+import pymysql, datetime, json
+import requests
 import model
 from datetime import datetime as dtc
-import time
 
+
+class RequestUtil:
+    DEFAULT_TIMEOUT = 5 # timeout second
+    DEFAULT_HEADER = {
+        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+    }
+
+    @staticmethod
+    def handler_request_args(**kwargs):
+        if "timeout" not in kwargs:
+            kwargs["timeout"] = RequestUtil.DEFAULT_TIMEOUT
+        if "headers" not in kwargs:
+            kwargs["headers"] = RequestUtil.DEFAULT_HEADER
+        return kwargs
+
+    @staticmethod
+    def get_json(url, params=None, **kwargs):
+        try:
+            return requests.get(url, params=params,**RequestUtil.handler_request_args(**kwargs)).json()
+        except Exception as e:
+            return None
+
+    @staticmethod
+    def post_json(url, data=None, **kwargs):
+        try:
+            return requests.post(url,data=data,**RequestUtil.handler_request_args(**kwargs)).json()
+        except Exception as e:
+            return None
+
+    
 
 class MySQLOption:
     def __init__(self):

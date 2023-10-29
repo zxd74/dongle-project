@@ -2,14 +2,14 @@ import requests,threading,os
 from bs4 import BeautifulSoup
 from dongle.utils import Files as f
 
-HOST = ""
-BOOK_LIST_HOME = HOST + "/art/yinqijiaohuan/"
+HOST = "https://www.z3680o.com"
+BOOK_LIST_HOME = HOST + "/art/jiatingluanlun/"
 BOOK_LIST_HOST = BOOK_LIST_HOME + "index_%d.html"
-FILE_DIR = "D:\\Data\\My\\小说\\sex5\\yqjh\\"
+FILE_DIR = "F:\\Download\\Dongle\\b\\jtll\\"
 if not os.path.exists(FILE_DIR) :
     os.makedirs(FILE_DIR)
 FILE_NAME = FILE_DIR + "%s.txt"
-MAX_PAGE_NUM = 50  # 最大抓取数，避免一直抓取
+MAX_PAGE_NUM = 10  # 最大抓取数，避免一直抓取
 TOTAL = 0  # 网站总计数量
 TOTAL_PAGE = 200  # 网站共共计数量
 

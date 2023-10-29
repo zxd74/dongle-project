@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwanvi.nvwa.dao.AdPositionMappingMapper">
+  <resultMap id="BaseResultMap" type="com.iwanvi.nvwa.dao.model.AdPositionMapping">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ad_position_id" jdbcType="INTEGER" property="adPositionId" />
+    <result column="app_id" jdbcType="INTEGER" property="appId" />
+    <result column="flow_consumer_id" jdbcType="INTEGER" property="flowConsumerId" />
+    <result column="consumer_position_id" jdbcType="VARCHAR" property="consumerPositionId" />
+    <result column="consumer_position_name" jdbcType="VARCHAR" property="consumerPositionName" />
+    <result column="width" jdbcType="INTEGER" property="width" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="forecast_RTB_price" jdbcType="DOUBLE" property="forecastRtbPrice" />
+    <result column="forecast_CTR" jdbcType="DOUBLE" property="forecastCtr" />
+    <result column="template_id" jdbcType="INTEGER" property="templateId" />
+    <result column="mapper_type" jdbcType="INTEGER" property="mapperType" />
+    <result column="dsp_floor" jdbcType="DOUBLE" property="dspFloor" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, ad_position_id, app_id, flow_consumer_id, consumer_position_id, consumer_position_name,
+    width, height, forecast_RTB_price, forecast_CTR, template_id, mapper_type, dsp_floor,
+    status, create_user, update_user, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.iwanvi.nvwa.dao.model.AdPositionMappingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ad_position_mapping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ad_position_mapping
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ad_position_mapping
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwanvi.nvwa.dao.model.AdPositionMappingExample">
+    delete from ad_position_mapping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.iwanvi.nvwa.dao.model.AdPositionMapping" useGeneratedKeys="true">
+    insert into ad_position_mapping (ad_position_id, app_id, flow_consumer_id,
+      consumer_position_id, consumer_position_name,
+      width, height, forecast_RTB_price,
+      forecast_CTR, template_id, mapper_type,
+      dsp_floor, status, create_user,
+      update_user, create_time, update_time
+      )
+    values (#{adPositionId,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, #{flowConsumerId,jdbcType=INTEGER},
+      #{consumerPositionId,jdbcType=VARCHAR}, #{consumerPositionName,jdbcType=VARCHAR},
+      #{width,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{forecastRtbPrice,jdbcType=DOUBLE},
+      #{forecastCtr,jdbcType=DOUBLE}, #{templateId,jdbcType=INTEGER}, #{mapperType,jdbcType=INTEGER},
+      #{dspFloor,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{createUser,jdbcType=INTEGER},
+      #{updateUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.iwanvi.nvwa.dao.model.AdPositionMapping" useGeneratedKeys="true">
+    insert into ad_position_mapping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="adPositionId != null">
+        ad_position_id,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="flowConsumerId != null">
+        flow_consumer_id,
+      </if>
+      <if test="consumerPositionId != null">
+        consumer_position_id,
+      </if>
+      <if test="consumerPositionName != null">
+        consumer_position_name,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="forecastRtbPrice != null">
+        forecast_RTB_price,
+      </if>
+      <if test="forecastCtr != null">
+        forecast_CTR,
+      </if>
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="mapperType != null">
+        mapper_type,
+      </if>
+      <if test="dspFloor != null">
+        dsp_floor,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="adPositionId != null">
+        #{adPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="flowConsumerId != null">
+        #{flowConsumerId,jdbcType=INTEGER},
+      </if>
+      <if test="consumerPositionId != null">
+        #{consumerPositionId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerPositionName != null">
+        #{consumerPositionName,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="forecastRtbPrice != null">
+        #{forecastRtbPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="forecastCtr != null">
+        #{forecastCtr,jdbcType=DOUBLE},
+      </if>
+      <if test="templateId != null">
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="mapperType != null">
+        #{mapperType,jdbcType=INTEGER},
+      </if>
+      <if test="dspFloor != null">
+        #{dspFloor,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwanvi.nvwa.dao.model.AdPositionMappingExample" resultType="java.lang.Long">
+    select count(*) from ad_position_mapping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ad_position_mapping
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.adPositionId != null">
+        ad_position_id = #{record.adPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appId != null">
+        app_id = #{record.appId,jdbcType=INTEGER},
+      </if>
+      <if test="record.flowConsumerId != null">
+        flow_consumer_id = #{record.flowConsumerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.consumerPositionId != null">
+        consumer_position_id = #{record.consumerPositionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumerPositionName != null">
+        consumer_position_name = #{record.consumerPositionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.width != null">
+        width = #{record.width,jdbcType=INTEGER},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=INTEGER},
+      </if>
+      <if test="record.forecastRtbPrice != null">
+        forecast_RTB_price = #{record.forecastRtbPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.forecastCtr != null">
+        forecast_CTR = #{record.forecastCtr,jdbcType=DOUBLE},
+      </if>
+      <if test="record.templateId != null">
+        template_id = #{record.templateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mapperType != null">
+        mapper_type = #{record.mapperType,jdbcType=INTEGER},
+      </if>
+      <if test="record.dspFloor != null">
+        dsp_floor = #{record.dspFloor,jdbcType=DOUBLE},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ad_position_mapping
+    set id = #{record.id,jdbcType=INTEGER},
+      ad_position_id = #{record.adPositionId,jdbcType=INTEGER},
+      app_id = #{record.appId,jdbcType=INTEGER},
+      flow_consumer_id = #{record.flowConsumerId,jdbcType=INTEGER},
+      consumer_position_id = #{record.consumerPositionId,jdbcType=VARCHAR},
+      consumer_position_name = #{record.consumerPositionName,jdbcType=VARCHAR},
+      width = #{record.width,jdbcType=INTEGER},
+      height = #{record.height,jdbcType=INTEGER},
+      forecast_RTB_price = #{record.forecastRtbPrice,jdbcType=DOUBLE},
+      forecast_CTR = #{record.forecastCtr,jdbcType=DOUBLE},
+      template_id = #{record.templateId,jdbcType=INTEGER},
+      mapper_type = #{record.mapperType,jdbcType=INTEGER},
+      dsp_floor = #{record.dspFloor,jdbcType=DOUBLE},
+      status = #{record.status,jdbcType=INTEGER},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwanvi.nvwa.dao.model.AdPositionMapping">
+    update ad_position_mapping
+    <set>
+      <if test="adPositionId != null">
+        ad_position_id = #{adPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="flowConsumerId != null">
+        flow_consumer_id = #{flowConsumerId,jdbcType=INTEGER},
+      </if>
+      <if test="consumerPositionId != null">
+        consumer_position_id = #{consumerPositionId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerPositionName != null">
+        consumer_position_name = #{consumerPositionName,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="forecastRtbPrice != null">
+        forecast_RTB_price = #{forecastRtbPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="forecastCtr != null">
+        forecast_CTR = #{forecastCtr,jdbcType=DOUBLE},
+      </if>
+      <if test="templateId != null">
+        template_id = #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="mapperType != null">
+        mapper_type = #{mapperType,jdbcType=INTEGER},
+      </if>
+      <if test="dspFloor != null">
+        dsp_floor = #{dspFloor,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwanvi.nvwa.dao.model.AdPositionMapping">
+    update ad_position_mapping
+    set ad_position_id = #{adPositionId,jdbcType=INTEGER},
+      app_id = #{appId,jdbcType=INTEGER},
+      flow_consumer_id = #{flowConsumerId,jdbcType=INTEGER},
+      consumer_position_id = #{consumerPositionId,jdbcType=VARCHAR},
+      consumer_position_name = #{consumerPositionName,jdbcType=VARCHAR},
+      width = #{width,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      forecast_RTB_price = #{forecastRtbPrice,jdbcType=DOUBLE},
+      forecast_CTR = #{forecastCtr,jdbcType=DOUBLE},
+      template_id = #{templateId,jdbcType=INTEGER},
+      mapper_type = #{mapperType,jdbcType=INTEGER},
+      dsp_floor = #{dspFloor,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="com.iwanvi.nvwa.dao.model.AdPositionMappingExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from ad_position_mapping
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into ad_position_mapping
+    (ad_position_id, app_id, flow_consumer_id, consumer_position_id, consumer_position_name,
+      width, height, forecast_RTB_price, forecast_CTR, template_id, mapper_type, dsp_floor,
+      status, create_user, update_user, create_time, update_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.adPositionId,jdbcType=INTEGER}, #{item.appId,jdbcType=INTEGER}, #{item.flowConsumerId,jdbcType=INTEGER},
+        #{item.consumerPositionId,jdbcType=VARCHAR}, #{item.consumerPositionName,jdbcType=VARCHAR},
+        #{item.width,jdbcType=INTEGER}, #{item.height,jdbcType=INTEGER}, #{item.forecastRtbPrice,jdbcType=DOUBLE},
+        #{item.forecastCtr,jdbcType=DOUBLE}, #{item.templateId,jdbcType=INTEGER}, #{item.mapperType,jdbcType=INTEGER},
+        #{item.dspFloor,jdbcType=DOUBLE}, #{item.status,jdbcType=INTEGER}, #{item.createUser,jdbcType=INTEGER},
+        #{item.updateUser,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into ad_position_mapping (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'ad_position_id'.toString() == column.value">
+          #{item.adPositionId,jdbcType=INTEGER}
+        </if>
+        <if test="'app_id'.toString() == column.value">
+          #{item.appId,jdbcType=INTEGER}
+        </if>
+        <if test="'flow_consumer_id'.toString() == column.value">
+          #{item.flowConsumerId,jdbcType=INTEGER}
+        </if>
+        <if test="'consumer_position_id'.toString() == column.value">
+          #{item.consumerPositionId,jdbcType=VARCHAR}
+        </if>
+        <if test="'consumer_position_name'.toString() == column.value">
+          #{item.consumerPositionName,jdbcType=VARCHAR}
+        </if>
+        <if test="'width'.toString() == column.value">
+          #{item.width,jdbcType=INTEGER}
+        </if>
+        <if test="'height'.toString() == column.value">
+          #{item.height,jdbcType=INTEGER}
+        </if>
+        <if test="'forecast_RTB_price'.toString() == column.value">
+          #{item.forecastRtbPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="'forecast_CTR'.toString() == column.value">
+          #{item.forecastCtr,jdbcType=DOUBLE}
+        </if>
+        <if test="'template_id'.toString() == column.value">
+          #{item.templateId,jdbcType=INTEGER}
+        </if>
+        <if test="'mapper_type'.toString() == column.value">
+          #{item.mapperType,jdbcType=INTEGER}
+        </if>
+        <if test="'dsp_floor'.toString() == column.value">
+          #{item.dspFloor,jdbcType=DOUBLE}
+        </if>
+        <if test="'status'.toString() == column.value">
+          #{item.status,jdbcType=INTEGER}
+        </if>
+        <if test="'create_user'.toString() == column.value">
+          #{item.createUser,jdbcType=INTEGER}
+        </if>
+        <if test="'update_user'.toString() == column.value">
+          #{item.updateUser,jdbcType=INTEGER}
+        </if>
+        <if test="'create_time'.toString() == column.value">
+          #{item.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'update_time'.toString() == column.value">
+          #{item.updateTime,jdbcType=TIMESTAMP}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+</mapper>

@@ -61,14 +61,14 @@ class SzJysApi(JysApi):
     def grab_stock_data_by_day(self, code, day):
         # 当日实时数据，如果需要整天数据，不要在交易时间内查询
         url = self.__stock_data_request_uri % (code, day, day)
-        content = requests.get(url)
+        content = requests.get(url,timeout=5)
         data = content.json()
         data = data[0]['data']
         if len(data) == 0:
             print("深圳交易所未查询到股票%s %s交易数据" % (code, day))
             return None
         d = data[0]
-        print(d)
+        # print(d)
         stockData = model.StockData(day, code, d['ks'], d['zg'], d['zd'], d['ss'])
         return stockData
 
