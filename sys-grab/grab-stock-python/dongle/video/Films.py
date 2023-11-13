@@ -47,7 +47,7 @@ def getRealM3u8(url):
 
 def formatFfmpeg(videos):
     for video in videos:
-        print("nohup ffmpeg -i %s -vcode copy resources/%s.mp4 > ff.log 2>&1 &" % (video['m3u8'],video['name']))
+        print("nohup ffmpeg -i %s -vcodec copy resources/%s.mp4 > ff.log 2>&1 &" % (video['m3u8'],video['name']))
 
 def videoFromXigua543(index):
     """
@@ -88,7 +88,11 @@ def videoFromHdmoli(index):
         video['name'] = name + video['name']
     formatFfmpeg(videos)
 
+def videoFrom(url):
+    if url.find("www.xigua543.com") != -1:
+        videoFromXigua543(url)
+    elif url.find("www.hdmoli.top") != -1:
+        videoFromHdmoli(url)
+
 if __name__ == '__main__':
-    # xigua543("https://www.xigua543.com/xianggangju/luomiouyuzhuyingtaiguoyu/")
-    videoFromHdmoli("https://www.hdmoli.top/detail/123342.html")
-    pass
+    videoFrom("https://www.xigua543.com/dongzuopian/jingqiduichang2/")
