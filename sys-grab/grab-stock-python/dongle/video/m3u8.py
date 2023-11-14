@@ -8,7 +8,7 @@ target_file = DIR + "video.mp4"
 if os.path.exists(DIR) is False:
     print("Please create a download directory first!")
     exit(-1)
-
+isAes = False
 def handlerPrefix(url): # 解析前缀
     return "".join(url[:url.rfind("/")+1])
 
@@ -19,6 +19,11 @@ def resolveM3u8(url,suffix=None,prefix=None): # 解析m3u8 获取ts列表
     content = requests.get(url).text
     list=[]
     for line in content.split("\n"):
+        if line.startswith("#EXT-X-KEY"):
+            # 加密处理
+            isAes = True
+            print("视频已加密，暂时无法处理！")
+            return None
         if line.startswith("#") or line == '':
             continue
         if suffix:
@@ -61,7 +66,7 @@ def downByThread(func,qe): # 多线程下载
 def downTs(url,filename): # 下载ts
     try:
         r = requests.get(url,stream=True)
-        with open(DIR + filename, 'wb') as f:
+        with open(filename, 'wb') as f:
             for chunk in r.iter_content(chunk_size=1024):
                 if chunk:
                     f.write(chunk)
@@ -88,7 +93,6 @@ def merge(list_file,filename): # 合并ts为MP4
     command = "ffmpeg -y -f concat -safe 0 -i %s -vcodec copy %s" % (list_file,filename)
     print("exec video merge system command:",command)
     try:
-        import os
         os.system(command)
         print("video merge is complate!")
     except Exception as ex:
@@ -117,11 +121,12 @@ def repair(list): # 修复使用，下载缺失片段
 if __name__ == "__main__":
     start = datetime.datetime.now()
     list = resolveM3u8(url)
-    print("ready down ts count[%d]" % len(list))
-    generatorListFile(list,source_file)
-    # repair(list)
-    qe = convertQueue(list)
-    downByThread(down,qe)
-    merge(source_file,target_file)
-    delTsFile()
+    if list:
+        print("ready down ts count[%d]" % len(list))
+        generatorListFile(list,source_file)
+        # repair(list)
+        qe = convertQueue(list)
+        downByThread(down,qe)
+        merge(source_file,target_file)
+        delTsFile()
     print("use time[%s]!" % str(datetime.datetime.now() - start))
