@@ -32,7 +32,6 @@ class RequestUtil:
         except Exception as e:
             return None
 
-    
 
 class MySQLOption:
     def __init__(self):
