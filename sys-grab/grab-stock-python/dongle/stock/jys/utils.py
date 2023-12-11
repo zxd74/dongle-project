@@ -73,7 +73,7 @@ class StockDao:
 
     def saveStock(self, stock: model.Stock):
         content = "'%s','%s','%s'" % (stock.src, stock.code, stock.name)
-        sql = "insert ignore into `stock_info_new`(`source`,`code`,`code_name`) value(%s)" % content
+        sql = "insert ignore into `stocks`(`source`,`code`,`code_name`) value(%s)" % content
         self.__conn.executeSql(sql)
 
     def saveStockDatas(self, datas: [model.StockData]):
