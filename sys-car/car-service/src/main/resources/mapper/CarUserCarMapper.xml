@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongle.car.dao.mapper.CarUserCarMapper">
+  <resultMap id="BaseResultMap" type="com.dongle.car.dao.model.CarUserCar">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="u_id" jdbcType="CHAR" property="uId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="model_id" jdbcType="INTEGER" property="modelId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="cdt" jdbcType="TIMESTAMP" property="cdt" />
+    <result column="udt" jdbcType="TIMESTAMP" property="udt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, u_id, code, model_id, `name`, images, `status`, cdt, udt
+  </sql>
+  <select id="selectByExample" parameterType="com.dongle.car.dao.model.CarUserCarExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_user_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_user_car
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_user_car
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dongle.car.dao.model.CarUserCarExample">
+    delete from car_user_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dongle.car.dao.model.CarUserCar">
+    insert into car_user_car (id, u_id, code, model_id, 
+      `name`, images, `status`, 
+      cdt, udt)
+    values (#{id,jdbcType=INTEGER}, #{uId,jdbcType=CHAR}, #{code,jdbcType=VARCHAR}, #{modelId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{cdt,jdbcType=TIMESTAMP}, #{udt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dongle.car.dao.model.CarUserCar">
+    insert into car_user_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="modelId != null">
+        model_id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="cdt != null">
+        cdt,
+      </if>
+      <if test="udt != null">
+        udt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=CHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null">
+        #{modelId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cdt != null">
+        #{cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udt != null">
+        #{udt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dongle.car.dao.model.CarUserCarExample" resultType="java.lang.Long">
+    select count(*) from car_user_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update car_user_car
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=INTEGER},
+      </if>
+      <if test="row.uId != null">
+        u_id = #{row.uId,jdbcType=CHAR},
+      </if>
+      <if test="row.code != null">
+        code = #{row.code,jdbcType=VARCHAR},
+      </if>
+      <if test="row.modelId != null">
+        model_id = #{row.modelId,jdbcType=INTEGER},
+      </if>
+      <if test="row.name != null">
+        `name` = #{row.name,jdbcType=VARCHAR},
+      </if>
+      <if test="row.images != null">
+        images = #{row.images,jdbcType=VARCHAR},
+      </if>
+      <if test="row.status != null">
+        `status` = #{row.status,jdbcType=INTEGER},
+      </if>
+      <if test="row.cdt != null">
+        cdt = #{row.cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.udt != null">
+        udt = #{row.udt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update car_user_car
+    set id = #{row.id,jdbcType=INTEGER},
+      u_id = #{row.uId,jdbcType=CHAR},
+      code = #{row.code,jdbcType=VARCHAR},
+      model_id = #{row.modelId,jdbcType=INTEGER},
+      `name` = #{row.name,jdbcType=VARCHAR},
+      images = #{row.images,jdbcType=VARCHAR},
+      `status` = #{row.status,jdbcType=INTEGER},
+      cdt = #{row.cdt,jdbcType=TIMESTAMP},
+      udt = #{row.udt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongle.car.dao.model.CarUserCar">
+    update car_user_car
+    <set>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=CHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null">
+        model_id = #{modelId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cdt != null">
+        cdt = #{cdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udt != null">
+        udt = #{udt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongle.car.dao.model.CarUserCar">
+    update car_user_car
+    set u_id = #{uId,jdbcType=CHAR},
+      code = #{code,jdbcType=VARCHAR},
+      model_id = #{modelId,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      images = #{images,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      cdt = #{cdt,jdbcType=TIMESTAMP},
+      udt = #{udt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

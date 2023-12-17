@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongle.car.dao.mapper.CarCompanyMapper">
+  <resultMap id="BaseResultMap" type="com.dongle.car.dao.model.CarCompany">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="lisence" jdbcType="VARCHAR" property="lisence" />
+    <result column="legal" jdbcType="VARCHAR" property="legal" />
+    <result column="tel" jdbcType="CHAR" property="tel" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="logo" jdbcType="CHAR" property="logo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `name`, address, `status`, lisence, legal, tel, phone, images, logo
+  </sql>
+  <select id="selectByExample" parameterType="com.dongle.car.dao.model.CarCompanyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_company
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from car_company
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dongle.car.dao.model.CarCompanyExample">
+    delete from car_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dongle.car.dao.model.CarCompany">
+    insert into car_company (id, `name`, address, 
+      `status`, lisence, legal, 
+      tel, phone, images, logo
+      )
+    values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{lisence,jdbcType=VARCHAR}, #{legal,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{images,jdbcType=VARCHAR}, #{logo,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dongle.car.dao.model.CarCompany">
+    insert into car_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="lisence != null">
+        lisence,
+      </if>
+      <if test="legal != null">
+        legal,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lisence != null">
+        #{lisence,jdbcType=VARCHAR},
+      </if>
+      <if test="legal != null">
+        #{legal,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dongle.car.dao.model.CarCompanyExample" resultType="java.lang.Long">
+    select count(*) from car_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update car_company
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=CHAR},
+      </if>
+      <if test="row.name != null">
+        `name` = #{row.name,jdbcType=VARCHAR},
+      </if>
+      <if test="row.address != null">
+        address = #{row.address,jdbcType=VARCHAR},
+      </if>
+      <if test="row.status != null">
+        `status` = #{row.status,jdbcType=INTEGER},
+      </if>
+      <if test="row.lisence != null">
+        lisence = #{row.lisence,jdbcType=VARCHAR},
+      </if>
+      <if test="row.legal != null">
+        legal = #{row.legal,jdbcType=VARCHAR},
+      </if>
+      <if test="row.tel != null">
+        tel = #{row.tel,jdbcType=CHAR},
+      </if>
+      <if test="row.phone != null">
+        phone = #{row.phone,jdbcType=CHAR},
+      </if>
+      <if test="row.images != null">
+        images = #{row.images,jdbcType=VARCHAR},
+      </if>
+      <if test="row.logo != null">
+        logo = #{row.logo,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update car_company
+    set id = #{row.id,jdbcType=CHAR},
+      `name` = #{row.name,jdbcType=VARCHAR},
+      address = #{row.address,jdbcType=VARCHAR},
+      `status` = #{row.status,jdbcType=INTEGER},
+      lisence = #{row.lisence,jdbcType=VARCHAR},
+      legal = #{row.legal,jdbcType=VARCHAR},
+      tel = #{row.tel,jdbcType=CHAR},
+      phone = #{row.phone,jdbcType=CHAR},
+      images = #{row.images,jdbcType=VARCHAR},
+      logo = #{row.logo,jdbcType=CHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongle.car.dao.model.CarCompany">
+    update car_company
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lisence != null">
+        lisence = #{lisence,jdbcType=VARCHAR},
+      </if>
+      <if test="legal != null">
+        legal = #{legal,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongle.car.dao.model.CarCompany">
+    update car_company
+    set `name` = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      lisence = #{lisence,jdbcType=VARCHAR},
+      legal = #{legal,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=CHAR},
+      phone = #{phone,jdbcType=CHAR},
+      images = #{images,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
