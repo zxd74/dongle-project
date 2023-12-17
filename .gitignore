@@ -26,4 +26,4 @@ pnpm-debug.log*
 *.sw?
 *.log
 
-*/_pycache_
+_pycache_/
