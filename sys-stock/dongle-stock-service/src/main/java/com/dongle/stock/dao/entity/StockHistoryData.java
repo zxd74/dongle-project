@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
-@Table(name = "stock_history_data")
+@Table(name = "stock_day_data")
 @IdClass(StockHistoryKey.class)
 @Entity
 public class StockHistoryData {
@@ -21,13 +21,5 @@ public class StockHistoryData {
     private Double preclose;
     private Long volume;
     private Double amount;
-    private int adjustflag;
-    private Double turn;
-    private int tradestatus;
     private Double pctChg;
-    private Double peTTM;
-    private Double pbMRQ;
-    private Double psTTM;
-    private Double pcfNcfTTM;
-    private int isST;
 }

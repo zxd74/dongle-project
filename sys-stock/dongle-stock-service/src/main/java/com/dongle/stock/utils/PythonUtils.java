@@ -47,8 +47,4 @@ public class PythonUtils {
         }
         return false;
     }
-
-    public static void main(String[] args) {
-        execPython(new String[]{STOCK_GRAB_PYTHON,"method=new","code=sz.002236","day=2023-06-06"});
-    }
 }

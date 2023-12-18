@@ -17,8 +17,8 @@ import java.util.concurrent.Executors;
 @EnableScheduling
 public class SchedulerConfig {
 
-    @Bean(destroyMethod = "shutdown")
-    public Executor taskScheduler(){
-        return Executors.newScheduledThreadPool(10);
-    }
+    // @Bean(destroyMethod = "shutdown")
+    // public Executor taskScheduler(){
+    //     return Executors.newScheduledThreadPool(10);
+    // }
 }
