@@ -27,4 +27,8 @@ public interface CarShopMapper {
     int updateByPrimaryKeySelective(CarShop row);
 
     int updateByPrimaryKey(CarShop row);
+
+    int batchInsert(@Param("list") List<CarShop> list);
+
+    int batchInsertSelective(@Param("list") List<CarShop> list, @Param("selective") CarShop.Column ... selective);
 }

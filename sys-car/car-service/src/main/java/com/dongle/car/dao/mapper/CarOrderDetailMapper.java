@@ -27,4 +27,8 @@ public interface CarOrderDetailMapper {
     int updateByPrimaryKeySelective(CarOrderDetail row);
 
     int updateByPrimaryKey(CarOrderDetail row);
+
+    int batchInsert(@Param("list") List<CarOrderDetail> list);
+
+    int batchInsertSelective(@Param("list") List<CarOrderDetail> list, @Param("selective") CarOrderDetail.Column ... selective);
 }

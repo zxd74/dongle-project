@@ -27,4 +27,8 @@ public interface CarImagesMapper {
     int updateByPrimaryKeySelective(CarImages row);
 
     int updateByPrimaryKey(CarImages row);
+
+    int batchInsert(@Param("list") List<CarImages> list);
+
+    int batchInsertSelective(@Param("list") List<CarImages> list, @Param("selective") CarImages.Column ... selective);
 }

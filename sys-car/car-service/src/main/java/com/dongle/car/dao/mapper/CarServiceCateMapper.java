@@ -27,4 +27,8 @@ public interface CarServiceCateMapper {
     int updateByPrimaryKeySelective(CarServiceCate row);
 
     int updateByPrimaryKey(CarServiceCate row);
+
+    int batchInsert(@Param("list") List<CarServiceCate> list);
+
+    int batchInsertSelective(@Param("list") List<CarServiceCate> list, @Param("selective") CarServiceCate.Column ... selective);
 }

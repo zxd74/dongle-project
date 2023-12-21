@@ -287,4 +287,59 @@
       logo = #{logo,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <insert id="batchInsert" parameterType="map">
+    insert into car_company
+    (id, `name`, address, `status`, lisence, legal, tel, phone, images, logo)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=CHAR}, #{item.name,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, 
+        #{item.status,jdbcType=INTEGER}, #{item.lisence,jdbcType=VARCHAR}, #{item.legal,jdbcType=VARCHAR}, 
+        #{item.tel,jdbcType=CHAR}, #{item.phone,jdbcType=CHAR}, #{item.images,jdbcType=VARCHAR}, 
+        #{item.logo,jdbcType=CHAR})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into car_company (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=CHAR}
+        </if>
+        <if test="'name'.toString() == column.value">
+          #{item.name,jdbcType=VARCHAR}
+        </if>
+        <if test="'address'.toString() == column.value">
+          #{item.address,jdbcType=VARCHAR}
+        </if>
+        <if test="'status'.toString() == column.value">
+          #{item.status,jdbcType=INTEGER}
+        </if>
+        <if test="'lisence'.toString() == column.value">
+          #{item.lisence,jdbcType=VARCHAR}
+        </if>
+        <if test="'legal'.toString() == column.value">
+          #{item.legal,jdbcType=VARCHAR}
+        </if>
+        <if test="'tel'.toString() == column.value">
+          #{item.tel,jdbcType=CHAR}
+        </if>
+        <if test="'phone'.toString() == column.value">
+          #{item.phone,jdbcType=CHAR}
+        </if>
+        <if test="'images'.toString() == column.value">
+          #{item.images,jdbcType=VARCHAR}
+        </if>
+        <if test="'logo'.toString() == column.value">
+          #{item.logo,jdbcType=CHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
 </mapper>

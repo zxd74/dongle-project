@@ -302,4 +302,63 @@
       udt = #{udt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <insert id="batchInsert" parameterType="map">
+    insert into car_order
+    (id, u_id, shop_id, `status`, pay_status, phone, eval_id, eval_level, odt, cdt, udt
+      )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=CHAR}, #{item.uId,jdbcType=CHAR}, #{item.shopId,jdbcType=CHAR}, 
+        #{item.status,jdbcType=INTEGER}, #{item.payStatus,jdbcType=INTEGER}, #{item.phone,jdbcType=CHAR}, 
+        #{item.evalId,jdbcType=INTEGER}, #{item.evalLevel,jdbcType=VARCHAR}, #{item.odt,jdbcType=TIMESTAMP}, 
+        #{item.cdt,jdbcType=TIMESTAMP}, #{item.udt,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into car_order (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=CHAR}
+        </if>
+        <if test="'u_id'.toString() == column.value">
+          #{item.uId,jdbcType=CHAR}
+        </if>
+        <if test="'shop_id'.toString() == column.value">
+          #{item.shopId,jdbcType=CHAR}
+        </if>
+        <if test="'status'.toString() == column.value">
+          #{item.status,jdbcType=INTEGER}
+        </if>
+        <if test="'pay_status'.toString() == column.value">
+          #{item.payStatus,jdbcType=INTEGER}
+        </if>
+        <if test="'phone'.toString() == column.value">
+          #{item.phone,jdbcType=CHAR}
+        </if>
+        <if test="'eval_id'.toString() == column.value">
+          #{item.evalId,jdbcType=INTEGER}
+        </if>
+        <if test="'eval_level'.toString() == column.value">
+          #{item.evalLevel,jdbcType=VARCHAR}
+        </if>
+        <if test="'odt'.toString() == column.value">
+          #{item.odt,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'cdt'.toString() == column.value">
+          #{item.cdt,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'udt'.toString() == column.value">
+          #{item.udt,jdbcType=TIMESTAMP}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
 </mapper>

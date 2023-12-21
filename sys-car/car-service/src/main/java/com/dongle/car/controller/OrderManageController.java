@@ -1,7 +1,11 @@
 package com.dongle.car.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.dongle.car.service.OrderService;
+
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -9,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("order")
 public class OrderManageController {
+
+    @Autowired
+    private OrderService orderService;
     
     @RequestMapping("list")
     public Object list(){

@@ -1,50 +1,45 @@
 package com.dongle.car.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dongle.car.config.SysAdmin;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import com.dongle.car.service.DictService;
+import com.dongle.commons.web.model.DongleResponse;
+import com.dongle.commons.web.utils.DongleResponseUtils;
 
 @RestController
 @RequestMapping("service")
 public class ServiceManageController {
-    
-    @RequestMapping(value = "list", method=RequestMethod.GET)
-    public Object list(@RequestParam String param) {
-        return new Object();
-    }
-    
-    @RequestMapping("service/add")
-    @SysAdmin
-    public Object  addService(String serviceName, String serviceDesc) {
-        return null;
+        
+    @Autowired
+    private DictService dictService;
+
+    @GetMapping("list")
+    public DongleResponse services(@RequestParam String param) {
+        return DongleResponseUtils.success("success");
     }
 
-    @RequestMapping(value = "update", method=RequestMethod.GET)
-    @SysAdmin
-    public Object update(@RequestParam String param) {
-        return new Object();
-    }
-
-    @RequestMapping(value = "lists", method=RequestMethod.GET)
-    public Object lists(@RequestParam String param) {
-        return new Object();
-    }
-
-    @RequestMapping("good/add")
-    @SysAdmin
-    public Object  addGood(String serviceName, String serviceDesc) {
-        return null;
+    @PostMapping("add")
+    public DongleResponse addService() {
+        //TODO: process POST request
+        
+        return DongleResponseUtils.success("success");
     }
     
-    @RequestMapping("good/update")
-    @SysAdmin
-    public Object  updateGood(String serviceName, String serviceDesc) {
-        return null;
+    @PostMapping("update")
+    public DongleResponse updateService() {
+        //TODO: process POST request
+        
+        return DongleResponseUtils.success("success");
+    }
+
+    @GetMapping("disable")
+    public DongleResponse disableService() {
+        return DongleResponseUtils.success("success");
     }
     
 }

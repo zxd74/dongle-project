@@ -27,4 +27,8 @@ public interface CarDictTypeMapper {
     int updateByPrimaryKeySelective(CarDictType row);
 
     int updateByPrimaryKey(CarDictType row);
+
+    int batchInsert(@Param("list") List<CarDictType> list);
+
+    int batchInsertSelective(@Param("list") List<CarDictType> list, @Param("selective") CarDictType.Column ... selective);
 }

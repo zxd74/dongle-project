@@ -161,4 +161,32 @@
     set url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <insert id="batchInsert" parameterType="map">
+    insert into car_images
+    (id, url)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=CHAR}, #{item.url,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into car_images (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=CHAR}
+        </if>
+        <if test="'url'.toString() == column.value">
+          #{item.url,jdbcType=VARCHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
 </mapper>

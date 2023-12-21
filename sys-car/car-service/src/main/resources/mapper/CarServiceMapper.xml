@@ -255,4 +255,52 @@
       `status` = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <insert id="batchInsert" parameterType="map">
+    insert into car_service
+    (id, s_id, `name`, price, cover, images, stock, `status`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.sId,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, 
+        #{item.price,jdbcType=INTEGER}, #{item.cover,jdbcType=VARCHAR}, #{item.images,jdbcType=VARCHAR}, 
+        #{item.stock,jdbcType=INTEGER}, #{item.status,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into car_service (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.escapedColumnName}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id'.toString() == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'s_id'.toString() == column.value">
+          #{item.sId,jdbcType=INTEGER}
+        </if>
+        <if test="'name'.toString() == column.value">
+          #{item.name,jdbcType=VARCHAR}
+        </if>
+        <if test="'price'.toString() == column.value">
+          #{item.price,jdbcType=INTEGER}
+        </if>
+        <if test="'cover'.toString() == column.value">
+          #{item.cover,jdbcType=VARCHAR}
+        </if>
+        <if test="'images'.toString() == column.value">
+          #{item.images,jdbcType=VARCHAR}
+        </if>
+        <if test="'stock'.toString() == column.value">
+          #{item.stock,jdbcType=INTEGER}
+        </if>
+        <if test="'status'.toString() == column.value">
+          #{item.status,jdbcType=INTEGER}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
 </mapper>
