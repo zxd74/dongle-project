@@ -46,10 +46,13 @@ def resolveVideoContentFromScript(soup,pattern,fieldname='url',defun=None):
 def getRealM3u8(url):
     # 2000k/hls/mixed.m3u8 # 实际都是该结果，故直接输出
     prefix="/".join(url.split("/")[:-1])
+    root = resovleUrlRootPath(url)
     content=requests.get(url).content.decode("utf-8")
     if content.find("#EXTINF")==-1:  # 非真实m3u8链接
         for line in content.split("\n"):
             if not (line.startswith("#") or len(line)==0):
+                if line.startswith("/"):
+                    return root + line
                 return prefix + "/" + line
     else: # 真实m3u8链接
         return url

@@ -30,30 +30,56 @@ ts_file = TMP_DIR + identy + "-ts.txt"
 def handlerPrefix(url): # 解析前缀
     return "".join(url[:url.rfind("/")+1])
 
+def resovleUrlRootPath(url):
+    import urllib
+    '''
+        获取URL 根路径
+    '''
+    urls = urllib.parse.urlparse(url)
+    return urls.scheme + "://" + urls.netloc
+
 def resolveM3u8(url,suffix=None,prefix=None): # 解析m3u8 获取ts列表
+    list=[]
     if os.path.exists(ts_file):
         with open(ts_file,'r',encoding='utf-8') as f:
             content = f.read()
-            return content.split("\n")
-    
+            for line in content.split("\n"):
+                list.append({'url':line})
+            return list
     if prefix is None:
         prefix = handlerPrefix(url)
-    
+    root = resovleUrlRootPath(url)
     content = requests.get(url).text
-    list=[]
+    isSkip = False
     for line in content.split("\n"):
+        if line.startswith('#EXT-X-DISCONTINUITY'):
+            isSkip = not isSkip
+            continue
+
+        if isSkip:
+            continue
+
         if line.startswith("#EXT-X-KEY"):
             # 加密处理
-            print("视频已被加密，暂时无法处理！")
-            return None
+            if not line.startswith("#EXT-X-KEY:METHOD=NONE"):
+                print("视频已被加密，暂时无法处理！",line)
+                return None
         if line.startswith("#") or line == '':
             continue
+        
+        if line.startswith('/'):
+            line = root + line
+        else:
+            line = prefix + line
         if suffix:
             if suffix.startswith("?"): # 输入参数时代表已了解url结构
                 line = line + suffix
             elif line.__contains__("?"): # 未避免参数值内？
                 line = line + "&" + suffix
-        list.append({'url':prefix+line})
+        list.append({'url':line})
+    with open(ts_file,'w',encoding='utf-8') as f:
+        for i in list:
+            f.write(i['url'] + "\n")
     return list
 
 def generatorListFile(list,filename): # 格式化内容
