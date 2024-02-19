@@ -104,8 +104,9 @@ class ShJysApi(JysApi):
     上海交易所API查询
     """
     # http://query.sse.com.cn/commonQuery.do?jsonCallBack=jsonpCallback11398773&sqlId=COMMON_SSE_CP_GPJCTPZ_GPLB_CJGK_MRGK_C&SEC_CODE=603069&TX_DATE=2023-07-26&TX_DATE_MON=&TX_DATE_YEAR=&_=1690808485545
-    # http://query.sse.com.cn/commonQuery.do?jsonCallBack=jsonpCallback%s&sqlId=COMMON_SSE_CP_GPJCTPZ_GPLB_CJGK_MRGK_C&SEC_CODE=%s&TX_DATE=%s&TX_DATE_MON=&TX_DATE_YEAR=&_=%d
-    __stock_request_day_uri = "http://query.sse.com.cn/commonQuery.do?"
+    # 2024年2月16日 改为GET请求
+    __stock_request_day_uri = "http://query.sse.com.cn/commonQuery.do?jsonCallBack=%s&sqlId=COMMON_SSE_CP_GPJCTPZ_GPLB_CJGK_MRGK_C&SEC_CODE=%s&TX_DATE=%s&TX_DATE_MON=&TX_DATE_YEAR=&_=%d"
+    # __stock_request_day_uri = "http://query.sse.com.cn/commonQuery.do?"
     __headers = {
         "User-Agent": UserAgent,
         "Referer": "http://www.sse.com.cn/",  # TODO 此条件必需
@@ -150,15 +151,20 @@ class ShJysApi(JysApi):
         r = int(random.random() * (100000000 + 1))
 
         jsonCallBack = "jsonpCallback" + str(r)
-        params = {
-            "jsonCallBack": jsonCallBack,
-            "sqlId": "COMMON_SSE_CP_GPJCTPZ_GPLB_CJGK_MRGK_C",
-            "SEC_CODE": code,
-            "TX_DATE_MON": day,
-            "TX_DATE_YEAR": "",
-            "_": t
-        }
-        response = requests.post(self.__stock_request_day_uri, data=params, headers=self.__headers)
+        # params = {
+        #     "jsonCallBack": jsonCallBack,
+        #     "sqlId": "COMMON_SSE_CP_GPJCTPZ_GPLB_CJGK_MRGK_C",
+        #     "SEC_CODE": code,
+        #     "TX_DATA_DAY":day,
+        #     "TX_DATE_MON": "",
+        #     "TX_DATE_YEAR": "",
+        #     "_": t
+        # }
+        # response = requests.post(self.__stock_request_day_uri, data=params, headers=self.__headers)
+        
+        url = self.__stock_request_day_uri %(jsonCallBack,code,day,t)
+        response = requests.get(url, headers=self.__headers)
+
         content = response.content.decode("utf-8")
         content = utils.JsonUtil.convertJsonFromJsonCallBack(content, jsonCallBack)
         data = json.loads(content)
@@ -337,5 +343,5 @@ class HkJysApi(JysApi):
             else -1
 
 
-# jys = ShJysApi()
-# print(jys.grab_stock_data_by_day('601800','2023-09-25'))
+jys = ShJysApi()
+print(jys.grab_stock_data_by_day('600036','2024-02-05'))
