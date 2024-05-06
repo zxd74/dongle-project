@@ -8,11 +8,11 @@
         <version>2.7.10</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.dongle.stockModel</groupId>
-    <artifactId>dongle-stockModel-service</artifactId>
-    <version>0.0.1</version>
-    <name>dongle-stockModel-service</name>
-    <description>dongle-stockModel-service</description>
+    <groupId>com.dongle.project</groupId>
+    <artifactId>dongle-stock-service</artifactId>
+    <version>1.0.0</version>
+    <name>dongle-stock-service</name>
+    <description>dongle-stock-service</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -44,11 +44,6 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

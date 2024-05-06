@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dongle.store.system</groupId>
     <artifactId>dongle-store-system</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>dongle-store-system</name>
     <description>dongle-store-system</description>
     <properties>

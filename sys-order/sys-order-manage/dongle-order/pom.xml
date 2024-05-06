@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dongle.sys.order</groupId>
-    <artifactId>DongleOrder</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>DongleOrder</name>
-    <description>DongleOrder</description>
+    <artifactId>dongle-order</artifactId>
+    <version>1.0.0</version>
+    <name>dongle-order</name>
+    <description>dongle-order</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

@@ -1,6 +1,6 @@
 # dongle-stock-web
 
-> Dongle Stock Web
+> A Vue.js project
 
 ## Build Setup
 

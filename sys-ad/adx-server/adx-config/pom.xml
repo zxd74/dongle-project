@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>com.dongle.adx</groupId>
 	<artifactId>adx-config</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name></name>
+	<version>1.0.0</version>
+	<name>adx-config</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
