@@ -4,7 +4,6 @@
             <el-select v-model="code" placeholder="请选择股票" filterable @change="queryAllStockData">
                 <el-option v-for="item in allStock" :key='"stock_"+item.code' :value="item.code" :label="handlerLabel(item)"></el-option>
             </el-select>
-            <!-- <el-button @click="queryAllStockData()"  type="primary">查询</el-button> -->
         </div>
         <div id="echarts">
             <div id="main"></div>
@@ -26,7 +25,11 @@ export default{
         this.queryAllStock()
     },
     mounted(){
-        this.queryAllStockData(this.$route.query.code)
+        var code  = this.$route.query.code
+        if(code != undefined) {
+            this.code = code
+            this.queryAllStockData()
+        }
     },
     methods:{
         handlerLabel(stock){

@@ -65,6 +65,11 @@ export default{
                             "name":'分组数据',
                             "icon":'el-icon-pie-chart',
                         },
+                        {
+                            "url":'/stock-analysis',
+                            "name":'股票分析',
+                            "icon":'el-icon-pie-chart',
+                        },
                     ]
                 }
             ],

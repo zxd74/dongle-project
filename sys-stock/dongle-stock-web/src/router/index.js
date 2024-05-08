@@ -37,6 +37,10 @@ const router = new VueRouter({
         {
           path:'group-data',
           component:()=>import('@/components/pages/data/GroupStockData'),
+        },
+        {
+          path:'stock-analysis',
+          component:()=>import('@/components/pages/data/StockAnalysis'),
         }
       ]
     },
