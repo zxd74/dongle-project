@@ -22,18 +22,19 @@
                 <el-table-column prop="low_gap" label="最低差" width="180"></el-table-column>
                 <el-table-column prop="price" label="收盘价" width="180"></el-table-column>
                 <el-table-column prop="price_gap" label="收盘差" width="180"></el-table-column>
-                <el-table-column label="最差" width="180">
+                <el-table-column label="当日最差" width="180">
                     <template slot-scope="scope">
                        {{ (scope.row.high-scope.row.low).toFixed(2) }}
                     </template>
                 </el-table-column>
+                <el-table-column prop="pre_gap" label="前日最差" width="180"></el-table-column>
             </el-table>
         </div>
     </div>
 </template>
 <script>
 import {stockAllData,allStocks,stockInfo} from '@/assets/js/Api'
-import {createEcharts,formatTitle,createEchartsForStockGap} from '@/assets/js/stock'
+import {createEchartsForStock,formatTitle,createEchartsForStockByGrap} from '@/assets/js/stock'
 export default {
     name: 'StockAnalysis',
     data(){
@@ -76,18 +77,19 @@ export default {
             }).then(()=>{
                 stockAllData({code:code}).then(res=>{
                     var data = res.data
-                    data.sort((a,b)=>{
+                    createEchartsForStock(document.getElementById("main"),data,formatTitle(that.stock))
+                    // 差值处理
+                    data.sort((a,b)=>{ // a为后者，b为前一个
                         a.high_gap=(a.high-b.high).toFixed(2)
                         a.open_gap=(a.open-b.open).toFixed(2)
                         a.price_gap=(a.price-b.price).toFixed(2)
                         a.low_gap=(a.low-b.low).toFixed(2)
-                        b.gap =(b.high-b.low).toFixed(2)
-                        a.gap =(a.high-a.low).toFixed(2)
+                        a.pre_gap =(a.high-b.low).toFixed(2)
+                        if(!b.pre_gap) b.pre_gap=0
                         return 0
                     })
                     
-                    createEcharts(document.getElementById("main"),data,formatTitle(that.stock))
-                    createEchartsForStockGap(document.getElementById("sub"),data,formatTitle(that.stock)+" \nGAP数据")
+                    createEchartsForStockByGrap(document.getElementById("sub"),data,formatTitle(that.stock)+"\nGap 差值")
                     that.stockData = data
                 })
             })

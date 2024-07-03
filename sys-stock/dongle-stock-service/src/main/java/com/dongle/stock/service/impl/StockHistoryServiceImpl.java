@@ -32,6 +32,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
         List<StockModel> stockModels = new ArrayList<>();
         Iterable<StockHistoryData> iterable = stockHistoryDataDao.queryByCode(code,day);
         iterable.forEach(stockInfo -> stockModels.add(convert(stockInfo)));
+        stockModels.sort((s1,s2)->-1);
         return stockModels;
     }
 

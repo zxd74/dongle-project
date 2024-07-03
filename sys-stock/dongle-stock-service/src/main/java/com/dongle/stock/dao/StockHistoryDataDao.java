@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface StockHistoryDataDao extends CrudRepository<StockHistoryData,StockHistoryKey> {
 
-    @Query(value="select * from stock_day_data where code=?1 order by date limit ?2",nativeQuery = true)
+    @Query(value="select * from stock_day_data where code=?1 order by date desc limit ?2",nativeQuery = true)
     List<StockHistoryData> queryByCode(String code,int day);
     
 
