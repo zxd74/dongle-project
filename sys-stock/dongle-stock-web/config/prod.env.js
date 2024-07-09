@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
-  API_ROOT: '"http://devops.dongle.com:8888"',
+  API_ROOT: '"http://stock-service.dongle.com"',
   NODE_ENV: '"production"'
 }

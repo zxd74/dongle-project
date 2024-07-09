@@ -1,5 +1,5 @@
 import axios from 'axios';
-let base = process.env.API_ROOT;
+let base = `${process.env.API_ROOT}`;
 
 if (base.endsWith("/")){
     base = base.substring(0,base.length-1)
