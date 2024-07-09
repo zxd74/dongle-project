@@ -20,7 +20,7 @@ EXPOSE 8888
 ```
   * nginx配置
 ```txt
-upstream_stock-service.dongle.com{
+upstream stock-service.dongle.com{
     server localhost:8888
 }
 server {
@@ -40,7 +40,7 @@ server {
     add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
 
     location / {
-        proxy_pass   http://stock-service.dongle.com;
+        proxy_pass   http://stock-service;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -76,7 +76,7 @@ COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 ```
   * nginx配置
 ```txt
-upstream_stock-web.dongle.com{
+upstream stock-web{
     server localhost:8080
 }
 server {
@@ -96,7 +96,7 @@ server {
     add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
 
     location / {
-        proxy_pass   http://stock-web.dongle.com;
+        proxy_pass   http://stock-web;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -122,3 +122,33 @@ docker build . -t dongle/stock-web -f dongle-stock-web.Dockerfile
 docker stop stock-web & docker rm stock-web
 docker run -d --name stock-web -p 8080:80 dongle/stock-web
 ```
+## Compose
+* 定制`docker-compose.yml`
+```txt
+services:
+ dongle-stock-service:
+  build:
+   context: ../
+   dockerfile: docker-df/dongle-stock-service.Dockerfile
+  image: dongle/stock-service-demo
+  container_name: stock-service-demo
+  volumes:
+   - /data/logs/:/data/logs
+  ports:
+   - 8888:8888
+  extra_hosts:
+   - "db.dongle.com:192.168.74.3"
+
+ dongle-stock-web:
+  build:
+   context: ../
+   dockerfile: docker-df/dongle-stock-web.Dockerfile
+  image: dongle/stock-web-demo
+  container_name: stock-web-demo
+  volumes:
+   - /data/docker/nginx/logs:/var/logs/nginx
+  ports:
+   - "8080:80"
+```
+* 构建镜像`docker compose build`
+* 顺序创建并启动容器`docker compose up -d`
