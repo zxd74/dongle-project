@@ -139,8 +139,8 @@ export const createEchartsForStock=(element,data,text)=>{
     data.forEach(item=>{
         echartData.xdata.push(item.date)
         var idx = 0
-        echartData.ydata[idx++].push(item.high)
         echartData.ydata[idx++].push(item.open)
+        echartData.ydata[idx++].push(item.high)
         echartData.ydata[idx++].push(item.low)
         echartData.ydata[idx++].push(item.price)
         echartData.ydata[idx].push((item.high-item.low).toFixed(2))
@@ -158,8 +158,8 @@ export const createEchartsForStockByGrap=(element,data,text)=>{
     data.forEach(item=>{
         echartData.xdata.push(item.date)
         var idx = 0
-        echartData.ydata[idx++].push(item.high_gap)
         echartData.ydata[idx++].push(item.open_gap)
+        echartData.ydata[idx++].push(item.high_gap)
         echartData.ydata[idx++].push(item.low_gap)
         echartData.ydata[idx++].push(item.price_gap)
         echartData.ydata[idx].push(item.pre_gap)

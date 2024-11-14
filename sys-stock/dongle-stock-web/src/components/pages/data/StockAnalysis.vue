@@ -4,6 +4,10 @@
             <el-select v-model="code" placeholder="请选择股票" filterable @change="queryAllStockData">
                 <el-option v-for="item in allStock" :key='"stock_"+item.code' :value="item.code" :label="handlerLabel(item)"></el-option>
             </el-select>
+            <el-select v-model="day" placeholder="请选择天数" @change="queryAllStockData" style="width: 80px;">
+                <el-option v-for="item in dayList" :key="item" :value="item" :label="item+'天'"></el-option>
+            </el-select>
+            <!-- <el-button type="primary" @click="queryAllStockData">查询</el-button> -->
         </div>
         <div id="echarts">
             <!-- 显示股票数据 -->
@@ -40,6 +44,8 @@ export default {
     data(){
         return{
             code:undefined,
+            day:30,
+            dayList:[3,7,10,30],
             allStock:[],
             stock:{},
             stockData:[]
@@ -67,15 +73,17 @@ export default {
                 this.allStock = res.data
             })
         },
-        queryAllStockData(code){
+        queryAllStockData(){
             var that = this
-            if(code == undefined) code = this.code
+            var code = this.code
+            var day = this.day
             stockInfo({code:code}).then(res=>{
                 that.stock = res.data
                 if(this.stock!={} || this.stock!='')
                     return new Promise(res=>res())
             }).then(()=>{
-                stockAllData({code:code}).then(res=>{
+                console.log(code,day)
+                stockAllData({code:code,day:day}).then(res=>{
                     var data = res.data
                     createEchartsForStock(document.getElementById("main"),data,formatTitle(that.stock))
                     // 差值处理
